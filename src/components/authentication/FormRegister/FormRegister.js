@@ -1,20 +1,20 @@
 import { useSetAtom } from "jotai";
 import { useForm } from "react-hook-form";
-import { errorMessageValues, errorInput, errorMessage } from "./errors";
-import usePostForm from "./usePostForm";
-import { currentuser, logged } from "../atoms/logged";
+import { errorMessageValues, errorInput, errorMessage } from "../errors";
+import usePostForm from "../usePostForm";
+import { currentuserAtom, loggedAtom } from "../../../atoms/loggedAtom";
 import { useNavigate } from "react-router-dom";
 
 
-function Form(props) {
+function FormRegister() {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
 
-	const setLogged = useSetAtom(logged);
-	const current_user = useSetAtom(currentuser);
+	const setLogged = useSetAtom(loggedAtom);
+	const current_user = useSetAtom(currentuserAtom);
 	const navigate = useNavigate();
 
 	const OnSubmit = (data) => {
@@ -67,4 +67,4 @@ function Form(props) {
 	);
 }
 
-export default Form;
+export default FormRegister;

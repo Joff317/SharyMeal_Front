@@ -1,13 +1,13 @@
 import { useAtomValue } from "jotai";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { logged } from "../components/atoms/logged";
+import { loggedAtom } from "../../atoms/loggedAtom";
 
 function User(props) {
 	const API = "http://127.0.0.1:3000/member-data";
 	const token = Cookies.get("token");
 	const [data, setData] = useState();
-	const loggedd = useAtomValue(logged);
+	const loggedd = useAtomValue(loggedAtom);
 
 	useEffect(() => {
 		loggedd &&

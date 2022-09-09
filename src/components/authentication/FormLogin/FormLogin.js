@@ -2,19 +2,19 @@ import { useSetAtom } from "jotai";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { currentuser, logged } from "../atoms/logged";
-import { errorMessageValues, errorInput, errorMessage } from "./errors";
-import usePostForm from "./usePostForm";
+import { currentuserAtom, loggedAtom } from "../../../atoms/loggedAtom";
+import { errorMessageValues, errorInput, errorMessage } from "../errors";
+import usePostForm from "../usePostForm";
 
-function FormLogin(props) {
+function FormLogin() {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
 
-	const setLogged = useSetAtom(logged);
-	const current_user = useSetAtom(currentuser);
+	const setLogged = useSetAtom(loggedAtom);
+	const current_user = useSetAtom(currentuserAtom);
 	const navigate = useNavigate();
 
 	const OnSubmit = (data) => {
