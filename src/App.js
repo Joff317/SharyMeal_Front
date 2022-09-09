@@ -15,7 +15,7 @@ function App() {
 				<Route path='/user' element={<User />} />
 				<Route path='/register' element={<Form />} />
 				<Route path='/sendemail' element={<Sendemail />} />
-				<Route path='/reinitialisation' element={<ReinitPassword />} />
+				<Route path='/new_password/:tokenId' element={<ReinitPassword />} />
 				<Route path='/login' element={<FormLogin />} />
 			</Routes>
 		</Layout>
