@@ -7,7 +7,7 @@ import {
 	errorMessageValues,
 	errorInput,
 	errorMessage,
-} from "../components/forms/errors";
+} from "../components/authentication/errors";
 import Post from "../components/Post";
 
 function Home(props) {
