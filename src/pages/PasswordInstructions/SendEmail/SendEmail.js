@@ -1,19 +1,17 @@
-import React, { useRef, useState } from "react";
-import { sendForm } from "@emailjs/browser";
-import { useNavigate } from "react-router-dom";
-import { API } from "../utils/variables";
+import React, { useState } from "react";
+import { API } from "../../../utils/variables";
 
-function Sendemail(props) {
+function SendEmail() {
 	const [show, setShow] = useState(false);
 	const API_URL_RESET = `${API}users/password` 
 
 	const handleSubmit = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 		fetch(API_URL_RESET, {
 			method: "POST",
 			headers: {
-				"content-type": 'application/json',
-				"accept": 'application/json'
+				"Content-Type": 'application/json',
+				"Accept": 'application/json',
 			},
 			body: JSON.stringify({user: {email: e.target.email.value}})
 		})
@@ -21,6 +19,7 @@ function Sendemail(props) {
 		 return response.json()
 		})
 		.then((res) => {
+			setShow(true)
 			console.log(res);
 		})
 		.catch((error) => console.log(error.message))
@@ -53,4 +52,4 @@ function Sendemail(props) {
 	);
 }
 
-export default Sendemail;
+export default SendEmail;

@@ -1,11 +1,11 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { logged } from "./atoms/logged";
+import { loggedAtom } from "../atoms/loggedAtom";
 import { useAtomValue } from "jotai";
-import FormLogin from "./authentication/login";
+import FormLogin from "./authentication/FormLogin/FormLogin";
 
 function ProtectedRoutes() {
-    let isLogged = useAtomValue(logged);
+    let isLogged = useAtomValue(loggedAtom);
     return <div>{isLogged ? <Outlet /> : <FormLogin />}</div>;
 }
 

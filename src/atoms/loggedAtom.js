@@ -3,6 +3,6 @@ import { atomWithStorage } from "jotai/utils";
 
 import Cookies from "js-cookie";
 
-export const logged = atom(Cookies.get("token"));
+export const loggedAtom = atom(Cookies.get("token"));
 
-export const currentuser = atomWithStorage({});
+export const currentuserAtom = atomWithStorage({});

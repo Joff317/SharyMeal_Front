@@ -5,8 +5,8 @@ import {
 	 	errorMessageValues,
 	 	errorInput,
 		errorMessage,
-	} from "../components/authentication/errors";
-import { API } from "../utils/variables";	
+	} from "../../../components/authentication/errors";
+import { API } from "../../../utils/variables";	
 
 function ReinitPassword(props) {
 

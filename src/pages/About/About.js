@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useFetch from "../hooks/useGet";
+import useFetch from "../../hooks/useGet";
 
 function About(props) {
 	return (

@@ -2,38 +2,38 @@ import { useAtomValue } from "jotai";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { currentuser, logged } from "../components/atoms/logged";
+import { currentuserAtom, loggedAtom } from "../../atoms/loggedAtom";
 import {
 	errorMessageValues,
 	errorInput,
 	errorMessage,
-} from "../components/authentication/errors";
-import Post from "../components/Post";
+} from "../../components/authentication/errors";
+import ArticlePost from "../../components/A MODIF_ArticlePost";
 
 function Home(props) {
-	const API = "http://127.0.0.1:3000/articles";
-	const [data, setData] = useState();
+	// const API = "http://127.0.0.1:3000/articles";
+	// const [data, setData] = useState();
 
-	const loggedd = useAtomValue(logged);
-	const token = Cookies.get("token");
-	const current_user = useAtomValue(currentuser);
+	const loggedd = useAtomValue(loggedAtom);
+	// const token = Cookies.get("token");
+	// const current_user = useAtomValue(currentuser);
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm();
+	// const {
+	// 	register,
+	// 	handleSubmit,
+	// 	formState: { errors },
+	// } = useForm();
 
-	useEffect(() => {
-		loggedd &&
-			fetch(API)
-				.then((response) => {
-					return response.json();
-				})
-				.then((res) => {
-					setData(res);
-				});
-	}, [loggedd, setData]);
+	// useEffect(() => {
+	// 	loggedd &&
+	// 		fetch(API)
+	// 			.then((response) => {
+	// 				return response.json();
+	// 			})
+	// 			.then((res) => {
+	// 				setData(res);
+	// 			});
+	// }, [loggedd, setData]);
 
 	// const onSubmit = (data) => {
 	// 	fetch(API, {

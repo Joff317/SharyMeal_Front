@@ -2,13 +2,13 @@ import { useAtom } from "jotai";
 import Cookies from "js-cookie";
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { logged } from "../atoms/logged";
+import { loggedAtom } from "../../../atoms/loggedAtom";
 
-function Navigation(props) {
+function Navigation() {
 	let activeStyle = {
 		textDecoration: "underline",
 	};
-	const [loggedd, setLogged] = useAtom(logged);
+	const [loggedd, setLogged] = useAtom(loggedAtom);
 	const navigate = useNavigate();
 	const token = Cookies.get("token");
 
