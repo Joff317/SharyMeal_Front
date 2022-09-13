@@ -2,12 +2,14 @@ import { Route, Routes } from "react-router-dom";
 import FormLogin from "./components/authentication/FormLogin/FormLogin";
 import Form from "./components/authentication/FormRegister/FormRegister";
 import Layout from "./components/layout/Layout";
+import MealDetails from "./components/meals/MealDetails";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import ReinitPassword from "./pages/PasswordInstructions/ReinitPassword/ReinitPassword";
 import SendEmail from "./pages/PasswordInstructions/SendEmail/SendEmail";
 import User from "./pages/User/User";
+import MealsIndex from './components/meals/MealsIndex'
 
 function App() {
 	return (
@@ -22,6 +24,8 @@ function App() {
 				<Route path='/new_password/:tokenId' element={<ReinitPassword />} />
 				<Route path='/login' element={<FormLogin />} />
 				<Route path='/*' element={<NotFound/>}/>
+				<Route path="/meals/:mealId" element={<MealDetails/>}/>
+				<Route path="/meals" element={<MealsIndex/>}/>
 			</Routes>
 		</Layout>
 	);
