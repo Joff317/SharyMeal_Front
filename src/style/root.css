@@ -1,0 +1,74 @@
+body {
+    margin: 0 auto;
+    background-color: var(--white);
+    font-family: var(--medium-font);
+}
+
+:root {
+    /************************/
+    /* 	    COLORS        */
+    /************************/
+    /* BASE */
+    --white: #FFFFFF;
+    --black: #292929;
+    --grey: #B8B8B8;
+    --grey-border: #ECECEC;
+;
+    /* PRIMARY */
+    --green: #51DFAD;
+    --green_light: #DCFFF3;
+    --pink: #F4C0DB;
+    --red: #FF6767;
+    --yellow: #FCF087;
+
+
+    /* MESSAGES */
+    --warning: 212, 22, 22;
+    --danger: 227, 150, 6;
+    --info: 33, 102, 252;
+    --success: 41, 122, 0;
+    /************************/
+    /* 	    TYPO        */
+    /************************/
+    /* font */
+    --bookmania-black-font: "Bookmania_Black", "Arial", sans-serif;
+    --bookmania-bold-font: "Bookmania_Bold", "Arial", sans-serif;
+    --bold-font: "Circular_Bold", "Arial", sans-serif;
+    --medium-font: "Circular_Medium", "Arial", sans-serif;
+    --light-font: "Circular_Light", "Arial", sans-serif;
+    --book-font: "Circular_Book", "Arial", sans-serif;
+}
+
+:root h1, :root h2, :root h3, :root h4, :root h5, :root h6, :root p {
+    margin: 0;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+/************************/
+/* 	    LINK       */
+/************************/
+a {
+    font-family: var(--medium-font);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+/************************/
+/* 	    ICONS       */
+/************************/
+i {
+    margin-right: 10px;
+}
+
+/************************/
+/* 	    LISTS       */
+/************************/
+li {
+    list-style: none;
+    font-size: 1rem;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}

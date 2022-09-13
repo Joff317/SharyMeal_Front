@@ -1,0 +1,9 @@
+.title{
+    font-family: var(--bookmania-bold-font);
+    font-size: 75px;
+}
+
+.title1{
+    font-family: var(--bold-font);
+    font-size: 55px;
+}

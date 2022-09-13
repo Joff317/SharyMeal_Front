@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'Bookmania_Black';
+    src: url('Bookmania_Black.otf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bookmania_Bold';
+    src: url('Bookmania_Bold.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circular_Light';
+    src: url('CircularStd-Light.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circular_Book';
+    src: url('CircularStd-Book.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circular_Medium';
+    src: url('CircularStd-Medium.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circular_Bold';
+    src: url('CircularStd-Bold.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+

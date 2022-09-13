@@ -1,65 +1,80 @@
 import { useAtomValue } from "jotai";
-import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { currentuserAtom, loggedAtom } from "../../atoms/loggedAtom";
-import {
-	errorMessageValues,
-	errorInput,
-	errorMessage,
-} from "../../components/authentication/errors";
-import ArticlePost from "../../components/A MODIF_ArticlePost";
+import React, { useState } from "react";
+import { loggedAtom } from "../../atoms/loggedAtom";
+import "./Home.css";
+import Button from "../../components/actions/Button";
+import Arrow from "../../icons/Arrow";
+import HeroTitle from "../../components/titles/HeroTitle";
+import SectionTitle from "../../components/titles/SectionTitle";
+import SubsectionTitle from "../../components/titles/SubsectionTitle";
+import CategoryItem from "../../components/actions/CategoryItem";
+import Sushi from "../../icons/Sushi";
 
 function Home(props) {
-	// const API = "http://127.0.0.1:3000/articles";
-	// const [data, setData] = useState();
+  const loggedd = useAtomValue(loggedAtom);
+  const [categoriesArray, setCategoriesArray] = useState([]);
+  const [meals, setMeals] = useState([
+    {
+      name: "sushi",
+      description: "super plat",
+      category: ["Sushi", "Marocain", "Poisson"],
+    },
+    {
+      name: "Pizza",
+      description: "super plat",
+      category: ["Pizza", "Sea Food", "Vegetables"],
+    },
+  ]);
 
-	const loggedd = useAtomValue(loggedAtom);
-	// const token = Cookies.get("token");
-	// const current_user = useAtomValue(currentuser);
+  const categories = [
+    {
+      label: "Sushi",
+      icon: <Sushi />,
+    },
+    {
+      label: "Pizza",
+      icon: <Sushi />,
+    },
+    {
+      label: "Vegetables",
+      icon: <Sushi />,
+    },
+  ];
 
-	// const {
-	// 	register,
-	// 	handleSubmit,
-	// 	formState: { errors },
-	// } = useForm();
+  console.log(categoriesArray);
 
-	// useEffect(() => {
-	// 	loggedd &&
-	// 		fetch(API)
-	// 			.then((response) => {
-	// 				return response.json();
-	// 			})
-	// 			.then((res) => {
-	// 				setData(res);
-	// 			});
-	// }, [loggedd, setData]);
-
-	// const onSubmit = (data) => {
-	// 	fetch(API, {
-	// 		method: "POST",
-	// 		headers: {
-	// 			"Content-type": "application/json",
-	// 			Authorization: `Bearer ${token}`,
-	// 		},
-	// 		body: JSON.stringify({ article: data }),
-	// 	})
-	// 		.then((response) => {
-	// 			return response.json();
-	// 		})
-	// 		.then((res) => {});
-
-	// 	window.location.reload();
-	// };
-
-	return (
-		<div>
-			<h1 className='text-3xl font-bold underline'>Hello Home!</h1>
-			{loggedd && (
-				<h1>Hello</h1>
-			)}
-		</div>
-	);
+  return (
+    <div className="card">
+      <HeroTitle> Hero Title </HeroTitle>
+      <SectionTitle> Section Title </SectionTitle>
+      <SubsectionTitle> Sub Section Title </SubsectionTitle>
+      //
+      <Button icon={<Arrow />} />
+      <Button icon={<Arrow />} showText={true}>
+        Mon text
+      </Button>
+      //
+      <div className={`flex gap-2`}>
+        {categories.map((category) => (
+          <CategoryItem
+            setCategoriesArray={setCategoriesArray}
+            categoriesArray={categoriesArray}
+            label={category.label}
+            icon={category.icon}
+          />
+        ))}
+      </div>
+      <div>
+        {meals &&
+          meals
+            .filter((meal) =>
+              meal.category.some((cat) => categoriesArray.includes(cat))
+            )
+            .map((meal) => <p> {meal.name} </p>)}
+      </div>
+      {loggedd && <h1 className="title">Hello</h1>}
+    </div>
+  );
 }
 
 export default Home;
