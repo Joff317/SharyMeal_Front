@@ -9,6 +9,8 @@ import SectionTitle from "../../components/titles/SectionTitle";
 import SubsectionTitle from "../../components/titles/SubsectionTitle";
 import CategoryItem from "../../components/actions/CategoryItem";
 import Sushi from "../../icons/Sushi";
+import AvatarForm from "../../components/user/AvatarForm";
+import MealImagesForm from "../../components/meals/MealImagesForm";
 
 function Home(props) {
   const loggedd = useAtomValue(loggedAtom);
@@ -73,6 +75,9 @@ function Home(props) {
             .map((meal) => <p> {meal.name} </p>)}
       </div>
       {loggedd && <h1 className="title">Hello</h1>}
+
+      <AvatarForm/>
+      <MealImagesForm/>
     </div>
   );
 }
