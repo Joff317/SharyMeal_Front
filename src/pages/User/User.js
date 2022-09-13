@@ -2,40 +2,40 @@ import { useAtomValue } from "jotai";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { loggedAtom } from "../../atoms/loggedAtom";
+import { API } from "../../utils/variables";
 
 function User(props) {
-	const API = "http://127.0.0.1:3000/member-data";
-	const token = Cookies.get("token");
-	const [data, setData] = useState();
-	const loggedd = useAtomValue(loggedAtom);
+  const token = Cookies.get("token");
+  const [data, setData] = useState();
+  const loggedd = useAtomValue(loggedAtom);
 
-	useEffect(() => {
-		loggedd &&
-			fetch(API, {
-				headers: { Authorization: `Bearer ${token}` },
-			})
-				.then((response) => {
-					return response.json();
-				})
-				.then((res) => {
-					console.log(res);
-					setData(res.user);
-				});
-	}, [setData]);
+  useEffect(() => {
+    loggedd &&
+      fetch(API + "me", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((res) => {
+          console.log(res);
+          setData(res);
+        });
+  }, [setData]);
 
-	return (
-		<div className='flex flex-col justify-center gap-2'>
-			{data && (
-				<>
-					<h1 className='text-2xl font-bold text-center mt-5'>
-						{" "}
-						{data.email}{" "}
-					</h1>
-					<h1 className='text-center mt-2'> user_id = {data.id} </h1>
-				</>
-			)}
-		</div>
-	);
+  return (
+    <div className="flex flex-col justify-center gap-2">
+      {data && (
+        <>
+          <h1 className="text-2xl font-bold text-center mt-5">
+            {" "}
+            {data.email}{" "}
+          </h1>
+          <h1 className="text-center mt-2"> user_id = {data.id} </h1>
+        </>
+      )}
+    </div>
+  );
 }
 
 export default User;
