@@ -9,8 +9,9 @@
 }
 
 .top-container{
+    padding-top: 100px;
     background-color: var(--black);
-    height: 33vh;
+    height: 60vh;
 }
 
 .text-container{
@@ -18,13 +19,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--white);
     font: var(--bookmania-bold-font);
 }
 
 .under-title{
     width: 717px;
     height: 84px;
+    color: var(--white);
     text-align: center;
 }
 

@@ -33,54 +33,47 @@ function Navigation() {
   };
 
   return (
-    <div className="flex items-center justify-between gap-20 py-8 bg-black px-24 text-white">
-      <NavLink
-        to="/"
-      >
+    <div className="flex w-full items-center justify-between gap-20 py-8 fixed px-24 text-white">
+      <NavLink to="/">
         <span className="font-bold-font">Shary</span> Meal
       </NavLink>
 
-    <div className="flex gap-12">
-      <NavLink to="/about">
-       About us
-      </NavLink>
+      <div className="flex gap-12">
+        <NavLink to="/about">About us</NavLink>
 
-      <NavLink to="/">
-        Proposer un repas
-      </NavLink>
-    </div>  
+        <NavLink to="/">Proposer un repas</NavLink>
+      </div>
 
-    <div className="flex justify-end gap-8 items-center">
-      {!loggedd ? (
-        <>
-          {" "}
-          <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            to="/register"
-          >
-            Register
-          </NavLink>
-          <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            to="/login"
-          >
-            Login
-          </NavLink>{" "}
-        </>
-    
-      ) : (
-        <>
-          <NavLink
-            to="/user"
-          >
-           <span className="flex items-center gap-2"><User/> Profil</span>
-          </NavLink>{" "}
-          <button onClick={reset}>
-            <Button showText={true}>Déconnexion</Button>
-          </button>
-        </>
-      )}
-     </div>     
+      <div className="flex justify-end gap-8 items-center">
+        {!loggedd ? (
+          <>
+            {" "}
+            <NavLink
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              to="/register"
+            >
+              Register
+            </NavLink>
+            <NavLink
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              to="/login"
+            >
+              Login
+            </NavLink>{" "}
+          </>
+        ) : (
+          <>
+            <NavLink to="/user">
+              <span className="flex items-center gap-2">
+                <User /> Profil
+              </span>
+            </NavLink>{" "}
+            <button onClick={reset}>
+              <Button showText={true}>Déconnexion</Button>
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }
