@@ -1,41 +1,75 @@
-import React, { useEffect, useState } from 'react';
-import { API } from "../../utils/variables"
-import MealCard from './mealCard/MealCard';
-import './MealsIndex.scss'
+import React, { useEffect, useState } from "react";
+import { API } from "../../utils/variables";
+import MealCard from "./mealCard/MealCard";
+import "./MealsIndex.scss";
+import SectionTitle from "../titles/SectionTitle";
+import CategoryItem from "../actions/CategoryItem";
+import { categories } from "../../data/Category";
 
 function MealIndex() {
+  const [mealsIndex, setMealsIndex] = useState(null);
+  const [categoriesArray, setCategoriesArray] = useState([]);
+  const [meals, setMeals] = useState([
+    {
+      name: "sushi",
+      description: "super plat",
+      category: ["Sushi", "Marocain", "Poisson"],
+      categories: [
+        {
+          label: "Sushi",
+        },
+        { label: "Marocain" },
+      ],
+    },
+    {
+      name: "Pizza",
+      description: "super plat",
+      category: ["Pizza", "Sea Food", "Vegetables"],
+    },
+  ]);
 
-    const [ mealsIndex, setMealsIndex ] = useState(null)
-   
+  useEffect(() => {
+    console.log("API", API);
 
-    useEffect(() => {
-        console.log('API', API);
+    fetch(API + "meals")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setMealsIndex(data);
+      });
+  }, []);
 
-        fetch(API + 'meals')
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            setMealsIndex(data);
-        })
-    }, [])
+  return (
+    <div className="mt-[300px]">
+      <SectionTitle textCenter={true}>
+        {" "}
+        Discover food experiences around you{" "}
+      </SectionTitle>
+      <div className={`flex gap-2 `}>
+        {categories.map((category) => (
+          <CategoryItem
+            setCategoriesArray={setCategoriesArray}
+            categoriesArray={categoriesArray}
+            label={category.label}
+            icon={category.icon}
+          />
+        ))}
+      </div>
 
-    return (
-        <div>
-            <p>Discover food experiences around you</p>
-            <p>Icones des catégories de repas</p>
-            <p>Bouton des filtres  + Toggle Map mode</p>
-
-            <div id="meals-index-container">
-
-                {
-                    mealsIndex && mealsIndex.map(meal => (
-                       <MealCard mealData={meal}/>
-                    ))
-                }
-
-            </div>
-        </div>
-    );
+      <div id="meals-index-container">
+        {mealsIndex &&
+          mealsIndex
+            .filter((meal) =>
+              categoriesArray.length >= 1
+                ? meal.categories.some((cat) =>
+                    categoriesArray.includes(cat.label)
+                  )
+                : mealsIndex
+            )
+            .map((meal) => <MealCard mealData={meal} />)}
+      </div>
+    </div>
+  );
 }
 
 export default MealIndex;
