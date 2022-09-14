@@ -1,12 +1,7 @@
-import React from 'react';
+import React from "react";
 
-function MealTitle({title}) {
-    return (
-        <div>
-            <p>{title}</p>
-        </div>
-      
-    );
+function MealTitle({ title }) {
+  return <p className="text-white text-2xl">{title}</p>;
 }
 
 export default MealTitle;

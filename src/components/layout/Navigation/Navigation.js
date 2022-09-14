@@ -33,7 +33,7 @@ function Navigation() {
   };
 
   return (
-    <div className="flex w-full items-center justify-between gap-20 py-8 fixed px-24 text-white">
+    <div className="flex w-full items-center z-50 justify-between gap-20 py-8 fixed px-24 text-white">
       <NavLink to="/">
         <span className="font-bold-font">Shary</span> Meal
       </NavLink>

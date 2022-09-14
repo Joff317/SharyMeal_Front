@@ -1,11 +1,9 @@
 #meals-index-container{
-    border: 1px solid black;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    width: 1034px;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     justify-items: center;
     align-items: center;
-
 }
 
 
