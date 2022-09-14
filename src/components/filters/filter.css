@@ -1,0 +1,16 @@
+.filter-container{
+   box-shadow: 0px 0px 4px  rgba(0, 0, 0, 0.12);
+
+}
+
+.filter-button{
+   display: flex;
+   align-items: center;
+   gap: 6px;
+   font-size: 14px;
+   font-family: var( --medium-font);
+   border: 1px solid var(--grey-border);
+   border-radius: 27px;
+   width: 100px;
+   padding: 10px 20px;
+}
