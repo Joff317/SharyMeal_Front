@@ -1,7 +1,7 @@
 import { useAtomValue } from "jotai";
 import React, { useState } from "react";
 import { loggedAtom } from "../../atoms/loggedAtom";
-import "./home.css";
+import "./Home.css";
 import Button from "../../components/actions/Button";
 import Arrow from "../../icons/Arrow";
 import HeroTitle from "../../components/titles/HeroTitle";
