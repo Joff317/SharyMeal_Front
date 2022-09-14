@@ -5,10 +5,13 @@ import "./MealsIndex.scss";
 import SectionTitle from "../titles/SectionTitle";
 import CategoryItem from "../actions/CategoryItem";
 import { categories } from "../../data/Category";
+import { useAtomValue } from "jotai";
+import { inputDataAtom } from "../../atoms/inputData";
 
 function MealIndex() {
   const [mealsIndex, setMealsIndex] = useState(null);
   const [categoriesArray, setCategoriesArray] = useState([]);
+  const inputData = useAtomValue(inputDataAtom);
   const [meals, setMeals] = useState([
     {
       name: "sushi",
@@ -57,19 +60,28 @@ function MealIndex() {
       </div>
 
       <div id="meals-index-container">
-        {mealsIndex &&
-          mealsIndex
-            .filter((meal) =>
-              categoriesArray.length >= 1
-                ? meal.categories.some((cat) =>
-                    categoriesArray.includes(cat.label)
-                  )
-                : mealsIndex
-            )
-            .map((meal) => <MealCard mealData={meal} />)}
+
+{mealsIndex &&
+  mealsIndex
+    .filter((meal) =>
+      categoriesArray.length >= 1
+        ? (meal.categories.some((cat) =>
+            categoriesArray.includes(cat.label)
+        ))
+        : mealsIndex
+    )
+    .filter((meal) => 
+      inputData.city !== "" ?
+      meal.location.city === inputData.city :
+      mealsIndex
+    )
+    .map((meal) => <MealCard mealData={meal} />)}
+
       </div>
     </div>
   );
 }
 
 export default MealIndex;
+
+

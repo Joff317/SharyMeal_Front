@@ -14,11 +14,13 @@ function MealCard({ mealData }) {
         {mealData.categories.map((category) => (
           <p> {category.label} </p>
         ))}
+       <p> {mealData.location.city} </p> 
         <MealImage image={mealData.image_urls[0]} />
         <MealPrice price={mealData.price} />
         <MealAvatar host={mealData.host} />
         <MealTitle title={mealData.title} />
         <MealStartingDate date={mealData.starting_date} />
+        
       </div>
     </Link>
   );
