@@ -27,7 +27,7 @@ function CategoryItem({ label, icon, setCategoriesArray, categoriesArray }) {
         className={`flex flex-col items-center justify-center w-fit cursor-pointer`}
       >
         {icon}
-        <p className={`mt-2 font-book-font`}> {label} </p>
+        <p className={`mt-3 font-book-font text-[14px]`}> {label} </p>
       </div>
     </div>
   );

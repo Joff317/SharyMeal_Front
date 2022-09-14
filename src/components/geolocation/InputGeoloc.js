@@ -28,17 +28,15 @@ function InputGeoloc() {
         date: startDate,
       });
     }
-  }
 
-  const CustomInput = forwardRef(({ value, onClick }, ref) => (
-    <button
-      className=" font-light-font text-sm mr-4 mb-0.5"
-      onClick={onClick}
-      ref={ref}
-    >
-      {value}
-    </button>
-  ));
+    const targetScroll = document.getElementById("titleScroll");
+    console.log("salut");
+    targetScroll.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
+  }
 
   function getData(e) {
     if (e.target.value.length > 4) {
@@ -81,14 +79,16 @@ function InputGeoloc() {
               ))}
           </div>
         )}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 ">
           <label className="text-sm min-w-[80px]"> À partir du :</label>
 
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            customInput={<CustomInput />}
-          />
+          <span className="text-sm font-light-font">
+            {" "}
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+            />{" "}
+          </span>
         </div>
 
         <button type="submit">
