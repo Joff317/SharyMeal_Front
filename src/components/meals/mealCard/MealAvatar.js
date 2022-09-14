@@ -9,7 +9,7 @@ function MealAvatar({ host }) {
     fetch(API + `/user_detail/${host.id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("data MealAvatar => ", data);
+        // console.log("data MealAvatar => ", data);
         setHostDetails(data);
       });
   }, []);

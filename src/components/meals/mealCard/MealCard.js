@@ -9,7 +9,7 @@ import MealStartingDate from "./MealStartingDate";
 import defaultImage from "./meal-image-default.jpeg";
 
 function MealCard({ mealData }) {
-  console.log("Mealdata fouk", mealData);
+  // console.log("Mealdata fouk", mealData);
   return (
     <Link to={`/meals/${mealData.id}`}>
       <div
@@ -21,6 +21,7 @@ function MealCard({ mealData }) {
             <p> {category.label} </p>
           ))}
         </div>
+        <p>{mealData.location.city}</p>
         <div className="layer-blur"> </div>
 
         {mealData.images ? (
