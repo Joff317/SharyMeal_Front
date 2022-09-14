@@ -12,24 +12,6 @@ function MealIndex() {
   const [mealsIndex, setMealsIndex] = useState(null);
   const [categoriesArray, setCategoriesArray] = useState([]);
   const inputData = useAtomValue(inputDataAtom);
-  const [meals, setMeals] = useState([
-    {
-      name: "sushi",
-      description: "super plat",
-      category: ["Sushi", "Marocain", "Poisson"],
-      categories: [
-        {
-          label: "Sushi",
-        },
-        { label: "Marocain" },
-      ],
-    },
-    {
-      name: "Pizza",
-      description: "super plat",
-      category: ["Pizza", "Sea Food", "Vegetables"],
-    },
-  ]);
 
   useEffect(() => {
     console.log("API", API);
@@ -75,7 +57,12 @@ function MealIndex() {
       meal.location.city === inputData.city :
       mealsIndex
     )
-    .map((meal) => <MealCard mealData={meal} />)}
+    .filter((meal) => 
+    inputData.date !== "" ?
+      new Date(meal.starting_date) >= new Date(inputData.date) : mealsIndex
+      )
+    .map((meal) => <MealCard mealData={meal} />)
+  }
 
       </div>
     </div>
@@ -83,5 +70,3 @@ function MealIndex() {
 }
 
 export default MealIndex;
-
-

@@ -17,10 +17,17 @@ function InputGeoloc() {
 
   function onSubmit(e) {
     e.preventDefault();
-    setInputData({
-      city: cityInfo && cityInfo.city,
-      date: startDate,
-    });
+    if (e.target.cityInput.value.length === 0) {
+      setInputData({
+        city: "",
+        date: startDate,
+      });
+    } else {
+      setInputData({
+        city: cityInfo && cityInfo.city,
+        date: startDate,
+      });
+    }
   }
 
   const CustomInput = forwardRef(({ value, onClick }, ref) => (
@@ -32,8 +39,6 @@ function InputGeoloc() {
       {value}
     </button>
   ));
-
-  console.log(inputDataValue);
 
   function getData(e) {
     if (e.target.value.length > 4) {
@@ -60,6 +65,8 @@ function InputGeoloc() {
           type="text"
           id="inputCity"
           onChange={getData}
+          name="cityInput"
+          placeholder="Aucune sélection"
         />
         {autocompleteVisible && (
           <div className="border border-slate-500 rounded-lg p-2 absolute top-16 left-16 z-10 bg-white">
@@ -75,7 +82,7 @@ function InputGeoloc() {
           </div>
         )}
         <div className="flex items-center gap-2">
-          <label className="text-sm min-w-[60px]"> Quand ?</label>
+          <label className="text-sm min-w-[80px]"> À partir du :</label>
 
           <DatePicker
             selected={startDate}
