@@ -16,7 +16,7 @@ function MealIndex() {
   const [categoriesArray, setCategoriesArray] = useState([]);
   const inputData = useAtomValue(inputDataAtom);
   const [price, setPrice] = useState([0, 30]);
-  const [ places, setPlaces ] = useState(0);
+  const [places, setPlaces] = useState(0);
   const [visibleFilter, setVisibleFilter] = useState(false);
 
   useEffect(() => {
@@ -34,9 +34,14 @@ function MealIndex() {
 
   return (
     <div className="flex flex-col  items-center">
+      <span id="titleScroll" className=""></span>
       <SectionTitle textCenter={true}>
         {" "}
-        Discover food experiences around you{" "}
+        Discover food experiences around{" "}
+        <span className="bg-green">
+          {" "}
+          {inputData.city ? inputData.city : "you"}{" "}
+        </span>
       </SectionTitle>
       <div className={`flex gap-10 my-10 border-b border-grey-border pb-3`}>
         {categories.map((category) => (
@@ -49,27 +54,25 @@ function MealIndex() {
         ))}
       </div>
 
-    <div className="relative w-full px-52">
+      <div className="relative w-full px-52">
+        <FilterButton
+          setVisibleFilter={setVisibleFilter}
+          visibleFilter={visibleFilter}
+        />
 
-
-      <FilterButton
-        setVisibleFilter={setVisibleFilter}
-        visibleFilter={visibleFilter}
-      />
-
-
-      <div
-        className={` filter-container bg-white absolute top-8 z-10 w-[500px] h-[0px] transition-all ${
-          visibleFilter && "h-[150px]"
-        }`}
-      >
-        {visibleFilter && 
-        <>
-          <PriceFilter setPrice={setPrice} price={price} />
-          <PlacesFilter places={places} setPlaces={setPlaces}/>
-        </>}
+        <div
+          className={` filter-container bg-white absolute top-8 z-10 w-[500px] h-[0px] transition-all ${
+            visibleFilter && "h-[150px]"
+          }`}
+        >
+          {visibleFilter && (
+            <>
+              <PriceFilter setPrice={setPrice} price={price} />
+              <PlacesFilter places={places} setPlaces={setPlaces} />
+            </>
+          )}
+        </div>
       </div>
-    </div> 
 
       <div id="meals-index-container">
         {mealsIndex &&
@@ -91,9 +94,9 @@ function MealIndex() {
                 ? new Date(meal.starting_date) >= new Date(inputData.date)
                 : mealsIndex
             )
-            .filter((meal) => meal.price > price[0] && meal.price < price[1]
-            )
-            .filter((meal) => places <= (meal.guest_capacity - meal.guest_registered)
+            .filter((meal) => meal.price > price[0] && meal.price < price[1])
+            .filter(
+              (meal) => places <= meal.guest_capacity - meal.guest_registered
             )
             .map((meal) => <MealCard mealData={meal} />)}
       </div>
