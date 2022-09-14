@@ -8,13 +8,15 @@ import { categories } from "../../data/Category";
 import { useAtomValue } from "jotai";
 import { inputDataAtom } from "../../atoms/inputData";
 import FilterButton from "../filters/FilterButton";
-import PriceFilter from "../priceFilter/PriceFilter";
+import PriceFilter from "../filters/priceFilter/PriceFilter";
+import PlacesFilter from "../filters/placesFilter/PlacesFilter";
 
 function MealIndex() {
   const [mealsIndex, setMealsIndex] = useState(null);
   const [categoriesArray, setCategoriesArray] = useState([]);
   const inputData = useAtomValue(inputDataAtom);
   const [price, setPrice] = useState([0, 30]);
+  const [ places, setPlaces ] = useState(0);
   const [visibleFilter, setVisibleFilter] = useState(false);
 
   useEffect(() => {
@@ -61,7 +63,11 @@ function MealIndex() {
           visibleFilter && "h-[150px]"
         }`}
       >
-        {visibleFilter && <PriceFilter setPrice={setPrice} price={price} />}
+        {visibleFilter && 
+        <>
+          <PriceFilter setPrice={setPrice} price={price} />
+          <PlacesFilter places={places} setPlaces={setPlaces}/>
+        </>}
       </div>
     </div> 
 
@@ -85,7 +91,10 @@ function MealIndex() {
                 ? new Date(meal.starting_date) >= new Date(inputData.date)
                 : mealsIndex
             )
-            .filter((meal) => meal.price > price[0] && meal.price < price[1])
+            .filter((meal) => meal.price > price[0] && meal.price < price[1]
+            )
+            .filter((meal) => places <= (meal.guest_capacity - meal.guest_registered)
+            )
             .map((meal) => <MealCard mealData={meal} />)}
       </div>
     </div>

@@ -21,7 +21,8 @@ function MealCard({ mealData }) {
             <p> {category.label} </p>
           ))}
         </div>
-        <p>{mealData.location.city}</p>
+        <p className="text-white">{mealData.location.city}</p>
+        <p className="text-white">Places dispo : {mealData.guest_capacity - mealData.guest_registered}</p>
         <div className="layer-blur"> </div>
 
         {mealData.images ? (

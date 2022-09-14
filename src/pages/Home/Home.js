@@ -12,8 +12,7 @@ import image1 from "../../assets/images/imagehome1.jpeg";
 import image2 from "../../assets/images/imagehome2.jpeg";
 import image3 from "../../assets/images/imagehome3.jpeg";
 import InputGeoloc from "../../components/geolocation/InputGeoloc";
-import PriceFilter from "../../components/priceFilter/PriceFilter";
-import Filter from "../../components/filters/FilterButton";
+
 
 function Home(props) {
   const loggedd = useAtomValue(loggedAtom);
