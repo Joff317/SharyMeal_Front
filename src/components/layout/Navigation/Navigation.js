@@ -3,7 +3,9 @@ import Cookies from "js-cookie";
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { loggedAtom } from "../../../atoms/loggedAtom";
+import User from "../../../icons/User";
 import { API } from "../../../utils/variables";
+import Button from "../../actions/Button";
 
 function Navigation() {
   let activeStyle = {
@@ -31,14 +33,24 @@ function Navigation() {
   };
 
   return (
-    <div className="flex items-center justify-center gap-20 py-5 bg-slate-100">
+    <div className="flex items-center justify-between gap-20 py-8 bg-black px-24 text-white">
       <NavLink
-        style={({ isActive }) => (isActive ? activeStyle : undefined)}
         to="/"
       >
-        Home
+        <span className="font-bold-font">Shary</span> Meal
       </NavLink>
 
+    <div className="flex gap-12">
+      <NavLink to="/about">
+       About us
+      </NavLink>
+
+      <NavLink to="/">
+        Proposer un repas
+      </NavLink>
+    </div>  
+
+    <div className="flex justify-end gap-8 items-center">
       {!loggedd ? (
         <>
           {" "}
@@ -55,20 +67,20 @@ function Navigation() {
             Login
           </NavLink>{" "}
         </>
+    
       ) : (
         <>
           <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/user"
           >
-            Profil
+           <span className="flex items-center gap-2"><User/> Profil</span>
           </NavLink>{" "}
-          <button className="py-2 px-4 bg-slate-800 text-white" onClick={reset}>
-            {" "}
-            Déconnexion{" "}
+          <button onClick={reset}>
+            <Button showText={true}>Déconnexion</Button>
           </button>
         </>
       )}
+     </div>     
     </div>
   );
 }
