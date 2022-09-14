@@ -11,6 +11,7 @@ import CategoryItem from "../../components/actions/CategoryItem";
 import Sushi from "../../icons/Sushi";
 import AvatarForm from "../../components/user/AvatarForm";
 import MealImagesForm from "../../components/meals/MealImagesForm";
+import MealsIndex from "../../components/meals/MealsIndex";
 
 function Home(props) {
   const loggedd = useAtomValue(loggedAtom);
@@ -43,10 +44,13 @@ function Home(props) {
     },
   ];
 
-  console.log(categoriesArray);
+  // console.log(categoriesArray);
 
   return (
     <div className="card">
+    <MealsIndex/>
+
+    <div className="border border-primary">
       <HeroTitle> Hero Title </HeroTitle>
       <SectionTitle> Section Title </SectionTitle>
       <SubsectionTitle> Sub Section Title </SubsectionTitle>
@@ -78,6 +82,8 @@ function Home(props) {
 
       <AvatarForm/>
       <MealImagesForm/>
+      </div>
+      
     </div>
   );
 }
