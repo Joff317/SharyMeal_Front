@@ -20,31 +20,38 @@ function Home(props) {
   // console.log(categoriesArray);
 
   return (
-    <div className="home-container">
-      <div className="top-container">
-        <div className="text-container">
+    <div className="home-container ">
+      <div className="top-container relative">
+        <div className="text-container pt-3">
           <HeroTitle> Meet. Share. Eat. </HeroTitle>
-          <div className="under-title">
+          <div className="under-title mt-3">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             semper nisl nec sociis.Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Praesent semper nisl
           </div>
           <InputGeoloc />
         </div>
-      </div>
 
-      <div className="image-container">
-        <img src={image1} alt="" className="image_1" />
-        <img src={image2} alt="" className="image_2" />
-        <div className="image-button">
-          <img src={image3} alt="" className="image_3" />
-          <button className="absolute">
-            <Button showText={true} showIcon={true}>
-              About us <Arrow />
-            </Button>
-          </button>
+        <div className="flex gap-4 w-full flex-wrap pt-24 justify-evenly absolute top-[320px]">
+          <img
+            src={image1}
+            alt=""
+            className="max-w-[300px] max-h-[350px] object-cover -rotate-12"
+          />
+          <img
+            src={image2}
+            alt=""
+            className="max-w-[350px] min-w-[320px] max-h-[350px] object-cover"
+          />
+          <img
+            src={image3}
+            alt=""
+            className="max-w-[300px] min-w-[300px] max-h-[350px] object-cover rotate-6"
+          />
         </div>
       </div>
+
+      <div className="w-full h-5 mt-[250px]"> </div>
 
       <MealsIndex />
     </div>

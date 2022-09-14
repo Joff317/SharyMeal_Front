@@ -40,12 +40,12 @@ function MealIndex() {
   }, []);
 
   return (
-    <div className="mt-[300px]">
+    <div className="flex flex-col  items-center">
       <SectionTitle textCenter={true}>
         {" "}
         Discover food experiences around you{" "}
       </SectionTitle>
-      <div className={`flex gap-2 `}>
+      <div className={`flex gap-10 my-10 border-b border-grey-border pb-3`}>
         {categories.map((category) => (
           <CategoryItem
             setCategoriesArray={setCategoriesArray}
