@@ -10,6 +10,8 @@ import ReinitPassword from "./pages/PasswordInstructions/ReinitPassword/ReinitPa
 import SendEmail from "./pages/PasswordInstructions/SendEmail/SendEmail";
 import User from "./pages/User/User";
 import MealsIndex from './components/meals/MealsIndex'
+import About from "./pages/About/About";
+import CreateMeal from "./pages/createMeal/CreateMeal";
 
 function App() {
 	return (
@@ -18,6 +20,7 @@ function App() {
 				<Route path='/' element={<Home />} />
 				<Route element={<ProtectedRoutes/>}>
 					<Route path='/user' element={<User/>} />
+					<Route path="/create-meal" element={<CreateMeal/>}/>
 				</Route>
 				<Route path='/register' element={<Form />} />
 				<Route path='/sendemail' element={<SendEmail />} />
@@ -26,6 +29,8 @@ function App() {
 				<Route path='/*' element={<NotFound/>}/>
 				<Route path="/meals/:mealId" element={<MealDetails/>}/>
 				<Route path="/meals" element={<MealsIndex/>}/>
+				<Route path="/about" element={<About/>}/>
+				
 			</Routes>
 		</Layout>
 	);
