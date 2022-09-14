@@ -40,6 +40,7 @@ function MealCard({ mealData }) {
         </div>
 
         <MealStartingDate date={mealData.starting_date} />
+        
       </div>
     </Link>
   );
