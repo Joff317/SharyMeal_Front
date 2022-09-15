@@ -30,11 +30,10 @@ function InputGeoloc() {
     }
 
     const targetScroll = document.getElementById("titleScroll");
-    console.log("salut");
     targetScroll.scrollIntoView({
       behavior: "smooth",
       block: "start",
-      inline: "nearest",
+      inline: "end",
     });
   }
 
