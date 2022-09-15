@@ -10,14 +10,14 @@ function Close() {
       <path
         d="M17.4167 17.4166L4.58337 4.58325"
         stroke="#292929"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
       <path
         d="M17.4167 4.58325L4.58337 17.4166"
         stroke="#292929"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
     </svg>
   );

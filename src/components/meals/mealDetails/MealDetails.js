@@ -26,16 +26,16 @@ function MealDetails() {
       {meal && (
         <>
           <div className="top-detail-container">
-            <MealDetailsImages/>
+            <MealDetailsImages meal={meal} />
             <div className="meal-detail-right-container">
               <div className="meal-detail-right-top-container">
-                <MealDetailsTitle meal={meal}/>
-                <MealDetailsHost meal={meal}/>
+                <MealDetailsTitle meal={meal} />
+                <MealDetailsHost meal={meal} />
               </div>
 
-             <MealDetailsDescription meal={meal}/>
+              <MealDetailsDescription meal={meal} />
 
-             <MealDetailsInformations meal={meal}/>
+              <MealDetailsInformations meal={meal} />
             </div>
           </div>
         </>

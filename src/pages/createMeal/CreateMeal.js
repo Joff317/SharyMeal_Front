@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
@@ -16,6 +16,10 @@ import HeroTitle from "../../components/titles/HeroTitle";
 import SectionTitle from "../../components/titles/SectionTitle";
 import { dietType } from "../../data/DietType";
 import { allergens } from "../../data/Allergens";
+import imgCreateMeal from "../../assets/images/imgCreateMeal.png";
+import { useNavigate } from "react-router-dom";
+import LayoutBlur from "../../components/layout/LayoutBlur/LayoutBlur";
+import JSConfetti from "js-confetti";
 
 const CreateMeal = () => {
   const token = Cookies.get("token");
@@ -25,6 +29,8 @@ const CreateMeal = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [nextStep, setNextStep] = useState("firstStep");
   const [count, setCount] = useState(1);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [mealId, setMealId] = useState(0);
 
   const {
     register,
@@ -32,8 +38,16 @@ const CreateMeal = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
+  const jsConfetti = new JSConfetti();
+
   const onSubmit = (data) => {
-    console.log(data);
+    const imagesUrl = new FormData();
+    for (let i = 0; i < data.image_urls.length; i++) {
+      imagesUrl.append("meal[images][]", data.image_urls[i]);
+    }
+
     fetch(API + "meals", {
       method: "POST",
       headers: {
@@ -67,6 +81,10 @@ const CreateMeal = () => {
       .then((res) => {
         console.log(res);
         postCategoriesInfo(data.categories, res.id);
+        postImages(res.id, imagesUrl);
+        setMealId(res.id);
+        jsConfetti.addConfetti();
+        setShowConfirmation(true);
       });
   };
   const postCategoriesInfo = (categoriesArray, mealId) => {
@@ -86,6 +104,18 @@ const CreateMeal = () => {
       });
     });
   };
+
+  const postImages = (mealId, data) => {
+    const requestOptions = {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${token}` },
+      body: data,
+    };
+    fetch(API + `meals/${mealId}`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => console.log(res));
+  };
+
   const getData = (e) => {
     if (e.target.value.length > 4) {
       fetch(
@@ -101,20 +131,16 @@ const CreateMeal = () => {
       setAutocompleteVisible(false);
     }
   };
-
   const increment = () => {
     setCount(count + 1);
   };
-
   const decrement = () => {
     setCount(count - 1);
   };
-
   const gotoNextStep = (value) => {
     setNextStep(value);
     increment();
   };
-
   const gotoPreviousStep = (value) => {
     setNextStep(value);
     decrement();
@@ -122,10 +148,35 @@ const CreateMeal = () => {
 
   return (
     <div className="flex">
-      <div className="w-2/6 h-screen bg-green sticky top-0"></div>
+      {showConfirmation && (
+        <LayoutBlur>
+          <div className="flex flex-col items-center">
+            <SectionTitle> Bravo ! 🎉 </SectionTitle>
+            <p className="text-center font-book-font mt-6 mb-8">
+              {" "}
+              Tu peux désormais voir, supprimer et <br /> modifier ton repas
+              dans ton <span className="bg-pink"> compte client </span>{" "}
+            </p>
+            <span onClick={() => navigate("/")}>
+              <Button showText={true}> Continuer ma navigation </Button>
+            </span>
+            <p
+              className="underline hover:cursor-pointer mt-3 text-sm font-book-font"
+              onClick={() => navigate(`/meals/${mealId}`)}
+            >
+              {" "}
+              Voir l'aperçu de mon repas
+            </p>
+          </div>
+        </LayoutBlur>
+      )}
+      <div className="w-2/6 h-screen bg-green flex justify-center items-center -z-10 top-0">
+        <img className="w-96" alt="createmeal" src={imgCreateMeal} />{" "}
+      </div>
+
       <div className="p-32 pb-0 w-4/6">
         <HeroTitle>
-          <span className="text-black"> {count}/3 </span>
+          <span className="text-black"> 0{count}/04 </span>
         </HeroTitle>
 
         <form
@@ -367,6 +418,27 @@ const CreateMeal = () => {
               </div>
               <div className="flex items-center gap-4 mt-8">
                 <span onClick={() => gotoPreviousStep("secondStep")}>
+                  <Button showText={true}> Précedent </Button>
+                </span>
+                <span onClick={() => gotoNextStep("fourthStep")}>
+                  <Button showText={true}> Suivant </Button>
+                </span>
+              </div>
+            </>
+          )}
+
+          {nextStep === "fourthStep" && (
+            <>
+              <SectionTitle> Ajouter des images </SectionTitle>
+              <input
+                type="file"
+                name="images"
+                id="images"
+                multiple={true}
+                {...register("image_urls")}
+              />
+              <div className="flex items-center gap-4 mt-8">
+                <span onClick={() => gotoPreviousStep("thirdStep")}>
                   <Button showText={true}> Précedent </Button>
                 </span>
                 <button type="submit" className="my-2 flex justify-center">
