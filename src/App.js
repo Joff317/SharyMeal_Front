@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import FormLogin from "./components/authentication/FormLogin/FormLogin";
 import Form from "./components/authentication/FormRegister/FormRegister";
 import Layout from "./components/layout/Layout";
-import MealDetails from "./components/meals/MealDetails";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
@@ -12,6 +11,7 @@ import User from "./pages/User/User";
 import MealsIndex from './components/meals/MealsIndex'
 import About from "./pages/About/About";
 import CreateMeal from "./pages/createMeal/CreateMeal";
+import MealDetails from "./components/meals/mealDetails/MealDetails";
 
 function App() {
 	return (

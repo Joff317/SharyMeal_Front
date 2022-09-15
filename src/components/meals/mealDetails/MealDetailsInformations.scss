@@ -1,0 +1,28 @@
+.meal-detail-right-bottom-container{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+
+.allergen{
+   display: flex;
+   flex-direction: row;
+   gap: 3px;
+}
+
+ul{
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 5px;
+
+   li{
+      font-family: var(--light-font);
+   }
+}
+}
+
+.icon{
+   display: flex;
+   flex-direction: row;
+   gap: 3px;
+}
