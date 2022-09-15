@@ -1,0 +1,27 @@
+.top-detail-container{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 20px;
+}
+
+.meal-detail-right-container {
+   margin-top: 90px;
+}
+
+.meal-detail-right-top-container{
+   display: flex;
+   flex-direction: column;
+}
+
+.title-cat{
+   gap: 0;
+}
+
+.categories{
+   display: flex;
+   flex-direction: row;
+   gap: 3px;
+   margin-top: 0;
+   font-family: var(--light-font);
+}
