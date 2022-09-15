@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import Cookies from "js-cookie";
-import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { loggedAtom } from "../../../atoms/loggedAtom";
 import User from "../../../icons/User";
 import { API } from "../../../utils/variables";
@@ -19,6 +19,17 @@ function Navigation() {
   const [registerPopup, setRegisterPopup] = useState(false);
   const [loginPopup, setLoginPopup] = useState(false);
   const [switchPopup, setSwitchPopup] = useState(false);
+  const [changeColor, setChangeColor] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setChangeColor(true);
+    } else {
+      setChangeColor(false);
+    }
+  }, [location]);
 
   const reset = () => {
     setLogged(false);
@@ -38,7 +49,11 @@ function Navigation() {
   };
 
   return (
-    <div className="flex w-full items-center z-50 justify-between gap-20 py-8 fixed px-24 text-white">
+    <div
+      className={`flex w-full items-center z-50 justify-between gap-20 py-8 fixed px-24 ${
+        changeColor ? "text-white" : "text-black"
+      } `}
+    >
       <NavLink to="/">
         <span className="font-bold-font">Shary</span> Meal
       </NavLink>
@@ -53,11 +68,10 @@ function Navigation() {
         {!loggedd ? (
           <>
             <p
-              className="cursor-pointer text-sm"
+              className="cursor-pointer text-sm "
               onClick={() => setLoginPopup(true)}
             >
-              {" "}
-              Login{" "}
+              Login
             </p>
             {loginPopup && (
               <LayoutBlur>
@@ -83,8 +97,7 @@ function Navigation() {
               className="cursor-pointer text-sm"
               onClick={() => setRegisterPopup(true)}
             >
-              {" "}
-              Register{" "}
+              Register
             </p>
             {registerPopup && (
               <LayoutBlur>
@@ -112,7 +125,7 @@ function Navigation() {
               <span className="flex items-center gap-2">
                 <User /> Profil
               </span>
-            </NavLink>{" "}
+            </NavLink>
             <button onClick={reset}>
               <Button showText={true}>Déconnexion</Button>
             </button>
