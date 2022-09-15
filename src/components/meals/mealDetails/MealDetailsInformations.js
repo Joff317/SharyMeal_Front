@@ -9,6 +9,7 @@ import Meal from "../../../icons/Meal";
 import DoggyBag from "../../../icons/DoggyBag";
 
 const MealDetailsInformations = ({ meal }) => {
+  console.log(meal);
   return (
     <div className="meal-detail-right-bottom-container">
       <SubsectionTitle>Informations</SubsectionTitle>
@@ -17,13 +18,13 @@ const MealDetailsInformations = ({ meal }) => {
           
         <li className="icon">
         <Shrimp/>
-          {meal.animals ? meal.animals : "non accepté"}</li>
+          {meal.animals ? "Animaux accepté" : "Animaux non-accepté"}</li>
 
 
         
         <li className="icon">
         <Wine/>
-          {meal.alcool ? meal.alcool : "pas d'alcool"}</li>
+          {meal.alcool ? "Alcool autorisé": "Alcool non-autorisé"}</li>
 
           
         <li className="icon">
@@ -48,7 +49,7 @@ const MealDetailsInformations = ({ meal }) => {
 
         <li className="icon">
           <DoggyBag/>
-          {meal.doggybag ? meal.doggybag : "doggybag non autorisé"}</li>
+          {meal.doggybag ? "Doggybag autorisé" : "Doggybag non-autorisé"}</li>
 
       </ul>
     </div>
