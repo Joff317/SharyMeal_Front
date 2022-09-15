@@ -24,7 +24,7 @@ function Navigation() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/") {
+    if (location.pathname === "/" || location.pathname === "/user") {
       setChangeColor(true);
     } else {
       setChangeColor(false);

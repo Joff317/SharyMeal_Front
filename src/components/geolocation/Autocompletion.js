@@ -14,6 +14,11 @@ function Autocompletion({ res, setAutocompleteVisible, setCityInfo, origin }) {
       input = document.getElementById("inputAddress");
       input.value = res.formatted;
     }
+
+    if (origin === "userProfile") {
+      input = document.getElementById("inputCityUser");
+      input.value = res.formatted;
+    }
   };
 
   return (
