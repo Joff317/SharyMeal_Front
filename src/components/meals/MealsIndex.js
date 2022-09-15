@@ -15,6 +15,7 @@ function MealIndex() {
   const [mealsIndex, setMealsIndex] = useState(null);
   const [categoriesArray, setCategoriesArray] = useState([]);
   const inputData = useAtomValue(inputDataAtom);
+  console.log(inputData);
   const [price, setPrice] = useState([0, 30]);
   const [places, setPlaces] = useState(0);
   const [visibleFilter, setVisibleFilter] = useState(false);
@@ -88,12 +89,12 @@ function MealIndex() {
                           : mealsIndex
                       )
                       .filter((meal) =>
-                        inputData.city !== ""
+                        inputData && inputData.city !== ""
                           ? meal.location.city === inputData.city
                           : mealsIndex
                       )
                       .filter((meal) =>
-                        inputData.date !== ""
+                       inputData && inputData.date !== ""
                           ? new Date(meal.starting_date) >= new Date(inputData.date)
                           : mealsIndex
                       )
