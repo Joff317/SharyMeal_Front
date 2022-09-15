@@ -1,25 +1,30 @@
 import { useAtom } from "jotai";
 import Cookies from "js-cookie";
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { loggedAtom } from "../../../atoms/loggedAtom";
 import User from "../../../icons/User";
 import { API } from "../../../utils/variables";
 import Button from "../../actions/Button";
+import FormLogin from "../../authentication/FormLogin/FormLogin";
+import LayoutBlur from "../LayoutBlur/LayoutBlur";
+import FormRegister from "../../authentication/FormRegister/FormRegister";
 
 function Navigation() {
   let activeStyle = {
     textDecoration: "underline",
   };
   const [loggedd, setLogged] = useAtom(loggedAtom);
-  const navigate = useNavigate();
   const token = Cookies.get("token");
+  const [registerPopup, setRegisterPopup] = useState(false);
+  const [loginPopup, setLoginPopup] = useState(false);
+  const [switchPopup, setSwitchPopup] = useState(false);
 
   const reset = () => {
     setLogged(false);
     Cookies.remove("token");
-    navigate("/login");
-
+    setLoginPopup(false);
+    setRegisterPopup(false);
     fetch(API + "users/sign_out", {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
@@ -47,19 +52,59 @@ function Navigation() {
       <div className="flex justify-end gap-8 items-center">
         {!loggedd ? (
           <>
-            {" "}
-            <NavLink
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}
-              to="/register"
+            <p
+              className="cursor-pointer text-sm"
+              onClick={() => setLoginPopup(true)}
             >
-              Register
-            </NavLink>
-            <NavLink
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}
-              to="/login"
+              {" "}
+              Login{" "}
+            </p>
+            {loginPopup && (
+              <LayoutBlur>
+                {!switchPopup ? (
+                  <FormLogin
+                    setLoginPopup={setLoginPopup}
+                    setSwitchPopup={setSwitchPopup}
+                    setRegisterPopup={setRegisterPopup}
+                    switchPopup={switchPopup}
+                  />
+                ) : (
+                  <FormRegister
+                    setRegisterPopup={setRegisterPopup}
+                    setSwitchPopup={setSwitchPopup}
+                    setLoginPopup={setLoginPopup}
+                    switchPopup={switchPopup}
+                  />
+                )}
+              </LayoutBlur>
+            )}
+
+            <p
+              className="cursor-pointer text-sm"
+              onClick={() => setRegisterPopup(true)}
             >
-              Login
-            </NavLink>{" "}
+              {" "}
+              Register{" "}
+            </p>
+            {registerPopup && (
+              <LayoutBlur>
+                {!switchPopup ? (
+                  <FormRegister
+                    setRegisterPopup={setRegisterPopup}
+                    setSwitchPopup={setSwitchPopup}
+                    setLoginPopup={setLoginPopup}
+                    switchPopup={switchPopup}
+                  />
+                ) : (
+                  <FormLogin
+                    setLoginPopup={setLoginPopup}
+                    setSwitchPopup={setSwitchPopup}
+                    setRegisterPopup={setRegisterPopup}
+                    switchPopup={switchPopup}
+                  />
+                )}
+              </LayoutBlur>
+            )}
           </>
         ) : (
           <>
