@@ -29,11 +29,19 @@ function MyProfile({currentUser, setCurrentUser}) {
       } = useForm();
 
     const OnSubmit = (data) => {
-        console.log('data du formulaire', data);
+        console.log('data du formulaire', data.age);
         fetch(API + "update_me", {
             method: "PUT",
             headers: { 'Authorization' : `Bearer ${token}`, "Content-type": "application/json" },
-            body : JSON.stringify({user : data })
+            body : JSON.stringify({user : {
+                    name: data.name,
+                    age: data.age,
+                    email : data.email,
+                    gender : data.gender,
+                    description : data.description,
+                    city : cityInfo ? cityInfo.city : currentUser.city
+                }
+            })
 
         })
         .then(response => {
@@ -63,6 +71,9 @@ function MyProfile({currentUser, setCurrentUser}) {
 
     
     function getData(e) {
+        console.log('e.target', e.target.value);
+        console.log('autocomplete', autocomplete);
+        console.log('autocomplete visible', autocompleteVisible)
         if (e.target.value.length > 4) {
           fetch(
             `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&type=city&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
@@ -117,7 +128,7 @@ function MyProfile({currentUser, setCurrentUser}) {
                             className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
                             errors.age
                             )}`}
-                            type="number"
+                            type="text"
                             {...register("age", errorMessageValues.age)}
                             onChange = { () => handleVisibilities() }
                         />
@@ -139,7 +150,7 @@ function MyProfile({currentUser, setCurrentUser}) {
                         {errorMessage(errors.email)}
                     </div>
 
-                    <div className="flex flex-col">
+                    {/* <div className="flex flex-col">
                         <p className="mb-2"> Ville (normal) </p>
                         <input
                             placeholder="Où cuisines-tu ?"
@@ -152,21 +163,21 @@ function MyProfile({currentUser, setCurrentUser}) {
                             onChange = { () => handleVisibilities() }
                         />
                         {errorMessage(errors.city)}
-                    </div>
+                    </div> */}
 
-                    <div className="flex flex-col">
+                    <div className="flex flex-col relative">
                         <p className="mb-2"> Ville (auto_complétion) </p>
                         <input
                             className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
                             errors.city
                             )}`}
                             type="text"
-                            id="inputCity"
+                            id="inputCityUser"
                             onChange={getData}
                             name="cityInput"
                             placeholder="Où cuisines-tu ?"
                             defaultValue={currentUser.city && `${currentUser.city}`}
-                            {...register("city", errorMessageValues.city)}
+                            // {...register("city", errorMessageValues.city)}
                             onInput = { () => handleVisibilities() }
                             />
                             {autocompleteVisible && (
@@ -178,6 +189,7 @@ function MyProfile({currentUser, setCurrentUser}) {
                                     res={res}
                                     setCityInfo={setCityInfo}
                                     setAutocompleteVisible={setAutocompleteVisible}
+                                    origin={"userProfile"}
                                     />
                                 ))}
                             </div>

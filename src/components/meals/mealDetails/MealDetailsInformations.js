@@ -18,7 +18,7 @@ const MealDetailsInformations = ({ meal }) => {
           
         <li className="icon">
         <Shrimp/>
-          {meal.animals ? "Animaux accepté" : "Animaux non-accepté"}</li>
+          {meal.animals ? "Animaux acceptés" : "Animaux non-acceptés"}</li>
 
 
         
@@ -29,19 +29,19 @@ const MealDetailsInformations = ({ meal }) => {
           
         <li className="icon">
         <UserBlack/>
-          {meal.guest_registered} Invités</li>
+          {meal.guest_capacity && meal.guest_capacity } places</li>
 
 
         <li className="allergen icon">
           <Peanuts/>
-          {meal.allergens.map((allergen) => (
+          {meal.allergens && meal.allergens.map((allergen) => (
             <p>{allergen}</p>
           ))}
         </li>
 
         <li className="icon">
           <Meal/>
-          {meal.diet_type.map((diet) => (
+          {meal.diet_type && meal.diet_type.map((diet) => (
             <p>{diet}</p>
           ))}
         </li>
