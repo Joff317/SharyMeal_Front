@@ -32,7 +32,7 @@ function InputGeoloc() {
     const targetScroll = document.getElementById("titleScroll");
     targetScroll.scrollIntoView({
       behavior: "smooth",
-      block: "start"
+      block: "start",
     });
   }
 
@@ -74,6 +74,7 @@ function InputGeoloc() {
                   res={res}
                   setCityInfo={setCityInfo}
                   setAutocompleteVisible={setAutocompleteVisible}
+                  origin="geolocation"
                 />
               ))}
           </div>

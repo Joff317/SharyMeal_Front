@@ -1,10 +1,19 @@
-function Autocompletion({ res, setAutocompleteVisible, setCityInfo }) {
+function Autocompletion({ res, setAutocompleteVisible, setCityInfo, origin }) {
   const handleClick = () => {
     setAutocompleteVisible(false);
     setCityInfo(res);
 
-    let input = document.getElementById("inputCity");
-    input.value = `${res.city}, ${res.country}`;
+    let input;
+
+    if (origin === "geolocation") {
+      input = document.getElementById("inputCity");
+      input.value = `${res.city}, ${res.country}`;
+    }
+
+    if (origin === "createMeal") {
+      input = document.getElementById("inputAddress");
+      input.value = res.formatted;
+    }
   };
 
   return (

@@ -46,7 +46,7 @@ function FormLogin({
           <p className="mb-2"> Email </p>
           <input
             placeholder="Votre email"
-            className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
+            className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md  ${errorInput(
               errors.email
             )}`}
             type="text"
@@ -58,7 +58,7 @@ function FormLogin({
           <p className="mb-2"> Mot de passe </p>
           <input
             placeholder="°°°°°°°"
-            className={`border border-grey-border placeholder:font-light-font h-14 pl-3 rounded-md ${errorInput(
+            className={`border border-grey-border placeholder:font-light-font placeholder:text-sm h-14 pl-3 rounded-md ${errorInput(
               errors.password
             )}`}
             type="Password"

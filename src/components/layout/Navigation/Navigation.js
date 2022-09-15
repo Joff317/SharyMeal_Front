@@ -61,7 +61,7 @@ function Navigation() {
       <div className="flex gap-12">
         <NavLink to="/about">About us</NavLink>
 
-        <NavLink to="/">Proposer un repas</NavLink>
+        <NavLink to="/create-meal">Proposer un repas</NavLink>
       </div>
 
       <div className="flex justify-end gap-8 items-center">
