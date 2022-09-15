@@ -70,5 +70,15 @@ export const errorMessageValues = {
 		// 	value: /^([A-Z][a-z]+)+$/,
 		// 	message: "Le mot de passe doit contenir au moins 1 majuscule",
 		// },
+	},
+
+	age: {
+		min: {
+			value: 16,
+			message: "Vous devez avoir 16 ans." 
+		}
 	}
+
+
+
 };

@@ -13,6 +13,7 @@ module.exports = {
       pink: "#F4C0DB",
       red: "#FF6767",
       yellow: "#FCF087",
+      success: "#00bf49"
     },
     fontFamily: {
       "bookmania-black-font": ["Bookmania_Black", "sans-serif"],

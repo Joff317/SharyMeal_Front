@@ -8,9 +8,9 @@ function Layout({ children }) {
 	};
 
 	return (
-		<div>
+		<div className="">
 			<Navigation />
-			<div className={`m-auto max-w-screen-${css.maxW}`}>{children}</div>
+			<div className={`m-auto max-w-screen-${css.maxW} `}>{children}</div>
 			<Footer/>
 		</div>
 	);
