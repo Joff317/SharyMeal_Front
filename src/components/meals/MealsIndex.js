@@ -30,7 +30,8 @@ function MealIndex() {
       });
   }, []);
 
-  // console.log(mealsIndex);
+
+  // console.log('mealsIndex', mealsIndex);
 
   return (
     <div className="flex flex-col  items-center">
@@ -74,31 +75,37 @@ function MealIndex() {
         </div>
       </div>
 
+
+      
+
       <div id="meals-index-container">
-        {mealsIndex &&
-          mealsIndex
-            .filter((meal) =>
-              categoriesArray.length >= 1
-                ? meal.categories.some((cat) =>
-                    categoriesArray.includes(cat.label)
-                  )
-                : mealsIndex
-            )
-            .filter((meal) =>
-              inputData.city !== ""
-                ? meal.location.city === inputData.city
-                : mealsIndex
-            )
-            .filter((meal) =>
-              inputData.date !== ""
-                ? new Date(meal.starting_date) >= new Date(inputData.date)
-                : mealsIndex
-            )
-            .filter((meal) => meal.price > price[0] && meal.price < price[1])
-            .filter(
-              (meal) => places <= meal.guest_capacity - meal.guest_registered
-            )
-            .map((meal) => <MealCard mealData={meal} />)}
+        {mealsIndex && mealsIndex
+                      .filter((meal) =>
+                        categoriesArray.length >= 1
+                          ? meal.categories.some((cat) =>
+                              categoriesArray.includes(cat.label)
+                            )
+                          : mealsIndex
+                      )
+                      .filter((meal) =>
+                        inputData.city !== ""
+                          ? meal.location.city === inputData.city
+                          : mealsIndex
+                      )
+                      .filter((meal) =>
+                        inputData.date !== ""
+                          ? new Date(meal.starting_date) >= new Date(inputData.date)
+                          : mealsIndex
+                      )
+                      .filter((meal) => meal.price > price[0] && meal.price < price[1]
+                      )
+                      .filter(
+                        (meal) => places <= meal.guest_capacity - meal.guest_registered
+                      )
+                      .map((meal) => <MealCard mealData={meal} />
+                      )
+                      
+      }
       </div>
     </div>
   );
