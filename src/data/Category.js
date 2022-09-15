@@ -11,38 +11,47 @@ import Fries from "../icons/Fries";
 
 export const categories = [
   {
+    id: 9,
     label: "Pizza",
     icon: <Pizza />,
   },
   {
+    id: 2,
     label: "SeaFood",
     icon: <Shrimp />,
   },
   {
+    id: 3,
     label: "Drink",
     icon: <Wine />,
   },
   {
+    id: 4,
     label: "Meat",
     icon: <Meat />,
   },
   {
+    id: 5,
     label: "Vege",
     icon: <Vege />,
   },
   {
+    id: 7,
     label: "Mexican",
     icon: <Taco />,
   },
   {
+    id: 6,
     label: "Fruits",
     icon: <Cherry />,
   },
   {
+    id: 8,
     label: "Belgium",
     icon: <Fries />,
   },
   {
+    id: 1,
     label: "Japanese",
     icon: <Sushi />,
   },

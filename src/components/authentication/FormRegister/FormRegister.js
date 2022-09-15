@@ -53,7 +53,7 @@ function FormRegister({
         <div className="flex flex-col">
           <p className="mb-2"> Email </p>
           <input
-            className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md ${errorInput(
+            className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md ${errorInput(
               errors.email
             )} `}
             placeholder="Votre email"
@@ -65,7 +65,7 @@ function FormRegister({
         <div className="flex flex-col">
           <p className="mb-2"> Password </p>
           <input
-            className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md ${errorInput(
+            className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md ${errorInput(
               errors.password
             )}`}
             placeholder="°°°°°°°"
