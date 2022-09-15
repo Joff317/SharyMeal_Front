@@ -2,7 +2,7 @@ import React from "react";
 import { API } from "../../utils/variables";
 import Cookies from "js-cookie";
 
-function MealImagesForm(props) {
+function MealImagesForm({ maxId }) {
   const token = Cookies.get("token");
 
   const handleSubmitFile = (e) => {
@@ -22,20 +22,14 @@ function MealImagesForm(props) {
       headers: { Authorization: `Bearer ${token}` },
       body: data,
     };
-    fetch(API + "meals/21", requestOptions)
+    fetch(API + `meals/${maxId + 1}`, requestOptions)
       .then((response) => response.json())
       .then((res) => console.log(res));
   };
 
   return (
     <>
-      TEST ACTIVE STORAGE
       <form onSubmit={(e) => handleSubmitFile(e)}>
-        <label htmlFor="title">Title:</label>
-        <input type="text" name="title" id="title" />
-        <br />
-
-        <label htmlFor="images">Image:</label>
         <input type="file" name="images" id="images" multiple={true} />
         <br />
 
