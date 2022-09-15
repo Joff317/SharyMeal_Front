@@ -20,7 +20,7 @@ function Navigation() {
   const [loginPopup, setLoginPopup] = useState(false);
   const [switchPopup, setSwitchPopup] = useState(false);
   const [changeColor, setChangeColor] = useState(false);
-
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -46,6 +46,8 @@ function Navigation() {
       .then((res) => {
         console.log(res);
       });
+      
+      navigate("/")
   };
 
   return (
