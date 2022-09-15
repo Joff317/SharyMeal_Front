@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
-export const inputDataAtom = atomWithStorage({
-  city: "", 
+export const inputDataAtom = atomWithStorage("inputData", {
+  city: "",
   date: "",
 });

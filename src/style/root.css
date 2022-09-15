@@ -39,7 +39,7 @@ body {
     --book-font: "Circular_Book", "Arial", sans-serif;
 }
 
-:root h1, :root h2, :root h3, :root h4, :root h5, :root h6, :root p {
+:root h1, :root h2, :root h3, :root h4, :root h5, :root h6{
     margin: 0;
     width: -moz-fit-content;
     width: fit-content;
