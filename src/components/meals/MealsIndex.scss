@@ -6,6 +6,10 @@
     align-items: center;
 
     @media (max-width: 1293px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 1062px) {
         grid-template-columns: repeat(3, 1fr);
     }
 

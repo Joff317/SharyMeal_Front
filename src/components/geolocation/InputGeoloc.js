@@ -32,8 +32,7 @@ function InputGeoloc() {
     const targetScroll = document.getElementById("titleScroll");
     targetScroll.scrollIntoView({
       behavior: "smooth",
-      block: "start",
-      inline: "end",
+      block: "start"
     });
   }
 
@@ -64,6 +63,7 @@ function InputGeoloc() {
           onChange={getData}
           name="cityInput"
           placeholder="Aucune sélection"
+          defaultValue={inputDataValue.city}
         />
         {autocompleteVisible && (
           <div className="border border-slate-500 rounded-lg p-2 absolute top-16 left-16 z-10 bg-white">
