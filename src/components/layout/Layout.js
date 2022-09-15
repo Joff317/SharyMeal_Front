@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./Footer";
 import Navigation from "./Navigation/Navigation";
 
 function Layout({ children }) {
@@ -10,6 +11,7 @@ function Layout({ children }) {
 		<div>
 			<Navigation />
 			<div className={`m-auto max-w-screen-${css.maxW}`}>{children}</div>
+			<Footer/>
 		</div>
 	);
 }
