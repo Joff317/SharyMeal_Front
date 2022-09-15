@@ -89,15 +89,15 @@ function MealIndex() {
                       )
                       .filter((meal) =>
                         inputData.city !== ""
-                          ? meal.location.city === inputData.city
-                          : mealsIndex
+                                      ? meal.location.city === inputData.city
+                                      : mealsIndex
                       )
                       .filter((meal) =>
                         inputData.date !== ""
-                          ? new Date(meal.starting_date) >= new Date(inputData.date)
-                          : mealsIndex
+                                      ? new Date(meal.starting_date) >= new Date(inputData.date)
+                                      : mealsIndex
                       )
-                      .filter((meal) => meal.price > price[0] && meal.price < price[1]
+                      .filter((meal) => meal.price >= price[0] && meal.price <= price[1]
                       )
                       .filter(
                         (meal) => places <= meal.guest_capacity - meal.guest_registered
