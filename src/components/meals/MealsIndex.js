@@ -20,18 +20,12 @@ function MealIndex() {
   const [visibleFilter, setVisibleFilter] = useState(false);
 
   useEffect(() => {
-    // console.log("API", API);
-
     fetch(API + "meals")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setMealsIndex(data);
       });
   }, []);
-
-
-  // console.log('mealsIndex', mealsIndex);
 
   return (
     <div className="flex flex-col  items-center">
@@ -39,10 +33,7 @@ function MealIndex() {
       <SectionTitle textCenter={true}>
         {" "}
         Discover food experiences around{" "}
-        <span className="bg-green">
-          {" "}
-          {inputData.city ? inputData.city : "you"}{" "}
-        </span>
+        <span className="bg-green"> {inputData ? inputData.city : "you"} </span>
       </SectionTitle>
       <div className={`flex gap-10 my-10 border-b border-grey-border pb-3`}>
         {categories.map((category) => (
@@ -75,37 +66,31 @@ function MealIndex() {
         </div>
       </div>
 
-
-      
-
       <div id="meals-index-container">
-        {mealsIndex && mealsIndex
-                      .filter((meal) =>
-                        categoriesArray.length >= 1
-                          ? meal.categories.some((cat) =>
-                              categoriesArray.includes(cat.label)
-                            )
-                          : mealsIndex
-                      )
-                      .filter((meal) =>
-                        inputData.city !== ""
-                                      ? meal.location.city === inputData.city
-                                      : mealsIndex
-                      )
-                      .filter((meal) =>
-                        inputData.date !== ""
-                                      ? new Date(meal.starting_date) >= new Date(inputData.date)
-                                      : mealsIndex
-                      )
-                      .filter((meal) => meal.price >= price[0] && meal.price <= price[1]
-                      )
-                      .filter(
-                        (meal) => places <= meal.guest_capacity - meal.guest_registered
-                      )
-                      .map((meal) => <MealCard mealData={meal} />
-                      )
-                      
-      }
+        {mealsIndex &&
+          mealsIndex
+            .filter((meal) =>
+              categoriesArray.length >= 1
+                ? meal.categories.some((cat) =>
+                    categoriesArray.includes(cat.label)
+                  )
+                : mealsIndex
+            )
+            .filter((meal) =>
+              inputData && inputData.city !== ""
+                ? meal.location.city === inputData.city
+                : mealsIndex
+            )
+            .filter((meal) =>
+              inputData && inputData.date !== ""
+                ? new Date(meal.starting_date) >= new Date(inputData.date)
+                : mealsIndex
+            )
+            .filter((meal) => meal.price > price[0] && meal.price < price[1])
+            .filter(
+              (meal) => places <= meal.guest_capacity - meal.guest_registered
+            )
+            .map((meal) => <MealCard mealData={meal} />)}
       </div>
     </div>
   );

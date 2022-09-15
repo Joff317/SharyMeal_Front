@@ -5,4 +5,4 @@ import Cookies from "js-cookie";
 
 export const loggedAtom = atom(Cookies.get("token"));
 
-export const currentuserAtom = atomWithStorage({});
+export const currentuserAtom = atomWithStorage("currentUser", {});
