@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { loggedAtom } from "../../atoms/loggedAtom";
 import { currentuserAtom } from "../../atoms/loggedAtom";
 import SectionTitle from "../../components/titles/SectionTitle";
@@ -22,6 +22,7 @@ function User() {
   const [messagesVisib, setMessagesVisib] = useState(false);
   const [attendancesVisib, setAttendancesVisib] = useState(false);
   const [hostedMealsVisib, setHostedMealsVisib] = useState(false);
+  const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
     loggedd &&
@@ -35,7 +36,7 @@ function User() {
           console.log(res);
           setData(res);
         });
-  }, [setData]);
+  }, [setData, recucerValue]);
 
   const displayProfile = () => {
     setMessagesVisib(false);
@@ -151,7 +152,9 @@ function User() {
           )}
           {messagesVisib && <MyMessages />}
           {attendancesVisib && <MyAttendances />}
-          {hostedMealsVisib && <MyHostedMeals />}
+          {hostedMealsVisib && (
+            <MyHostedMeals userData={data} forceUpdate={forceUpdate} />
+          )}
         </div>
       </div>
     </div>

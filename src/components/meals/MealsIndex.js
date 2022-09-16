@@ -67,6 +67,7 @@ function MealIndex() {
         </div>
       </div>
 
+
       
         {
           mealsIndex ? <div id="meals-index-container">
@@ -95,6 +96,7 @@ function MealIndex() {
                       :
                       <Loader type="spinningBubbles" color="#292929"/>
           }
+
     </div>
   );
 }
