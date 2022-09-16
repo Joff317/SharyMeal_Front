@@ -3,92 +3,32 @@ import Button from "../../actions/Button";
 import SubsectionTitle from "../../titles/SubsectionTitle";
 import { useForm } from "react-hook-form";
 import { API } from "../../../utils/variables";
-
-import { errorMessageValues, errorInput, errorMessage } from "../../authentication/errors";
-import './MyProfile.scss';
-import { useState } from 'react';
-import { useAtomValue } from 'jotai';
-import { loggedAtom } from '../../../atoms/loggedAtom';
-import Autocompletion from '../../geolocation/Autocompletion';
-import Cookies from 'js-cookie';
-
-
+import {
+  errorMessageValues,
+  errorInput,
+  errorMessage,
+} from "../../authentication/errors";
+import "./MyProfile.scss";
+import { useState } from "react";
+import Autocompletion from "../../geolocation/Autocompletion";
+import Cookies from "js-cookie";
 
 function MyProfile({ currentUser, setCurrentUser }) {
+  const [saveButtonVisib, setSaveButtonVisib] = useState(false);
+  const token = Cookies.get("token");
+  const [autocompleteVisible, setAutocompleteVisible] = useState(false);
+  const [autocomplete, setAutocomplete] = useState(false);
+  const [cityInfo, setCityInfo] = useState();
+  const [editConfirmVisib, setEditConfirmVisib] = useState(false);
+  const [editErrorVisib, setEditErrorVisib] = useState(false);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  console.log("data");
 
-    const [ saveButtonVisib, setSaveButtonVisib ] = useState(false)
-    const token = Cookies.get('token');
-    const [autocompleteVisible, setAutocompleteVisible] = useState(false);
-    const [autocomplete, setAutocomplete] = useState(false);
-    const [cityInfo, setCityInfo] = useState();
-    const [ editConfirmVisib, setEditConfirmVisib ] = useState(false);
-    const [ editErrorVisib, setEditErrorVisib ] = useState(false);
-
-
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm();
-
-    const OnSubmit = (data) => {
-        console.log('data du formulaire', data.age);
-        fetch(API + "update_me", {
-            method: "PUT",
-            headers: { 'Authorization' : `Bearer ${token}`, "Content-type": "application/json" },
-            body : JSON.stringify({user : {
-                    name: data.name,
-                    age: data.age,
-                    email : data.email,
-                    gender : data.gender,
-                    description : data.description,
-                    city : cityInfo ? cityInfo.city : currentUser.city
-                }
-            })
-
-        })
-        .then(response => {
-            console.log('response du fetch', response);
-            if (response.status === 200) {
-                setEditConfirmVisib(true);
-                setTimeout(() => {
-                    setEditConfirmVisib(false) 
-                }, 2000)
-                setCurrentUser(data);
-                setSaveButtonVisib(false);
-            } else {
-                setEditErrorVisib(true);
-                setTimeout(() => {
-                    setEditErrorVisib(false) 
-                }, 2000)
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('data réponse du fetch => ', data);
-        })
-        .catch(error => console.log(error.message))
-        
-        
-    };
-
-    
-    function getData(e) {
-        console.log('e.target', e.target.value);
-        console.log('autocomplete', autocomplete);
-        console.log('autocomplete visible', autocompleteVisible)
-        if (e.target.value.length > 4) {
-          fetch(
-            `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&type=city&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              setAutocompleteVisible(true);
-              setAutocomplete(data);
-            })
-            .catch((err) => console.error(err));
-            
   const OnSubmit = (data) => {
     console.log("data du formulaire", data.age);
     fetch(API + "update_me", {
@@ -117,7 +57,6 @@ function MyProfile({ currentUser, setCurrentUser }) {
           }, 2000);
           setCurrentUser(data);
           setSaveButtonVisib(false);
-
         } else {
           setEditErrorVisib(true);
           setTimeout(() => {
