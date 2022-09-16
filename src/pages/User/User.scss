@@ -1,7 +1,8 @@
 .top-container{
     padding-top: 100px;
+    padding-bottom: 20px;
     background-color: var(--black);
-    height: 600px;
+
 }
 
 .text-container{
@@ -13,16 +14,29 @@
 }
 
 .user-main-container{
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    max-width: 1400px
 }
 
 .user-features-navigation{
-    
-
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+    width: 15%;
+    margin: 30px 30px 30px 50px;
+    padding: 20px 0px 0px 0px;
+    border-right: 1px solid var(--grey-border);
+    position: sticky;
+    align-self: flex-start;
+    top: 170px;
 }
 
 .user-feature-container{
+    width: 80%;
+    padding-top: 20px;
+    margin: 20px 0px 20px 10px;
+
 
 }
