@@ -27,6 +27,7 @@ import { dietType } from "../../../data/DietType";
 import { allergens } from "../../../data/Allergens";
 import SectionTitle from "../../titles/SectionTitle";
 import MealEditForm from "../MealEditForm";
+import Edit from "../../../icons/Edit";
 
 function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
   const token = Cookies.get("token");
@@ -46,7 +47,7 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
   };
 
   return (
-    <Link to={!showAdditionalInfo && `/meals/${mealData.id}`}>
+    <div>
       <div
         key={mealData.id}
         className="mealcard-container flex flex-col justify-end gap-1"
@@ -56,24 +57,30 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
             <div className="absolute top-2 -left-2 flex flex-col gap-2 z-10">
               <div
                 onClick={() => setShowEdit(true)}
-                className="w-[38px] h-[38px] rounded-full bg-[#5376F1]"
-              ></div>
+                className="w-[38px] h-[38px] rounded-full bg-[#5376F1] flex justify-center items-center cursor-pointer"
+              >
+                <Edit />
+              </div>
               <div
                 onClick={() => openInNewTab(`/meals/${mealData.id}`)}
-                className="w-[38px] h-[38px] rounded-full bg-[#F1538C] flex justify-center items-center"
+                className="w-[38px] h-[38px] rounded-full bg-[#F1538C] flex justify-center items-center cursor-pointer"
               >
                 <Eye />
               </div>
               <div
                 onClick={() => deleteMeal()}
-                className="w-[38px] h-[38px] rounded-full bg-[#F15353] flex justify-center items-center"
+                className="w-[38px] h-[38px] rounded-full bg-[#F15353] flex justify-center items-center cursor-pointer"
               >
                 <Bin />
               </div>
             </div>
             {showEdit && (
               <LayoutBlur>
-                <MealEditForm mealData={mealData} setShowEdit={setShowEdit} />
+                <MealEditForm
+                  mealData={mealData}
+                  setShowEdit={setShowEdit}
+                  forceUpdate={forceUpdate}
+                />
               </LayoutBlur>
             )}{" "}
           </>
@@ -95,7 +102,7 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
         )}
 
         <MealPrice price={mealData.price} />
-        <MealTitle title={mealData.title} />
+        <MealTitle title={mealData.title} mealId={mealData.id} />
         {showAvatar && (
           <div className="flex gap-2 items-center">
             <MealAvatar host={mealData.host} />
@@ -108,7 +115,7 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
 
         <MealStartingDate date={mealData.starting_date} />
       </div>
-    </Link>
+    </div>
   );
 }
 

@@ -11,17 +11,26 @@ import { dietType } from "../../data/DietType";
 import { allergens } from "../../data/Allergens";
 import Button from "../actions/Button";
 import Close from "../../icons/Close";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { API } from "../../utils/variables";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 
-function MealEditForm({ mealData, setShowEdit }) {
+function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
   const [autocomplete, setAutocomplete] = useState();
   const [autocompleteVisible, setAutocompleteVisible] = useState(false);
   const [startDate, setStartDate] = useState(new Date(mealData.starting_date));
   const [cityInfo, setCityInfo] = useState();
+  const [joinCategoryArray, setJoinCategoryArray] = useState();
   const token = Cookies.get("token");
+
+  useEffect(() => {
+    fetch(API + `meals/${mealData.id}`).then((res) => {
+      res
+        .json()
+        .then((response) => setJoinCategoryArray(response.joinCategoryMealIds));
+    });
+  }, []);
 
   const {
     register,
@@ -43,10 +52,10 @@ function MealEditForm({ mealData, setShowEdit }) {
           description: data.description,
           price: data.price,
           location: {
-            city: cityInfo.city,
-            lat: cityInfo.lat,
-            lon: cityInfo.lon,
-            address: cityInfo.formatted,
+            city: mealData.location.city,
+            lat: mealData.location.lat,
+            lon: mealData.location.lon,
+            address: mealData.location.address,
           },
           guest_capacity: data.guest_capacity,
           starting_date: startDate,
@@ -63,7 +72,38 @@ function MealEditForm({ mealData, setShowEdit }) {
       })
       .then((res) => {
         console.log(res);
+        deleteCategoryInfo(joinCategoryArray, data.categories, res.id);
+        setShowEdit(false);
+        forceUpdate();
       });
+  };
+
+  const deleteCategoryInfo = async (arrayToDelete, dataCategory, mealId) => {
+    arrayToDelete.map((categoryId) => {
+      fetch(API + `join_categories/${categoryId}`, {
+        method: "DELETE",
+      });
+    });
+
+    await postCategoriesInfo(dataCategory, mealId);
+  };
+
+  const postCategoriesInfo = (categoriesArray, mealId) => {
+    categoriesArray.map((category) => {
+      fetch(API + "join_categories", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          join_category_meal: {
+            meal_id: mealId,
+            category_id: parseInt(category),
+          },
+        }),
+      });
+    });
   };
 
   const getData = (e) => {
@@ -323,8 +363,11 @@ function MealEditForm({ mealData, setShowEdit }) {
         >
           <Button showIcon={true} icon={<Close />}></Button>
         </span>
-        <button type="submit" className="my-2 flex justify-center ">
-          Modifier mon repas
+        <button
+          type="submit"
+          className="my-2 flex justify-center fixed bottom-4 left-[40%]"
+        >
+          <Button showText> Modifier mon repas </Button>
         </button>
       </form>
     </>

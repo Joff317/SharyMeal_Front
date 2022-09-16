@@ -19,7 +19,7 @@ function MealDetails() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setMeal(data);
+        setMeal(data.meal);
       });
   }, []);
 
@@ -39,11 +39,9 @@ function MealDetails() {
 
               <MealDetailsInformations meal={meal} />
             </div>
-
           </div>
           <MealHostProfile meal={meal} />
-          <MealDetailsFooter meal={meal}/>
-
+          <MealDetailsFooter meal={meal} />
         </>
       )}
     </div>
