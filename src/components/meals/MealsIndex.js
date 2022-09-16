@@ -90,7 +90,7 @@ function MealIndex() {
             .filter(
               (meal) => places <= meal.guest_capacity - meal.guest_registered
             )
-            .map((meal) => <MealCard mealData={meal} />)}
+            .map((meal) => <MealCard mealData={meal} showAvatar />)}
       </div>
     </div>
   );
