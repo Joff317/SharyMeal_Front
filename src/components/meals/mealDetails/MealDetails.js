@@ -7,6 +7,7 @@ import MealDetailsTitle from "./MealDetailsTitle";
 import MealDetailsHost from "./MealDetailsHost";
 import MealDetailsDescription from "./MealDetailsDescription";
 import MealDetailsInformations from "./MealDetailsInformations";
+import MealDetailsFooter from "./MealDetailsFooter";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
@@ -37,7 +38,9 @@ function MealDetails() {
 
               <MealDetailsInformations meal={meal} />
             </div>
+
           </div>
+          <MealDetailsFooter meal={meal}/>
         </>
       )}
     </div>
