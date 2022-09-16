@@ -9,12 +9,13 @@ import { useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { loggedAtom } from '../../../atoms/loggedAtom';
 import Autocompletion from '../../geolocation/Autocompletion';
+import Cookies from 'js-cookie';
 
 
 function MyProfile({currentUser, setCurrentUser}) {
 
     const [ saveButtonVisib, setSaveButtonVisib ] = useState(false)
-    const token = useAtomValue(loggedAtom);
+    const token = Cookies.get('token');
     const [autocompleteVisible, setAutocompleteVisible] = useState(false);
     const [autocomplete, setAutocomplete] = useState(false);
     const [cityInfo, setCityInfo] = useState();
