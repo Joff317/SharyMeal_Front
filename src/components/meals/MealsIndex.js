@@ -10,6 +10,7 @@ import { inputDataAtom } from "../../atoms/inputData";
 import FilterButton from "../filters/FilterButton";
 import PriceFilter from "../filters/priceFilter/PriceFilter";
 import PlacesFilter from "../filters/placesFilter/PlacesFilter";
+import Loader from "../Loader";
 
 function MealIndex() {
   const [mealsIndex, setMealsIndex] = useState(null);
@@ -66,32 +67,35 @@ function MealIndex() {
         </div>
       </div>
 
-      <div id="meals-index-container">
-        {mealsIndex &&
-          mealsIndex
-            .filter((meal) =>
-              categoriesArray.length >= 1
-                ? meal.categories.some((cat) =>
-                    categoriesArray.includes(cat.label)
-                  )
-                : mealsIndex
-            )
-            .filter((meal) =>
-              inputData && inputData.city !== ""
-                ? meal.location.city === inputData.city
-                : mealsIndex
-            )
-            .filter((meal) =>
-              inputData && inputData.date !== ""
-                ? new Date(meal.starting_date) >= new Date(inputData.date)
-                : mealsIndex
-            )
-            .filter((meal) => meal.price > price[0] && meal.price < price[1])
-            .filter(
-              (meal) => places <= meal.guest_capacity - meal.guest_registered
-            )
-            .map((meal) => <MealCard mealData={meal} showAvatar />)}
-      </div>
+      
+        {
+          mealsIndex ? <div id="meals-index-container">
+                        {mealsIndex
+                        .filter((meal) =>
+                            categoriesArray.length >= 1
+                              ? meal.categories.some((cat) =>
+                                  categoriesArray.includes(cat.label)
+                                )
+                              : mealsIndex
+                          )
+                        .filter((meal) =>
+                                      inputData && inputData.city !== ""
+                                        ? meal.location.city === inputData.city
+                                        : mealsIndex
+                                    )
+                        .filter((meal) =>
+                                      inputData && inputData.date !== ""
+                                        ? new Date(meal.starting_date) >= new Date(inputData.date)
+                                        : mealsIndex
+                                    )
+                        .filter((meal) => meal.price > price[0] && meal.price < price[1])
+                        .filter((meal) => places <= meal.guest_capacity - meal.guest_registered)
+                        .map((meal) => <MealCard mealData={meal} />)}
+                        </div>
+                      :
+                      <Loader type="spinningBubbles" color="#292929"/>
+          }
+
     </div>
   );
 }
