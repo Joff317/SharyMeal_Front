@@ -27,6 +27,7 @@ function MyProfile({ currentUser, setCurrentUser }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  console.log("data");
 
   const OnSubmit = (data) => {
     console.log("data du formulaire", data.age);
