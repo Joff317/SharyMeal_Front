@@ -101,6 +101,7 @@ function MealIndex() {
                       :
                       <Loader type="spinningBubbles" color="#292929"/>
           }
+
     </div>
   );
 }

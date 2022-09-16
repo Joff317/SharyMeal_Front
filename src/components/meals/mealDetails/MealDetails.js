@@ -8,6 +8,7 @@ import MealDetailsHost from "./MealDetailsHost";
 import MealDetailsDescription from "./MealDetailsDescription";
 import MealDetailsInformations from "./MealDetailsInformations";
 import MealDetailsFooter from "./MealDetailsFooter";
+import MealHostProfile from "./MealHostProfile";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
@@ -40,7 +41,9 @@ function MealDetails() {
             </div>
 
           </div>
+          <MealHostProfile meal={meal} />
           <MealDetailsFooter meal={meal}/>
+
         </>
       )}
     </div>
