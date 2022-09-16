@@ -166,7 +166,7 @@ function MyProfile({currentUser, setCurrentUser}) {
                     </div> */}
 
                     <div className="flex flex-col relative">
-                        <p className="mb-2"> Ville (auto_complétion) </p>
+                        <p className="mb-2"> Ville </p>
                         <input
                             className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
                             errors.city
