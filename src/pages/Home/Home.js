@@ -12,7 +12,6 @@ import image1 from "../../assets/images/imagehome1.jpeg";
 import image2 from "../../assets/images/imagehome2.jpeg";
 import image3 from "../../assets/images/imagehome3.jpeg";
 import InputGeoloc from "../../components/geolocation/InputGeoloc";
-import Foucauld from "../../Foucauld";
 
 
 function Home(props) {
