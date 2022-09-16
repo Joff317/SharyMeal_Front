@@ -26,7 +26,7 @@ function FormLogin({
   const current_user = useSetAtom(currentuserAtom);
 
   const OnSubmit = (data) => {
-    usePostForm(API + "/users/sign_in", data, setLogged, current_user);
+    usePostForm(API + "users/sign_in", data, setLogged, current_user);
   };
 
   function resetPopup() {
