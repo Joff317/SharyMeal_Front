@@ -46,6 +46,14 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
+  function dataParsed(date) {
+    return new Date(date).toLocaleDateString("fr-FR", {
+      month: "short",
+      year: "numeric",
+      day: "numeric",
+    });
+  }
+
   return (
     <div>
       <div
@@ -113,7 +121,7 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
           </div>
         )}
 
-        <MealStartingDate date={mealData.starting_date} />
+        <MealStartingDate date={dataParsed(mealData.starting_date)} />
       </div>
     </div>
   );
