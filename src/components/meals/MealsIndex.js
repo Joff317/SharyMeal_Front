@@ -11,6 +11,8 @@ import FilterButton from "../filters/FilterButton";
 import PriceFilter from "../filters/priceFilter/PriceFilter";
 import PlacesFilter from "../filters/placesFilter/PlacesFilter";
 import Loader from "../Loader";
+import Lottie from "react-lottie";
+import * as noResult from "../../lotties/noresult.json";
 
 function MealIndex() {
   const [mealsIndex, setMealsIndex] = useState(null);
@@ -20,6 +22,16 @@ function MealIndex() {
   const [price, setPrice] = useState([0, 30]);
   const [places, setPlaces] = useState(0);
   const [visibleFilter, setVisibleFilter] = useState(false);
+  const [mealsIndexFiltered, setMealsIndexFiltered] = useState([]);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: noResult,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   useEffect(() => {
     fetch(API + "meals")
@@ -28,11 +40,48 @@ function MealIndex() {
         setMealsIndex(data);
       });
 
-      setInputData({
-        city: "",
-        date: "",
-      })
+    setInputData({
+      city: "",
+      date: "",
+    });
   }, []);
+
+  const filteringRender = (data) => {
+    const results = data
+      .filter((meal) =>
+        categoriesArray.length >= 1
+          ? meal.categories.some((cat) => categoriesArray.includes(cat.label))
+          : mealsIndex
+      )
+      .filter((meal) =>
+        inputData && inputData.city !== ""
+          ? meal.location.city === inputData.city
+          : mealsIndex
+      )
+      .filter((meal) =>
+        inputData && inputData.date !== ""
+          ? new Date(meal.starting_date) >= new Date(inputData.date)
+          : mealsIndex
+      )
+      .filter((meal) => meal.price >= price[0] && meal.price <= price[1])
+      .filter((meal) => places <= meal.guest_capacity - meal.guest_registered);
+
+    if (results.length > 0) {
+      return (
+        <div id="meals-index-container">
+          {results.map((meal) => (
+            <MealCard mealData={meal} />
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Lottie options={defaultOptions} height={400} width={500} />
+        </div>
+      );
+    }
+  };
 
   return (
     <div className="flex flex-col  items-center">
@@ -73,35 +122,11 @@ function MealIndex() {
         </div>
       </div>
 
-      
-        {
-          mealsIndex ? <div id="meals-index-container">
-                        {mealsIndex
-                          .filter((meal) =>
-                                      categoriesArray.length >= 1
-                                        ? meal.categories.some((cat) =>
-                                            categoriesArray.includes(cat.label)
-                                          )
-                                        : mealsIndex
-                                    )
-                        .filter((meal) =>
-                                      inputData && inputData.city !== ""
-                                        ? meal.location.city === inputData.city
-                                        : mealsIndex
-                                    )
-                        .filter((meal) =>
-                                      inputData && inputData.date !== ""
-                                        ? new Date(meal.starting_date) >= new Date(inputData.date)
-                                        : mealsIndex
-                                    )
-                        .filter((meal) => meal.price >= price[0] && meal.price <= price[1])
-                        .filter((meal) => places <= meal.guest_capacity - meal.guest_registered)
-                        .map((meal) =><MealCard mealData={meal} />)}
-                        </div>
-                      :
-                      <Loader type="spinningBubbles" color="#292929"/>
-          }
-
+      {mealsIndex ? (
+        filteringRender(mealsIndex)
+      ) : (
+        <Loader type="spinningBubbles" color="#292929" />
+      )}
     </div>
   );
 }

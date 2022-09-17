@@ -4,8 +4,9 @@ import { useState, forwardRef } from "react";
 import Autocompletion from "./Autocompletion";
 import { useAtomValue, useSetAtom } from "jotai";
 import { inputDataAtom } from "../../atoms/inputData";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import fr from "date-fns/locale/fr";
 
 function InputGeoloc() {
   const [autocompleteVisible, setAutocompleteVisible] = useState(false);
@@ -14,6 +15,8 @@ function InputGeoloc() {
   const setInputData = useSetAtom(inputDataAtom);
   const inputDataValue = useAtomValue(inputDataAtom);
   const [startDate, setStartDate] = useState(new Date());
+
+  registerLocale("fr", fr);
 
   function onSubmit(e) {
     e.preventDefault();
@@ -87,6 +90,8 @@ function InputGeoloc() {
             <DatePicker
               selected={startDate}
               onChange={(date) => setStartDate(date)}
+              dateFormat="d MMMM yyyy"
+              locale="fr"
             />{" "}
           </span>
         </div>
