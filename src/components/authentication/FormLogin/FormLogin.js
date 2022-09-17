@@ -1,7 +1,7 @@
-import { useSetAtom } from "jotai";
-import React from "react";
+import { useSetAtom, useAtomValue } from "jotai";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { currentuserAtom, loggedAtom } from "../../../atoms/loggedAtom";
 import { errorMessageValues, errorInput, errorMessage } from "../errors";
 import usePostForm from "../usePostForm";
@@ -9,6 +9,7 @@ import { API } from "../../../utils/variables";
 import SectionTitle from "../../titles/SectionTitle";
 import Button from "../../actions/Button";
 import Close from "../../../icons/Close";
+
 
 function FormLogin({
   setLoginPopup,
@@ -24,9 +25,10 @@ function FormLogin({
 
   const setLogged = useSetAtom(loggedAtom);
   const current_user = useSetAtom(currentuserAtom);
-
+  const [ loginResult, setLoginResult ] = useState(true)
+  
   const OnSubmit = (data) => {
-    usePostForm(API + "users/sign_in", data, setLogged, current_user);
+    usePostForm(API + "users/sign_in", data, setLogged, current_user, setLoginResult);
   };
 
   function resetPopup() {
@@ -37,6 +39,7 @@ function FormLogin({
 
   return (
     <div className="text-black flex flex-col items-center">
+      
       <SectionTitle> Connectez-vous </SectionTitle>
       <form
         className={` min-w-[480px] flex flex-col gap-5 mt-8`}
@@ -73,6 +76,10 @@ function FormLogin({
         <button type="submit" className="my-2 flex justify-center">
           <Button showText={true}>Se connecter</Button>
         </button>
+        {
+          !loginResult && <p className="bg-red text-white text-center rounded p-2">Erreur d'identifiant ou de mot de passe</p>
+        }
+       
       </form>
       <span className="absolute top-5 right-5" onClick={() => resetPopup()}>
         <Button showIcon={true} icon={<Close />}></Button>

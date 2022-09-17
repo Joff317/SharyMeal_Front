@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { API } from "../../../utils/variables";
 import Button from "../../actions/Button";
 import Close from "../../../icons/Close";
-import React from "react";
+import React, { useState } from "react";
 import SectionTitle from "../../titles/SectionTitle";
 
 function FormRegister({
@@ -25,6 +25,7 @@ function FormRegister({
   const setLogged = useSetAtom(loggedAtom);
   const current_user = useSetAtom(currentuserAtom);
   const navigate = useNavigate();
+  const [ registerResult, setRegisterResult ] = useState(true)
 
   const OnSubmit = (data) => {
     usePostForm(
@@ -32,8 +33,7 @@ function FormRegister({
       data,
       setLogged,
       current_user,
-      navigate,
-      "/user"
+      setRegisterResult
     );
   };
 
@@ -77,6 +77,11 @@ function FormRegister({
         <button type="submit" className="my-2 flex justify-center">
           <Button showText={true}>Créer mon compte</Button>
         </button>
+
+        {
+          !registerResult && <p className="bg-red text-white text-center rounded p-2">Erreur. Vous avez peut-être déjà un compte chez nous ?</p>
+        }
+
       </form>
       <span className="absolute top-5 right-5" onClick={() => resetPopup()}>
         <Button showIcon={true} icon={<Close />}></Button>
