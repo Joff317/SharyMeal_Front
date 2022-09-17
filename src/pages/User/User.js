@@ -23,7 +23,7 @@ function User() {
   const [attendancesVisib, setAttendancesVisib] = useState(false);
   const [hostedMealsVisib, setHostedMealsVisib] = useState(false);
   const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
-
+  console.log(currentUser);
   useEffect(() => {
     loggedd &&
       fetch(API + "me", {
@@ -70,7 +70,12 @@ function User() {
     <div className="w-full">
       <div className="top-container max-h-[170px] sticky top-0 z-20">
         <div className="text-container text-white">
-          <SectionTitle> Welcome back, {currentUser.name} </SectionTitle>
+          <SectionTitle>
+            {" "}
+            {currentUser.name
+              ? `Welcome back, ${currentUser.name}`
+              : "Welcome back"}
+          </SectionTitle>
         </div>
       </div>
 

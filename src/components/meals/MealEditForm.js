@@ -23,6 +23,9 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
   const [cityInfo, setCityInfo] = useState();
   const [joinCategoryArray, setJoinCategoryArray] = useState();
   const token = Cookies.get("token");
+  const [formErrors, setFormErrors] = useState();
+  const [formData, setFormData] = useState();
+  const [inputEmpty, setInputempty] = useState();
 
   useEffect(() => {
     fetch(API + `meals/${mealData.id}`).then((res) => {
@@ -38,44 +41,60 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
     formState: { errors },
   } = useForm();
 
+  const isDataValid = (data) => {
+    return data.categories.length > 0 && inputEmpty !== "" && startDate
+      ? true
+      : false;
+  };
+
   const submitData = (data) => {
-    console.log("ok");
-    fetch(API + `meals/${mealData.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        meal: {
-          title: data.title,
-          description: data.description,
-          price: data.price,
-          location: {
-            city: mealData.location.city,
-            lat: mealData.location.lat,
-            lon: mealData.location.lon,
-            address: mealData.location.address,
-          },
-          guest_capacity: data.guest_capacity,
-          starting_date: startDate,
-          animals: data.animals,
-          alcool: data.alcool,
-          doggybag: data.doggybag,
-          diet_type: data.dietType,
-          allergens: data.allergens,
+    setFormData(data);
+    setFormErrors({
+      categories:
+        data.categories.length === 0 && "Veuillez saisir au moins 1 catégorie",
+      location: inputEmpty === "" && "L'adresse est requise.",
+      starting_date: startDate === undefined && "La date du repas est requise.",
+    });
+    if (isDataValid(data)) {
+      fetch(API + `meals/${mealData.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-      }),
-    })
-      .then((response) => {
-        return response.json();
+        body: JSON.stringify({
+          meal: {
+            title: data.title,
+            description: data.description,
+            price: data.price,
+            location: {
+              city: cityInfo ? cityInfo.city : mealData.location.city,
+              lat: cityInfo ? cityInfo.lat : mealData.location.lat,
+              lon: cityInfo ? cityInfo.lon : mealData.location.lon,
+              address: cityInfo
+                ? cityInfo.formatted
+                : mealData.location.address,
+            },
+            guest_capacity: data.guest_capacity,
+            starting_date: startDate,
+            animals: data.animals,
+            alcool: data.alcool,
+            doggybag: data.doggybag,
+            diet_type: data.dietType,
+            allergens: data.allergens,
+          },
+        }),
       })
-      .then((res) => {
-        console.log(res);
-        deleteCategoryInfo(joinCategoryArray, data.categories, res.id);
-        setShowEdit(false);
-        forceUpdate();
-      });
+        .then((response) => {
+          return response.json();
+        })
+        .then((res) => {
+          console.log(res);
+          deleteCategoryInfo(joinCategoryArray, data.categories, res.id);
+          setShowEdit(false);
+          forceUpdate();
+        });
+    }
   };
 
   const deleteCategoryInfo = async (arrayToDelete, dataCategory, mealId) => {
@@ -182,8 +201,9 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
                   id={category.id}
                   value={category.id}
                   className={`hidden peer`}
-                  {...register(`categories`)}
+                  {...register(`categories`, errorMessageValues.categories)}
                 />
+                {errorMessage(errors.categories)}
                 <label
                   htmlFor={category.id}
                   className="inline-flex justify-between items-center px-3 py-1 rounded-full w-full text-grey bg-white text-sm font-book-font  border  cursor-pointer  peer-checked:bg-green hover:text-black  peer-checked:text-black hover:bg-green_light"
@@ -194,6 +214,12 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
               </div>
             ))}
           </div>
+          {formData && !isDataValid(formData) && (
+            <p className="text-sm text-red font-book-font">
+              {" "}
+              {formErrors.categories}{" "}
+            </p>
+          )}
         </div>
         <div className="flex gap-8 mt-8">
           <div className="flex flex-col  w-full">
@@ -205,6 +231,8 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
               defaultValue={mealData.price}
               placeholder="Ex : 12€"
               type="number"
+              max={24}
+              min={0}
               {...register("price", errorMessageValues.price)}
             />
             {errorMessage(errors.price)}
@@ -215,6 +243,8 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
               className={`border border-grey-border  w-full  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md  ${errorInput(
                 errors.guest_capacity
               )}`}
+              max={12}
+              min={1}
               defaultValue={mealData.guest_capacity}
               placeholder="Ex : 4 invités"
               type="number"
@@ -232,6 +262,7 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
             placeholder="Votre adresse"
             defaultValue={mealData.location.address}
             onChange={getData}
+            onInput={(e) => setInputempty(e.target.value)}
             type="text"
             id="inputAddress"
             // {...register("location", errorMessageValues.location)}
@@ -250,8 +281,13 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
                 ))}{" "}
             </div>
           )}
-          {errorMessage(errors.location)}
         </div>
+        {formData && !isDataValid(formData) && (
+          <p className="text-sm text-red font-book-font">
+            {" "}
+            {formErrors.location}{" "}
+          </p>
+        )}
         <div className="flex items-center gap-2 my-5">
           <label className="text-md min-w-[80px]"> A quelle date ?</label>
           <span className="text-sm font-light-font">
@@ -262,6 +298,12 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
             />{" "}
           </span>
         </div>
+        {formData && !isDataValid(formData) && (
+          <p className="text-sm text-red font-book-font">
+            {" "}
+            {formErrors.starting_date}{" "}
+          </p>
+        )}
         <p className="my-3"> Des spécificités ? </p>
         <div className="flex gap-3">
           <div className="flex items-center gap-2">
