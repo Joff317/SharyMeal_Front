@@ -9,9 +9,11 @@ import MealDetailsDescription from "./MealDetailsDescription";
 import MealDetailsInformations from "./MealDetailsInformations";
 import MealDetailsFooter from "./MealDetailsFooter";
 import MealHostProfile from "./MealHostProfile";
+import MyHostedMeals from '../../user/MyHostedMeals';
 
 function MealDetails() {
   const [meal, setMeal] = useState();
+  const [ hostedMeals, setHostedMeals ] = useState();
   const mealId = useParams().mealId;
 
   useEffect(() => {
@@ -20,6 +22,7 @@ function MealDetails() {
       .then((data) => {
         console.log(data);
         setMeal(data.meal);
+        setHostedMeals(data.hosted_meals);
       });
   }, []);
 
@@ -40,7 +43,7 @@ function MealDetails() {
               <MealDetailsInformations meal={meal} />
             </div>
           </div>
-          <MealHostProfile meal={meal} />
+          <MealHostProfile meal={meal} hostedMeals={hostedMeals}/>
           <MealDetailsFooter meal={meal} />
         </>
       )}
