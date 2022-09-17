@@ -52,9 +52,8 @@ function Navigation() {
 
   return (
     <div
-      className={`flex w-full items-center z-50 justify-between gap-20 py-8 fixed px-24 ${
-        changeColor ? "text-white" : "text-black"
-      } `}
+      className={`flex w-full items-center z-50 justify-between gap-20 py-8 fixed px-24  ${
+        changeColor ? "text-white bg-black_opacity backdrop-blur-sm " : "text-black bg-white_opacity backdrop-blur-sm"} `}
     >
       <NavLink to="/">
         <span className="font-bold-font">Shary</span> Meal
@@ -63,7 +62,7 @@ function Navigation() {
       <div className="flex gap-12">
         <NavLink to="/about">About us</NavLink>
 
-        <NavLink to="/create-meal">Proposer un repas</NavLink>
+        <NavLink to="/create-meal">&#10024; Proposer un repas &#10024;</NavLink>
       </div>
 
       <div className="flex justify-end gap-8 items-center">

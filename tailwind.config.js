@@ -5,6 +5,8 @@ module.exports = {
     colors: {
       white: "#FFFFFF",
       black: "#292929",
+      black_opacity: "rgba(41, 41, 41, 0.17)",
+      white_opacity: "rgba(255, 255, 255, 0.23)",
       grey: "#B8B8B8",
       "grey-border": "#ECECEC",
       /* PRIMARY */

@@ -1,10 +1,10 @@
 export const errorInput = (target) => {
-	return target ? "border-red-400" : "border-gray-300";
+	return target ? "border-red" : "border-gray-300";
 };
 
 export const errorMessage = (target) => {
 	return (
-		target && <span className='text-red-400 text-sm'>{target.message}</span>
+		target && <span className='text-red text-sm'>{target.message}</span>
 	);
 };
 
@@ -66,6 +66,14 @@ export const errorMessageValues = {
 
 	password: {
 		required: "Le mot de passe est requis",
+		maxLength: {
+			value: 20,
+			message: "Le mot de passe doit faire maximum 20 caractères",
+		},
+		minLength: {
+			value: 6,
+			message: "Le mot de passe doit faire minimum 6 caractères",
+		},
 		// pattern: {
 		// 	value: /^([A-Z][a-z]+)+$/,
 		// 	message: "Le mot de passe doit contenir au moins 1 majuscule",
