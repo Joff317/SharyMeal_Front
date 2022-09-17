@@ -93,14 +93,8 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
             )}{" "}
           </>
         )}
-        <div className="flex gap-1 text-white">
-          {mealData.categories &&
-            mealData.categories.map((category) => <p> {category.label} </p>)}
-        </div>
-        <p className="text-white">{mealData.location.city}</p>
-        <p className="text-white">
-          Places dispo : {mealData.guest_capacity - mealData.guest_registered}
-        </p>
+          <p className="text-white">{mealData.location.city}</p>
+        
         <div className="layer-blur"> </div>
 
         {mealData.images ? (

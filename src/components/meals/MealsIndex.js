@@ -70,7 +70,7 @@ function MealIndex() {
       return (
         <div id="meals-index-container">
           {results.map((meal) => (
-            <MealCard mealData={meal} />
+            <MealCard mealData={meal} showAvatar={true} />
           ))}
         </div>
       );
