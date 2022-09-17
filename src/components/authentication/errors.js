@@ -95,4 +95,11 @@ export const errorMessageValues = {
       message: "Vous devez avoir 16 ans.",
     },
   },
+
+  // price:{
+  //   minLength: {
+  //     value: 1,
+  //     message: "Le prix est requis (inscrire '0' si gratuit)."
+  //   },
+  // }
 };

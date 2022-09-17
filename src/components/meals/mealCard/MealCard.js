@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import MealImage from "./MealImage";
+import React, { useState, useEffect } from "react";
 import MealPrice from "./MealPrice";
 import MealAvatar from "./MealAvatar";
 import "./MealCard.scss";
@@ -12,26 +10,13 @@ import Cookies from "js-cookie";
 import Bin from "../../../icons/Bin";
 import Eye from "../../../icons/Eye";
 import LayoutBlur from "../../layout/LayoutBlur/LayoutBlur";
-import Button from "../../actions/Button";
-import Close from "../../../icons/Close";
-import {
-  errorInput,
-  errorMessage,
-  errorMessageValues,
-} from "../../authentication/errors";
-import { categories } from "../../../data/Category";
-import { useForm } from "react-hook-form";
-import Autocompletion from "../../geolocation/Autocompletion";
-import DatePicker from "react-datepicker";
-import { dietType } from "../../../data/DietType";
-import { allergens } from "../../../data/Allergens";
-import SectionTitle from "../../titles/SectionTitle";
 import MealEditForm from "../MealEditForm";
 import Edit from "../../../icons/Edit";
 
 function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
   const token = Cookies.get("token");
   const [showEdit, setShowEdit] = useState();
+  const [ categoriesFromDB, setCategoriesFromDB ] = useState();
 
   const deleteMeal = () => {
     fetch(`${API}/meals/${mealData.id}`, {
@@ -53,6 +38,19 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
       day: "numeric",
     });
   }
+
+  useEffect(() => {
+    fetch(API + `categories/${mealData.id}`)
+    .then(response => {
+      console.log('categories response', response);
+      return response.json();
+    })
+    .then(data => {
+      console.log('categories data', data);
+      
+      setCategoriesFromDB(data);
+    }) 
+  }, [])
 
   return (
     <div>
@@ -88,6 +86,7 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
                   mealData={mealData}
                   setShowEdit={setShowEdit}
                   forceUpdate={forceUpdate}
+                  categoriesFromDB={categoriesFromDB}
                 />
               </LayoutBlur>
             )}{" "}

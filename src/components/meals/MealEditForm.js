@@ -6,7 +6,9 @@ import {
 } from "../authentication/errors";
 import { categories } from "../../data/Category";
 import Autocompletion from "../geolocation/Autocompletion";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import fr from "date-fns/locale/fr";
 import { dietType } from "../../data/DietType";
 import { allergens } from "../../data/Allergens";
 import Button from "../actions/Button";
@@ -16,7 +18,7 @@ import { API } from "../../utils/variables";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 
-function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
+function MealEditForm({ mealData, setShowEdit, forceUpdate, categoriesFromDB }) {
   const [autocomplete, setAutocomplete] = useState();
   const [autocompleteVisible, setAutocompleteVisible] = useState(false);
   const [startDate, setStartDate] = useState(new Date(mealData.starting_date));
@@ -26,6 +28,8 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
   const [formErrors, setFormErrors] = useState();
   const [formData, setFormData] = useState();
   const [inputEmpty, setInputempty] = useState();
+  registerLocale("fr", fr);
+  
 
   useEffect(() => {
     fetch(API + `meals/${mealData.id}`).then((res) => {
@@ -50,8 +54,8 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
   const submitData = (data) => {
     setFormData(data);
     setFormErrors({
-      categories:
-        data.categories.length === 0 && "Veuillez saisir au moins 1 catégorie",
+      categories: data.categories.length === 0 && "Veuillez saisir au moins 1 catégorie",
+      
       location: inputEmpty === "" && "L'adresse est requise.",
       starting_date: startDate === undefined && "La date du repas est requise.",
     });
@@ -142,7 +146,8 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
   };
 
   const getCategoryChecked = (categoryId) => {
-    if (mealData.categories.some((c) => c.id === categoryId)) {
+
+    if (categoriesFromDB && categoriesFromDB.find((c) => c.id === categoryId)) {
       return true;
     } else {
       return false;
@@ -156,6 +161,19 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
       return false;
     }
   };
+
+  // useEffect(() => {
+  //   fetch(API + `categories/${mealData.id}`)
+  //   .then(response => {
+  //     console.log('categories response', response);
+  //     return response.json();
+  //   })
+  //   .then(data => {
+  //     console.log('categories data', data);
+  //     setCategoriesFromDB(data);
+  //   }) 
+  // }, [])
+
   return (
     <>
       <SectionTitle>Modifier votre repas</SectionTitle>
@@ -233,9 +251,12 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
               type="number"
               max={24}
               min={0}
+              onKeyDown={(e) => e.preventDefault()}
               {...register("price", errorMessageValues.price)}
+              
             />
             {errorMessage(errors.price)}
+            
           </div>
           <div className="flex flex-col  w-full">
             <p> Combien de convives maximum ? </p>
@@ -248,6 +269,7 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
               defaultValue={mealData.guest_capacity}
               placeholder="Ex : 4 invités"
               type="number"
+              onKeyDown={(e) => e.preventDefault()}
               {...register("guest_capacity", errorMessageValues.guest_capacity)}
             />
             {errorMessage(errors.guest_capacity)}
@@ -295,6 +317,8 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
             <DatePicker
               selected={startDate}
               onChange={(date) => setStartDate(date)}
+              dateFormat="d MMMM yyyy"
+              locale="fr"
             />{" "}
           </span>
         </div>
