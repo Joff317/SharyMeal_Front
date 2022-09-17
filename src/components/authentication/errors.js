@@ -32,7 +32,7 @@ export const errorMessageValues = {
 	// 	},
 	// },
 
-	titre: {
+	title: {
 		required: "Le titre est requis",
 		maxLength: {
 			value: 20,

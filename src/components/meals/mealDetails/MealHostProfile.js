@@ -3,8 +3,10 @@ import Button from "../../actions/Button";
 import SectionTitle from "../../titles/SectionTitle";
 import SubsectionTitle from "../../titles/SubsectionTitle";
 import "./MealHostProfile.scss";
+import MyHostedMeals from '../../user/MyHostedMeals';
 
-const MealHostProfile = ({ meal }) => {
+const MealHostProfile = ({ meal, hostedMeals }) => {
+  console.log(hostedMeals);
   console.log(meal);
   return (
     <div className="meals-detail-host">
@@ -23,9 +25,14 @@ const MealHostProfile = ({ meal }) => {
               </span>
 
               {meal.host.age && <p>{meal.host.age} ans</p>}
-              {meal.host.hosted_meals && (
-                <p>{meal.host.hosted_meals} repas organisé</p>
-              )}
+
+             
+                
+                {  hostedMeals === 1 ? "1 repas organisé" : (
+                  <p>{hostedMeals} repas organisés</p>
+                )}
+                
+              
             </div>
           </div>
 
