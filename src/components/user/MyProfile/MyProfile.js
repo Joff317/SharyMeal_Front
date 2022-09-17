@@ -12,6 +12,8 @@ import "./MyProfile.scss";
 import { useState } from "react";
 import Autocompletion from "../../geolocation/Autocompletion";
 import Cookies from "js-cookie";
+import { useAtom, useSetAtom } from "jotai";
+import { currentuserAtom } from "../../../atoms/loggedAtom";
 
 function MyProfile({ currentUser, setCurrentUser }) {
   const [saveButtonVisib, setSaveButtonVisib] = useState(false);
@@ -21,16 +23,17 @@ function MyProfile({ currentUser, setCurrentUser }) {
   const [cityInfo, setCityInfo] = useState();
   const [editConfirmVisib, setEditConfirmVisib] = useState(false);
   const [editErrorVisib, setEditErrorVisib] = useState(false);
+  const [currentUserAtom, setCurrentUserAtom] = useAtom(currentuserAtom);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  console.log("data");
 
   const OnSubmit = (data) => {
     console.log("data du formulaire", data.age);
+
     fetch(API + "update_me", {
       method: "PUT",
       headers: {
@@ -44,12 +47,11 @@ function MyProfile({ currentUser, setCurrentUser }) {
           email: data.email,
           gender: data.gender,
           description: data.description,
-          city: cityInfo ? cityInfo.city : currentUser.city,
+          city: cityInfo ? cityInfo.city : "",
         },
       }),
     })
       .then((response) => {
-        console.log("response du fetch", response);
         if (response.status === 200) {
           setEditConfirmVisib(true);
           setTimeout(() => {
@@ -67,6 +69,7 @@ function MyProfile({ currentUser, setCurrentUser }) {
       })
       .then((data) => {
         console.log("data réponse du fetch => ", data);
+        setCurrentUserAtom({ ...currentUserAtom, city: data.city });
       })
       .catch((error) => console.log(error.message));
   };
@@ -125,7 +128,7 @@ function MyProfile({ currentUser, setCurrentUser }) {
                   className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
                     errors.age
                   )}`}
-                  type="text"
+                  type="number"
                   {...register("age", errorMessageValues.age)}
                   onChange={() => handleVisibilities()}
                 />
@@ -178,7 +181,7 @@ function MyProfile({ currentUser, setCurrentUser }) {
                     </div> */}
 
               <div className="flex flex-col relative w-full">
-                <p className="mb-2"> Ville (auto_complétion) </p>
+                <p className="mb-2"> Ville </p>
                 <input
                   className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
                     errors.city
