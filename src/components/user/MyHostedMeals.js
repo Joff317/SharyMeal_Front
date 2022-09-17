@@ -14,6 +14,7 @@ function MyHostedMeals({ userData, forceUpdate }) {
               mealData={hosted_meal}
               showAdditionalInfo
               forceUpdate={forceUpdate}
+             
             />
           ))}
       </div>

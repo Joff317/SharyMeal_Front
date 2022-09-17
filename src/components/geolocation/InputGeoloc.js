@@ -58,7 +58,7 @@ function InputGeoloc() {
   return (
     <div className="rounded-full bg-white w-fit py-2 pl-6 pr-2 relative">
       <form onSubmit={(e) => onSubmit(e)} className={`flex items-center`}>
-        <label className="text-sm"> Ta ville :</label>
+        <label className="text-sm"> Quelle ville ? </label>
         <input
           className="pl-2 mt-0.5 text-sm font-light-font focus:visible "
           type="text"

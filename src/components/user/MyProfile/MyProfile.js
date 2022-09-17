@@ -165,21 +165,6 @@ function MyProfile({ currentUser, setCurrentUser }) {
                 {errorMessage(errors.email)}
               </div>
 
-              {/* <div className="flex flex-col">
-                        <p className="mb-2"> Ville (normal) </p>
-                        <input
-                            placeholder="Où cuisines-tu ?"
-                            defaultValue={currentUser.city && `${currentUser.city}`}
-                            className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
-                            errors.city
-                            )}`}
-                            type="text"
-                            {...register("city", errorMessageValues.city)}
-                            onChange = { () => handleVisibilities() }
-                        />
-                        {errorMessage(errors.city)}
-                    </div> */}
-
               <div className="flex flex-col relative w-full">
                 <p className="mb-2"> Ville </p>
                 <input

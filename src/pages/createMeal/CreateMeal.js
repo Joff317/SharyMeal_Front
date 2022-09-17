@@ -35,6 +35,8 @@ const CreateMeal = () => {
   const [ formData, setFormData ] = useState();
   const [ formErrors, setFormErrors ] = useState();
 
+  document.documentElement.scrollTop = 0;
+
   const {
     register,
     handleSubmit,
@@ -293,8 +295,9 @@ const CreateMeal = () => {
                     )}`}
                     placeholder="Ex : 12€"
                     type="number"
-                    min={1}
+                    min={0}
                     max={24}
+                    onKeyDown={(e) => e.preventDefault()}
                     {...register("price", errorMessageValues.price)}
                     
                   />
@@ -310,6 +313,7 @@ const CreateMeal = () => {
                     type="number"
                     min={1}
                     max={11}
+                    onKeyDown={(e) => e.preventDefault()}
                     {...register(
                       "guest_capacity",
                       errorMessageValues.guest_capacity

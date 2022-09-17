@@ -11,6 +11,7 @@ import MyProfile from "../../components/user/MyProfile/MyProfile";
 import MyMessages from "../../components/user/MyMessages";
 import MyAttendances from "../../components/user/MyAttendances";
 import MyHostedMeals from "../../components/user/MyHostedMeals";
+import Button from "../../components/actions/Button";
 
 function User() {
   const token = Cookies.get("token");
@@ -22,7 +23,7 @@ function User() {
   const [messagesVisib, setMessagesVisib] = useState(false);
   const [attendancesVisib, setAttendancesVisib] = useState(false);
   const [hostedMealsVisib, setHostedMealsVisib] = useState(false);
-  const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
+  const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
   console.log(currentUser);
   useEffect(() => {
     loggedd &&
@@ -36,7 +37,7 @@ function User() {
           console.log(res);
           setData(res);
         });
-  }, [setData, recucerValue]);
+  }, [setData, reducerValue]);
 
   const displayProfile = () => {
     setMessagesVisib(false);
@@ -146,6 +147,10 @@ function User() {
               Mes repas organisés
             </label>
           </div>
+
+          <NavLink to="/create-meal" className="mt-8">
+              <Button showText={true}>&#10024; Proposer un repas &#10024;</Button> 
+          </NavLink>
         </div>
 
         <div className="user-feature-container ">
