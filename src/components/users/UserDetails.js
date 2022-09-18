@@ -29,8 +29,11 @@ const UserDetails = () => {
               src='https://randomuser.me/api/portraits/women/79.jpg'
               alt="user"
             />
-            <h3 className="text-center">{user.name}</h3>
-            <h6>{user.city}</h6>
+
+            <div className="avatar-bottom">
+            <span className="user-name">Prénom: {user.name}</span>
+            <span className="user-city">Ville: {user.city}</span>
+            </div>
             <p>
               {user.description}
             </p>
@@ -39,6 +42,11 @@ const UserDetails = () => {
                  <Button showText={true}>
                  Message
                  </Button>
+                </button>
+                <button>
+                   <Button showText={true}>
+                      Voir les repas
+                   </Button>
                 </button>
             </div>
             <div class="skills">
