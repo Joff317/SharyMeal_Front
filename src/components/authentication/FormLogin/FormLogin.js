@@ -10,7 +10,6 @@ import SectionTitle from "../../titles/SectionTitle";
 import Button from "../../actions/Button";
 import Close from "../../../icons/Close";
 
-
 function FormLogin({
   setLoginPopup,
   setRegisterPopup,
@@ -25,10 +24,18 @@ function FormLogin({
 
   const setLogged = useSetAtom(loggedAtom);
   const current_user = useSetAtom(currentuserAtom);
-  const [ loginResult, setLoginResult ] = useState(true)
-  
+  const current_user_value = useAtomValue(currentuserAtom);
+  const [loginResult, setLoginResult] = useState(true);
+
   const OnSubmit = (data) => {
-    usePostForm(API + "users/sign_in", data, setLogged, current_user, setLoginResult);
+    usePostForm(
+      API + "users/sign_in",
+      data,
+      setLogged,
+      current_user,
+      setLoginResult,
+      current_user_value
+    );
   };
 
   function resetPopup() {
@@ -39,7 +46,6 @@ function FormLogin({
 
   return (
     <div className="text-black flex flex-col items-center">
-      
       <SectionTitle> Connectez-vous </SectionTitle>
       <form
         className={` min-w-[480px] flex flex-col gap-5 mt-8`}
@@ -76,10 +82,11 @@ function FormLogin({
         <button type="submit" className="my-2 flex justify-center">
           <Button showText={true}>Se connecter</Button>
         </button>
-        {
-          !loginResult && <p className="bg-red text-white text-center rounded p-2">Erreur d'identifiant ou de mot de passe</p>
-        }
-       
+        {!loginResult && (
+          <p className="bg-red text-white text-center rounded p-2">
+            Erreur d'identifiant ou de mot de passe
+          </p>
+        )}
       </form>
       <span className="absolute top-5 right-5" onClick={() => resetPopup()}>
         <Button showIcon={true} icon={<Close />}></Button>
