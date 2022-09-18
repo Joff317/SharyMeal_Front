@@ -39,6 +39,7 @@ function usePostForm(
         gender: res.user.gender,
         description: res.user.description,
         avatar_url: res.user.avatar_url,
+        id: res.user.id,
       });
       setLogged && setLogged(true);
     })

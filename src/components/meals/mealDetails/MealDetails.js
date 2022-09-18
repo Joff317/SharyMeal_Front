@@ -11,22 +11,23 @@ import MealDetailsFooter from "./MealDetailsFooter";
 import MealHostProfile from "./MealHostProfile";
 import MyHostedMeals from "../../user/MyHostedMeals";
 import Loader from "../../Loader";
+import { useAtomValue } from "jotai";
+import { currentuserAtom } from "../../../atoms/loggedAtom";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
   const [hostedMeals, setHostedMeals] = useState();
   const [hostAvatar, setHostavatar] = useState();
+  const currentUserAtom = useAtomValue(currentuserAtom);
   const mealId = useParams().mealId;
 
   useEffect(() => {
     fetch(API + `meals/${mealId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setMeal(data.meal);
         setHostedMeals(data.hosted_meals);
         setHostavatar(data.host_avatar);
-        console.log("INSIDE FETCH", data.hosted_meals);
         document.documentElement.scrollTop = 0;
       });
   }, []);
@@ -55,7 +56,9 @@ function MealDetails() {
             hostedMeals={hostedMeals}
             hostAvatar={hostAvatar}
           />
-          <MealDetailsFooter meal={meal} />
+          {currentUserAtom.id !== meal.host.id && (
+            <MealDetailsFooter meal={meal} />
+          )}
         </div>
       ) : (
         <>
