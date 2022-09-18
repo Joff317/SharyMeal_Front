@@ -9,15 +9,13 @@ import MealDetailsDescription from "./MealDetailsDescription";
 import MealDetailsInformations from "./MealDetailsInformations";
 import MealDetailsFooter from "./MealDetailsFooter";
 import MealHostProfile from "./MealHostProfile";
-import MyHostedMeals from '../../user/MyHostedMeals';
+import MyHostedMeals from "../../user/MyHostedMeals";
 import Loader from "../../Loader";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
-  const [ hostedMeals, setHostedMeals ] = useState();
+  const [hostedMeals, setHostedMeals] = useState();
   const mealId = useParams().mealId;
-
-  
 
   useEffect(() => {
     fetch(API + `meals/${mealId}`)
@@ -26,51 +24,39 @@ function MealDetails() {
         console.log(data);
         setMeal(data.meal);
         setHostedMeals(data.hosted_meals);
-
+        console.log("INSIDE FETCH", data.hosted_meals);
         document.documentElement.scrollTop = 0;
       });
   }, []);
 
-
   return (
     <>
-    
-      {
-        meal ? 
-              <div className="meal-detail-container">
+      {meal ? (
+        <div className="meal-detail-container">
+          <div className="top-detail-container">
+            <MealDetailsImages meal={meal} />
 
-                <div className="top-detail-container">
-
-                  <MealDetailsImages meal={meal} />
-
-                  <div className="meal-detail-right-container">
-
-                    <div className="meal-detail-right-top-container">
-                      <MealDetailsTitle meal={meal} />
-                      <MealDetailsHost meal={meal} />
-                    </div>
-
-                    <MealDetailsDescription meal={meal} />
-
-                    <MealDetailsInformations meal={meal} />
-
-                  </div>
-
-                </div>
-
-                <MealHostProfile meal={meal} hostedMeals={hostedMeals}/>
-                <MealDetailsFooter meal={meal} />
-                
+            <div className="meal-detail-right-container">
+              <div className="meal-detail-right-top-container">
+                <MealDetailsTitle meal={meal} />
+                <MealDetailsHost meal={meal} />
               </div>
-        
-        
-            :
-              <>
-                <Loader type="spinningBubbles" color="#292929" />
-              </>
-      }
-      </>
-    
+
+              <MealDetailsDescription meal={meal} />
+
+              <MealDetailsInformations meal={meal} />
+            </div>
+          </div>
+
+          <MealHostProfile meal={meal} hostedMeals={hostedMeals} />
+          <MealDetailsFooter meal={meal} />
+        </div>
+      ) : (
+        <>
+          <Loader type="spinningBubbles" color="#292929" />
+        </>
+      )}
+    </>
   );
 }
 

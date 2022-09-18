@@ -46,14 +46,17 @@ function Navigation() {
       .then((res) => {
         console.log(res);
       });
-      
-      navigate("/")
+
+    navigate("/");
   };
 
   return (
     <div
-      className={`flex w-full items-center z-50 justify-between gap-20 py-8 fixed px-24  ${
-        changeColor ? "text-white bg-black_opacity backdrop-blur-sm " : "text-black bg-white_opacity backdrop-blur-sm"} `}
+      className={`flex w-full items-center z-50 justify-between gap-20 py-5 fixed px-24  ${
+        changeColor
+          ? "text-white bg-black_opacity backdrop-blur-sm "
+          : "text-black bg-white_opacity backdrop-blur-sm"
+      } `}
     >
       <NavLink to="/">
         <span className="font-bold-font">Shary</span> Meal

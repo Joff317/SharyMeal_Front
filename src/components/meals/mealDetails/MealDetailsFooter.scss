@@ -1,9 +1,12 @@
 .meal-details-footer-top{
    display: flex;
    flex-direction: row;
+   justify-content: space-between;
    align-items: center;
    width: 100%;
    height: 90px;
+   padding-left: 5%;
+   padding-right: 5%;
    background-color: #51DFAD;
    position: fixed;
    bottom: 0;
@@ -12,7 +15,6 @@
       display: flex;
       flex-direction: row;
       gap: 5px;
-      padding: 30px 989px 30px 128px;
 
       .meal-title{
          font-family: var(--bookmania-black-font);
