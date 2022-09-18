@@ -43,7 +43,10 @@
       .button-wrapper{
          font-size: 20px;
          padding: 10px;
-         
+         gap: 5px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
       }
 
 
