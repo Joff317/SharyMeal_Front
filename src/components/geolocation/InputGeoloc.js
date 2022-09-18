@@ -1,5 +1,4 @@
 import Button from "../actions/Button";
-import Arrow from "../../icons/Arrow";
 import { useState, forwardRef } from "react";
 import Autocompletion from "./Autocompletion";
 import { useAtomValue, useSetAtom } from "jotai";
@@ -7,6 +6,7 @@ import { inputDataAtom } from "../../atoms/inputData";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import fr from "date-fns/locale/fr";
+import Search from "../../icons/Search";
 
 function InputGeoloc() {
   const [autocompleteVisible, setAutocompleteVisible] = useState(false);
@@ -97,7 +97,7 @@ function InputGeoloc() {
         </div>
 
         <button type="submit">
-          <Button showIcon={true} icon={<Arrow />} />
+          <Button showIcon={true} icon={<Search />} />
         </button>
       </form>
     </div>
