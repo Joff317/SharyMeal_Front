@@ -17,8 +17,6 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
   const token = Cookies.get("token");
   const [showEdit, setShowEdit] = useState();
 
-  console.log(mealData);
-
   const deleteMeal = () => {
     fetch(`${API}/meals/${mealData.id}`, {
       method: "DELETE",

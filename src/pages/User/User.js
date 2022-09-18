@@ -34,7 +34,6 @@ function User() {
           return response.json();
         })
         .then((res) => {
-          console.log("ici le user", res);
           setData(res);
         });
   }, [setData, reducerValue]);

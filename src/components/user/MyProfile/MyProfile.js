@@ -33,8 +33,6 @@ function MyProfile({ currentUser, setCurrentUser }) {
   } = useForm();
 
   const OnSubmit = (data) => {
-    console.log("data du formulaire", data);
-
     const dataAvatar = new FormData();
     dataAvatar.append("user[avatar]", data.avatar_url[0]);
 
@@ -72,7 +70,6 @@ function MyProfile({ currentUser, setCurrentUser }) {
         return response.json();
       })
       .then((fetchData) => {
-        console.log("fetchData réponse du fetch => ", fetchData);
         setCurrentUserAtom({
           ...currentUserAtom,
           city: fetchData.city,
@@ -82,14 +79,12 @@ function MyProfile({ currentUser, setCurrentUser }) {
           gender: fetchData.gender,
           description: fetchData.description,
         });
-        console.log(data.avatar_url);
         data.avatar_url.length !== 0 && postAvatar(dataAvatar);
       })
       .catch((error) => console.log(error.message));
   };
 
   function postAvatar(dataAvatar) {
-    console.log("ok");
     const requestOptions = {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` },
