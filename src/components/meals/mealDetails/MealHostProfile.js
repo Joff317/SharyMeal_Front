@@ -7,8 +7,6 @@ import avatarDefault from "../../../assets/images/avatardefault.png";
 import MyHostedMeals from "../../user/MyHostedMeals";
 
 const MealHostProfile = ({ meal, hostedMeals, hostAvatar }) => {
-  console.log(meal);
-
   return (
     <div className="meals-detail-host">
       <div className="host-container">
@@ -36,7 +34,7 @@ const MealHostProfile = ({ meal, hostedMeals, hostAvatar }) => {
               {meal.host.age && <p>{meal.host.age} ans</p>}
 
               {hostedMeals === 1 ? (
-                "1 repas organisé"
+                <p> 1 repas organisé </p>
               ) : (
                 <p>{hostedMeals} repas organisés</p>
               )}
