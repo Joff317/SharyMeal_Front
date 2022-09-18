@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 import "./User.scss";
 import MyProfile from "../../components/user/MyProfile/MyProfile";
 import MyMessages from "../../components/user/MyMessages";
-import MyAttendances from "../../components/user/MyAttendances";
+import MyAttendances from "../../components/user/MyAttendances/MyAttendances";
 import MyHostedMeals from "../../components/user/MyHostedMeals";
 import Button from "../../components/actions/Button";
 
@@ -34,6 +34,7 @@ function User() {
           return response.json();
         })
         .then((res) => {
+          console.log('data DE User.js ', res)
           setData(res);
         });
   }, [setData, reducerValue]);
@@ -160,7 +161,7 @@ function User() {
             />
           )}
           {messagesVisib && <MyMessages />}
-          {attendancesVisib && <MyAttendances />}
+          {attendancesVisib && <MyAttendances userData={data}/>}
           {hostedMealsVisib && (
             <MyHostedMeals userData={data} forceUpdate={forceUpdate} />
           )}
