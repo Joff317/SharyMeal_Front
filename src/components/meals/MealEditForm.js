@@ -18,7 +18,7 @@ import { API } from "../../utils/variables";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 
-function MealEditForm({ mealData, setShowEdit, forceUpdate, categoriesFromDB }) {
+function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
   const [autocomplete, setAutocomplete] = useState();
   const [autocompleteVisible, setAutocompleteVisible] = useState(false);
   const [startDate, setStartDate] = useState(new Date(mealData.starting_date));
@@ -29,7 +29,6 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate, categoriesFromDB }) 
   const [formData, setFormData] = useState();
   const [inputEmpty, setInputempty] = useState();
   registerLocale("fr", fr);
-  
 
   useEffect(() => {
     fetch(API + `meals/${mealData.id}`).then((res) => {
@@ -54,8 +53,9 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate, categoriesFromDB }) 
   const submitData = (data) => {
     setFormData(data);
     setFormErrors({
-      categories: data.categories.length === 0 && "Veuillez saisir au moins 1 catégorie",
-      
+      categories:
+        data.categories.length === 0 && "Veuillez saisir au moins 1 catégorie",
+
       location: inputEmpty === "" && "L'adresse est requise.",
       starting_date: startDate === undefined && "La date du repas est requise.",
     });
@@ -146,33 +146,12 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate, categoriesFromDB }) 
   };
 
   const getCategoryChecked = (categoryId) => {
-
-    if (categoriesFromDB && categoriesFromDB.find((c) => c.id === categoryId)) {
-      return true;
-    } else {
-      return false;
-    }
+    return !!mealData.categories.find((c) => c.id === categoryId);
   };
 
   const getDataChecked = (data, dataToCheck) => {
-    if (data.includes(dataToCheck)) {
-      return true;
-    } else {
-      return false;
-    }
+    return !!data.includes(dataToCheck);
   };
-
-  // useEffect(() => {
-  //   fetch(API + `categories/${mealData.id}`)
-  //   .then(response => {
-  //     console.log('categories response', response);
-  //     return response.json();
-  //   })
-  //   .then(data => {
-  //     console.log('categories data', data);
-  //     setCategoriesFromDB(data);
-  //   }) 
-  // }, [])
 
   return (
     <>
@@ -253,10 +232,8 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate, categoriesFromDB }) 
               min={0}
               onKeyDown={(e) => e.preventDefault()}
               {...register("price", errorMessageValues.price)}
-              
             />
             {errorMessage(errors.price)}
-            
           </div>
           <div className="flex flex-col  w-full">
             <p> Combien de convives maximum ? </p>

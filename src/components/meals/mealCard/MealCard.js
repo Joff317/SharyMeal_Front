@@ -16,7 +16,6 @@ import Edit from "../../../icons/Edit";
 function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
   const token = Cookies.get("token");
   const [showEdit, setShowEdit] = useState();
-  const [ categoriesFromDB, setCategoriesFromDB ] = useState();
 
   const deleteMeal = () => {
     fetch(`${API}/meals/${mealData.id}`, {
@@ -38,19 +37,6 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
       day: "numeric",
     });
   }
-
-  useEffect(() => {
-    fetch(API + `categories/${mealData.id}`)
-    .then(response => {
-      console.log('categories response', response);
-      return response.json();
-    })
-    .then(data => {
-      console.log('categories data', data);
-      
-      setCategoriesFromDB(data);
-    }) 
-  }, [])
 
   return (
     <div>
@@ -86,14 +72,13 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
                   mealData={mealData}
                   setShowEdit={setShowEdit}
                   forceUpdate={forceUpdate}
-                  categoriesFromDB={categoriesFromDB}
                 />
               </LayoutBlur>
             )}{" "}
           </>
         )}
-          <p className="text-white">{mealData.location.city}</p>
-        
+        <p className="text-white">{mealData.location.city}</p>
+
         <div className="layer-blur"> </div>
 
         {mealData.images ? (
