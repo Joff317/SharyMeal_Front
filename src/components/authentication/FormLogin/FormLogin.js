@@ -75,7 +75,11 @@ function FormLogin({
           />
           {errorMessage(errors.password)}
         </div>
-        <Link to="/sendemail" className="hover:underline">
+        <Link
+          to="/sendemail"
+          onClick={() => setLoginPopup(false)}
+          className="hover:underline"
+        >
           {" "}
           Mot de passe oublié ?{" "}
         </Link>

@@ -17,6 +17,8 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
   const token = Cookies.get("token");
   const [showEdit, setShowEdit] = useState();
 
+  console.log(mealData);
+
   const deleteMeal = () => {
     fetch(`${API}/meals/${mealData.id}`, {
       method: "DELETE",
@@ -81,8 +83,12 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
 
         <div className="layer-blur"> </div>
 
-        {mealData.images ? (
-          <img src={mealData.images} alt="meal" className="mealcard-image" />
+        {mealData.image_urls ? (
+          <img
+            src={mealData.image_urls[0]}
+            alt="meal"
+            className="mealcard-image"
+          />
         ) : (
           <img src={defaultImage} alt="meal" className="mealcard-image" />
         )}

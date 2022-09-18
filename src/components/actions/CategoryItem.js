@@ -17,8 +17,8 @@ function CategoryItem({ label, icon, setCategoriesArray, categoriesArray }) {
   return (
     <div
       className={`w-fit pt-3 px-4 flex justify-center items-center pb-1 max-w-[76px] max-h-[78px] ${
-        active && "bg-green_light rounded-md"
-      } hover:bg-green_light hover:rounded-md cursor:pointer`}
+        active && "bg-green_light rounded-md hover:bg-[#DCFFF3]"
+      } hover:bg-grey-border hover:rounded-md cursor:pointer`}
       onClick={() => {
         handleClick();
       }}

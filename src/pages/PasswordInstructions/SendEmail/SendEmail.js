@@ -1,55 +1,57 @@
 import React, { useState } from "react";
 import { API } from "../../../utils/variables";
+import SectionTitle from "../../../components/titles/SectionTitle";
+import Button from "../../../components/actions/Button";
+import Close from "../../../icons/Close";
 
 function SendEmail() {
-	const [show, setShow] = useState(false);
-	const API_URL_RESET = `${API}users/password` 
+  const [show, setShow] = useState(false);
+  const [error, setError] = useState(false);
+  const API_URL_RESET = `${API}users/password`;
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		fetch(API_URL_RESET, {
-			method: "POST",
-			headers: {
-				"Content-Type": 'application/json',
-				"Accept": 'application/json',
-			},
-			body: JSON.stringify({user: {email: e.target.email.value}})
-		})
-		.then((response) => {
-		 return response.json()
-		})
-		.then((res) => {
-			setShow(true)
-			console.log(res);
-		})
-		.catch((error) => console.log(error.message))
-	}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch(API_URL_RESET, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ user: { email: e.target.email.value } }),
+    })
+      .then((response) => {
+        console.log(response);
+        throw "erreur";
+        return response.json();
+      })
+      .then((res) => {
+        setShow(true);
+        console.log(res);
+      })
+      .catch((error) => setError(true));
+  };
 
-	
-	return (
-		<div className='mx-[300px]'>
-			<h1 className='my-4 text-3xl font-bold'>
-				{" "}
-				Veuillez noter votre adresse email :
-			</h1>
-			<form
-				onSubmit={handleSubmit}
+  return (
+    <div className="pt-[150px] h-[80vh] flex justify-start items-center flex-col">
+      <SectionTitle> Saisissez votre mail </SectionTitle>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col max-w-xs gap-3 mt-4 "
+      >
+        <input
+          className="border border-grey-border  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md"
+          placeholder="Noter votre mail"
+          name="email"
+        />
 
-				className='flex flex-col max-w-xs gap-3'>
-				<input
-					className='border h-10 pl-3 rounded-md'
-					placeholder='Noter votre mail'
-					name='email'
-				/>
-				<input
-					className='py-2 px-4 rounded text-white bg-slate-800 cursor-pointer'
-					type='submit'
-					value='envoyer'
-				/>
-			</form>
-			{show && <h1 className='font-bold text-xl text-green-500'> Envoyé ! </h1>}
-		</div>
-	);
+        <button type="submit" className="my-2 flex justify-center">
+          <Button showText={true}>Envoyer </Button>
+        </button>
+      </form>
+      {show && <h1 className="font-bold text-xl text-green-500"> Envoyé ! </h1>}
+      {error && <h1 className="font-bold text-xl text-green-500"> Raté </h1>}
+    </div>
+  );
 }
 
 export default SendEmail;
