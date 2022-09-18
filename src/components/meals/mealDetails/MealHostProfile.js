@@ -3,22 +3,30 @@ import Button from "../../actions/Button";
 import SectionTitle from "../../titles/SectionTitle";
 import SubsectionTitle from "../../titles/SubsectionTitle";
 import "./MealHostProfile.scss";
-import MyHostedMeals from '../../user/MyHostedMeals';
+import avatarDefault from "../../../assets/images/avatardefault.png";
+import MyHostedMeals from "../../user/MyHostedMeals";
 
 const MealHostProfile = ({ meal, hostedMeals }) => {
   console.log(hostedMeals);
-  console.log(meal);
   return (
     <div className="meals-detail-host">
       <div className="host-container">
         <span className="host-title">
           {" "}
-          <SectionTitle>About {meal.host.name} ...</SectionTitle>{" "}
+          <SectionTitle>
+            About {meal.host.name ? meal.host.name : "your host"} ...
+          </SectionTitle>{" "}
         </span>
 
         <div className="detail-host-container">
           <div className="left-detail-host-container">
-            <div className="avatar"></div>
+            <div className="avatar">
+              {meal.host.avatar_url ? (
+                <img alt="avatar" src={meal.host.avatar_url} />
+              ) : (
+                <img alt="avatar" src={avatarDefault} />
+              )}
+            </div>
             <div className="right-detail-of-left-detail-host-container">
               <span className="host-title">
                 <SectionTitle>{meal.host.name}</SectionTitle>
@@ -26,28 +34,25 @@ const MealHostProfile = ({ meal, hostedMeals }) => {
 
               {meal.host.age && <p>{meal.host.age} ans</p>}
 
-             
-                
-                {  hostedMeals === 1 ? "1 repas organisé" : (
-                  <p>{hostedMeals} repas organisés</p>
-                )}
-                
-              
+              {hostedMeals === 1 ? (
+                "1 repas organisé"
+              ) : (
+                <p>{hostedMeals} repas organisés</p>
+              )}
             </div>
           </div>
 
           <p className="vertical-border"></p>
 
           <div className="right-detail-host-container">
-            <div className="top-container">
+            <div className="top-container-about">
               <span className="bio-title">
                 <SubsectionTitle>Bio</SubsectionTitle>
               </span>
               <p className="bio-container">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis
-                risus lectus nec, nunc. Elementum, tortor, facilisis sem in vel
-                porttitor ultrices in facilisi. Sit blandit imperdiet egestas
-                duis amet. Nulla dignissim nec nullam sed orci purus.
+                {meal.host.description
+                  ? meal.host.description
+                  : "L'hôte n'a pas encore publié de description ❌"}
               </p>
             </div>
 

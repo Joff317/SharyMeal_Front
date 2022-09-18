@@ -15,7 +15,9 @@ const MealDetailsHost = ({ meal }) => {
     <div className="host">
       <div className="user">
         <UserBlack />
-        <p>{meal.host.name}</p>
+        <p className="font-light-font text-md">
+          {meal.host.name ? meal.host.name : meal.host.email}
+        </p>
       </div>
       <div className="date">
         <StartDate />

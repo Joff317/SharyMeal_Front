@@ -69,7 +69,15 @@ function MyProfile({ currentUser, setCurrentUser }) {
       })
       .then((data) => {
         console.log("data réponse du fetch => ", data);
-        setCurrentUserAtom({ ...currentUserAtom, city: data.city });
+        setCurrentUserAtom({
+          ...currentUserAtom,
+          city: data.city,
+          name: data.name,
+          age: data.age,
+          email: data.email,
+          gender: data.gender,
+          description: data.description,
+        });
       })
       .catch((error) => console.log(error.message));
   };
