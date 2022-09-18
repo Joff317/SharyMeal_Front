@@ -5,20 +5,17 @@ align-items: flex-start;
 gap: 10px;
 margin-top: 34px;
 
-.allergen{
-   display: flex;
-   flex-direction: row;
-   gap: 4px;
-}
+
 
 ul{
    display: grid;
    grid-template-columns: repeat(2, 1fr);
-   gap: 15px;
+   gap: 20px;
    margin-top: 10px;
 
    li{
       font-family: var(--light-font);
+
    }
 }
 }
@@ -26,5 +23,17 @@ ul{
 .icon{
    display: flex;
    flex-direction: row;
-   gap: 3px;
+
+   margin-right: 13px;
+   gap: 5px;
+
+   div{
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-items: flex-start;
+      width: 100%;
+      gap: 5px;
+      max-width: 200px;
+   }
 }

@@ -6,7 +6,6 @@
 
    .under{
       border-bottom: 8px solid #51DFAD;
-      width: 310px;
       display: inline-block;
       line-height: 0.55;
    }
@@ -18,11 +17,13 @@
    align-items: center;
    gap: 0px;
 
+
    .price{
       background: #51DFAD;
       border-radius: 5px;
       padding: 6px 11px;
       gap: 8px;
+      margin-left: 20px;
    }
 }
 
