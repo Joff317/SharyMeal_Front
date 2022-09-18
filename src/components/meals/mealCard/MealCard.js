@@ -12,6 +12,7 @@ import Eye from "../../../icons/Eye";
 import LayoutBlur from "../../layout/LayoutBlur/LayoutBlur";
 import MealEditForm from "../MealEditForm";
 import Edit from "../../../icons/Edit";
+import { Link } from "react-router-dom";
 
 function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
   const token = Cookies.get("token");
@@ -98,7 +99,7 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
             <MealAvatar host={mealData.host} />
             <p className="text-white text-base font-book-font">
               {" "}
-              {mealData.host.name}{" "}
+             <Link to={`/users/${mealData.host.id}`}>{mealData.host.name}{" "}</Link>
             </p>
           </div>
         )}
