@@ -24,7 +24,7 @@ function User() {
   const [attendancesVisib, setAttendancesVisib] = useState(false);
   const [hostedMealsVisib, setHostedMealsVisib] = useState(false);
   const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
-  console.log(currentUser);
+
   useEffect(() => {
     loggedd &&
       fetch(API + "me", {
@@ -34,7 +34,7 @@ function User() {
           return response.json();
         })
         .then((res) => {
-          console.log(res);
+          console.log("ici le user", res);
           setData(res);
         });
   }, [setData, reducerValue]);
@@ -149,7 +149,7 @@ function User() {
           </div>
 
           <NavLink to="/create-meal" className="mt-8">
-              <Button showText={true}>&#10024; Proposer un repas &#10024;</Button> 
+            <Button showText={true}>&#10024; Proposer un repas &#10024;</Button>
           </NavLink>
         </div>
 

@@ -15,6 +15,7 @@ import Loader from "../../Loader";
 function MealDetails() {
   const [meal, setMeal] = useState();
   const [hostedMeals, setHostedMeals] = useState();
+  const [hostAvatar, setHostavatar] = useState();
   const mealId = useParams().mealId;
 
   useEffect(() => {
@@ -24,6 +25,7 @@ function MealDetails() {
         console.log(data);
         setMeal(data.meal);
         setHostedMeals(data.hosted_meals);
+        setHostavatar(data.host_avatar);
         console.log("INSIDE FETCH", data.hosted_meals);
         document.documentElement.scrollTop = 0;
       });
@@ -48,7 +50,11 @@ function MealDetails() {
             </div>
           </div>
 
-          <MealHostProfile meal={meal} hostedMeals={hostedMeals} />
+          <MealHostProfile
+            meal={meal}
+            hostedMeals={hostedMeals}
+            hostAvatar={hostAvatar}
+          />
           <MealDetailsFooter meal={meal} />
         </div>
       ) : (

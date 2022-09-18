@@ -25,16 +25,10 @@ function AvatarForm(props) {
 
   return (
     <>
-      TEST ACTIVE STORAGE
       <form onSubmit={(e) => handleSubmitFile(e)}>
-        <label htmlFor="title">Title:</label>
-        <input type="text" name="title" id="title" />
-        <br />
-
-        <label htmlFor="avatar">Avatar:</label>
+        <p className="mb-2"> Choisissez un avatar </p>
         <input type="file" name="avatar" id="avatar" />
         <br />
-
         <button type="submit">UPLOAD</button>
       </form>
     </>

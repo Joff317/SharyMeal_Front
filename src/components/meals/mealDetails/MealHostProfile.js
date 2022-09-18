@@ -6,8 +6,9 @@ import "./MealHostProfile.scss";
 import avatarDefault from "../../../assets/images/avatardefault.png";
 import MyHostedMeals from "../../user/MyHostedMeals";
 
-const MealHostProfile = ({ meal, hostedMeals }) => {
-  console.log(hostedMeals);
+const MealHostProfile = ({ meal, hostedMeals, hostAvatar }) => {
+  console.log(meal);
+
   return (
     <div className="meals-detail-host">
       <div className="host-container">
@@ -21,8 +22,8 @@ const MealHostProfile = ({ meal, hostedMeals }) => {
         <div className="detail-host-container">
           <div className="left-detail-host-container">
             <div className="avatar">
-              {meal.host.avatar_url ? (
-                <img alt="avatar" src={meal.host.avatar_url} />
+              {hostAvatar ? (
+                <img alt="avatar" src={hostAvatar} />
               ) : (
                 <img alt="avatar" src={avatarDefault} />
               )}

@@ -14,6 +14,7 @@ import Autocompletion from "../../geolocation/Autocompletion";
 import Cookies from "js-cookie";
 import { useAtom, useSetAtom } from "jotai";
 import { currentuserAtom } from "../../../atoms/loggedAtom";
+import AvatarForm from "../AvatarForm";
 
 function MyProfile({ currentUser, setCurrentUser }) {
   const [saveButtonVisib, setSaveButtonVisib] = useState(false);
@@ -32,7 +33,10 @@ function MyProfile({ currentUser, setCurrentUser }) {
   } = useForm();
 
   const OnSubmit = (data) => {
-    console.log("data du formulaire", data.age);
+    console.log("data du formulaire", data);
+
+    const dataAvatar = new FormData();
+    dataAvatar.append("user[avatar]", data.avatar_url[0]);
 
     fetch(API + "update_me", {
       method: "PUT",
@@ -67,20 +71,39 @@ function MyProfile({ currentUser, setCurrentUser }) {
         }
         return response.json();
       })
-      .then((data) => {
-        console.log("data réponse du fetch => ", data);
+      .then((fetchData) => {
+        console.log("fetchData réponse du fetch => ", fetchData);
         setCurrentUserAtom({
           ...currentUserAtom,
-          city: data.city,
-          name: data.name,
-          age: data.age,
-          email: data.email,
-          gender: data.gender,
-          description: data.description,
+          city: fetchData.city,
+          name: fetchData.name,
+          age: fetchData.age,
+          email: fetchData.email,
+          gender: fetchData.gender,
+          description: fetchData.description,
         });
+        console.log(data.avatar_url);
+        data.avatar_url.length !== 0 && postAvatar(dataAvatar);
       })
       .catch((error) => console.log(error.message));
   };
+
+  function postAvatar(dataAvatar) {
+    console.log("ok");
+    const requestOptions = {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${token}` },
+      body: dataAvatar,
+    };
+    fetch(API + "update_me", requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        setCurrentUserAtom({
+          ...currentUserAtom,
+          avatar_url: res.avatar_url,
+        });
+      });
+  }
 
   function getData(e) {
     if (e.target.value.length > 4) {
@@ -222,6 +245,22 @@ function MyProfile({ currentUser, setCurrentUser }) {
               {errorMessage(errors.description)}
             </div>
 
+            <div className="flex gap-8 items-center">
+              <img
+                alt="useravatar"
+                className="w-24 border border-black rounded-full"
+                src={currentUser.avatar_url}
+              />
+
+              <div>
+                <input
+                  type="file"
+                  name="avatar"
+                  id="avatar"
+                  {...register("avatar_url")}
+                />
+              </div>
+            </div>
             {saveButtonVisib && (
               <button type="submit" className="my-2 flex justify-center">
                 <Button showText={true}>Sauvegarder les modifications</Button>
