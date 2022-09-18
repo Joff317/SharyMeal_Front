@@ -12,6 +12,7 @@ import MealsIndex from './components/meals/MealsIndex'
 import About from "./pages/About/About";
 import CreateMeal from "./pages/createMeal/CreateMeal";
 import MealDetails from "./components/meals/mealDetails/MealDetails";
+import UserDetails from "./components/users/UserDetails";
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 				<Route path='/login' element={<FormLogin />} />
 				<Route path='/*' element={<NotFound/>}/>
 				<Route path="/meals/:mealId" element={<MealDetails/>}/>
+				<Route path="/users/:userId" element={<UserDetails/>}/>
 				<Route path="/meals" element={<MealsIndex/>}/>
 				<Route path="/about" element={<About/>}/>
 				
