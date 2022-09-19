@@ -9,28 +9,74 @@ import MealDetailsDescription from "./MealDetailsDescription";
 import MealDetailsInformations from "./MealDetailsInformations";
 import MealDetailsFooter from "./MealDetailsFooter";
 import MealHostProfile from "./MealHostProfile";
-import MyHostedMeals from "../../user/MyHostedMeals";
 import Loader from "../../Loader";
 import { useAtomValue, useSetAtom } from "jotai";
 import { currentuserAtom } from "../../../atoms/loggedAtom";
-import OrderConfirmation from "../order/OrderConfirmation";
 import { OrderConfirmationAtom } from "../../../atoms/OrderConfirmation";
 import LayoutBlur from "../../layout/LayoutBlur/LayoutBlur";
 import Button from "../../actions/Button";
 import Close from "../../../icons/Close";
 import SectionTitle from "../../titles/SectionTitle";
 import JSConfetti from "js-confetti";
+import Cookies from "js-cookie";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
   const [hostedMeals, setHostedMeals] = useState();
   const [hostAvatar, setHostavatar] = useState();
+  const [bookingQuantity, setBookingQuantity] = useState(1);
   const currentUserAtom = useAtomValue(currentuserAtom);
   const mealId = useParams().mealId;
   const navigate = useNavigate();
   const jsConfetti = new JSConfetti();
   const orderConfirmationAtom = useAtomValue(OrderConfirmationAtom);
   const setOrderConfirmationAtom = useSetAtom(OrderConfirmationAtom);
+  const token = Cookies.get("token");
+
+  console.log("MEALID", mealId);
+
+  const createAttendance = () => {
+    fetch(API + "attendances", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        attendance: {
+          meal_id: mealId,
+        },
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        console.log("CREATE ATTENDANCE", response);
+        updateGuestRegisteredCount();
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const updateGuestRegisteredCount = () => {
+    fetch(API + `meals/${mealId}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        meal: {
+          guest_registered: meal.guest_registered + bookingQuantity,
+        },
+      }),
+    })
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
+  };
 
   useEffect(() => {
     fetch(API + `meals/${mealId}`)
@@ -44,19 +90,19 @@ function MealDetails() {
   }, []);
 
   if (window.location.href !== `http://localhost:3001/meals/${mealId}`) {
-    console.log("FIRST", window.location.href);
     setOrderConfirmationAtom(true);
     jsConfetti.addConfetti();
   }
 
   const closeModal = () => {
-    console.log("SECOND", window.location.href);
+    createAttendance();
     // setOrderConfirmationAtom(false);
     // return (window.location.href = `http://localhost:3001/meals/${mealId}`);
     return window.history.go(-1);
   };
 
   const redirectToPath = (path) => {
+    createAttendance();
     setOrderConfirmationAtom(false);
     return navigate(path);
   };
@@ -114,7 +160,11 @@ function MealDetails() {
             hostAvatar={hostAvatar}
           />
           {currentUserAtom.id !== meal.host.id && (
-            <MealDetailsFooter meal={meal} />
+            <MealDetailsFooter
+              meal={meal}
+              setBookingQuantity={setBookingQuantity}
+              bookingQuantity={bookingQuantity}
+            />
           )}
         </div>
       ) : (
