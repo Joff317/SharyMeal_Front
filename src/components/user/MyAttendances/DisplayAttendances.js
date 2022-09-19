@@ -10,16 +10,16 @@ function DisplayAttendances({period, meals}) {
             {
                 period === 'past'   ?
                                         meals
-                                        .filter(meal => (new Date(meal.meal.starting_date) < Date.now()))
+                                        .filter(meal => (new Date(meal.starting_date) < Date.now()))
                                         .map(meal => (
-                                            <MealCard mealData={meal.meal}/>  
+                                            <MealCard mealData={meal}/>  
                                         ))
                                     :
 
                                         meals
-                                        .filter(meal => (new Date(meal.meal.starting_date) >= Date.now()))
+                                        .filter(meal => (new Date(meal.starting_date) >= Date.now()))
                                         .map(meal => (
-                                            <MealCard mealData={meal.meal}/>  
+                                            <MealCard mealData={meal}/>  
                                         ))
             }
             
