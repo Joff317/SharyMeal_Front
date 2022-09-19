@@ -23,11 +23,15 @@ function InputGeoloc() {
     if (e.target.cityInput.value.length === 0) {
       setInputData({
         city: "",
+        lat: "",
+        lon: "",
         date: startDate,
       });
     } else {
       setInputData({
         city: cityInfo ? cityInfo.city : inputDataValue.city,
+        lat: cityInfo ? cityInfo.lat : inputDataAtom.lat,
+        lon: cityInfo ? cityInfo.lon : inputDataAtom.lon,
         date: startDate,
       });
     }

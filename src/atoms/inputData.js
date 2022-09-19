@@ -3,5 +3,7 @@ import { atomWithStorage } from "jotai/utils";
 
 export const inputDataAtom = atomWithStorage("inputData", {
   city: "",
+  lat: "",
+  lon: "",
   date: "",
 });

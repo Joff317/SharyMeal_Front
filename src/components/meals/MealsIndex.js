@@ -13,6 +13,8 @@ import PlacesFilter from "../filters/placesFilter/PlacesFilter";
 import Loader from "../Loader";
 import Lottie from "react-lottie";
 import * as noResult from "../../lotties/noresult.json";
+import Map from "../map/Map";
+import ToggleMap from "../map/ToggleMap";
 
 function MealIndex() {
   const [mealsIndex, setMealsIndex] = useState(null);
@@ -23,6 +25,8 @@ function MealIndex() {
   const [places, setPlaces] = useState(0);
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [mealsIndexFiltered, setMealsIndexFiltered] = useState([]);
+  const [ mapVisib, setMapVisib ] = useState(false);
+  
 
   const defaultOptions = {
     loop: true,
@@ -65,11 +69,17 @@ function MealIndex() {
 
     if (results.length > 0) {
       return (
-        <div id="meals-index-container">
-          {results.map((meal) => (
-            <MealCard mealData={meal} showAvatar={true} />
-          ))}
-        </div>
+
+        !mapVisib ?
+                  <div id="meals-index-container">
+                    {results.map((meal) => (
+                      <MealCard mealData={meal} showAvatar={true} />
+                    ))}
+                  </div>
+                  :
+                  <Map mapCenter={inputData} meals={results}/>
+                  
+                  
       );
     } else {
       return (
@@ -79,6 +89,7 @@ function MealIndex() {
       );
     }
   };
+
 
   return (
     <div className="flex flex-col  items-center">
@@ -117,6 +128,12 @@ function MealIndex() {
             </>
           )}
         </div>
+
+        <ToggleMap
+          setMapVisib={setMapVisib}
+          mapVisib={mapVisib}
+          
+          />
       </div>
 
       {mealsIndex ? (
