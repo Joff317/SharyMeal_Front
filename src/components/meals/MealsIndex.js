@@ -40,10 +40,7 @@ function MealIndex() {
         setMealsIndex(data);
       });
 
-    setInputData({
-      city: "",
-      date: "",
-    });
+    setInputData({...inputData, date: "" });
   }, []);
 
   const filteringRender = (data) => {
@@ -55,7 +52,7 @@ function MealIndex() {
       )
       .filter((meal) =>
         inputData && inputData.city !== ""
-          ? meal.location.city === inputData.city
+          ? meal.location.city === inputData.city 
           : mealsIndex
       )
       .filter((meal) =>
