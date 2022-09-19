@@ -110,7 +110,7 @@ function MealIndex() {
         ))}
       </div>
 
-      <div className="relative w-full px-52">
+      <div className="relative w-full px-52 flex justify-between items-center">
         <FilterButton
           setVisibleFilter={setVisibleFilter}
           visibleFilter={visibleFilter}
