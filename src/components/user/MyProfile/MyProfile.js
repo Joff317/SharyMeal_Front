@@ -17,7 +17,7 @@ import { currentuserAtom } from "../../../atoms/loggedAtom";
 import AvatarForm from "../AvatarForm";
 
 function MyProfile({ currentUser, setCurrentUser }) {
-  const [saveButtonVisib, setSaveButtonVisib] = useState(false);
+
   const token = Cookies.get("token");
   const [autocompleteVisible, setAutocompleteVisible] = useState(false);
   const [autocomplete, setAutocomplete] = useState(false);
@@ -60,7 +60,7 @@ function MyProfile({ currentUser, setCurrentUser }) {
             setEditConfirmVisib(false);
           }, 2000);
           setCurrentUser(data);
-          setSaveButtonVisib(false);
+          
         } else {
           setEditErrorVisib(true);
           setTimeout(() => {
@@ -117,7 +117,7 @@ function MyProfile({ currentUser, setCurrentUser }) {
   }
 
   const handleVisibilities = () => {
-    setSaveButtonVisib(true);
+  
     setEditConfirmVisib(false);
   };
 
@@ -141,7 +141,7 @@ function MyProfile({ currentUser, setCurrentUser }) {
                   )}`}
                   type="text"
                   {...register("name", errorMessageValues.name)}
-                  onChange={() => handleVisibilities()}
+                  
                 />
                 {errorMessage(errors.name)}
               </div>
@@ -155,8 +155,10 @@ function MyProfile({ currentUser, setCurrentUser }) {
                     errors.age
                   )}`}
                   type="number"
+                  min={16}
+                  onKeyDown={(e) => e.preventDefault()}
                   {...register("age", errorMessageValues.age)}
-                  onChange={() => handleVisibilities()}
+                  
                 />
                 {errorMessage(errors.age)}
               </div>
@@ -170,7 +172,7 @@ function MyProfile({ currentUser, setCurrentUser }) {
                   )}`}
                   type="text"
                   {...register("gender", errorMessageValues.gender)}
-                  onChange={() => handleVisibilities()}
+                  
                 />
                 {errorMessage(errors.gender)}
               </div>
@@ -186,7 +188,7 @@ function MyProfile({ currentUser, setCurrentUser }) {
                   )}`}
                   type="text"
                   {...register("email", errorMessageValues.email)}
-                  onChange={() => handleVisibilities()}
+                  
                 />
                 {errorMessage(errors.email)}
               </div>
@@ -235,7 +237,7 @@ function MyProfile({ currentUser, setCurrentUser }) {
                 )}`}
                 type="text"
                 {...register("description", errorMessageValues.description)}
-                onChange={() => handleVisibilities()}
+                
               />
               {errorMessage(errors.description)}
             </div>
@@ -256,11 +258,11 @@ function MyProfile({ currentUser, setCurrentUser }) {
                 />
               </div>
             </div>
-            {saveButtonVisib && (
+       
               <button type="submit" className="my-2 flex justify-center">
                 <Button showText={true}>Sauvegarder les modifications</Button>
               </button>
-            )}
+            
 
             {editConfirmVisib && (
               <p className="bg-success text-white text-center p-1 rounded">
