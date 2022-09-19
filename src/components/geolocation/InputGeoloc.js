@@ -27,7 +27,7 @@ function InputGeoloc() {
       });
     } else {
       setInputData({
-        city: cityInfo && cityInfo.city,
+        city: cityInfo ? cityInfo.city : inputDataValue.city,
         date: startDate,
       });
     }
