@@ -19,6 +19,7 @@ import Close from "../../../icons/Close";
 import SectionTitle from "../../titles/SectionTitle";
 import JSConfetti from "js-confetti";
 import Cookies from "js-cookie";
+import { CURRENT_URL } from "../../../utils/variables";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
@@ -89,7 +90,7 @@ function MealDetails() {
       });
   }, []);
 
-  if (window.location.href !== `http://localhost:3001/meals/${mealId}`) {
+  if (window.location.href !== CURRENT_URL + `${mealId}`) {
     setOrderConfirmationAtom(true);
     jsConfetti.addConfetti();
   }
