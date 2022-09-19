@@ -90,7 +90,7 @@ function MealDetails() {
       });
   }, []);
 
-  if (window.location.href !== CURRENT_URL + `${mealId}`) {
+  if (window.location.href !== CURRENT_URL + `meals/${mealId}`) {
     setOrderConfirmationAtom(true);
     jsConfetti.addConfetti();
   }
