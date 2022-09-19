@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import Cookies from "js-cookie";
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import { loggedAtom } from "../../atoms/loggedAtom";
 import { currentuserAtom } from "../../atoms/loggedAtom";
 import SectionTitle from "../../components/titles/SectionTitle";
@@ -24,6 +24,7 @@ function User() {
   const [attendancesVisib, setAttendancesVisib] = useState(false);
   const [hostedMealsVisib, setHostedMealsVisib] = useState(false);
   const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
+  const radioButton = useRef();
 
   useEffect(() => {
     loggedd &&
@@ -34,7 +35,7 @@ function User() {
           return response.json();
         })
         .then((res) => {
-          console.log('data DE User.js ', res)
+          console.log("data DE User.js ", res);
           setData(res);
         });
   }, [setData, reducerValue]);
@@ -44,6 +45,7 @@ function User() {
     setAttendancesVisib(false);
     setHostedMealsVisib(false);
     setProfileVisib(true);
+    console.log("USE REF", radioButton);
   };
 
   const displayMessages = () => {
@@ -89,6 +91,7 @@ function User() {
               id="radio1"
               value="radio1"
               defaultChecked
+              ref={radioButton}
               className={`hidden peer`}
             />
             <label
@@ -161,7 +164,7 @@ function User() {
             />
           )}
           {messagesVisib && <MyMessages />}
-          {attendancesVisib && <MyAttendances userData={data}/>}
+          {attendancesVisib && <MyAttendances userData={data} />}
           {hostedMealsVisib && (
             <MyHostedMeals userData={data} forceUpdate={forceUpdate} />
           )}
