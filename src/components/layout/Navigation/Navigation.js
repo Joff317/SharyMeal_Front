@@ -52,7 +52,7 @@ function Navigation() {
 
   return (
     <div
-      className={`flex w-full items-center z-50 justify-between gap-20 py-5 fixed px-24  ${
+      className={`flex w-full items-center z-30 justify-between gap-20 py-5 fixed px-24  ${
         changeColor
           ? "text-white bg-black_opacity backdrop-blur-sm "
           : "text-black bg-white_opacity backdrop-blur-sm"
