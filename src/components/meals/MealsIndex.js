@@ -25,8 +25,7 @@ function MealIndex() {
   const [places, setPlaces] = useState(0);
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [mealsIndexFiltered, setMealsIndexFiltered] = useState([]);
-  const [ mapVisib, setMapVisib ] = useState(false);
-  
+  const [mapVisib, setMapVisib] = useState(false);
 
   const defaultOptions = {
     loop: true,
@@ -41,10 +40,11 @@ function MealIndex() {
     fetch(API + "meals")
       .then((res) => res.json())
       .then((data) => {
+        console.log("MEALINDEX", data);
         setMealsIndex(data);
       });
 
-    setInputData({...inputData, date: "" });
+    setInputData({ ...inputData, date: "" });
   }, []);
 
   const filteringRender = (data) => {
@@ -56,7 +56,7 @@ function MealIndex() {
       )
       .filter((meal) =>
         inputData && inputData.city !== ""
-          ? meal.location.city === inputData.city 
+          ? meal.location.city === inputData.city
           : mealsIndex
       )
       .filter((meal) =>
@@ -68,18 +68,14 @@ function MealIndex() {
       .filter((meal) => places <= meal.guest_capacity - meal.guest_registered);
 
     if (results.length > 0) {
-      return (
-
-        !mapVisib ?
-                  <div id="meals-index-container">
-                    {results.map((meal) => (
-                      <MealCard mealData={meal} showAvatar={true} />
-                    ))}
-                  </div>
-                  :
-                  <Map mapCenter={inputData} meals={results}/>
-                  
-                  
+      return !mapVisib ? (
+        <div id="meals-index-container">
+          {results.map((meal) => (
+            <MealCard mealData={meal} showAvatar={true} />
+          ))}
+        </div>
+      ) : (
+        <Map mapCenter={inputData} meals={results} />
       );
     } else {
       return (
@@ -89,7 +85,6 @@ function MealIndex() {
       );
     }
   };
-
 
   return (
     <div className="flex flex-col  items-center">
@@ -129,11 +124,7 @@ function MealIndex() {
           )}
         </div>
 
-        <ToggleMap
-          setMapVisib={setMapVisib}
-          mapVisib={mapVisib}
-          
-          />
+        <ToggleMap setMapVisib={setMapVisib} mapVisib={mapVisib} />
       </div>
 
       {mealsIndex ? (

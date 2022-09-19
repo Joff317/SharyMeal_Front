@@ -5,18 +5,15 @@ import Check from "../../../icons/Check";
 import LayoutBlur from "../../layout/LayoutBlur/LayoutBlur";
 import OrderConfirmation from "../order/OrderConfirmation";
 
-const MealDetailsFooter = ({ meal }) => {
-  const [counter, setCounter] = useState(1);
+const MealDetailsFooter = ({ meal, setBookingQuantity, bookingQuantity }) => {
   const [showOrderPopup, setShowOrderPopup] = useState(false);
-  const incrementCounter = () => setCounter(counter + 1);
-  let decrementCounter = () => setCounter(counter - 1);
 
-  if (counter <= 0) {
-    decrementCounter = () => setCounter(1);
-  }
+  const incrementCounter = () => {
+    setBookingQuantity(bookingQuantity + 1);
+  };
 
-  const handleChange = (e) => {
-    setCounter(e.target.value);
+  let decrementCounter = () => {
+    setBookingQuantity(bookingQuantity - 1);
   };
 
   return (
@@ -29,7 +26,7 @@ const MealDetailsFooter = ({ meal }) => {
       <div className="right-footer">
         <p className="fork">Couvert : </p>
         <div className="button-wrapper">
-          {counter > 1 ? (
+          {bookingQuantity > 1 ? (
             <span
               className="minus flex justify-center items-center bg-black w-6 h-6 rounded-full text-white"
               onClick={decrementCounter}
@@ -42,14 +39,11 @@ const MealDetailsFooter = ({ meal }) => {
             </span>
           )}
 
-          <div
-            className="num flex items-center justify-center"
-            onChange={handleChange}
-          >
-            {counter}
+          <div className="num flex items-center justify-center">
+            {bookingQuantity}
           </div>
 
-          {counter !== meal.guest_capacity ? (
+          {bookingQuantity !== meal.guest_capacity - meal.guest_registered ? (
             <span
               className="plus flex justify-center items-center bg-black w-6 h-6 rounded-full text-white"
               onClick={incrementCounter}
@@ -68,7 +62,7 @@ const MealDetailsFooter = ({ meal }) => {
         {showOrderPopup && (
           <LayoutBlur>
             <OrderConfirmation
-              guestRegistered={counter}
+              guestRegistered={bookingQuantity}
               meal={meal}
               showOrderPopup={showOrderPopup}
               setShowOrderPopup={setShowOrderPopup}
