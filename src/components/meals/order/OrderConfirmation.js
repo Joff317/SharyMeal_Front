@@ -1,10 +1,35 @@
 import SectionTitle from "../../titles/SectionTitle";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../actions/Button";
 import Close from "../../../icons/Close";
 import SubsectionTitle from "../../titles/SubsectionTitle";
+import { Elements } from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
+import PaymentForm from "./PaymentForm"
+import { API } from "../../../utils/variables";
+
+const PUBLIC_KEY = process.env.REACT_APP_PUBLISHABLE_KEY
+const stripeTestPromise = loadStripe(PUBLIC_KEY)
+
 
 function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
+
+	const [clientSecret, setClientSecret] = useState("")
+  
+
+	useEffect(() => {
+		fetch(API + "charges", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				amount: parseInt(`${meal.price * guestRegistered}00`),
+				currency: "eur",
+			}),
+		})
+			.then((res) => res.json())
+			.then((data) => setClientSecret(data.clientSecret))
+	}, [])
+
   function dataParsed(date) {
     return new Date(date).toLocaleDateString("fr-FR", {
       month: "long",
@@ -12,6 +37,15 @@ function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
       day: "numeric",
     });
   }
+
+  const appearance = {
+		theme: "stripe",
+	}
+	const options = {
+		clientSecret,
+		appearance,
+	}
+
   return (
     <div>
       <SectionTitle> Confirmation de commande </SectionTitle>
@@ -43,6 +77,11 @@ function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
           {meal.price}€ par unité - total : {meal.price * guestRegistered}€{" "}
         </li>
       </ul>
+      {clientSecret && (
+					<Elements options={options} stripe={stripeTestPromise}>
+						<PaymentForm />
+					</Elements>
+				)}
       <span
         className="absolute top-5 right-5"
         onClick={() => setShowOrderPopup(false)}
