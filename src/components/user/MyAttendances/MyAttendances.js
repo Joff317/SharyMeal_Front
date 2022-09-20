@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DisplayAttendances from './DisplayAttendances';
 
 function MyAttendances({userData}) {
-
+    
     const [ period, setPeriod ] = useState('future');
 
     return (
