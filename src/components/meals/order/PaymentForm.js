@@ -56,7 +56,9 @@ export default function PaymentForm({ setShowOrderPopup, mealId }) {
     }
 
     setIsLoading(true);
-    console.log(CURRENT_URL);
+
+    
+
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {

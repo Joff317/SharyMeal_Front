@@ -34,6 +34,7 @@ function MealDetails() {
   const setOrderConfirmationAtom = useSetAtom(OrderConfirmationAtom);
   const token = Cookies.get("token");
 
+  console.log('CURRENT_URL', CURRENT_URL);
   console.log("MEALID", mealId);
 
   const createAttendance = () => {
