@@ -99,9 +99,9 @@ function MealDetails() {
   const closeModal = () => {
     createAttendance();
     // setOrderConfirmationAtom(false);
-    // return (window.location.href = `http://localhost:3001/meals/${mealId}`);
-    console.log('window.history', window.history);
-    return window.history.go(-1);
+    return (window.location.href = CURRENT_URL + `meals/${mealId}`);
+    // console.log('window.history', window.history);
+    // return window.history.go(-1);
   };
 
   const redirectToPath = (path) => {
