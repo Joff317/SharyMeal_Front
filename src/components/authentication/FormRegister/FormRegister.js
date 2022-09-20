@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import { errorMessageValues, errorInput, errorMessage } from "../errors";
 import usePostForm from "../usePostForm";
 import { currentuserAtom, loggedAtom } from "../../../atoms/loggedAtom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API } from "../../../utils/variables";
 import Button from "../../actions/Button";
 import Close from "../../../icons/Close";
 import React, { useState } from "react";
 import SectionTitle from "../../titles/SectionTitle";
+import './FormRegister.scss'
 
 function FormRegister({
   setRegisterPopup,
@@ -75,15 +76,21 @@ function FormRegister({
           {errorMessage(errors.password)}
         </div>
         <div className="flex flex-col">
+          <a href="/condition_d_utilisation" className="use-conditions">
+          condition d'utilisation
+          </a>
+          <div className="check-conditions">
           <p className="mb-2"> J'ai lu et j'accepte les conditions d'utilisation </p>
           <input
             className={`border border-grey-border  pl-3 placeholder:font-light-font placeholder:text-sm rounded-md ${errorInput(
               errors.password
             )}`}
             type="checkbox"
+            required
             {...register("password", errorMessageValues.password)}
           />
           {errorMessage(errors.password)}
+          </div>
          </div>
         <button type="submit" className="my-2 flex justify-center">
           <Button showText={true}>Créer mon compte</Button>

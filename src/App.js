@@ -14,6 +14,7 @@ import CreateMeal from "./pages/createMeal/CreateMeal";
 import MealDetails from "./components/meals/mealDetails/MealDetails";
 import UserDetails from "./components/users/UserDetails";
 import ConfirmPayment from "./components/meals/order/ConfirmPayment";
+import Rgpd from "./pages/rgpd/Rgpd";
 
 function App() {
 	return (
@@ -34,6 +35,7 @@ function App() {
 				<Route path="/meals" element={<MealsIndex/>}/>
 				<Route path="/about" element={<About/>}/>
 				<Route path="/confirm_payment" element={<ConfirmPayment/>}/>
+				<Route path="/condition_d_utilisation" element={<Rgpd/>}/>
 				
 			</Routes>
 		</Layout>

@@ -1,13 +1,16 @@
 import React from "react";
-import HeroTitle from "../components/titles/HeroTitle";
+import SectionTitle from "../../components/titles/SectionTitle";
+import './Rgpd.scss'
 
 const Rgpd = () => {
   return (
     <div className="condition-container">
-      <HeroTitle>
+      <span className="top-title">
+        <SectionTitle>
         Conditions générales d'utilisation du site SharyMeal
-      </HeroTitle>
-      <h3 className="article-1"> ARTICLE 1 : Objet </h3>
+      </SectionTitle>
+      </span>
+      <h3 className="article"> ARTICLE 1 : Objet </h3>
       <p>
         Les présentes « conditions générales d'utilisation » ont pour objet
         l'encadrement juridique de l’utilisation du site SharyMeal et de ses
@@ -18,7 +21,7 @@ const Rgpd = () => {
         acceptées par tout Utilisateur, et son accès au site vaut acceptation de
         ces conditions.
       </p>
-      <h3 className="article-2"> ARTICLE 2 : accès aux services </h3>
+      <h3 className="article"> ARTICLE 2 : accès aux services </h3>
       <p>
         L’Utilisateur du site SharyMeal a accès aux services suivants :
         S’inscrire/Se connecter Créer une annonce de repas Envoyer des messages
@@ -34,7 +37,7 @@ const Rgpd = () => {
         l’Éditeur, notamment à l’occasion d’une maintenance, sans obligation de
         préavis ou de justification.
       </p>
-      <h3 className="article-3">
+      <h3 className="article">
         {" "}
         ARTICLE 3 : Responsabilité de l’Utilisateur{" "}
       </h3>
@@ -57,7 +60,7 @@ const Rgpd = () => {
         L’Éditeur s'engage toutefois à citer le membre en cas d’utilisation de
         sa publication
       </p>
-      <h3 className="article-4"> ARTICLE 4 : Responsabilité de l’Éditeur </h3>
+      <h3 className="article"> ARTICLE 4 : Responsabilité de l’Éditeur </h3>
       <p>
         Tout dysfonctionnement du serveur ou du réseau ne peut engager la
         responsabilité de l’Éditeur. De même, la responsabilité du site ne peut
@@ -69,7 +72,7 @@ const Rgpd = () => {
         la fiabilité des sources, bien que les informations diffusées su le site
         soient réputées fiables.
       </p>
-      <h3 className="article-5"> ARTICLE 5 : Propriété intellectuelle </h3>
+      <h3 className="article"> ARTICLE 5 : Propriété intellectuelle </h3>
       <p>
         Les contenus du site SharyMeal (logos, textes, éléments graphiques,
         vidéos, etc.) son protégés par le droit d’auteur, en vertu du Code de la
@@ -83,7 +86,7 @@ const Rgpd = () => {
         moment les contenus mis en ligne par les utilisateurs, et ce sans
         justification.
       </p>
-      <h3 className="article-6"> ARTICLE 6 : Données personnelles </h3>
+      <h3 className="article"> ARTICLE 6 : Données personnelles </h3>
       <p>
         L’Utilisateur doit obligatoirement fournir des informations personnelles
         pour procéder à son inscription sur le site. L’adresse électronique
@@ -98,7 +101,7 @@ const Rgpd = () => {
         personnel sur le site ; Un formulaire de contact ; Par mail à
         sharymeal@mail.com ;
       </p>
-      <h3 className="article-7"> ARTICLE 7 : Liens hypertextes </h3>
+      <h3 className="article"> ARTICLE 7 : Liens hypertextes </h3>
       <p>
         Les domaines vers lesquels mènent les liens hypertextes présents sur le
         site n’engagent pas la responsabilité de l’Éditeur de SharyMeal, qui n’a
@@ -106,7 +109,7 @@ const Rgpd = () => {
         lien vers une page du site SharyMeal sans autorisation expresse de
         l’éditeur.
       </p>
-      <h3 className="article-8">
+      <h3 className="article">
         {" "}
         ARTICLE 8 : Évolution des conditions générales d’utilisation{" "}
       </h3>
@@ -114,13 +117,13 @@ const Rgpd = () => {
         Le site SharyMeal se réserve le droit de modifier les clauses de ces
         conditions générales d’utilisation à tout moment et sans justification.
       </p>
-      <h3 className="article-9"> ARTICLE 9 : Durée du contrat </h3>
+      <h3 className="article"> ARTICLE 9 : Durée du contrat </h3>
       <p>
         La durée du présent contrat est indéterminée. Le contrat produit ses
         effets à l'égard de l'Utilisateur à compter du début de l’utilisation du
         service.
       </p>
-      <h3 className="article-10">
+      <h3 className="article">
         {" "}
         ARTICLE 10 : Droit applicable et juridiction compétente{" "}
       </h3>
