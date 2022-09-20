@@ -105,25 +105,26 @@ function MealIndex() {
         ))}
       </div>
 
-      <div className="relative w-full px-52 flex justify-between items-center">
-        <FilterButton
-          setVisibleFilter={setVisibleFilter}
-          visibleFilter={visibleFilter}
-        />
+      <div className="relative w-full flex justify-around items-center mb-5">
+        <div className="relative">
+          <FilterButton
+            setVisibleFilter={setVisibleFilter}
+            visibleFilter={visibleFilter}
+          />
 
-        <div
-          className={` filter-container bg-white absolute top-8 z-10 w-[500px] h-[0px] transition-all ${
-            visibleFilter && "h-[150px]"
-          }`}
-        >
-          {visibleFilter && (
-            <>
-              <PriceFilter setPrice={setPrice} price={price} />
-              <PlacesFilter places={places} setPlaces={setPlaces} />
-            </>
-          )}
+          <div
+            className={` filter-container bg-white absolute rounded-xl left-0 top-14 z-10 w-[380px] h-[0px] transition-all ${
+              visibleFilter && "h-[160px]"
+            }`}
+          >
+            {visibleFilter && (
+              <>
+                <PriceFilter setPrice={setPrice} price={price} />
+                <PlacesFilter places={places} setPlaces={setPlaces} />
+              </>
+            )}
+          </div>
         </div>
-
         <ToggleMap setMapVisib={setMapVisib} mapVisib={mapVisib} />
       </div>
 
