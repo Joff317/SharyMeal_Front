@@ -56,11 +56,12 @@ export default function PaymentForm({ setShowOrderPopup, mealId }) {
     }
 
     setIsLoading(true);
-
+    console.log(CURRENT_URL);
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
+        
         return_url: CURRENT_URL + `meals/${mealId}`,
       },
     });
