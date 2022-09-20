@@ -9,8 +9,11 @@ import aboutImage from "../../assets/images/about-image.jpeg";
 import "./About.scss";
 import SectionTitle from "../../components/titles/SectionTitle";
 import SubsectionTitle from "../../components/titles/SubsectionTitle";
+import { useNavigate } from "react-router-dom";
 
 function About(props) {
+  const navigate = useNavigate();
+
   return (
     <div className="about-container">
       <div className="top-container">
@@ -26,7 +29,7 @@ function About(props) {
             corrupti consequuntur cupiditate aspernatur aliquam eius expedita
             modi, repellat ipsam.
           </p>
-          <button>
+          <button onClick={() => navigate("/create-meal")}>
             <Button showText={true}>Commencer</Button>
           </button>
         </div>
@@ -114,22 +117,50 @@ function About(props) {
         <div className="middle-container-right">
           <div className="text-1">
             <SubsectionTitle>Créer votre annonce</SubsectionTitle>
-            <p className="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima repudiandae animi asperiores magni. Animi, perferendis ipsa vel reprehenderit ullam voluptatibus harum. Ratione iste quibusdam labore quae, asperiores alias dicta id!
-            Soluta aliquid quas quaerat voluptates modi quod, aspernatur deserunt, expedita eaque nesciunt sit exercitationem ut assumenda excepturi explicabo nam ab cupiditate rem nihil in doloribus nostrum. Corporis voluptatum harum quibusdam?
+            <p className="text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
+              repudiandae animi asperiores magni. Animi, perferendis ipsa vel
+              reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
+              labore quae, asperiores alias dicta id! Soluta aliquid quas
+              quaerat voluptates modi quod, aspernatur deserunt, expedita eaque
+              nesciunt sit exercitationem ut assumenda excepturi explicabo nam
+              ab cupiditate rem nihil in doloribus nostrum. Corporis voluptatum
+              harum quibusdam?
             </p>
           </div>
           <div className="text-2">
-          <SubsectionTitle>Gérer les demande de participations </SubsectionTitle>
-          <p className="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima repudiandae animi asperiores magni. Animi, perferendis ipsa vel reprehenderit ullam voluptatibus harum. Ratione iste quibusdam labore quae, asperiores alias dicta id!
-            Soluta aliquid quas quaerat voluptates modi quod, aspernatur deserunt, expedita eaque nesciunt sit exercitationem ut assumenda excepturi explicabo nam ab cupiditate rem nihil in doloribus nostrum. Corporis voluptatum harum quibusdam?
-          </p>
+            <SubsectionTitle>
+              Gérer les demande de participations{" "}
+            </SubsectionTitle>
+            <p className="text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
+              repudiandae animi asperiores magni. Animi, perferendis ipsa vel
+              reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
+              labore quae, asperiores alias dicta id! Soluta aliquid quas
+              quaerat voluptates modi quod, aspernatur deserunt, expedita eaque
+              nesciunt sit exercitationem ut assumenda excepturi explicabo nam
+              ab cupiditate rem nihil in doloribus nostrum. Corporis voluptatum
+              harum quibusdam?
+            </p>
           </div>
           <div className="text-3">
-          <SubsectionTitle>Mangez et profitez !</SubsectionTitle>
-          <p className="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima repudiandae animi asperiores magni. Animi, perferendis ipsa vel reprehenderit ullam voluptatibus harum. Ratione iste quibusdam labore quae, asperiores alias dicta id!
-            Soluta aliquid quas quaerat voluptates modi quod, aspernatur deserunt, expedita eaque nesciunt sit exercitationem ut assumenda excepturi explicabo nam ab cupiditate rem nihil in doloribus nostrum. Corporis voluptatum harum quibusdam?</p>
+            <SubsectionTitle>Mangez et profitez !</SubsectionTitle>
+            <p className="text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
+              repudiandae animi asperiores magni. Animi, perferendis ipsa vel
+              reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
+              labore quae, asperiores alias dicta id! Soluta aliquid quas
+              quaerat voluptates modi quod, aspernatur deserunt, expedita eaque
+              nesciunt sit exercitationem ut assumenda excepturi explicabo nam
+              ab cupiditate rem nihil in doloribus nostrum. Corporis voluptatum
+              harum quibusdam?
+            </p>
           </div>
         </div>
+
+        <span className="bottom-button" onClick={() => navigate("/create-meal")}>
+          <Button showText={true}>Lancez-vous</Button>
+        </span>
       </div>
     </div>
   );

@@ -65,6 +65,11 @@ object-fit: cover;
       margin-top: 30px;
       height: 820px;
 
+      .middle-title{
+         display: flex;
+         justify-content: center;
+      }
+
       .middle-left-container{
          position: relative;
          align-items: center;
@@ -166,14 +171,23 @@ object-fit: cover;
          flex-direction: column;
          text-align:justify ;
          right: 100px;
-         top: 150px;
+         top: 180px;
          width: 50vw;
-         gap: 10px;
+         gap: 20px;
+         font-family: var(--medium-font);
 
          .text{
             font-family: var(--medium-font) !important;
             font-size: 15px;
          }
+      }
+
+      .bottom-button{
+         position: absolute;
+         display: flex;
+         justify-content: center;
+         left: 800px;
+         bottom: 100px;
       }
       
    }
