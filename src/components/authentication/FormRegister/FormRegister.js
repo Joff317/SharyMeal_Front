@@ -74,6 +74,17 @@ function FormRegister({
           />
           {errorMessage(errors.password)}
         </div>
+        <div className="flex flex-col">
+          <p className="mb-2"> J'ai lu et j'accepte les conditions d'utilisation </p>
+          <input
+            className={`border border-grey-border  pl-3 placeholder:font-light-font placeholder:text-sm rounded-md ${errorInput(
+              errors.password
+            )}`}
+            type="checkbox"
+            {...register("password", errorMessageValues.password)}
+          />
+          {errorMessage(errors.password)}
+         </div>
         <button type="submit" className="my-2 flex justify-center">
           <Button showText={true}>Créer mon compte</Button>
         </button>
