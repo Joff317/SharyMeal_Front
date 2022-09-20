@@ -1,0 +1,19 @@
+.condition-container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   
+   
+
+   .top-title{
+      color: var(--black);
+      margin-top: 60px;
+      text-align: center !important;
+   }
+
+   .article{
+      padding: 20px;
+   }
+
+}
+
