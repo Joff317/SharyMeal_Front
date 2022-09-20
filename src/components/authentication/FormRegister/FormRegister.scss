@@ -1,0 +1,11 @@
+.use-conditions{
+   text-decoration: underline var(--black);
+}
+
+.check-conditions{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   gap: 10px;
+   
+}
