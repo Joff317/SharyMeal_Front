@@ -99,7 +99,8 @@ function MealDetails() {
     createAttendance();
     // setOrderConfirmationAtom(false);
     // return (window.location.href = `http://localhost:3001/meals/${mealId}`);
-    return window.history.go(-1);
+    console.log('window.history', window.history);
+    // return window.history.go(-1);
   };
 
   const redirectToPath = (path) => {
