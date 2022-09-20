@@ -17,7 +17,6 @@ import { currentuserAtom } from "../../../atoms/loggedAtom";
 import AvatarForm from "../AvatarForm";
 
 function MyProfile({ currentUser, setCurrentUser }) {
-
   const token = Cookies.get("token");
   const [autocompleteVisible, setAutocompleteVisible] = useState(false);
   const [autocomplete, setAutocomplete] = useState(false);
@@ -60,7 +59,6 @@ function MyProfile({ currentUser, setCurrentUser }) {
             setEditConfirmVisib(false);
           }, 2000);
           setCurrentUser(data);
-          
         } else {
           setEditErrorVisib(true);
           setTimeout(() => {
@@ -117,7 +115,6 @@ function MyProfile({ currentUser, setCurrentUser }) {
   }
 
   const handleVisibilities = () => {
-  
     setEditConfirmVisib(false);
   };
 
@@ -141,7 +138,6 @@ function MyProfile({ currentUser, setCurrentUser }) {
                   )}`}
                   type="text"
                   {...register("name", errorMessageValues.name)}
-                  
                 />
                 {errorMessage(errors.name)}
               </div>
@@ -158,7 +154,6 @@ function MyProfile({ currentUser, setCurrentUser }) {
                   min={16}
                   onKeyDown={(e) => e.preventDefault()}
                   {...register("age", errorMessageValues.age)}
-                  
                 />
                 {errorMessage(errors.age)}
               </div>
@@ -172,7 +167,6 @@ function MyProfile({ currentUser, setCurrentUser }) {
                   )}`}
                   type="text"
                   {...register("gender", errorMessageValues.gender)}
-                  
                 />
                 {errorMessage(errors.gender)}
               </div>
@@ -188,7 +182,6 @@ function MyProfile({ currentUser, setCurrentUser }) {
                   )}`}
                   type="text"
                   {...register("email", errorMessageValues.email)}
-                  
                 />
                 {errorMessage(errors.email)}
               </div>
@@ -237,7 +230,6 @@ function MyProfile({ currentUser, setCurrentUser }) {
                 )}`}
                 type="text"
                 {...register("description", errorMessageValues.description)}
-                
               />
               {errorMessage(errors.description)}
             </div>
@@ -245,24 +237,25 @@ function MyProfile({ currentUser, setCurrentUser }) {
             <div className="flex gap-8 items-center">
               <img
                 alt="useravatar"
-                className="w-24 border border-black rounded-full"
+                className="w-16 h-16 border border-black rounded-full"
                 src={currentUser.avatar_url}
               />
 
-              <div>
+              <label className="block">
+                <span className="sr-only">Choose profile photo</span>
                 <input
                   type="file"
+                  className="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer file:hover:bg-green_light"
                   name="avatar"
                   id="avatar"
                   {...register("avatar_url")}
                 />
-              </div>
+              </label>
             </div>
-       
-              <button type="submit" className="my-2 flex justify-center">
-                <Button showText={true}>Sauvegarder les modifications</Button>
-              </button>
-            
+
+            <button type="submit" className="my-2 flex justify-center">
+              <Button showText={true}>Sauvegarder les modifications</Button>
+            </button>
 
             {editConfirmVisib && (
               <p className="bg-success text-white text-center p-1 rounded">
