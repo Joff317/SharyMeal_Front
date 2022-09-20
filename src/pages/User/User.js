@@ -158,10 +158,11 @@ function User() {
         </div>
 
         <div className="user-feature-container ">
-          {profileVisib && (
+          {(profileVisib && data) && (
             <MyProfile
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
+              userData={data}
             />
           )}
           {messagesVisib && <MyMessages userData={data.list_chatters} />}
