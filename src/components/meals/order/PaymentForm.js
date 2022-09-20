@@ -8,6 +8,7 @@ import Button from "../../actions/Button";
 import OrderLoader from "./OrderLoader";
 import { useSetAtom } from "jotai";
 import { OrderConfirmationAtom } from "../../../atoms/OrderConfirmation";
+import { CURRENT_URL } from "../../../utils/variables";
 
 export default function PaymentForm({ setShowOrderPopup, mealId }) {
   const stripe = useStripe();
@@ -58,10 +59,10 @@ export default function PaymentForm({ setShowOrderPopup, mealId }) {
 
     const { error } = await stripe.confirmPayment({
       elements,
-      // confirmParams: {
-      //   // Make sure to change this to your payment completion page
-      //   return_url: `http://localhost:3001/meals/${mealId}`,
-      // },
+      confirmParams: {
+        // Make sure to change this to your payment completion page
+        return_url: CURRENT_URL + `meals/${mealId}`,
+      },
     });
 
     if (error.type === "card_error" || error.type === "validation_error") {
