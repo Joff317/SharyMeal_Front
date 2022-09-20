@@ -164,7 +164,7 @@ function User() {
               setCurrentUser={setCurrentUser}
             />
           )}
-          {messagesVisib && <MyMessages />}
+          {messagesVisib && <MyMessages userData={data.list_chatters} />}
           {attendancesVisib && <MyAttendances userData={data} />}
           {hostedMealsVisib && (
             <MyHostedMeals userData={data} forceUpdate={forceUpdate} />
