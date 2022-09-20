@@ -58,10 +58,10 @@ export default function PaymentForm({ setShowOrderPopup, mealId }) {
 
     const { error } = await stripe.confirmPayment({
       elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: `http://localhost:3001/meals/${mealId}`,
-      },
+      // confirmParams: {
+      //   // Make sure to change this to your payment completion page
+      //   return_url: `http://localhost:3001/meals/${mealId}`,
+      // },
     });
 
     if (error.type === "card_error" || error.type === "validation_error") {
