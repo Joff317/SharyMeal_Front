@@ -9,11 +9,17 @@ function DisplayReviews({reviewStatus, reviews}) {
                 
                 reviewStatus === "received" ?
                     reviews.received.map(review => (
-                        <p>{review.content}</p>
+                      <div className="review">
+                          <span>{review.content}</span>
+                          <span>{review.rating}</span>
+                      </div>
                     ))
                     :
                     reviews.written.map(review => (
-                        <p>{review.content}</p>
+                        <div className="review">
+                          <span>{review.content}</span>
+                          <span>{review.rating}</span>
+                      </div>
                     ))
 
             }

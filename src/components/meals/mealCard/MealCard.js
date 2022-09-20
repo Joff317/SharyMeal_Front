@@ -13,10 +13,12 @@ import LayoutBlur from "../../layout/LayoutBlur/LayoutBlur";
 import MealEditForm from "../MealEditForm";
 import Edit from "../../../icons/Edit";
 import { Link } from "react-router-dom";
+import CreateReview from "../../reviews/CreateReview";
 
-function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
+function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate, showAdditionalInfoReview }) {
   const token = Cookies.get("token");
   const [showEdit, setShowEdit] = useState();
+  const [showReview, setShowReview] = useState();
 
   const deleteMeal = () => {
     fetch(`${API}/meals/${mealData.id}`, {
@@ -78,10 +80,29 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
             )}{" "}
           </>
         )}
+        {showAdditionalInfoReview && (
+          <>
+          <div className="absolute top-2 flex flex-col gap-2 z-10">
+            <div
+              onClick={() => setShowReview(true)}
+              className="w-[38px] h-[38px] rounded-full bg-[#5376F1] flex justify-center items-center cursor-pointer"
+            >
+              <Edit />
+            </div>
+          </div>
+          {showReview && (
+            <LayoutBlur>
+              <CreateReview
+                mealData={mealData}
+                setShowReview={setShowReview}
+                forceUpdate={forceUpdate}
+              />
+            </LayoutBlur>
+          )}{" "}
+          </>
+        )}
         <p className="text-white">{mealData.location.city}</p>
-
         <div className="layer-blur"> </div>
-
         {mealData.image_urls ? (
           <img
             src={mealData.image_urls[0]}
@@ -91,7 +112,6 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
         ) : (
           <img src={defaultImage} alt="meal" className="mealcard-image" />
         )}
-
         <MealPrice price={mealData.price} />
         <MealTitle title={mealData.title} mealId={mealData.id} />
         {showAvatar && (
@@ -99,11 +119,12 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate }) {
             <MealAvatar host={mealData.host} />
             <p className="text-white text-base font-book-font">
               {" "}
-             <Link to={`/users/${mealData.host.id}`}>{mealData.host.name}{" "}</Link>
+              <Link to={`/users/${mealData.host.id}`}>
+                {mealData.host.name}{" "}
+              </Link>
             </p>
           </div>
         )}
-
         <MealStartingDate date={dataParsed(mealData.starting_date)} />
       </div>
     </div>
