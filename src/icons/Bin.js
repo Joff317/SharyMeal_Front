@@ -32,8 +32,8 @@ function Bin() {
       <path
         d="M7 5L7.22147 3.6712C7.3822 2.70683 8.21658 2 9.19425 2H12H14.8057C15.7834 2 16.6178 2.70683 16.7785 3.6712L17 5"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
     </svg>
   );
