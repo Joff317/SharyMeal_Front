@@ -87,9 +87,7 @@ function FormRegister({
             )}`}
             type="checkbox"
             required
-            {...register("password", errorMessageValues.password)}
           />
-          {errorMessage(errors.password)}
           </div>
          </div>
         <button type="submit" className="my-2 flex justify-center">
