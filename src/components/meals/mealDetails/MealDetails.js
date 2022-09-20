@@ -43,7 +43,6 @@ function MealDetails() {
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${token}`,
-        mode: 'no-cors'
       },
       body: JSON.stringify({
         attendance: {
