@@ -8,7 +8,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import fr from "date-fns/locale/fr";
 import Search from "../../icons/Search";
 import APIManager from "../../services/Api";
-import { GEOAPIFY_KEY } from "../../utils/variables";
+import env from "react-dotenv";
+
+
+
+
 
 function InputGeoloc() {
   const [autocompleteVisible, setAutocompleteVisible] = useState(false);
@@ -48,7 +52,7 @@ function InputGeoloc() {
   const getLocationData = async (e) => {
     if (e.target.value.length > 4) {
 
-      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${GEOAPIFY_KEY}`)
+      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`)
       .then(res => {
         console.log('res FROM getCityData REQUEST => ', res);
         setAutocompleteVisible(true);

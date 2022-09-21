@@ -27,6 +27,8 @@ import { ErrorMessage } from '@hookform/error-message';
 import Arrow from "../../icons/Arrow";
 import ArrowLeft from "../../icons/ArrowLeft";
 import Check from "../../icons/Check";
+import env from 'react-dotenv';
+
 
 const CreateMeal = () => {
   const token = Cookies.get("token");
@@ -85,7 +87,26 @@ const CreateMeal = () => {
         imagesUrl.append("meal[images][]", data.image_urls[i]);
       }
 
-      await APIManager.createMeal(data, cityInfo, startDate)
+      await APIManager.create("meals", {
+        title: data.title,
+        description: data.description,
+        price: data.price,
+        location: {
+          city: cityInfo ? cityInfo.city : data.location.city,
+          lat: cityInfo ? cityInfo.lat : data.location.lat,
+          lon: cityInfo ? cityInfo.lon : data.location.lon,
+          address: cityInfo
+            ? cityInfo.formatted
+            : data.location.address,
+        },
+        guest_capacity: data.guest_capacity,
+        starting_date: startDate,
+        animals: data.animals,
+        alcool: data.alcool,
+        doggybag: data.doggybag,
+        diet_type: data.dietType,
+        allergens: data.allergens,
+      })
       .then(res => {
         console.log('res FROM CREATE MEAL REQUEST => ', res)
         postCategoriesInfo(data.categories, res.id);
@@ -118,6 +139,10 @@ const CreateMeal = () => {
   const postImages = async (mealId, data) => {
     console.log('data from postImages', data)
 
+    // APIManager.postImages(mealId, data)
+    // .then(res => console.log('res FROM postImages REQUEST => ', res))
+    // .catch(error => console.log('error FROM postImages REQUEST => ', error.message))
+
 // The following request is not using axios like others requests (because not working). 
     const requestOptions = {
       method: "PUT",
@@ -132,7 +157,7 @@ const CreateMeal = () => {
   const getLocationData = async (e) => {
     if (e.target.value.length > 4) {
 
-      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${GEOAPIFY_KEY}`)
+      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`)
       .then(res => {
         console.log('res FROM getCityData REQUEST => ', res);
         setAutocompleteVisible(true);

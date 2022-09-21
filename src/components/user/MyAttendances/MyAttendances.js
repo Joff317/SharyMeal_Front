@@ -6,7 +6,7 @@ import SubsectionTitle from "../../titles/SubsectionTitle";
 function MyAttendances({ userData }) {
   const [period, setPeriod] = useState("future");
 
-  console.log(userData.guested_meals);
+  // console.log(userData.guested_meals);
 
   return (
     <>

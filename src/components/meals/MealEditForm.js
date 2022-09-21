@@ -18,7 +18,7 @@ import { API } from "../../utils/variables";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 import APIManager from "../../services/Api";
-import { GEOAPIFY_KEY } from "../../utils/variables";
+import env from 'react-dotenv';
 
 function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
   const [autocomplete, setAutocomplete] = useState();
@@ -63,7 +63,28 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
     });
     if (isDataValid(data)) {
 
-      APIManager.editMeal(mealData, data, cityInfo, startDate)
+      APIManager.edit(`meals/${mealData.id}`, {
+        meal: {
+          title: data.title,
+          description: data.description,
+          price: data.price,
+          location: {
+            city: cityInfo ? cityInfo.city : mealData.location.city,
+            lat: cityInfo ? cityInfo.lat : mealData.location.lat,
+            lon: cityInfo ? cityInfo.lon : mealData.location.lon,
+            address: cityInfo
+              ? cityInfo.formatted
+              : mealData.location.address,
+          },
+          guest_capacity: data.guest_capacity,
+          starting_date: startDate,
+          animals: data.animals,
+          alcool: data.alcool,
+          doggybag: data.doggybag,
+          diet_type: data.dietType,
+          allergens: data.allergens,
+        },
+      })
       .then(res => {
         console.log('res FROM EDIT MEAL REQUEST => ', res)
         deleteCategoryInfo(joinCategoryArray, data.categories, res.id);
@@ -79,28 +100,28 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
       //     "Content-type": "application/json",
       //     Authorization: `Bearer ${token}`,
       //   },
-      //   body: JSON.stringify({
-      //     meal: {
-      //       title: data.title,
-      //       description: data.description,
-      //       price: data.price,
-      //       location: {
-      //         city: cityInfo ? cityInfo.city : mealData.location.city,
-      //         lat: cityInfo ? cityInfo.lat : mealData.location.lat,
-      //         lon: cityInfo ? cityInfo.lon : mealData.location.lon,
-      //         address: cityInfo
-      //           ? cityInfo.formatted
-      //           : mealData.location.address,
-      //       },
-      //       guest_capacity: data.guest_capacity,
-      //       starting_date: startDate,
-      //       animals: data.animals,
-      //       alcool: data.alcool,
-      //       doggybag: data.doggybag,
-      //       diet_type: data.dietType,
-      //       allergens: data.allergens,
-      //     },
-      //   }),
+        // body: JSON.stringify({
+        //   meal: {
+        //     title: data.title,
+        //     description: data.description,
+        //     price: data.price,
+        //     location: {
+        //       city: cityInfo ? cityInfo.city : mealData.location.city,
+        //       lat: cityInfo ? cityInfo.lat : mealData.location.lat,
+        //       lon: cityInfo ? cityInfo.lon : mealData.location.lon,
+        //       address: cityInfo
+        //         ? cityInfo.formatted
+        //         : mealData.location.address,
+        //     },
+        //     guest_capacity: data.guest_capacity,
+        //     starting_date: startDate,
+        //     animals: data.animals,
+        //     alcool: data.alcool,
+        //     doggybag: data.doggybag,
+        //     diet_type: data.dietType,
+        //     allergens: data.allergens,
+        //   },
+        // }),
       // })
       //   .then((response) => {
       //     return response.json();
@@ -117,7 +138,7 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
   const deleteCategoryInfo = async (arrayToDelete, dataCategory, mealId) => {
     await arrayToDelete.map((categoryId) => {
 
-      APIManager.delete("join_categories", categoryId)
+      APIManager.delete(`join_categories/${categoryId}`)
       .then(res => console.log("res FROM deleteCategoryInfo REQUEST => ", res))
       .catch(error => console.error("error FROM deleteCategoryInfo REQUEST => ", error.message))
 
@@ -134,7 +155,12 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
 
     await categoriesArray.map((category) => {
 
-      APIManager.postCategoriesInfo(mealId, category)
+      APIManager.create("join_categories", {
+        join_category_meal: {
+          meal_id: mealId,
+          category_id: parseInt(category),
+        },
+      })
        .then(res => console.log('res FROM postCategoriesInfo REQUEST => ', res))
        .catch(error => console.error('error from postCategoriesInfo REQUEST => ', error))
 
@@ -145,37 +171,20 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
       //     "Content-type": "application/json",
       //     Authorization: `Bearer ${token}`,
       //   },
-      //   body: JSON.stringify({
-      //     join_category_meal: {
-      //       meal_id: mealId,
-      //       category_id: parseInt(category),
-      //     },
-      //   }),
+        // body: JSON.stringify({
+        //   join_category_meal: {
+        //     meal_id: mealId,
+        //     category_id: parseInt(category),
+        //   },
+        // }),
       // });
    });
-
-// OLD request : will be removed 
-    // categoriesArray.map((category) => {
-    //   fetch(API + "join_categories", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-type": "application/json",
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //     body: JSON.stringify({
-    //       join_category_meal: {
-    //         meal_id: mealId,
-    //         category_id: parseInt(category),
-    //       },
-    //     }),
-    //   });
-    // });
   };
 
   const getLocationData = async (e) => {
     if (e.target.value.length > 4) {
 
-      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${GEOAPIFY_KEY}`)
+      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`)
       .then(res => {
         console.log('res FROM getCityData REQUEST => ', res);
         setAutocompleteVisible(true);
