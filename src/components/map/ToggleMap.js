@@ -1,20 +1,23 @@
-import React from "react";
+import { useAtomValue } from "jotai";
+// import React from "react";
+ 
+// import { inputDataAtom } from '../../atoms/inputData';
 
 function ToggleMap({ setMapVisib, mapVisib }) {
 
-  const inputData = useAtomValue(inputDataAtom);
+  // const inputData = useAtomValue(inputDataAtom);
 
-  const handleToggle = (e) => {
-    fetch(
-      `https://api.geoapify.com/v1/geocode/search?city=${inputData.city}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        // setMapCenter([data.results[0].lat, data.results[0].lon]);
-        setMapVisib(!mapVisib);
-      })
-      .catch((err) => console.error(err));
-  };
+  // const handleToggle = (e) => {
+  //   fetch(
+  //     `https://api.geoapify.com/v1/geocode/search?city=${inputData.city}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // setMapCenter([data.results[0].lat, data.results[0].lon]);
+  //       setMapVisib(!mapVisib);
+  //     })
+  //     .catch((err) => console.error(err));
+  // };
 
 
   return (
