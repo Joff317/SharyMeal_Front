@@ -32,7 +32,7 @@ function User() {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => {
-          console.log("response DE User.js", response);
+          // console.log("response DE User.js", response);
           return response.json();
         })
         .then((res) => {

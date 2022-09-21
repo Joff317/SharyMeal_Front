@@ -2,7 +2,7 @@ import React from "react";
 import Review from "./Review";
 
 function DisplayReviews({ reviewStatus, reviews }) {
-  console.log(reviews);
+  // console.log(reviews);
   return (
     <div className="mb-8">
       {reviewStatus === "received" && reviews.received.length === 0 && (
@@ -24,8 +24,12 @@ function DisplayReviews({ reviewStatus, reviews }) {
       )}
 
       {reviewStatus === "received"
-        ? reviews.received.map((review, index) => <Review key={index} review={review} showHost />)
-        : reviews.written.map((review, index) => <Review key={index} review={review} />)}
+        ? reviews.received.map((review, index) => (
+            <Review key={index} review={review} showHost />
+          ))
+        : reviews.written.map((review, index) => (
+            <Review key={index} review={review} />
+          ))}
     </div>
   );
 }

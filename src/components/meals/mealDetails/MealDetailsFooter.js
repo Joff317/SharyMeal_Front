@@ -58,7 +58,9 @@ const MealDetailsFooter = ({ meal, setBookingQuantity, bookingQuantity }) => {
           )}
         </div>
         <button className="ml-[50px]" onClick={() => setShowOrderPopup(true)}>
-          <Button showText={true} showIcon={true} icon={<Book/>}>Réserver</Button>
+          <Button showText={true} showIcon={true} icon={<Book />}>
+            Réserver
+          </Button>
         </button>
         {showOrderPopup && (
           <LayoutBlur>

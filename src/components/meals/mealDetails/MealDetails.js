@@ -35,7 +35,6 @@ function MealDetails() {
   const orderConfirmationAtom = useAtomValue(OrderConfirmationAtom);
   const setOrderConfirmationAtom = useSetAtom(OrderConfirmationAtom);
   const token = Cookies.get("token");
-  console.log(hostReviews);
 
   const createAttendance = () => {
     fetch(API + "attendances", {
@@ -54,7 +53,7 @@ function MealDetails() {
         return response.json();
       })
       .then((response) => {
-        console.log("CREATE ATTENDANCE", response);
+        // console.log("CREATE ATTENDANCE", response);
         updateGuestRegisteredCount();
       })
       .catch((error) => console.error(error));
@@ -74,7 +73,6 @@ function MealDetails() {
       }),
     })
       .then((response) => {
-        console.log(response);
         return response.json();
       })
       .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
@@ -120,7 +118,7 @@ function MealDetails() {
 
             <div className="meal-detail-right-container">
               <div className="meal-detail-right-top-container">
-                <MealDetailsTitle  meal={meal} />
+                <MealDetailsTitle meal={meal} />
                 <MealDetailsHost meal={meal} />
               </div>
 
@@ -176,7 +174,7 @@ function MealDetails() {
                   reviews={hostReviews}
                 />
                 <img
-                  alt="review-image"
+                  alt="review"
                   className="w-[40%]"
                   src="https://www.netreviews.com/wp-content/uploads/2021/04/VIsuel-Avis-clients.jpg"
                 />
