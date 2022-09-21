@@ -1,0 +1,41 @@
+.mealcard-container {
+  border-radius: 10px;
+  width: 224px;
+  height: 273px;
+  margin: 10px;
+  padding: 12px;
+  position: relative;
+}
+
+.meal-price-button {
+  background-color: #90ffc4;
+  border-radius: 5px;
+  padding: 3px 6px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.mealcard-image {
+  position: absolute;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 10px;
+  z-index: -10;
+  width: 100%;
+}
+
+.layer-blur {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -9;
+  border-radius: 10px;
+  position: absolute;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+/*# sourceMappingURL=MealCard.css.map */
