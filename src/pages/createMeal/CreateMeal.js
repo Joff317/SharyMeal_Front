@@ -235,7 +235,7 @@ const CreateMeal = () => {
               </div>
               <div className="flex flex-col">
                 <p className="mt-3"> Description </p>
-                <input
+                <textarea
                   className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md  ${errorInput(
                     errors.description
                   )}`}
