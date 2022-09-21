@@ -37,17 +37,17 @@ function Home(props) {
         <div className="flex gap-4 w-full flex-wrap pt-24 justify-evenly absolute top-[320px]">
           <img
             src={image1}
-            alt=""
+            alt="first-img-home"
             className="max-w-[300px] max-h-[350px] object-cover -rotate-12"
           />
           <img
             src={image2}
-            alt=""
+            alt="second-img-home"
             className="max-w-[350px] min-w-[320px] max-h-[350px] object-cover"
           />
           <img
             src={image3}
-            alt=""
+            alt="third-img-home"
             className="max-w-[300px] min-w-[300px] max-h-[350px] object-cover rotate-6"
           />
         </div>
