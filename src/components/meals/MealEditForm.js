@@ -226,13 +226,12 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
         </div>
         <div className="flex flex-col">
           <p className="mt-3"> Description </p>
-          <input
-            className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md  ${errorInput(
+          <textarea
+            className={`border border-grey-border align-center h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md  ${errorInput(
               errors.description
             )}`}
             defaultValue={mealData.description}
             placeholder="Décrivez un peu plus ... ?"
-            type="text"
             {...register("description", errorMessageValues.description)}
           />
           {errorMessage(errors.description)}
@@ -241,9 +240,10 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
           <p className="my-3"> Sélectionnez une ou plusieurs catégories </p>
 
           <div className="flex flex-wrap gap-3">
-            {categories.map((category) => (
-              <div className="flex items-center gap-2">
+            {categories.map((category, index) => (
+              <div key={index} className="flex items-center gap-2">
                 <input
+                  
                   defaultChecked={getCategoryChecked(category.id)}
                   type="checkbox"
                   id={category.id}
@@ -407,9 +407,10 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
         </div>
         <p className="my-3"> Un régime alimentaire particulier ? </p>
         <div className="flex gap-3">
-          {dietType.map((dietT) => (
-            <div className="flex items-center gap-2">
+          {dietType.map((dietT, index) => (
+            <div key={index} className="flex items-center gap-2">
               <input
+                
                 type="checkbox"
                 defaultChecked={getDataChecked(mealData.diet_type, dietT.label)}
                 id={dietT.label}
@@ -429,8 +430,8 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
         </div>
         <p className="my-3"> Des allergies ? </p>
         <div className="flex gap-3">
-          {allergens.map((allergen) => (
-            <div className="flex items-center gap-2">
+          {allergens.map((allergen, index) => (
+            <div key={index} className="flex items-center gap-2">
               <input
                 type="checkbox"
                 defaultChecked={getDataChecked(

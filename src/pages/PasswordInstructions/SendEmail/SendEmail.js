@@ -21,13 +21,13 @@ function SendEmail() {
       body: JSON.stringify({ user: { email: e.target.email.value } }),
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         throw "erreur";
         return response.json();
       })
       .then((res) => {
         setShow(true);
-        console.log(res);
+        // console.log(res);
       })
       .catch((error) => setError(true));
   };
@@ -46,7 +46,9 @@ function SendEmail() {
         />
 
         <button type="submit" className="my-2 flex justify-center">
-          <Button showText={true} showIcon={true} icon={<Arrow />}>Envoyer </Button>
+          <Button showText={true} showIcon={true} icon={<Arrow />}>
+            Envoyer{" "}
+          </Button>
         </button>
       </form>
       {show && <h1 className="font-bold text-xl text-green-500"> Envoyé ! </h1>}

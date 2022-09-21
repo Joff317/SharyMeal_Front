@@ -36,6 +36,7 @@ function MealDetails() {
   const orderConfirmationAtom = useAtomValue(OrderConfirmationAtom);
   const setOrderConfirmationAtom = useSetAtom(OrderConfirmationAtom);
   const token = Cookies.get("token");
+
   // console.log('CURRENT_URL', CURRENT_URL);
   // console.log("MEALID", mealId);
   // console.log(hostReviews);
@@ -75,7 +76,6 @@ function MealDetails() {
     //   })
     //   .catch((error) => console.error(error));
 
-
   };
 
   const updateGuestRegisteredCount = () => {
@@ -106,6 +106,7 @@ function MealDetails() {
     //     return response.json();
     //   })
     //   .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
+
   };
 
   useEffect(() => {
@@ -148,7 +149,7 @@ function MealDetails() {
 
             <div className="meal-detail-right-container">
               <div className="meal-detail-right-top-container">
-                <MealDetailsTitle  meal={meal} />
+                <MealDetailsTitle meal={meal} />
                 <MealDetailsHost meal={meal} />
               </div>
 

@@ -189,7 +189,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
     setEditConfirmVisib(false);
   };
 
-  console.log("userData", userData);
+  // console.log("userData", userData);
   return (
     <div className="profile-container">
       <div className="perso-infos-container">
@@ -292,15 +292,14 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
 
             <div className="flex flex-col">
               <p className="mb-2"> Ma bio </p>
-              <input
+              <textarea
                 placeholder="Que doit-on savoir de toi ?"
                 defaultValue={
                   currentUser.description && `${currentUser.description}`
                 }
-                className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
+                className={`border border-grey-border h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
                   errors.description
                 )}`}
-                type="text"
                 {...register("description", errorMessageValues.description)}
               />
               {errorMessage(errors.description)}
@@ -350,9 +349,9 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
         <div className="tabs-container flex gap-4 border-b border-b-grey-border my-4 w-fit  font-light-font h-[29px]">
           <button
             className={
-              reviewStatus === "written" ?
-              "border-b-4 pb-3 border-green font-book-font"
-              : undefined
+              reviewStatus === "written"
+                ? "border-b-4 pb-3 border-green font-book-font"
+                : undefined
             }
             onClick={() => setReviewStatus("written")}
           >
@@ -362,9 +361,9 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
 
           <button
             className={
-              reviewStatus === "received" ?
-              "border-b-4 pb-3 font-book-font border-green"
-              : undefined
+              reviewStatus === "received"
+                ? "border-b-4 pb-3 font-book-font border-green"
+                : undefined
             }
             onClick={() => setReviewStatus("received")}
           >

@@ -13,8 +13,6 @@ import Button from "../actions/Button";
 import { Link } from "react-router-dom";
 
 function Map({ mapCenter, meals }) {
-  console.log("meals DES PROPS DE MAP :", meals);
-
   const LeafIcon = L.Icon.extend({
     options: {},
   });
@@ -64,7 +62,9 @@ function Map({ mapCenter, meals }) {
                       <img
                         className="w-24 rounded-lg"
                         src={meal.image_urls[0]}
+
                         alt="meal"
+
                       />
                     )}
 

@@ -6,7 +6,9 @@ import SubsectionTitle from "../../titles/SubsectionTitle";
 function MyAttendances({ userData }) {
   const [period, setPeriod] = useState("future");
 
+
   // console.log(userData.guested_meals);
+
 
   return (
     <>
@@ -14,7 +16,9 @@ function MyAttendances({ userData }) {
       <div className="tabs-container flex gap-4 border-b border-b-grey-border mt-4 w-fit  font-light-font h-[29px]">
         <button
           className={
-            period === "future" ? "border-b-4 pb-3 border-green font-book-font" : undefined
+            period === "future"
+              ? "border-b-4 pb-3 border-green font-book-font"
+              : undefined
           }
           onClick={() => setPeriod("future")}
         >
@@ -24,7 +28,9 @@ function MyAttendances({ userData }) {
 
         <button
           className={
-            period === "past" ? "border-b-4 pb-3 font-book-font border-green" : undefined
+            period === "past"
+              ? "border-b-4 pb-3 font-book-font border-green"
+              : undefined
           }
           onClick={() => setPeriod("past")}
         >

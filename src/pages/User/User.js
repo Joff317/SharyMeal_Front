@@ -50,7 +50,6 @@ function User() {
       //     setData(res);
       //   });
 
-
   }, [setData, reducerValue]);
 
   const displayProfile = () => {

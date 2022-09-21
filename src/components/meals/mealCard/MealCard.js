@@ -16,7 +16,13 @@ import { Link } from "react-router-dom";
 import CreateReview from "../../reviews/CreateReview";
 import APIManager from "../../../services/Api";
 
-function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate, showAdditionalInfoReview }) {
+function MealCard({
+  mealData,
+  showAvatar,
+  showAdditionalInfo,
+  forceUpdate,
+  showAdditionalInfoReview,
+}) {
   const token = Cookies.get("token");
   const [showEdit, setShowEdit] = useState();
   const [showReview, setShowReview] = useState();
@@ -94,23 +100,23 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate, showA
         )}
         {showAdditionalInfoReview && (
           <>
-          <div className="absolute top-2 flex flex-col gap-2 z-10">
-            <div
-              onClick={() => setShowReview(true)}
-              className="w-[38px] h-[38px] rounded-full bg-[#5376F1] flex justify-center items-center cursor-pointer"
-            >
-              <Edit />
+            <div className="absolute top-2 flex flex-col gap-2 z-10">
+              <div
+                onClick={() => setShowReview(true)}
+                className="w-[38px] h-[38px] rounded-full bg-[#5376F1] flex justify-center items-center cursor-pointer"
+              >
+                <Edit />
+              </div>
             </div>
-          </div>
-          {showReview && (
-            <LayoutBlur>
-              <CreateReview
-                mealData={mealData}
-                setShowReview={setShowReview}
-                forceUpdate={forceUpdate}
-              />
-            </LayoutBlur>
-          )}{" "}
+            {showReview && (
+              <LayoutBlur>
+                <CreateReview
+                  mealData={mealData}
+                  setShowReview={setShowReview}
+                  forceUpdate={forceUpdate}
+                />
+              </LayoutBlur>
+            )}{" "}
           </>
         )}
         <p className="text-white">{mealData.location.city}</p>

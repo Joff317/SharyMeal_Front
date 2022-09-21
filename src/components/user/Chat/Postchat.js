@@ -77,7 +77,7 @@ const PostChat = ({ forceUpdate, recipient_id }) => {
           className={`border border-grey h-10 pl-6 rounded-full w-full  ${errorInput(
             errors.content
           )}`}
-          autoFocus="true"
+          autoFocus={true}
           id="toDelete"
           type="text"
           size={10}

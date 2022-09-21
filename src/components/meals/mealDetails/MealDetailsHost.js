@@ -17,7 +17,10 @@ const MealDetailsHost = ({ meal }) => {
       <div className="user">
         <UserBlack />
         <p className="font-light-font text-md">
-          <Link to={`/users/${meal.host.id}`}> {meal.host.name ? meal.host.name : meal.host.email} </Link>
+          <Link to={`/users/${meal.host.id}`}>
+            {" "}
+            {meal.host.name ? meal.host.name : meal.host.email}{" "}
+          </Link>
         </p>
       </div>
       <div className="date">
