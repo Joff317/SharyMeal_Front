@@ -1,6 +1,7 @@
 export let API;
 export let CURRENT_URL;
 
+
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   // dev code
   API = "http://localhost:3000/";

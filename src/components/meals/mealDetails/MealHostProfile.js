@@ -4,7 +4,6 @@ import SectionTitle from "../../titles/SectionTitle";
 import SubsectionTitle from "../../titles/SubsectionTitle";
 import "./MealHostProfile.scss";
 import avatarDefault from "../../../assets/images/avatardefault.png";
-import MyHostedMeals from "../../user/MyHostedMeals";
 import { useNavigate } from "react-router-dom";
 import Arrow from "../../../icons/Arrow";
 import LayoutBlur from "../../layout/LayoutBlur/LayoutBlur";

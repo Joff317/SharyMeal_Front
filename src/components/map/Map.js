@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import * as L from "leaflet";
 import "./Map.css";
@@ -62,7 +62,9 @@ function Map({ mapCenter, meals }) {
                       <img
                         className="w-24 rounded-lg"
                         src={meal.image_urls[0]}
-                        alt="img"
+
+                        alt="meal"
+
                       />
                     )}
 

@@ -1,6 +1,5 @@
 import React from "react";
 import "./MealDetailsTitle.scss";
-import MealPrice from "../mealCard/MealPrice";
 
 const MealDetailsTitle = ({ meal }) => {
   return (

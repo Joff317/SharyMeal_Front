@@ -1,0 +1,3 @@
+window.env = {
+  "REACT_APP_GEOAPIFY_KEY": "9aa5158850824f25b76a238e1d875cc8"
+};
