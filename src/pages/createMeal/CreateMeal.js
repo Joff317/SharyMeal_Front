@@ -21,6 +21,9 @@ import { useNavigate } from "react-router-dom";
 import LayoutBlur from "../../components/layout/LayoutBlur/LayoutBlur";
 import JSConfetti from "js-confetti";
 import { ErrorMessage } from '@hookform/error-message';
+import Arrow from "../../icons/Arrow";
+import ArrowLeft from "../../icons/ArrowLeft";
+import Check from "../../icons/Check";
 
 const CreateMeal = () => {
   const token = Cookies.get("token");
@@ -277,7 +280,7 @@ const CreateMeal = () => {
                 </div>
               </div>
               <span onClick={() => gotoNextStep("secondStep", "title")}>
-                <Button showText={true}> Suivant </Button>
+                <Button showText={true} showIcon={true} icon={<Arrow/>}> Suivant </Button>
               </span>
               
             </>
@@ -366,10 +369,10 @@ const CreateMeal = () => {
 
               <div className="flex mt-6 gap-4">
                 <span onClick={() => gotoPreviousStep("firstStep")}>
-                  <Button showText={true}> Précedent </Button>
+                  <Button showText={true} showIconLeft={true} icon={<ArrowLeft/>}> Précedent </Button>
                 </span>
                 <span onClick={() => gotoNextStep("thirdStep")}>
-                  <Button showText={true}> Suivant </Button>
+                  <Button showText={true} showIcon={true} icon={<Arrow/>}> Suivant </Button>
                 </span>
               </div>
             </>
@@ -467,10 +470,10 @@ const CreateMeal = () => {
               </div>
               <div className="flex items-center gap-4 mt-8">
                 <span onClick={() => gotoPreviousStep("secondStep")}>
-                  <Button showText={true}> Précedent </Button>
+                  <Button showText={true} showIconLeft={true} icon={<ArrowLeft/>}> Précedent </Button>
                 </span>
                 <span onClick={() => gotoNextStep("fourthStep")}>
-                  <Button showText={true}> Suivant </Button>
+                  <Button showText={true} showIcon={true} icon={<Arrow/>}> Suivant </Button>
                 </span>
               </div>
             </>
@@ -493,13 +496,13 @@ const CreateMeal = () => {
 
               <div className="flex items-center gap-4 mt-8">
                 <span onClick={() => gotoPreviousStep("thirdStep")}>
-                  <Button showText={true}> Précedent </Button>
+                  <Button showText={true} showIconLeft={true} icon={<ArrowLeft/>}> Précedent </Button>
               </span>
 
 
                 
               <button type="submit" className="my-2 flex justify-center">
-                <Button showText={true}>Créer un repas</Button>
+                <Button showText={true} showIcon={true} icon={<Check/>}>Créer un repas</Button>
               </button>
 
               

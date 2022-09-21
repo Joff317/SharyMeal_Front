@@ -9,6 +9,7 @@ import { API } from "../../../utils/variables";
 import SectionTitle from "../../titles/SectionTitle";
 import Button from "../../actions/Button";
 import Close from "../../../icons/Close";
+import Arrow from "../../../icons/Arrow";
 
 function FormLogin({
   setLoginPopup,
@@ -84,7 +85,7 @@ function FormLogin({
           Mot de passe oublié ?{" "}
         </Link>
         <button type="submit" className="my-2 flex justify-center">
-          <Button showText={true}>Se connecter</Button>
+          <Button showText={true} showIcon={true} icon={<Arrow/>}>Se connecter</Button>
         </button>
         {!loginResult && (
           <p className="bg-red text-white text-center rounded p-2">
