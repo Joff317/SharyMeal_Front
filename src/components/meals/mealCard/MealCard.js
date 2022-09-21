@@ -67,8 +67,8 @@ function MealCard({
   return (
     <div
       key={mealData.id}
-      className={`mealcard-container flex flex-col opacity-100 justify-end gap-1 ${
-        launchAnimation && "slide"
+      className={`mealcard-container flex flex-col opacity-100 justify-end  gap-1 ${
+        launchAnimation && !showAdditionalInfo && "slide"
       } `}
     >
       {showAdditionalInfo && (
