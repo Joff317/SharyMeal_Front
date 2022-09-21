@@ -10,7 +10,7 @@ import {
 } from "../../icons/Stars";
 
 function Review({ review, showHost }) {
-  console.log("one review", review);
+  // console.log("one review", review);
 
   function dataParsed(date) {
     return new Date(date).toLocaleDateString("fr-FR", {

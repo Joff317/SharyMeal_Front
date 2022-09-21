@@ -13,7 +13,6 @@ import image2 from "../../assets/images/imagehome2.jpeg";
 import image3 from "../../assets/images/imagehome3.jpeg";
 import InputGeoloc from "../../components/geolocation/InputGeoloc";
 
-
 function Home(props) {
   const loggedd = useAtomValue(loggedAtom);
 
@@ -56,8 +55,6 @@ function Home(props) {
       <div className="w-full h-5 mt-[250px]" id="titleScroll"></div>
 
       <MealsIndex />
-   
-   
     </div>
   );
 }

@@ -11,7 +11,6 @@ function ToggleMap({ setMapVisib, mapVisib }) {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log("data DE TOGGLE MAP : ", data);
         // setMapCenter([data.results[0].lat, data.results[0].lon]);
         setMapVisib(!mapVisib);
       })

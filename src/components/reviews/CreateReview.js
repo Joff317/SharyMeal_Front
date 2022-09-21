@@ -12,7 +12,7 @@ import {
 import SectionTitle from "../titles/SectionTitle";
 
 function CreateReview({ setShowReview, mealData }) {
-//   console.log(mealData);
+  //   console.log(mealData);
   const token = Cookies.get("token");
 
   const {
@@ -37,10 +37,7 @@ function CreateReview({ setShowReview, mealData }) {
       }),
     })
       .then((res) => res.json())
-      .then(() => (
-        setShowReview(false)
-        ))
-      
+      .then(() => setShowReview(false));
   };
 
   return (
