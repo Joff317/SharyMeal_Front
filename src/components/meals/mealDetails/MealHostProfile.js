@@ -6,6 +6,7 @@ import "./MealHostProfile.scss";
 import avatarDefault from "../../../assets/images/avatardefault.png";
 import MyHostedMeals from "../../user/MyHostedMeals";
 import { useNavigate } from "react-router-dom";
+import Arrow from "../../../icons/Arrow";
 
 const MealHostProfile = ({ meal, hostedMeals, hostAvatar }) => {
   const navigate = useNavigate()
@@ -59,7 +60,7 @@ const MealHostProfile = ({ meal, hostedMeals, hostAvatar }) => {
 
             <div className="bottom-container">
               <span onClick={() => navigate(`/users/${meal.host.id}`)}>
-                <Button showText={true}>Voir le profil</Button>
+                <Button showText={true} showIcon={true} icon={<Arrow/>}>Voir le profil</Button>
               </span>
               <p className="contact">Contacter l'hôte</p>
             </div>

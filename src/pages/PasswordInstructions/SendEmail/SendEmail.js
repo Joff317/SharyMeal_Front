@@ -3,6 +3,7 @@ import { API } from "../../../utils/variables";
 import SectionTitle from "../../../components/titles/SectionTitle";
 import Button from "../../../components/actions/Button";
 import Close from "../../../icons/Close";
+import Arrow from "../../../icons/Arrow";
 
 function SendEmail() {
   const [show, setShow] = useState(false);
@@ -45,7 +46,7 @@ function SendEmail() {
         />
 
         <button type="submit" className="my-2 flex justify-center">
-          <Button showText={true}>Envoyer </Button>
+          <Button showText={true} showIcon={true} icon={<Arrow />}>Envoyer </Button>
         </button>
       </form>
       {show && <h1 className="font-bold text-xl text-green-500"> Envoyé ! </h1>}

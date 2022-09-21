@@ -16,6 +16,7 @@ import { useAtom, useSetAtom } from "jotai";
 import { currentuserAtom } from "../../../atoms/loggedAtom";
 import AvatarForm from "../AvatarForm";
 import DisplayReviews from "../../reviews/DisplayReviews";
+import Check from "../../../icons/Check";
 
 function MyProfile({ currentUser, setCurrentUser, userData }) {
   const token = Cookies.get("token");

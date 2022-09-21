@@ -10,6 +10,7 @@ import "./About.scss";
 import SectionTitle from "../../components/titles/SectionTitle";
 import SubsectionTitle from "../../components/titles/SubsectionTitle";
 import { useNavigate } from "react-router-dom";
+import Arrow from "../../icons/Arrow";
 
 function About(props) {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function About(props) {
             modi, repellat ipsam.
           </p>
           <button onClick={() => navigate("/create-meal")}>
-            <Button showText={true}>Commencer</Button>
+            <Button showText={true} showIcon={true} icon={<Arrow/>}>Commencer</Button>
           </button>
         </div>
         <div className="top-container-right">
@@ -158,7 +159,7 @@ function About(props) {
         </div>
 
         <span className="bottom-button" onClick={() => navigate("/create-meal")}>
-          <Button showText={true}>Lancez-vous</Button>
+          <Button showText={true} showIcon={true} icon={<Arrow/>}>Lancez-vous !</Button>
         </span>
       </div>
     </div>

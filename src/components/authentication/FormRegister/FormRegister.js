@@ -10,6 +10,7 @@ import Close from "../../../icons/Close";
 import React, { useState } from "react";
 import SectionTitle from "../../titles/SectionTitle";
 import './FormRegister.scss'
+import Arrow from "../../../icons/Arrow";
 
 function FormRegister({
   setRegisterPopup,
@@ -91,7 +92,7 @@ function FormRegister({
           </div>
          </div>
         <button type="submit" className="my-2 flex justify-center">
-          <Button showText={true}>Créer mon compte</Button>
+          <Button showText={true} showIcon={true} icon={<Arrow/>}>Créer mon compte</Button>
         </button>
 
         {
