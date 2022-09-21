@@ -16,7 +16,6 @@ import { useAtom, useSetAtom } from "jotai";
 import { currentuserAtom } from "../../../atoms/loggedAtom";
 import AvatarForm from "../AvatarForm";
 import DisplayReviews from "../../reviews/DisplayReviews";
-import Check from "../../../icons/Check";
 
 function MyProfile({ currentUser, setCurrentUser, userData }) {
   const token = Cookies.get("token");
@@ -282,8 +281,9 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
         <div className="tabs-container flex gap-4 border-b border-b-grey-border my-4 w-fit  font-light-font h-[29px]">
           <button
             className={
-              reviewStatus === "written" &&
+              reviewStatus === "written" ?
               "border-b-4 pb-3 border-green font-book-font"
+              : undefined
             }
             onClick={() => setReviewStatus("written")}
           >
@@ -293,8 +293,9 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
 
           <button
             className={
-              reviewStatus === "received" &&
+              reviewStatus === "received" ?
               "border-b-4 pb-3 font-book-font border-green"
+              : undefined
             }
             onClick={() => setReviewStatus("received")}
           >

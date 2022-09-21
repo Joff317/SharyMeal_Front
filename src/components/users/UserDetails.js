@@ -22,10 +22,10 @@ const UserDetails = () => {
     <>
       {user && (
         <div className="user-container">
-          <div class="card-container">
-            <span class="pro">Host</span>
+          <div className="card-container">
+            <span className="pro">Host</span>
             <img
-              class="round"
+              className="round"
               src='https://randomuser.me/api/portraits/women/79.jpg'
               alt="user"
             />
@@ -37,7 +37,7 @@ const UserDetails = () => {
             <p>
               {user.description}
             </p>
-            <div class="buttons">
+            <div className="buttons">
               <button>
                  <Button showText={true}>
                  Message
@@ -49,7 +49,7 @@ const UserDetails = () => {
                    </Button>
                 </button>
             </div>
-            <div class="skills">
+            <div className="skills">
               <h6>Info</h6>
               <ul>
                 <li>{user.gender}</li>
