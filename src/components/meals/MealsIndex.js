@@ -15,6 +15,7 @@ import Lottie from "react-lottie";
 import * as noResult from "../../lotties/noresult.json";
 import Map from "../map/Map";
 import ToggleMap from "../map/ToggleMap";
+import APIManager from "../../services/Api";
 
 function MealIndex() {
   const [mealsIndex, setMealsIndex] = useState(null);
@@ -37,14 +38,24 @@ function MealIndex() {
   };
 
   useEffect(() => {
-    fetch(API + "meals")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("MEALINDEX", data);
-        setMealsIndex(data);
-      });
+    const result = APIManager.get("meals")
+    
+      .then(res => {
+        console.log('res FROM GET REQUEST => ', res)
+        setMealsIndex(res);
+      })
+      .catch(error => console.log('error from GET REQUEST =>', error.message));
+      
+    // fetch(API + "meals")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log("MEALINDEX", data);
+    //     setMealsIndex(data);
+    //   });
 
     setInputData({ ...inputData, date: "" });
+
+
   }, []);
 
   const filteringRender = (data) => {

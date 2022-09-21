@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import LayoutBlur from "../../components/layout/LayoutBlur/LayoutBlur";
 import JSConfetti from "js-confetti";
 import { ErrorMessage } from '@hookform/error-message';
+import APIManager from "../../services/Api";
 
 const CreateMeal = () => {
   const token = Cookies.get("token");
@@ -50,7 +51,7 @@ const CreateMeal = () => {
   const jsConfetti = new JSConfetti();
 
   const isDataValid = (data) => {
-    console.log('data isDataValid', data);
+    // console.log('data isDataValid', data);
     
     return (  data.title.length >=3 &&
               data.description.length >= 10 &&
@@ -73,50 +74,62 @@ const CreateMeal = () => {
     setFormData(data);
     if (isDataValid(data)){ 
 
-              console.log("data", data)
-              const imagesUrl = new FormData();
-              for (let i = 0; i < data.image_urls.length; i++) {
-                imagesUrl.append("meal[images][]", data.image_urls[i]);
-              }
+      // console.log("data", data)
+      const imagesUrl = new FormData();
+      for (let i = 0; i < data.image_urls.length; i++) {
+        imagesUrl.append("meal[images][]", data.image_urls[i]);
+      }
 
-              fetch(API + "meals", {
-                method: "POST",
-                headers: {
-                  "Content-type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                  meal: {
-                    title: data.title,
-                    description: data.description,
-                    price: data.price,
-                    location: {
-                      city: cityInfo.city,
-                      lat: cityInfo.lat,
-                      lon: cityInfo.lon,
-                      address: cityInfo.formatted,
-                    },
-                    guest_capacity: data.guest_capacity,
-                    starting_date: startDate,
-                    animals: data.animals,
-                    alcool: data.alcool,
-                    doggybag: data.doggybag,
-                    diet_type: data.dietType,
-                    allergens: data.allergens,
-                  },
-                }),
-              })
-                .then((response) => {
-                  return response.json();
-                })
-                .then((res) => {
-                  console.log(res);
-                  postCategoriesInfo(data.categories, res.id);
-                  data.image_urls.length !== 0 && postImages(res.id, imagesUrl);
-                  setMealId(res.id);
-                  jsConfetti.addConfetti();
-                  setShowConfirmation(true);
-                });}
+      // APIManager.createMeal(data, cityInfo, startDate)
+      // .then(res => {
+      //   console.log('res FROM CREATE MEAL REQUEST => ', res)
+      //   postCategoriesInfo(data.categories, res.id);
+      //   data.image_urls.length !== 0 && postImages(res.id, imagesUrl);
+      //   setMealId(res.id);
+      //   jsConfetti.addConfetti();
+      //   setShowConfirmation(true);
+      // })
+      // .catch(error => console.log('error FROM CREATE MEAL REQUEST =>', error.message));
+
+      // fetch(API + "meals", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-type": "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      //   body: JSON.stringify({
+      //     meal: {
+      //       title: data.title,
+      //       description: data.description,
+      //       price: data.price,
+      //       location: {
+      //         city: cityInfo.city,
+      //         lat: cityInfo.lat,
+      //         lon: cityInfo.lon,
+      //         address: cityInfo.formatted,
+      //       },
+      //       guest_capacity: data.guest_capacity,
+      //       starting_date: startDate,
+      //       animals: data.animals,
+      //       alcool: data.alcool,
+      //       doggybag: data.doggybag,
+      //       diet_type: data.dietType,
+      //       allergens: data.allergens,
+      //     },
+      //   }),
+      // })
+      //   .then((response) => {
+      //     return response.json();
+      //   })
+      //   .then((res) => {
+      //     console.log(res);
+      //     postCategoriesInfo(data.categories, res.id);
+      //     data.image_urls.length !== 0 && postImages(res.id, imagesUrl);
+      //     setMealId(res.id);
+      //     jsConfetti.addConfetti();
+      //     setShowConfirmation(true);
+      //   });
+      }
 
     else {
       return (
@@ -150,7 +163,7 @@ const CreateMeal = () => {
     };
     fetch(API + `meals/${mealId}`, requestOptions)
       .then((response) => response.json())
-      .then((res) => console.log(res));
+      // .then((res) => console.log(res));
   };
 
   const getData = (e) => {
