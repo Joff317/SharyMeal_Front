@@ -1,30 +1,33 @@
-import React from 'react';
+import React from "react";
+import Review from "./Review";
 
-function DisplayReviews({reviewStatus, reviews}) {
-    return (
-        <div>
-            Reviews {reviewStatus}
+function DisplayReviews({ reviewStatus, reviews }) {
+  console.log(reviews);
+  return (
+    <div className="mb-8">
+      {reviewStatus === "received" && reviews.received.length === 0 && (
+        <p className=" mt-2 font-book-font">
+          {" "}
+          Vous n'avez pas encore écrit d'avis.
+          <br />
+          Pour écrire un avis sur un hôte, vous devez avoir participé à son
+          repas et que ce dernier sois passé. <br /> Vous retrouverez vos repas
+          passés dans "Mes réservations", onglet "Réservations passées"
+        </p>
+      )}
 
-            {
-                
-                reviewStatus === "received" ?
-                    reviews.received.map(review => (
-                      <div className="review">
-                          <span>{review.content}</span>
-                          <span>{review.rating}</span>
-                      </div>
-                    ))
-                    :
-                    reviews.written.map(review => (
-                        <div className="review">
-                          <span>{review.content}</span>
-                          <span>{review.rating}</span>
-                      </div>
-                    ))
+      {reviewStatus === "written" && reviews.written.length === 0 && (
+        <p className=" mt-2 font-book-font">
+          {" "}
+          Vous n'avez pas encore recues d'avis.
+        </p>
+      )}
 
-            }
-        </div>
-    );
+      {reviewStatus === "received"
+        ? reviews.received.map((review) => <Review review={review} showHost />)
+        : reviews.written.map((review) => <Review review={review} />)}
+    </div>
+  );
 }
 
 export default DisplayReviews;
