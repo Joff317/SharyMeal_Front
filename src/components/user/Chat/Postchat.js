@@ -68,7 +68,7 @@ const PostChat = ({ forceUpdate, recipient_id }) => {
         />
         {errorMessage(errors.content)}
         <button
-          className="py-2 px-4 h-fit text-sm rounded-full text-white bg-green"
+          className="py-2 px-4 h-fit text-black text-sm rounded-full text-white bg-pink"
           type="submit"
         >
           {" "}

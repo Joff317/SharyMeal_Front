@@ -55,10 +55,10 @@ function DetailMessage({ currentChatterId }) {
                 <>
                   <p className="text-black p-3 bg-green_light  text-sm self-end rounded-lg w-max max-w-sm">
                     {" "}
-                    Moi: {message.content}
+                    {message.content}
                   </p>
 
-                  <p className="self-end mt-[-2px] mb-2 text-xs text-black font-light text-grey">
+                  <p className="self-end mt-[-2px] mb-2 text-xs text-black font-light-font text-grey">
                     {" "}
                     {dataParsed(message.created_at)}{" "}
                   </p>
@@ -70,7 +70,7 @@ function DetailMessage({ currentChatterId }) {
                     {message.content}
                   </p>
 
-                  <p className="mt-[-2px] mb-2 text-xs font-light text-grey">
+                  <p className="mt-[-2px] mb-2 text-xs font-light-font text-grey">
                     {" "}
                     {dataParsed(message.created_at)}{" "}
                   </p>
