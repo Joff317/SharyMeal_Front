@@ -1,9 +1,6 @@
 .meals-detail-host{
-   border: 1px solid black;
-   width: 100%;
-   background: var(--black);
-   display: flex;
-   padding: 40px 0px 20px 80px;
+   max-width: 1500px;
+   margin: 0 auto;
 
 
    .host-container{
