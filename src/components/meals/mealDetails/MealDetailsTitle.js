@@ -13,8 +13,8 @@ const MealDetailsTitle = ({ meal }) => {
       </div>
       <div className="category">
         <p>Categories :</p>
-        {meal.categories.map((cat) => (
-          <p className="categories">
+        {meal.categories.map((cat, index) => (
+          <p className="categories" key = {index}>
             {meal.categories.indexOf(cat) !== meal.categories.length - 1
               ? `${cat.label},`
               : cat.label}
