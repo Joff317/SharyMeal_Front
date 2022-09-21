@@ -49,8 +49,8 @@ function Map({ mapCenter, meals }) {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
-          {meals.map((meal) => (
-            <div>
+          {meals.map((meal, index) => (
+            <div key={index}>
               <Marker
                 position={[meal.location.lat, meal.location.lon]}
                 icon={icon}
