@@ -62,9 +62,9 @@ function MealIndex() {
   const filteringRender = (data) => {
     const results = data
       .filter((meal) =>
-        categoriesArray.length >= 1
+       ( categoriesArray.length >= 1
           ? meal.categories.some((cat) => categoriesArray.includes(cat.label))
-          : mealsIndex
+          : mealsIndex )
       )
       .filter((meal) =>
         inputData && inputData.city !== ""
@@ -82,8 +82,8 @@ function MealIndex() {
     if (results.length > 0) {
       return !mapVisib ? (
         <div id="meals-index-container">
-          {results.map((meal) => (
-            <MealCard mealData={meal} showAvatar={true} />
+          {results.map((meal, index) => (
+            <MealCard key={index} mealData={meal} showAvatar={true} />
           ))}
         </div>
       ) : (
@@ -107,8 +107,9 @@ function MealIndex() {
         <span className="bg-green"> {inputData ? inputData.city : "you"} </span>
       </SectionTitle>
       <div className={`flex gap-10 my-10 border-b border-grey-border pb-3`}>
-        {categories.map((category) => (
-          <CategoryItem
+        {categories.map((category, index) => (
+          <CategoryItem 
+            key={index}
             setCategoriesArray={setCategoriesArray}
             categoriesArray={categoriesArray}
             label={category.label}

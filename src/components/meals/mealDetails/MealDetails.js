@@ -21,11 +21,13 @@ import JSConfetti from "js-confetti";
 import Cookies from "js-cookie";
 import { CURRENT_URL } from "../../../utils/variables";
 import APIManager from "../../../services/Api";
+import DisplayReviews from "../../reviews/DisplayReviews";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
   const [hostedMeals, setHostedMeals] = useState();
   const [hostAvatar, setHostavatar] = useState();
+  const [hostReviews, setHostReviews] = useState();
   const [bookingQuantity, setBookingQuantity] = useState(1);
   const currentUserAtom = useAtomValue(currentuserAtom);
   const mealId = useParams().mealId;
@@ -36,6 +38,7 @@ function MealDetails() {
   const token = Cookies.get("token");
   // console.log('CURRENT_URL', CURRENT_URL);
   // console.log("MEALID", mealId);
+  // console.log(hostReviews);
 
   const createAttendance = async () => {
 
@@ -98,6 +101,7 @@ function MealDetails() {
         setMeal(data.meal);
         setHostedMeals(data.hosted_meals);
         setHostavatar(data.host_avatar);
+        setHostReviews(data.host_reviews);
         document.documentElement.scrollTop = 0;
       });
   }, []);
@@ -130,7 +134,7 @@ function MealDetails() {
 
             <div className="meal-detail-right-container">
               <div className="meal-detail-right-top-container">
-                <MealDetailsTitle meal={meal} />
+                <MealDetailsTitle  meal={meal} />
                 <MealDetailsHost meal={meal} />
               </div>
 
@@ -168,11 +172,32 @@ function MealDetails() {
             </div>
           </div>
 
-          <MealHostProfile
-            meal={meal}
-            hostedMeals={hostedMeals}
-            hostAvatar={hostAvatar}
-          />
+          <div className="bg-black py-8 px-10">
+            <MealHostProfile
+              meal={meal}
+              hostedMeals={hostedMeals}
+              hostAvatar={hostAvatar}
+            />
+          </div>
+
+          {hostReviews.length !== 0 && (
+            <div className="pt-8 px-10 my-0 mx-auto max-w-[1500px]">
+              <SectionTitle> Reviews </SectionTitle>
+              <br />
+              <div className="flex items-start justify-between">
+                <DisplayReviews
+                  reviewStatus={"received"}
+                  reviews={hostReviews}
+                />
+                <img
+                  alt="review"
+                  className="w-[40%]"
+                  src="https://www.netreviews.com/wp-content/uploads/2021/04/VIsuel-Avis-clients.jpg"
+                />
+              </div>
+            </div>
+          )}
+
           {currentUserAtom.id !== meal.host.id && (
             <MealDetailsFooter
               meal={meal}

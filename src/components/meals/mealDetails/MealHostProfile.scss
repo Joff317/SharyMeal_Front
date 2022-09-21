@@ -1,9 +1,6 @@
 .meals-detail-host{
-   border: 1px solid black;
-   width: 100%;
-   background: var(--black);
-   display: flex;
-   padding: 40px 0px 20px 80px;
+   max-width: 1500px;
+   margin: 0 auto;
 
 
    .host-container{
@@ -100,6 +97,7 @@
          flex-direction: row;
          align-items: center;
          padding: 30px;
+         gap: 30px;
 
          @media   (max-width: 1150px){
             flex-direction: column;
@@ -107,13 +105,9 @@
             gap: 10px
          }
 
-         span{
-            width: 150px;
-         }
 
          .contact{
             color: var(--pink);
-            text-decoration: underline;
          }
       }
    }

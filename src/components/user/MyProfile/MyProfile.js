@@ -16,6 +16,7 @@ import { useAtom, useSetAtom } from "jotai";
 import { currentuserAtom } from "../../../atoms/loggedAtom";
 import AvatarForm from "../AvatarForm";
 import DisplayReviews from "../../reviews/DisplayReviews";
+import Check from "../../../icons/Check";
 
 function MyProfile({ currentUser, setCurrentUser, userData }) {
   const token = Cookies.get("token");
@@ -25,7 +26,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
   const [editConfirmVisib, setEditConfirmVisib] = useState(false);
   const [editErrorVisib, setEditErrorVisib] = useState(false);
   const [currentUserAtom, setCurrentUserAtom] = useAtom(currentuserAtom);
-  const [ reviewStatus, setReviewStatus ] = useState("received");
+  const [reviewStatus, setReviewStatus] = useState("received");
 
   const {
     register,
@@ -120,7 +121,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
     setEditConfirmVisib(false);
   };
 
-  console.log('userData', userData)
+  console.log("userData", userData);
   return (
     <div className="profile-container">
       <div className="perso-infos-container">
@@ -277,21 +278,35 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
         <br />
         <br />
         <SubsectionTitle> Mes reviews </SubsectionTitle>
-        
-        <div className='tabs-container flex'>
 
-            <div className={reviewStatus === "written" && "bg-green text-white"}>
-                <button onClick={() => setReviewStatus('written')}> Reviews écrites </button>
-            </div>
+        <div className="tabs-container flex gap-4 border-b border-b-grey-border my-4 w-fit  font-light-font h-[29px]">
+          <button
+            className={
+              reviewStatus === "written" &&
+              "border-b-4 pb-3 border-green font-book-font"
+            }
+            onClick={() => setReviewStatus("written")}
+          >
+            {" "}
+            Reviews recues
+          </button>
 
-            <div className={reviewStatus === "received" && "bg-green text-white"}>
-                <button onClick={() => setReviewStatus('received')}> Reviews reçues </button>
-            </div>
-
+          <button
+            className={
+              reviewStatus === "received" &&
+              "border-b-4 pb-3 font-book-font border-green"
+            }
+            onClick={() => setReviewStatus("received")}
+          >
+            {" "}
+            Reviews écrites
+          </button>
         </div>
-         
-        <DisplayReviews reviewStatus={reviewStatus} reviews={userData.reviews}/>
 
+        <DisplayReviews
+          reviewStatus={reviewStatus}
+          reviews={userData.reviews}
+        />
       </div>
     </div>
   );

@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../actions/Button";
 import SectionTitle from "../../titles/SectionTitle";
 import SubsectionTitle from "../../titles/SubsectionTitle";
 import "./MealHostProfile.scss";
 import avatarDefault from "../../../assets/images/avatardefault.png";
 import { useNavigate } from "react-router-dom";
+import Arrow from "../../../icons/Arrow";
+import LayoutBlur from "../../layout/LayoutBlur/LayoutBlur";
+import SendMessage from "./SendMessage";
+import { useAtomValue } from "jotai";
+import { currentuserAtom } from "../../../atoms/loggedAtom";
 
 const MealHostProfile = ({ meal, hostedMeals, hostAvatar }) => {
-  const navigate = useNavigate()
+  const [showMessage, setShowMessage] = useState(false);
+  const currentUser = useAtomValue(currentuserAtom);
+
+  const navigate = useNavigate();
   return (
     <div className="meals-detail-host">
       <div className="host-container">
@@ -58,9 +66,28 @@ const MealHostProfile = ({ meal, hostedMeals, hostAvatar }) => {
 
             <div className="bottom-container">
               <span onClick={() => navigate(`/users/${meal.host.id}`)}>
-                <Button showText={true}>Voir le profil</Button>
+                <Button showText={true} showIcon={true} icon={<Arrow />}>
+                  Voir le profil
+                </Button>
               </span>
-              <p className="contact">Contacter l'hôte</p>
+
+              {currentUser.id !== meal.host.id && (
+                <p
+                  onClick={() => setShowMessage(true)}
+                  className="contact cursor-pointer hover:underline"
+                >
+                  Contacter l'hôte
+                </p>
+              )}
+
+              {showMessage && (
+                <LayoutBlur>
+                  <SendMessage
+                    setShowMessage={setShowMessage}
+                    host={meal.host}
+                  />
+                </LayoutBlur>
+              )}
             </div>
           </div>
         </div>

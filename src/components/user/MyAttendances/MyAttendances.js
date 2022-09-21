@@ -1,28 +1,41 @@
-import React, { useState } from 'react';
-import DisplayAttendances from './DisplayAttendances';
+import React, { useState } from "react";
+import DisplayAttendances from "./DisplayAttendances";
+import SectionTitle from "../../titles/SectionTitle";
+import SubsectionTitle from "../../titles/SubsectionTitle";
 
-function MyAttendances({userData}) {
-    
-    const [ period, setPeriod ] = useState('future');
+function MyAttendances({ userData }) {
+  const [period, setPeriod] = useState("future");
 
-    return (
-        <>
-        <div className='tabs-container flex'>
+  console.log(userData.guested_meals);
 
-            <div className={period === "future" && "bg-green text-white"}>
-                <button onClick={() => setPeriod('future')}> Réservations futures </button>
-            </div>
+  return (
+    <>
+      <SubsectionTitle> Vos réservations </SubsectionTitle>
+      <div className="tabs-container flex gap-4 border-b border-b-grey-border mt-4 w-fit  font-light-font h-[29px]">
+        <button
+          className={
+            period === "future" && "border-b-4 pb-3 border-green font-book-font"
+          }
+          onClick={() => setPeriod("future")}
+        >
+          {" "}
+          Réservations futures{" "}
+        </button>
 
-            <div className={period === "past" && "bg-green text-white"}>
-                <button onClick={() => setPeriod('past')}> Réservations passées </button>
-            </div>
+        <button
+          className={
+            period === "past" && "border-b-4 pb-3 font-book-font border-green"
+          }
+          onClick={() => setPeriod("past")}
+        >
+          {" "}
+          Réservations passées{" "}
+        </button>
+      </div>
 
-        </div>
-         
-        <DisplayAttendances period={period} meals={userData.guested_meals}/>
-        
-        </>
-    );
+      <DisplayAttendances period={period} meals={userData.guested_meals} />
+    </>
+  );
 }
 
 export default MyAttendances;

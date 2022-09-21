@@ -23,6 +23,10 @@ import JSConfetti from "js-confetti";
 // import { ErrorMessage } from '@hookform/error-message';
 import APIManager from "../../services/Api";
 import { GEOAPIFY_KEY } from "../../utils/variables";
+import { ErrorMessage } from '@hookform/error-message';
+import Arrow from "../../icons/Arrow";
+import ArrowLeft from "../../icons/ArrowLeft";
+import Check from "../../icons/Check";
 
 const CreateMeal = () => {
   const token = Cookies.get("token");
@@ -230,8 +234,8 @@ const CreateMeal = () => {
                 </p>
 
                 <div className="flex flex-wrap gap-3">
-                  {categories.map((category) => (
-                    <div className="flex items-center gap-2">
+                  {categories.map((category, index) => (
+                    <div key={index} className="flex items-center gap-2">
                       <input
                         type="checkbox"
                         id={category.id}
@@ -251,7 +255,7 @@ const CreateMeal = () => {
                 </div>
               </div>
               <span onClick={() => gotoNextStep("secondStep", "title")}>
-                <Button showText={true}> Suivant </Button>
+                <Button showText={true} showIcon={true} icon={<Arrow/>}> Suivant </Button>
               </span>
               
             </>
@@ -314,8 +318,9 @@ const CreateMeal = () => {
                   <div className="border border-slate-500 rounded-xl p-3 absolute top-20 z-10 bg-white">
                     {" "}
                     {autocomplete &&
-                      autocomplete.results.map((res) => (
+                      autocomplete.results.map((res, index) => (
                         <Autocompletion
+                          key={index}
                           res={res}
                           setCityInfo={setCityInfo}
                           setAutocompleteVisible={setAutocompleteVisible}
@@ -340,10 +345,10 @@ const CreateMeal = () => {
 
               <div className="flex mt-6 gap-4">
                 <span onClick={() => gotoPreviousStep("firstStep")}>
-                  <Button showText={true}> Précedent </Button>
+                  <Button showText={true} showIconLeft={true} icon={<ArrowLeft/>}> Précedent </Button>
                 </span>
                 <span onClick={() => gotoNextStep("thirdStep")}>
-                  <Button showText={true}> Suivant </Button>
+                  <Button showText={true} showIcon={true} icon={<Arrow/>}> Suivant </Button>
                 </span>
               </div>
             </>
@@ -399,8 +404,8 @@ const CreateMeal = () => {
               </div>
               <p className="mt-3"> Un régime alimentaire particulier ? </p>
               <div className="flex gap-3">
-                {dietType.map((dietT) => (
-                  <div className="flex items-center gap-2">
+                {dietType.map((dietT, index) => (
+                  <div key={index} className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       id={dietT.label}
@@ -420,8 +425,8 @@ const CreateMeal = () => {
               </div>
               <p className="mt-3"> Des allergies ? </p>
               <div className="flex gap-3">
-                {allergens.map((allergen) => (
-                  <div className="flex items-center gap-2">
+                {allergens.map((allergen, index) => (
+                  <div key={index} className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       id={allergen.label}
@@ -441,10 +446,10 @@ const CreateMeal = () => {
               </div>
               <div className="flex items-center gap-4 mt-8">
                 <span onClick={() => gotoPreviousStep("secondStep")}>
-                  <Button showText={true}> Précedent </Button>
+                  <Button showText={true} showIconLeft={true} icon={<ArrowLeft/>}> Précedent </Button>
                 </span>
                 <span onClick={() => gotoNextStep("fourthStep")}>
-                  <Button showText={true}> Suivant </Button>
+                  <Button showText={true} showIcon={true} icon={<Arrow/>}> Suivant </Button>
                 </span>
               </div>
             </>
@@ -457,6 +462,7 @@ const CreateMeal = () => {
                 type="file"
                 name="images"
                 id="images"
+                required
                 multiple={true}
                 {...register("image_urls")}
               />
@@ -466,13 +472,13 @@ const CreateMeal = () => {
 
               <div className="flex items-center gap-4 mt-8">
                 <span onClick={() => gotoPreviousStep("thirdStep")}>
-                  <Button showText={true}> Précedent </Button>
+                  <Button showText={true} showIconLeft={true} icon={<ArrowLeft/>}> Précedent </Button>
               </span>
 
 
                 
               <button type="submit" className="my-2 flex justify-center">
-                <Button showText={true}>Créer un repas</Button>
+                <Button showText={true} showIcon={true} icon={<Check/>}>Créer un repas</Button>
               </button>
 
               
@@ -483,9 +489,9 @@ const CreateMeal = () => {
                   <div>
                   <p className="text-sm text-black font-book-font">Veuillez vérifier les informations suivantes :</p>
                     {
-                      Object.values(formErrors).map(error => {
+                      Object.values(formErrors).map((error, index )=> {
                         return(
-                          <p className="text-sm text-red font-book-font">{error}</p>
+                          <p key={index} className="text-sm text-red font-book-font">{error}</p>
                         )
                       })
                       

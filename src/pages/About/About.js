@@ -10,6 +10,7 @@ import "./About.scss";
 import SectionTitle from "../../components/titles/SectionTitle";
 import SubsectionTitle from "../../components/titles/SubsectionTitle";
 import { useNavigate } from "react-router-dom";
+import Arrow from "../../icons/Arrow";
 
 function About(props) {
   const navigate = useNavigate();
@@ -30,13 +31,13 @@ function About(props) {
             modi, repellat ipsam.
           </p>
           <button onClick={() => navigate("/create-meal")}>
-            <Button showText={true}>Commencer</Button>
+            <Button showText={true} showIcon={true} icon={<Arrow/>}>Commencer</Button>
           </button>
         </div>
         <div className="top-container-right">
           <div className="img-container">
-            <img src={image3} alt="" className="image-3" />
-            <img src={image1} alt="" className="image-1" />
+            <img src={image3} alt="about-us" className="image-3" />
+            <img src={image1} alt="about-us" className="image-1" />
           </div>
         </div>
       </div>
@@ -109,10 +110,9 @@ function About(props) {
               <span className="circle"></span>
               <span className="circle"></span>
             </div>
-            <img src="" alt="" />
           </div>
           <div className="square"></div>
-          <img src={aboutImage} alt="" className="about-image" />
+          <img src={aboutImage} alt="about-us" className="about-image" />
         </div>
         <div className="middle-container-right">
           <div className="text-1">
@@ -159,7 +159,7 @@ function About(props) {
         </div>
 
         <span className="bottom-button" onClick={() => navigate("/create-meal")}>
-          <Button showText={true}>Lancez-vous</Button>
+          <Button showText={true} showIcon={true} icon={<Arrow/>}>Lancez-vous !</Button>
         </span>
       </div>
     </div>
