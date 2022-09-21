@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import StartDate from "../../../icons/StartDate";
 import UserBlack from "../../../icons/UserBlack";
-import UserDetails from "../../users/UserDetails";
 import "./MealDetailsHost.scss";
 
 const MealDetailsHost = ({ meal }) => {

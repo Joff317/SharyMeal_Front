@@ -20,6 +20,7 @@ import SectionTitle from "../../titles/SectionTitle";
 import JSConfetti from "js-confetti";
 import Cookies from "js-cookie";
 import { CURRENT_URL } from "../../../utils/variables";
+import APIManager from "../../../services/Api";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
@@ -33,30 +34,41 @@ function MealDetails() {
   const orderConfirmationAtom = useAtomValue(OrderConfirmationAtom);
   const setOrderConfirmationAtom = useSetAtom(OrderConfirmationAtom);
   const token = Cookies.get("token");
-  console.log('CURRENT_URL', CURRENT_URL);
-  console.log("MEALID", mealId);
+  // console.log('CURRENT_URL', CURRENT_URL);
+  // console.log("MEALID", mealId);
 
-  const createAttendance = () => {
-    fetch(API + "attendances", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        attendance: {
-          meal_id: mealId,
-        },
-      }),
+  const createAttendance = async () => {
+
+    await APIManager.createAttendance(mealId)
+    .then(res => {
+      console.log("res FROM createAttendance REQUEST => ", res)
+      updateGuestRegisteredCount();
     })
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        console.log("CREATE ATTENDANCE", response);
-        updateGuestRegisteredCount();
-      })
-      .catch((error) => console.error(error));
+    .catch(error => console.error("error FROM createAttendance REQUEST => ", error.message))
+
+// OLD request : will be removed.
+    // fetch(API + "attendances", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   body: JSON.stringify({
+    //     attendance: {
+    //       meal_id: mealId,
+    //     },
+    //   }),
+    // })
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((response) => {
+    //     console.log("CREATE ATTENDANCE", response);
+    //     updateGuestRegisteredCount();
+    //   })
+    //   .catch((error) => console.error(error));
+
+
   };
 
   const updateGuestRegisteredCount = () => {

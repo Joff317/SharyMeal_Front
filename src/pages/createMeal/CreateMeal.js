@@ -20,8 +20,9 @@ import imgCreateMeal from "../../assets/images/imgCreateMeal.png";
 import { useNavigate } from "react-router-dom";
 import LayoutBlur from "../../components/layout/LayoutBlur/LayoutBlur";
 import JSConfetti from "js-confetti";
-import { ErrorMessage } from '@hookform/error-message';
+// import { ErrorMessage } from '@hookform/error-message';
 import APIManager from "../../services/Api";
+import { GEOAPIFY_KEY } from "../../utils/variables";
 
 const CreateMeal = () => {
   const token = Cookies.get("token");
@@ -61,7 +62,7 @@ const CreateMeal = () => {
             ) ? true : false
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log('data onSubmit', data, cityInfo, startDate);
     setFormErrors({
       title: data.title.length < 3 && "Titre trop court.",
@@ -80,55 +81,17 @@ const CreateMeal = () => {
         imagesUrl.append("meal[images][]", data.image_urls[i]);
       }
 
-      // APIManager.createMeal(data, cityInfo, startDate)
-      // .then(res => {
-      //   console.log('res FROM CREATE MEAL REQUEST => ', res)
-      //   postCategoriesInfo(data.categories, res.id);
-      //   data.image_urls.length !== 0 && postImages(res.id, imagesUrl);
-      //   setMealId(res.id);
-      //   jsConfetti.addConfetti();
-      //   setShowConfirmation(true);
-      // })
-      // .catch(error => console.log('error FROM CREATE MEAL REQUEST =>', error.message));
+      await APIManager.createMeal(data, cityInfo, startDate)
+      .then(res => {
+        console.log('res FROM CREATE MEAL REQUEST => ', res)
+        postCategoriesInfo(data.categories, res.id);
+        data.image_urls.length !== 0 && postImages(res.id, imagesUrl);
+        setMealId(res.id);
+        jsConfetti.addConfetti();
+        setShowConfirmation(true);
+      })
+      .catch(error => console.error('error FROM CREATE MEAL REQUEST =>', error.message));
 
-      // fetch(API + "meals", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-type": "application/json",
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      //   body: JSON.stringify({
-      //     meal: {
-      //       title: data.title,
-      //       description: data.description,
-      //       price: data.price,
-      //       location: {
-      //         city: cityInfo.city,
-      //         lat: cityInfo.lat,
-      //         lon: cityInfo.lon,
-      //         address: cityInfo.formatted,
-      //       },
-      //       guest_capacity: data.guest_capacity,
-      //       starting_date: startDate,
-      //       animals: data.animals,
-      //       alcool: data.alcool,
-      //       doggybag: data.doggybag,
-      //       diet_type: data.dietType,
-      //       allergens: data.allergens,
-      //     },
-      //   }),
-      // })
-      //   .then((response) => {
-      //     return response.json();
-      //   })
-      //   .then((res) => {
-      //     console.log(res);
-      //     postCategoriesInfo(data.categories, res.id);
-      //     data.image_urls.length !== 0 && postImages(res.id, imagesUrl);
-      //     setMealId(res.id);
-      //     jsConfetti.addConfetti();
-      //     setShowConfirmation(true);
-      //   });
       }
 
     else {
@@ -137,25 +100,21 @@ const CreateMeal = () => {
       )
     }
   };
-  const postCategoriesInfo = (categoriesArray, mealId) => {
-    categoriesArray.map((category) => {
-      fetch(API + "join_categories", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          join_category_meal: {
-            meal_id: mealId,
-            category_id: parseInt(category),
-          },
-        }),
-      });
+
+  const postCategoriesInfo = async (categoriesArray, mealId) => {
+    await categoriesArray.map((category) => {
+
+       APIManager.postCategoriesInfo(mealId, category)
+        .then(res => console.log('res FROM postCategoriesInfo REQUEST => ', res))
+        .catch(error => console.error('error from postCategoriesInfo REQUEST => ', error))
+
     });
   };
 
-  const postImages = (mealId, data) => {
+  const postImages = async (mealId, data) => {
+    console.log('data from postImages', data)
+
+// The following request is not using axios like others requests (because not working). 
     const requestOptions = {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` },
@@ -163,35 +122,37 @@ const CreateMeal = () => {
     };
     fetch(API + `meals/${mealId}`, requestOptions)
       .then((response) => response.json())
-      // .then((res) => console.log(res));
+      .then((res) => console.log(res));
   };
 
-  const getData = (e) => {
+  const getLocationData = async (e) => {
     if (e.target.value.length > 4) {
-      fetch(
-        `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setAutocompleteVisible(true);
-          setAutocomplete(data);
-        })
-        .catch((err) => console.error(err));
+
+      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${GEOAPIFY_KEY}`)
+      .then(res => {
+        console.log('res FROM getCityData REQUEST => ', res);
+        setAutocompleteVisible(true);
+        setAutocomplete(res);
+      })
+      .catch(error => console.error('error FROM getCityData REQUEST => ', error.message))
     } else {
       setAutocompleteVisible(false);
     }
   };
+
   const increment = () => {
     setCount(count + 1);
   };
+
   const decrement = () => {
     setCount(count - 1);
   };
-  const gotoNextStep = (value) => {
 
+  const gotoNextStep = (value) => {
     setNextStep(value);
     increment();
   };
+
   const gotoPreviousStep = (value) => {
     setNextStep(value);
     decrement();
@@ -343,9 +304,10 @@ const CreateMeal = () => {
                     errors.location
                   )}`}
                   placeholder="Votre adresse"
-                  onChange={getData}
+                  onChange={getLocationData}
                   type="text"
                   id="inputAddress"
+                  autocomplete="off"
                   // {...register("location", errorMessageValues.location)}
                 />
                 {autocompleteVisible && (

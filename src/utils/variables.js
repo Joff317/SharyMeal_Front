@@ -1,5 +1,6 @@
 export let API;
 export let CURRENT_URL;
+export const GEOAPIFY_KEY = "9aa5158850824f25b76a238e1d875cc8"
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   // dev code

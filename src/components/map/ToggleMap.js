@@ -1,11 +1,22 @@
 import React from "react";
 import { inputDataAtom } from "../../atoms/inputData";
 import { useAtomValue } from "jotai";
+import APIManager from "../../services/Api";
+import { GEOAPIFY_KEY } from "../../utils/variables";
 
 function ToggleMap({ setMapVisib, mapVisib }) {
   const inputData = useAtomValue(inputDataAtom);
 
-  const handleToggle = (e) => {
+  const handleToggle = async (e) => {
+
+    // await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/search?city=${inputData.city}&format=json&apiKey=${GEOAPIFY_KEY}`)
+    // .then(res => {
+    //   console.log('res FROM handleToggle REQUEST => ', res);
+    //   setMapVisib(!mapVisib);
+    // })
+    // .catch(error => console.error('error FROM handleToggle REQUEST => ', error.message))
+
+// OLD request : will be removed.
     fetch(
       `https://api.geoapify.com/v1/geocode/search?city=${inputData.city}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
     )
@@ -16,6 +27,7 @@ function ToggleMap({ setMapVisib, mapVisib }) {
         setMapVisib(!mapVisib);
       })
       .catch((err) => console.error(err));
+
   };
 
   return (

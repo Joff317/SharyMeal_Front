@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./MealDetailsFooter.scss";
 import Button from "../../../components/actions/Button";
-import Check from "../../../icons/Check";
 import LayoutBlur from "../../layout/LayoutBlur/LayoutBlur";
 import OrderConfirmation from "../order/OrderConfirmation";
 

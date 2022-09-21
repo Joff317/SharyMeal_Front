@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "./Map.css";
 // import RecenterAutomatically from "./RecenterAutomatically";
-import { API } from '../../utils/variables';
 import SubsectionTitle from '../titles/SubsectionTitle';
 import MealPrice from "../meals/mealCard/MealPrice";
 import RecenterAutomatically from "./RecenterAutomatically";
@@ -11,7 +10,7 @@ import Button from "../actions/Button";
 
 function Map({ mapCenter, meals }) {
 
-    console.log('meals DES PROPS DE MAP :', meals)
+    // console.log('meals DES PROPS DE MAP :', meals)
 
     return (
 

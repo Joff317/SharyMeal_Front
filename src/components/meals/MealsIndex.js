@@ -46,6 +46,7 @@ function MealIndex() {
       })
       .catch(error => console.log('error from GET REQUEST =>', error.message));
       
+// OLD fetch request : will be removed from code.
     // fetch(API + "meals")
     //   .then((res) => res.json())
     //   .then((data) => {

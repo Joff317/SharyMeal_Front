@@ -8,6 +8,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import PaymentForm from "./PaymentForm";
 import { API } from "../../../utils/variables";
 import "./OrderElement.scss";
+import APIManager from "../../../services/Api";
 
 const PUBLIC_KEY = process.env.REACT_APP_PUBLISHABLE_KEY;
 const stripeTestPromise = loadStripe(PUBLIC_KEY);
@@ -16,16 +17,26 @@ function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    fetch(API + "charges", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: parseInt(`${meal.price * guestRegistered}00`),
-        currency: "eur",
-      }),
+
+    APIManager.orderConfirmation(meal, guestRegistered)
+    .then(res => {
+      console.log('res FROM orderConfirmation REQUEST => ', res);
+      setClientSecret(res.data.clientSecret);
     })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+    .catch(error => console.error('error FROM orderConfirmation REQUEST => ', error.message));
+
+    // fetch(API + "charges", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     amount: parseInt(`${meal.price * guestRegistered}00`),
+    //     currency: "eur",
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => setClientSecret(data.clientSecret));
+
+
   }, []);
 
   function dataParsed(date) {

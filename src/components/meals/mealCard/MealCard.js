@@ -14,6 +14,7 @@ import MealEditForm from "../MealEditForm";
 import Edit from "../../../icons/Edit";
 import { Link } from "react-router-dom";
 import CreateReview from "../../reviews/CreateReview";
+import APIManager from "../../../services/Api";
 
 function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate, showAdditionalInfoReview }) {
   const token = Cookies.get("token");
@@ -21,13 +22,24 @@ function MealCard({ mealData, showAvatar, showAdditionalInfo, forceUpdate, showA
   const [showReview, setShowReview] = useState();
 
   const deleteMeal = () => {
-    fetch(`${API}/meals/${mealData.id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((response) => {
+
+    APIManager.delete(`meals/${mealData.id}`)
+    .then(res => {
+      console.log('res FROM DELETE MEAL REQUEST => ', res);
       forceUpdate();
-    });
+    })
+    .catch(error => console.error('error from DELETE MEAL REQUEST => ', error.message));
+
+//OLD request : will be removed from code.
+    // fetch(`${API}/meals/${mealData.id}`, {
+    //   method: "DELETE",
+    //   headers: { Authorization: `Bearer ${token}` },
+    // }).then((response) => {
+    //   forceUpdate();
+    // });
   };
+
+
 
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");

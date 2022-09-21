@@ -17,6 +17,8 @@ function MealImagesForm({ maxId }) {
   };
 
   const submitToAPI = (data) => {
+
+    
     const requestOptions = {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` },

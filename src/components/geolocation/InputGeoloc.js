@@ -7,6 +7,8 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import fr from "date-fns/locale/fr";
 import Search from "../../icons/Search";
+import APIManager from "../../services/Api";
+import { GEOAPIFY_KEY } from "../../utils/variables";
 
 function InputGeoloc() {
   const [autocompleteVisible, setAutocompleteVisible] = useState(false);
@@ -43,21 +45,34 @@ function InputGeoloc() {
     });
   }
 
-  function getData(e) {
+  const getLocationData = async (e) => {
     if (e.target.value.length > 4) {
-      fetch(
-        `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&type=city&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setAutocompleteVisible(true);
-          setAutocomplete(data);
-        })
-        .catch((err) => console.error(err));
+
+      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${GEOAPIFY_KEY}`)
+      .then(res => {
+        console.log('res FROM getCityData REQUEST => ', res);
+        setAutocompleteVisible(true);
+        setAutocomplete(res);
+      })
+      .catch(error => console.error('error FROM getCityData REQUEST => ', error.message))
+
+// OLD request : will be removed.
+      // fetch(
+      //   `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&type=city&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
+      // )
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     setAutocompleteVisible(true);
+      //     setAutocomplete(data);
+      //   })
+      //   .catch((err) => console.error(err));
+
     } else {
       setAutocompleteVisible(false);
     }
-  }
+  };
+
+
 
   return (
     <div className="rounded-full bg-white w-fit py-2 pl-6 pr-2 relative">
@@ -67,10 +82,11 @@ function InputGeoloc() {
           className="pl-2 mt-0.5 text-sm font-light-font focus:visible "
           type="text"
           id="inputCity"
-          onChange={getData}
+          onChange={getLocationData}
           name="cityInput"
           placeholder="Aucune sélection"
           defaultValue={inputDataValue && inputDataValue.city}
+          autoComplete="off"
         />
         {autocompleteVisible && (
           <div className="border border-slate-500 rounded-lg p-2 absolute top-16 left-16 z-10 bg-white">

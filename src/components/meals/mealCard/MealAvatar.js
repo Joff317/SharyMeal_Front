@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { API } from "../../../utils/variables";
 import avatarDefault from "../../../assets/images/avatardefault.png";
+import APIManager from "../../../services/Api";
 
 function MealAvatar({ host }) {
   const [hostDetails, setHostDetails] = useState(null);
 
   useEffect(() => {
-    fetch(API + `/user_detail/${host.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log("data MealAvatar => ", data);
-        setHostDetails(data);
-      });
+
+    APIManager.get(`/user_detail/${host.id}`)
+    .then(res => {
+      console.log('res FROM MealAvatar GET REQUEST => ', res);
+      setHostDetails(res);
+    })
+    .catch(error => console.log('error FROM MealAvatar GET REQUEST => ', error.message));
+
+  // OLD request : will be removed
+    // fetch(API + `/user_detail/${host.id}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // console.log("data MealAvatar => ", data);
+    //     setHostDetails(data);
+    //   });
   }, []);
 
   return (
