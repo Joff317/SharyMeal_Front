@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Button from "../../actions/Button";
 import SubsectionTitle from "../../titles/SubsectionTitle";
 import { useForm } from "react-hook-form";
-import { API } from "../../../utils/variables";
 import {
   errorMessageValues,
   errorInput,
@@ -12,12 +11,13 @@ import "./MyProfile.scss";
 import { useState } from "react";
 import Autocompletion from "../../geolocation/Autocompletion";
 import Cookies from "js-cookie";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { currentuserAtom } from "../../../atoms/loggedAtom";
-import AvatarForm from "../AvatarForm";
 import DisplayReviews from "../../reviews/DisplayReviews";
+import ScrollReveal from "scrollreveal";
+import { slideUpFast } from "../../animations/Animations";
 import APIManager from "../../../services/Api";
-import env from 'react-dotenv';
+import env from "react-dotenv";
 
 function MyProfile({ currentUser, setCurrentUser, userData }) {
   const token = Cookies.get("token");
@@ -49,39 +49,39 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
         city: cityInfo ? cityInfo.city : "",
       },
     })
-    .then(res => {
-      console.log('res FROM UPDATE_ME REQUEST => ', res);
-      console.log('res.status', res.status);
+      .then((res) => {
+        console.log("res FROM UPDATE_ME REQUEST => ", res);
+        console.log("res.status", res.status);
 
-      if (res.status === 200) {
-        setEditConfirmVisib(true);
-        setTimeout(() => {
-          setEditConfirmVisib(false);
-        }, 2000);
-        setCurrentUser(data);
-      } else {
-        setEditErrorVisib(true);
-        setTimeout(() => {
-          setEditErrorVisib(false);
-        }, 2000);
-      }
+        if (res.status === 200) {
+          setEditConfirmVisib(true);
+          setTimeout(() => {
+            setEditConfirmVisib(false);
+          }, 2000);
+          setCurrentUser(data);
+        } else {
+          setEditErrorVisib(true);
+          setTimeout(() => {
+            setEditErrorVisib(false);
+          }, 2000);
+        }
 
-      setCurrentUserAtom({
-        ...currentUserAtom,
-        city: res.data.city ? res.data.city : currentUser.city,
-        name: res.data.name,
-        age: res.data.age,
-        email: res.data.email,
-        gender: res.data.gender,
-        description: res.data.description,
-      });
-      data.avatar_url.length !== 0 && postAvatar(dataAvatar);
+        setCurrentUserAtom({
+          ...currentUserAtom,
+          city: res.data.city ? res.data.city : currentUser.city,
+          name: res.data.name,
+          age: res.data.age,
+          email: res.data.email,
+          gender: res.data.gender,
+          description: res.data.description,
+        });
+        data.avatar_url.length !== 0 && postAvatar(dataAvatar);
+      })
+      .catch((error) =>
+        console.error("error FROM UPDATE_ME REQUEST => ", error.message)
+      );
 
-    })
-    .catch(error => console.error('error FROM UPDATE_ME REQUEST => ', error.message))
-
-
-// OLD request : will be removed
+    // OLD request : will be removed
     // fetch(API + "update_me", {
     //   method: "PUT",
     //   headers: {
@@ -130,19 +130,19 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
   };
 
   async function postAvatar(dataAvatar) {
-
     await APIManager.edit("update_me", dataAvatar)
-    .then(res => {
-      console.log('res FROM postAvatar REQUEST ', res);
-      setCurrentUserAtom({
-        ...currentUserAtom,
-        avatar_url: res.avatar_url,
-      });
-    })
-    .catch(error => console.error('error FROM postAvatar REQUEST => ', error.message))
+      .then((res) => {
+        console.log("res FROM postAvatar REQUEST ", res);
+        setCurrentUserAtom({
+          ...currentUserAtom,
+          avatar_url: res.avatar_url,
+        });
+      })
+      .catch((error) =>
+        console.error("error FROM postAvatar REQUEST => ", error.message)
+      );
 
-
-// OLD request : will bre rmeoved.
+    // OLD request : will bre rmeoved.
     // const requestOptions = {
     //   method: "PUT",
     //   headers: { Authorization: `Bearer ${token}` },
@@ -160,17 +160,19 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
 
   async function getLocationData(e) {
     if (e.target.value.length > 4) {
+      await APIManager.getLocationData(
+        `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`
+      )
+        .then((res) => {
+          console.log("res FROM getLocationData REQUEST => ", res);
+          setAutocompleteVisible(true);
+          setAutocomplete(res);
+        })
+        .catch((error) =>
+          console.error("error FROM getLocationData => ", error.message)
+        );
 
-      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`)
-      .then(res => {
-        console.log('res FROM getLocationData REQUEST => ', res);
-        setAutocompleteVisible(true);
-        setAutocomplete(res);
-        
-      })
-      .catch(error => console.error('error FROM getLocationData => ', error.message))
-
-  // OLD request : will be removed
+      // OLD request : will be removed
       // fetch(
       //   `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&type=city&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
       // )
@@ -189,17 +191,23 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
     setEditConfirmVisib(false);
   };
 
-  // console.log("userData", userData);
+  useEffect(() => {
+    ScrollReveal().reveal(".slide", slideUpFast);
+  }, []);
+
   return (
     <div className="profile-container">
       <div className="perso-infos-container">
-        <SubsectionTitle>Mes informations persos</SubsectionTitle>
+        <SubsectionTitle>
+          {" "}
+          <span className="slide"> Mes informations persos </span>{" "}
+        </SubsectionTitle>
         <div className="perso-infos-details">
           <form
             className={` w-full flex flex-col gap-10 mt-8`}
             onSubmit={handleSubmit(OnSubmit)}
           >
-            <div className="flex justify-between w-full gap-14">
+            <div className="flex justify-between w-full gap-14 slide">
               <div className="flex flex-col w-full">
                 <p className="mb-2"> Nom </p>
                 <input
@@ -243,7 +251,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
                 {errorMessage(errors.gender)}
               </div>
             </div>
-            <div className="flex justify-between w-full gap-14">
+            <div className="flex justify-between w-full gap-14 slide">
               <div className="flex flex-col w-full">
                 <p className="mb-2"> Email </p>
                 <input
@@ -290,7 +298,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
               </div>
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col slide">
               <p className="mb-2"> Ma bio </p>
               <textarea
                 placeholder="Que doit-on savoir de toi ?"
@@ -305,7 +313,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
               {errorMessage(errors.description)}
             </div>
 
-            <div className="flex gap-8 items-center">
+            <div className="flex gap-8 items-center slide">
               <img
                 alt="useravatar"
                 className="w-16 h-16 border border-black rounded-full"
@@ -324,7 +332,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
               </label>
             </div>
 
-            <button type="submit" className="my-2 flex justify-center">
+            <button type="submit" className="my-2 flex justify-center slide">
               <Button showText={true}>Sauvegarder les modifications</Button>
             </button>
 
@@ -344,9 +352,12 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
         <br />
         <br />
         <br />
-        <SubsectionTitle> Mes reviews </SubsectionTitle>
+        <SubsectionTitle>
+          {" "}
+          <span className="slide"> Mes reviews </span>{" "}
+        </SubsectionTitle>
 
-        <div className="tabs-container flex gap-4 border-b border-b-grey-border my-4 w-fit  font-light-font h-[29px]">
+        <div className="tabs-container flex gap-4 border-b border-b-grey-border my-4 w-fit slide font-light-font h-[29px]">
           <button
             className={
               reviewStatus === "written"

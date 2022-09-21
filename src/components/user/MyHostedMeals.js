@@ -28,6 +28,7 @@ function MyHostedMeals({ userData, forceUpdate }) {
                 key={hosted_meal.id}
                 mealData={hosted_meal}
                 showAdditionalInfo
+                launchAnimation
                 forceUpdate={forceUpdate}
               />
             ))}

@@ -9,6 +9,7 @@ import Button from "../../actions/Button";
 import FormLogin from "../../authentication/FormLogin/FormLogin";
 import LayoutBlur from "../LayoutBlur/LayoutBlur";
 import FormRegister from "../../authentication/FormRegister/FormRegister";
+import "../../animations/transition.css";
 
 function Navigation() {
   let activeStyle = {

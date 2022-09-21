@@ -84,7 +84,7 @@ function InputGeoloc() {
   }
 
   return (
-    <div className="rounded-full bg-white w-fit py-2 pl-6 pr-2 relative">
+    <div className="rounded-full z-50 bg-white w-fit py-2 pl-6 pr-2 relative">
       <form onSubmit={(e) => onSubmit(e)} className={`flex items-center`}>
         <label className="text-sm"> Quelle ville ? </label>
         <input
@@ -98,7 +98,7 @@ function InputGeoloc() {
           autoComplete="off"
         />
         {autocompleteVisible && (
-          <div className="border border-slate-500 rounded-lg p-2 absolute top-16 left-16 z-10 bg-white">
+          <div className="border border-slate-500 z-50 rounded-lg p-2 absolute top-16 left-16 z-10 bg-white">
             {" "}
             {autocomplete &&
               autocomplete.results.map((res, index) => (

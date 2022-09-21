@@ -9,3 +9,18 @@
     background: rgba(0, 0, 0, 0.80);
     opacity:0.5;
 }
+
+.open-popup{
+    animation: open-popup ease 0.3s;
+}
+
+@keyframes open-popup {
+    0% {
+        transform: scale(0.8) ;
+
+    }
+
+    100%{
+        transform: scale(1);
+    }
+}

@@ -1,0 +1,24 @@
+.top-detail-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+}
+
+.meal-detail-right-container {
+  margin-top: 110px;
+  max-width: 496px;
+  max-height: 75vh;
+}
+
+.meal-detail-right-top-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.meal-detail-container {
+  min-height: 800px;
+}
+
+/*# sourceMappingURL=MealDetails.css.map */
