@@ -175,13 +175,12 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
         </div>
         <div className="flex flex-col">
           <p className="mt-3"> Description </p>
-          <input
-            className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md  ${errorInput(
+          <textarea
+            className={`border border-grey-border align-center h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md  ${errorInput(
               errors.description
             )}`}
             defaultValue={mealData.description}
             placeholder="Décrivez un peu plus ... ?"
-            type="text"
             {...register("description", errorMessageValues.description)}
           />
           {errorMessage(errors.description)}

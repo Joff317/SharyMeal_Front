@@ -223,15 +223,14 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
 
             <div className="flex flex-col">
               <p className="mb-2"> Ma bio </p>
-              <input
+              <textarea
                 placeholder="Que doit-on savoir de toi ?"
                 defaultValue={
                   currentUser.description && `${currentUser.description}`
                 }
-                className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
+                className={`border border-grey-border h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
                   errors.description
                 )}`}
-                type="text"
                 {...register("description", errorMessageValues.description)}
               />
               {errorMessage(errors.description)}
