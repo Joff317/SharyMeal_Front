@@ -5,7 +5,6 @@ import SubsectionTitle from "../titles/SubsectionTitle";
 
 function MyMessages({ userData }) {
   const [currentChatterId, setCurrentChatterId] = useState(userData[0] && userData[0].id);
-  console.log('userData', userData)
   return (
     <>
       <SubsectionTitle> Vos messages </SubsectionTitle>
