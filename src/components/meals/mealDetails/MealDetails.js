@@ -120,7 +120,7 @@ function MealDetails() {
 
             <div className="meal-detail-right-container">
               <div className="meal-detail-right-top-container">
-                <MealDetailsTitle meal={meal} />
+                <MealDetailsTitle  meal={meal} />
                 <MealDetailsHost meal={meal} />
               </div>
 

@@ -13,37 +13,37 @@ const MealDetailsImages = ({ meal }) => {
       <img
         className="box-1"
         src={meal.image_urls ? meal.image_urls[0] : MealDetailsImage1}
-        alt=""
+        alt="First-details-meal"
       />
 
       <img
-        className="box-2"
         src={meal.image_urls ? meal.image_urls[1] : MealDetailsImage2}
-        alt=""
+        alt="Second-details-meal"
+        className="box-2"
       />
 
       <img
         className="box-3"
         src={meal.image_urls ? meal.image_urls[2] : MealDetailsImage3}
-        alt=""
+        alt="Third-details-meal"
       />
 
       <img
         className="box-4"
         src={meal.image_urls ? meal.image_urls[3] : MealDetailsImage4}
-        alt=""
+        alt="Fourth-details-meal"
       />
 
       <img
         className="box-5"
         src={meal.image_urls ? meal.image_urls[4] : MealDetailsImage5}
-        alt=""
+        alt="Fifth-details-meal"
       />
 
       <img
         className="box-6"
         src={meal.image_urls ? meal.image_urls[5] : MealDetailsImage6}
-        alt=""
+        alt="sixth-details-meal"
       />
     </div>
   );

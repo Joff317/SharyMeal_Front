@@ -35,8 +35,8 @@ function About(props) {
         </div>
         <div className="top-container-right">
           <div className="img-container">
-            <img src={image3} alt="" className="image-3" />
-            <img src={image1} alt="" className="image-1" />
+            <img src={image3} alt="about-us" className="image-3" />
+            <img src={image1} alt="about-us" className="image-1" />
           </div>
         </div>
       </div>
@@ -109,10 +109,9 @@ function About(props) {
               <span className="circle"></span>
               <span className="circle"></span>
             </div>
-            <img src="" alt="" />
           </div>
           <div className="square"></div>
-          <img src={aboutImage} alt="" className="about-image" />
+          <img src={aboutImage} alt="about-us" className="about-image" />
         </div>
         <div className="middle-container-right">
           <div className="text-1">
