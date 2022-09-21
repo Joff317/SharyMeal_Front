@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import StartDate from "../../../icons/StartDate";
 import UserBlack from "../../../icons/UserBlack";
-import UserDetails from "../../users/UserDetails";
 import "./MealDetailsHost.scss";
 
 const MealDetailsHost = ({ meal }) => {
@@ -18,7 +17,10 @@ const MealDetailsHost = ({ meal }) => {
       <div className="user">
         <UserBlack />
         <p className="font-light-font text-md">
-          <Link to={`/users/${meal.host.id}`}> {meal.host.name ? meal.host.name : meal.host.email} </Link>
+          <Link to={`/users/${meal.host.id}`}>
+            {" "}
+            {meal.host.name ? meal.host.name : meal.host.email}{" "}
+          </Link>
         </p>
       </div>
       <div className="date">

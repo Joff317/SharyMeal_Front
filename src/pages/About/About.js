@@ -12,7 +12,7 @@ import SubsectionTitle from "../../components/titles/SubsectionTitle";
 import { useNavigate } from "react-router-dom";
 import Arrow from "../../icons/Arrow";
 
-function About(props) {
+function About() {
   const navigate = useNavigate();
 
   return (
@@ -31,7 +31,9 @@ function About(props) {
             modi, repellat ipsam.
           </p>
           <button onClick={() => navigate("/create-meal")}>
-            <Button showText={true} showIcon={true} icon={<Arrow/>}>Commencer</Button>
+            <Button showText={true} showIcon={true} icon={<Arrow />}>
+              Commencer
+            </Button>
           </button>
         </div>
         <div className="top-container-right">
@@ -158,8 +160,13 @@ function About(props) {
           </div>
         </div>
 
-        <span className="bottom-button" onClick={() => navigate("/create-meal")}>
-          <Button showText={true} showIcon={true} icon={<Arrow/>}>Lancez-vous !</Button>
+        <span
+          className="bottom-button"
+          onClick={() => navigate("/create-meal")}
+        >
+          <Button showText={true} showIcon={true} icon={<Arrow />}>
+            Lancez-vous !
+          </Button>
         </span>
       </div>
     </div>

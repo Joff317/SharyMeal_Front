@@ -20,6 +20,7 @@ import SectionTitle from "../../titles/SectionTitle";
 import JSConfetti from "js-confetti";
 import Cookies from "js-cookie";
 import { CURRENT_URL } from "../../../utils/variables";
+import APIManager from "../../../services/Api";
 import DisplayReviews from "../../reviews/DisplayReviews";
 
 function MealDetails() {
@@ -35,49 +36,77 @@ function MealDetails() {
   const orderConfirmationAtom = useAtomValue(OrderConfirmationAtom);
   const setOrderConfirmationAtom = useSetAtom(OrderConfirmationAtom);
   const token = Cookies.get("token");
-  console.log(hostReviews);
 
-  const createAttendance = () => {
-    fetch(API + "attendances", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
+  // console.log('CURRENT_URL', CURRENT_URL);
+  // console.log("MEALID", mealId);
+  // console.log(hostReviews);
+
+  const createAttendance = async () => {
+
+    await APIManager.create("attendances", {
+      attendance: {
+        meal_id: mealId,
       },
-      body: JSON.stringify({
-        attendance: {
-          meal_id: mealId,
-        },
-      }),
     })
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        console.log("CREATE ATTENDANCE", response);
-        updateGuestRegisteredCount();
-      })
-      .catch((error) => console.error(error));
+    .then(res => {
+      console.log("res FROM createAttendance REQUEST => ", res)
+      updateGuestRegisteredCount();
+    })
+    .catch(error => console.error("error FROM createAttendance REQUEST => ", error.message))
+
+// OLD request : will be removed.
+    // fetch(API + "attendances", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //     Authorization: `Bearer ${token}`,
+    //   },
+      // body: JSON.stringify({
+      //   attendance: {
+      //     meal_id: mealId,
+      //   },
+      // }),
+    // })
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((response) => {
+    //     console.log("CREATE ATTENDANCE", response);
+    //     updateGuestRegisteredCount();
+    //   })
+    //   .catch((error) => console.error(error));
+
   };
 
   const updateGuestRegisteredCount = () => {
-    fetch(API + `meals/${mealId}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
+
+    APIManager.edit(`meals/${mealId}`, {
+      meal: {
+        guest_registered: meal.guest_registered + bookingQuantity,
       },
-      body: JSON.stringify({
-        meal: {
-          guest_registered: meal.guest_registered + bookingQuantity,
-        },
-      }),
-    })
-      .then((response) => {
-        console.log(response);
-        return response.json();
-      })
-      .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
+    } )
+    .then(res => console.log("res FROM updateGuestRegisteredCount => ", res))
+    .catch(error => console.log('error FROM updateGuestRegisteredCount => ', error.message))
+
+
+    // fetch(API + `meals/${mealId}`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   body: JSON.stringify({
+    //     meal: {
+    //       guest_registered: meal.guest_registered + bookingQuantity,
+    //     },
+    //   }),
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //     return response.json();
+    //   })
+    //   .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
+
   };
 
   useEffect(() => {
@@ -176,7 +205,7 @@ function MealDetails() {
                   reviews={hostReviews}
                 />
                 <img
-                  alt="review-image"
+                  alt="review"
                   className="w-[40%]"
                   src="https://www.netreviews.com/wp-content/uploads/2021/04/VIsuel-Avis-clients.jpg"
                 />

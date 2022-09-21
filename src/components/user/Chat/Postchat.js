@@ -9,6 +9,7 @@ import { API } from "../../../utils/variables";
 import Cookies from "js-cookie";
 import { useAtomValue } from "jotai";
 import { currentuserAtom } from "../../../atoms/loggedAtom";
+import APIManager from "../../../services/Api";
 
 const PostChat = ({ forceUpdate, recipient_id }) => {
   const token = Cookies.get("token");
@@ -20,29 +21,45 @@ const PostChat = ({ forceUpdate, recipient_id }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    fetch(API + "messages", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        message: {
-          sender_id: currentUser.id,
-          recipient_id,
-          content: data.content,
-        },
-      }),
-    })
-      .then((response) => {
-        forceUpdate();
+  const onSubmit = async (data) => {
 
-        return response.json();
-      })
-      .then((res) => {
-        emptyInput();
-      });
+    await APIManager.create("messages", {
+      message: {
+        sender_id: currentUser.id,
+        recipient_id,
+        content: data.content,
+      },
+    })
+    .then(res => {
+      console.log('res FROM PostChat REQUEST => ', res)
+      forceUpdate();
+      emptyInput();
+    })
+    .catch(error => console.error('error FROM FROM PostChat REQUEST => ', error.message))
+
+// OLD request : will be removed.
+    // fetch(API + "messages", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   body: JSON.stringify({
+    //     message: {
+    //       sender_id: currentUser.id,
+    //       recipient_id,
+    //       content: data.content,
+    //     },
+    //   }),
+    // })
+    //   .then((response) => {
+    //     forceUpdate();
+
+    //     return response.json();
+    //   })
+    //   .then((res) => {
+    //     emptyInput();
+    //   });
   };
 
   const emptyInput = () => {
@@ -60,7 +77,7 @@ const PostChat = ({ forceUpdate, recipient_id }) => {
           className={`border border-grey h-10 pl-6 rounded-full w-full  ${errorInput(
             errors.content
           )}`}
-          autoFocus="true"
+          autoFocus={true}
           id="toDelete"
           type="text"
           size={10}

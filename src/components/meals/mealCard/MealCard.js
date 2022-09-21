@@ -5,7 +5,6 @@ import "./MealCard.scss";
 import MealTitle from "./MealTitle";
 import MealStartingDate from "./MealStartingDate";
 import defaultImage from "./meal-image-default.jpeg";
-import { API } from "../../../utils/variables";
 import Cookies from "js-cookie";
 import Bin from "../../../icons/Bin";
 import Eye from "../../../icons/Eye";
@@ -15,26 +14,38 @@ import Edit from "../../../icons/Edit";
 import { Link } from "react-router-dom";
 import CreateReview from "../../reviews/CreateReview";
 import ScrollReveal from "scrollreveal";
-import { slideUp, slideUpFast } from "../../animations/Animations";
+import { slideUpFast } from "../../animations/Animations";
+import APIManager from "../../../services/Api";
+
 function MealCard({
   mealData,
   showAvatar,
   showAdditionalInfo,
+
   launchAnimation,
   forceUpdate,
-  showAdditionalInfoReview,
 }) {
   const token = Cookies.get("token");
   const [showEdit, setShowEdit] = useState();
   const [showReview, setShowReview] = useState();
 
   const deleteMeal = () => {
-    fetch(`${API}/meals/${mealData.id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((response) => {
-      forceUpdate();
-    });
+    APIManager.delete(`meals/${mealData.id}`)
+      .then((res) => {
+        console.log("res FROM DELETE MEAL REQUEST => ", res);
+        forceUpdate();
+      })
+      .catch((error) =>
+        console.error("error from DELETE MEAL REQUEST => ", error.message)
+      );
+
+    //OLD request : will be removed from code.
+    // fetch(`${API}/meals/${mealData.id}`, {
+    //   method: "DELETE",
+    //   headers: { Authorization: `Bearer ${token}` },
+    // }).then((response) => {
+    //   forceUpdate();
+    // });
   };
 
   const openInNewTab = (url) => {

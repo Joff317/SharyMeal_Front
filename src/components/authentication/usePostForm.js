@@ -16,8 +16,6 @@ function usePostForm(
     body: JSON.stringify({ user: data }),
   })
     .then((response) => {
-      // console.log(response);
-
       if (!response.headers.has("Authorization")) {
         throw "Cancel";
       }
@@ -29,7 +27,6 @@ function usePostForm(
       return response.json();
     })
     .then((res) => {
-      console.log("res", res);
       current_user({
         ...current_user_value,
         city: res.user.city,
@@ -44,7 +41,6 @@ function usePostForm(
       setLogged && setLogged(true);
     })
     .catch((error) => {
-      // console.error(error)
       setAuthResult(false);
     });
 }

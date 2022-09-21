@@ -7,11 +7,7 @@ import image2 from "../../assets/images/imagehome2.jpeg";
 import image3 from "../../assets/images/imagehome3.jpeg";
 import InputGeoloc from "../../components/geolocation/InputGeoloc";
 import ScrollReveal from "scrollreveal";
-import {
-  AnimeJs,
-  slideUp,
-  slideUpContent,
-} from "../../components/animations/Animations";
+import { AnimeJs, slideUp } from "../../components/animations/Animations";
 import "../../components/animations/transition.css";
 
 function Home(props) {
@@ -70,6 +66,7 @@ function Home(props) {
       </div>
 
       <div className="w-full h-5 mt-[250px]" id="titleScroll"></div>
+
       <span className="slide">
         <MealsIndex />
       </span>

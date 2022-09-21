@@ -7,14 +7,14 @@ import "./UserDetails.scss";
 const UserDetails = () => {
   const [user, setUser] = useState();
   const userId = useParams().userId;
-  console.log(userId);
+  // console.log(userId);
 
   useEffect(() => {
     fetch(API + `user_detail/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         setUser(data);
-        console.log(data);
+        // console.log(data);
       });
   }, []);
 
@@ -26,28 +26,22 @@ const UserDetails = () => {
             <span className="pro">Host</span>
             <img
               className="round"
-              src='https://randomuser.me/api/portraits/women/79.jpg'
+              src="https://randomuser.me/api/portraits/women/79.jpg"
               alt="user"
             />
 
             <div className="avatar-bottom">
-            <span className="user-name">Prénom: {user.name}</span>
-            <span className="user-city">Ville: {user.city}</span>
+              <span className="user-name">Prénom: {user.name}</span>
+              <span className="user-city">Ville: {user.city}</span>
             </div>
-            <p>
-              {user.description}
-            </p>
+            <p>{user.description}</p>
             <div className="buttons">
               <button>
-                 <Button showText={true}>
-                 Message
-                 </Button>
-                </button>
-                <button>
-                   <Button showText={true}>
-                      Voir les repas
-                   </Button>
-                </button>
+                <Button showText={true}>Message</Button>
+              </button>
+              <button>
+                <Button showText={true}>Voir les repas</Button>
+              </button>
             </div>
             <div className="skills">
               <h6>Info</h6>

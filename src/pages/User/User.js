@@ -12,6 +12,7 @@ import MyMessages from "../../components/user/MyMessages";
 import MyAttendances from "../../components/user/MyAttendances/MyAttendances";
 import MyHostedMeals from "../../components/user/MyHostedMeals";
 import Button from "../../components/actions/Button";
+import APIManager from '../../services/Api';
 
 function User() {
   const token = Cookies.get("token");
@@ -28,17 +29,27 @@ function User() {
 
   useEffect(() => {
     loggedd &&
-      fetch(API + "me", {
-        headers: { Authorization: `Bearer ${token}` },
+
+      APIManager.get("me")
+      .then(res => {
+        setData(res);
+        console.log('res FROM GET ME REQUEST => ', res)
       })
-        .then((response) => {
-          console.log("response DE User.js", response);
-          return response.json();
-        })
-        .then((res) => {
-          console.log("data DE User.js ", res);
-          setData(res);
-        });
+      .catch(error => console.error('error FROM GET ME REQUEST => ', error))
+
+// OLD request : will be removed.
+      // fetch(API + "me", {
+      //   headers: { Authorization: `Bearer ${token}` },
+      // })
+      //   .then((response) => {
+      //     console.log("response DE User.js", response);
+      //     return response.json();
+      //   })
+      //   .then((res) => {
+      //     console.log("data DE User.js ", res);
+      //     setData(res);
+      //   });
+
   }, [setData, reducerValue]);
 
   const displayProfile = () => {

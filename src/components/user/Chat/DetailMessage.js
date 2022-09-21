@@ -22,7 +22,7 @@ function DetailMessage({ currentChatterId }) {
           return response.json();
         })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           setCurrentConversation(response);
         });
   }, [currentChatterId, reducerValue]);
@@ -49,8 +49,8 @@ function DetailMessage({ currentChatterId }) {
         className="w-full flex flex-col gap-2 max-h-[400px] min-h-[400px] overflow-y-scroll"
       >
         {currentConversation &&
-          currentConversation.conversations.map((message) => (
-            <>
+          currentConversation.conversations.map((message, index) => (
+            <div key={index} className="flex flex-col justify-end">
               {message.sender_id === currentUser.id ? (
                 <>
                   <p className="text-black p-3 bg-green_light  text-sm self-end rounded-lg w-max max-w-sm">
@@ -76,7 +76,7 @@ function DetailMessage({ currentChatterId }) {
                   </p>
                 </>
               )}
-            </>
+            </div>
           ))}
       </div>
       <PostChat forceUpdate={forceUpdate} recipient_id={currentChatterId} />

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./MealDetailsFooter.scss";
 import Button from "../../../components/actions/Button";
-import Check from "../../../icons/Check";
 import LayoutBlur from "../../layout/LayoutBlur/LayoutBlur";
 import OrderConfirmation from "../order/OrderConfirmation";
 import Book from "../../../icons/Book";
@@ -58,7 +57,9 @@ const MealDetailsFooter = ({ meal, setBookingQuantity, bookingQuantity }) => {
           )}
         </div>
         <button className="ml-[50px]" onClick={() => setShowOrderPopup(true)}>
-          <Button showText={true} showIcon={true} icon={<Book/>}>Réserver</Button>
+          <Button showText={true} showIcon={true} icon={<Book />}>
+            Réserver
+          </Button>
         </button>
         {showOrderPopup && (
           <LayoutBlur>

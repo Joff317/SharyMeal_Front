@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import * as L from "leaflet";
 import "./Map.css";
@@ -13,8 +13,6 @@ import Button from "../actions/Button";
 import { Link } from "react-router-dom";
 
 function Map({ mapCenter, meals }) {
-  console.log("meals DES PROPS DE MAP :", meals);
-
   const LeafIcon = L.Icon.extend({
     options: {},
   });
@@ -64,7 +62,9 @@ function Map({ mapCenter, meals }) {
                       <img
                         className="w-24 rounded-lg"
                         src={meal.image_urls[0]}
-                        alt="photo"
+
+                        alt="meal"
+
                       />
                     )}
 

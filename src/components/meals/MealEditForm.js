@@ -17,6 +17,8 @@ import React, { useState, useEffect } from "react";
 import { API } from "../../utils/variables";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
+import APIManager from "../../services/Api";
+import env from 'react-dotenv';
 
 function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
   const [autocomplete, setAutocomplete] = useState();
@@ -60,86 +62,135 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
       starting_date: startDate === undefined && "La date du repas est requise.",
     });
     if (isDataValid(data)) {
-      fetch(API + `meals/${mealData.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          meal: {
-            title: data.title,
-            description: data.description,
-            price: data.price,
-            location: {
-              city: cityInfo ? cityInfo.city : mealData.location.city,
-              lat: cityInfo ? cityInfo.lat : mealData.location.lat,
-              lon: cityInfo ? cityInfo.lon : mealData.location.lon,
-              address: cityInfo
-                ? cityInfo.formatted
-                : mealData.location.address,
-            },
-            guest_capacity: data.guest_capacity,
-            starting_date: startDate,
-            animals: data.animals,
-            alcool: data.alcool,
-            doggybag: data.doggybag,
-            diet_type: data.dietType,
-            allergens: data.allergens,
+
+      APIManager.edit(`meals/${mealData.id}`, {
+        meal: {
+          title: data.title,
+          description: data.description,
+          price: data.price,
+          location: {
+            city: cityInfo ? cityInfo.city : mealData.location.city,
+            lat: cityInfo ? cityInfo.lat : mealData.location.lat,
+            lon: cityInfo ? cityInfo.lon : mealData.location.lon,
+            address: cityInfo
+              ? cityInfo.formatted
+              : mealData.location.address,
           },
-        }),
+          guest_capacity: data.guest_capacity,
+          starting_date: startDate,
+          animals: data.animals,
+          alcool: data.alcool,
+          doggybag: data.doggybag,
+          diet_type: data.dietType,
+          allergens: data.allergens,
+        },
       })
-        .then((response) => {
-          return response.json();
-        })
-        .then((res) => {
-          console.log(res);
-          deleteCategoryInfo(joinCategoryArray, data.categories, res.id);
-          setShowEdit(false);
-          forceUpdate();
-        });
+      .then(res => {
+        console.log('res FROM EDIT MEAL REQUEST => ', res)
+        deleteCategoryInfo(joinCategoryArray, data.categories, res.id);
+        setShowEdit(false);
+        forceUpdate();
+      })
+      .catch(error => console.error('error FROM EDIT MEAL REQUEST =>',error.message))
+      
+// OLD request : will be removed from code.
+      // fetch(API + `meals/${mealData.id}`, {
+      //   method: "PUT",
+      //   headers: {
+      //     "Content-type": "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+        // body: JSON.stringify({
+        //   meal: {
+        //     title: data.title,
+        //     description: data.description,
+        //     price: data.price,
+        //     location: {
+        //       city: cityInfo ? cityInfo.city : mealData.location.city,
+        //       lat: cityInfo ? cityInfo.lat : mealData.location.lat,
+        //       lon: cityInfo ? cityInfo.lon : mealData.location.lon,
+        //       address: cityInfo
+        //         ? cityInfo.formatted
+        //         : mealData.location.address,
+        //     },
+        //     guest_capacity: data.guest_capacity,
+        //     starting_date: startDate,
+        //     animals: data.animals,
+        //     alcool: data.alcool,
+        //     doggybag: data.doggybag,
+        //     diet_type: data.dietType,
+        //     allergens: data.allergens,
+        //   },
+        // }),
+      // })
+      //   .then((response) => {
+      //     return response.json();
+      //   })
+      //   .then((res) => {
+      //     console.log(res);
+      //     deleteCategoryInfo(joinCategoryArray, data.categories, res.id);
+      //     setShowEdit(false);
+      //     forceUpdate();
+      //   });
     }
   };
 
   const deleteCategoryInfo = async (arrayToDelete, dataCategory, mealId) => {
-    arrayToDelete.map((categoryId) => {
-      fetch(API + `join_categories/${categoryId}`, {
-        method: "DELETE",
-      });
+    await arrayToDelete.map((categoryId) => {
+
+      APIManager.delete(`join_categories/${categoryId}`)
+      .then(res => console.log("res FROM deleteCategoryInfo REQUEST => ", res))
+      .catch(error => console.error("error FROM deleteCategoryInfo REQUEST => ", error.message))
+
+// OLD Request : will be removed
+      // fetch(API + `join_categories/${categoryId}`, {
+      //   method: "DELETE",
+      // });
     });
 
     await postCategoriesInfo(dataCategory, mealId);
   };
 
-  const postCategoriesInfo = (categoriesArray, mealId) => {
-    categoriesArray.map((category) => {
-      fetch(API + "join_categories", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
+  const postCategoriesInfo = async (categoriesArray, mealId) => {
+
+    await categoriesArray.map((category) => {
+
+      APIManager.create("join_categories", {
+        join_category_meal: {
+          meal_id: mealId,
+          category_id: parseInt(category),
         },
-        body: JSON.stringify({
-          join_category_meal: {
-            meal_id: mealId,
-            category_id: parseInt(category),
-          },
-        }),
-      });
-    });
+      })
+       .then(res => console.log('res FROM postCategoriesInfo REQUEST => ', res))
+       .catch(error => console.error('error from postCategoriesInfo REQUEST => ', error))
+
+// OLD resquest : will be removed
+      // fetch(API + "join_categories", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-type": "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+        // body: JSON.stringify({
+        //   join_category_meal: {
+        //     meal_id: mealId,
+        //     category_id: parseInt(category),
+        //   },
+        // }),
+      // });
+   });
   };
 
-  const getData = (e) => {
+  const getLocationData = async (e) => {
     if (e.target.value.length > 4) {
-      fetch(
-        `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setAutocompleteVisible(true);
-          setAutocomplete(data);
-        })
-        .catch((err) => console.error(err));
+
+      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`)
+      .then(res => {
+        console.log('res FROM getCityData REQUEST => ', res);
+        setAutocompleteVisible(true);
+        setAutocomplete(res);
+      })
+      .catch(error => console.error('error FROM getCityData REQUEST => ', error.message))
     } else {
       setAutocompleteVisible(false);
     }
@@ -175,13 +226,12 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
         </div>
         <div className="flex flex-col">
           <p className="mt-3"> Description </p>
-          <input
-            className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md  ${errorInput(
+          <textarea
+            className={`border border-grey-border align-center h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md  ${errorInput(
               errors.description
             )}`}
             defaultValue={mealData.description}
             placeholder="Décrivez un peu plus ... ?"
-            type="text"
             {...register("description", errorMessageValues.description)}
           />
           {errorMessage(errors.description)}
@@ -190,9 +240,10 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
           <p className="my-3"> Sélectionnez une ou plusieurs catégories </p>
 
           <div className="flex flex-wrap gap-3">
-            {categories.map((category) => (
-              <div className="flex items-center gap-2">
+            {categories.map((category, index) => (
+              <div key={index} className="flex items-center gap-2">
                 <input
+                  
                   defaultChecked={getCategoryChecked(category.id)}
                   type="checkbox"
                   id={category.id}
@@ -241,7 +292,7 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
               className={`border border-grey-border  w-full  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md  ${errorInput(
                 errors.guest_capacity
               )}`}
-              max={12}
+              max={11}
               min={1}
               defaultValue={mealData.guest_capacity}
               placeholder="Ex : 4 invités"
@@ -260,10 +311,11 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
             )}`}
             placeholder="Votre adresse"
             defaultValue={mealData.location.address}
-            onChange={getData}
+            onChange={getLocationData}
             onInput={(e) => setInputempty(e.target.value)}
             type="text"
             id="inputAddress"
+            autocomplete='off'
             // {...register("location", errorMessageValues.location)}
           />
           {autocompleteVisible && (
@@ -355,9 +407,10 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
         </div>
         <p className="my-3"> Un régime alimentaire particulier ? </p>
         <div className="flex gap-3">
-          {dietType.map((dietT) => (
-            <div className="flex items-center gap-2">
+          {dietType.map((dietT, index) => (
+            <div key={index} className="flex items-center gap-2">
               <input
+                
                 type="checkbox"
                 defaultChecked={getDataChecked(mealData.diet_type, dietT.label)}
                 id={dietT.label}
@@ -377,8 +430,8 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
         </div>
         <p className="my-3"> Des allergies ? </p>
         <div className="flex gap-3">
-          {allergens.map((allergen) => (
-            <div className="flex items-center gap-2">
+          {allergens.map((allergen, index) => (
+            <div key={index} className="flex items-center gap-2">
               <input
                 type="checkbox"
                 defaultChecked={getDataChecked(

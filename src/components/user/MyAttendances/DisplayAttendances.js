@@ -4,7 +4,7 @@ import CreateReview from "../../reviews/CreateReview";
 import SectionTitle from "../../titles/SectionTitle";
 
 function DisplayAttendances({ period, meals }) {
-  console.log("MEAL ATTENDANCE", meals);
+  // console.log("MEAL ATTENDANCE", meals);
 
   return (
     <>
@@ -40,7 +40,9 @@ function DisplayAttendances({ period, meals }) {
               ))
           : meals
               .filter((meal) => new Date(meal.starting_date) >= Date.now())
-              .map((meal) => <MealCard mealData={meal} launchAnimation />)}
+              .map((meal, index) => (
+                <MealCard mealData={meal} key={index} launchAnimation />
+              ))}
       </div>
     </>
   );
