@@ -20,10 +20,13 @@ import imgCreateMeal from "../../assets/images/imgCreateMeal.png";
 import { useNavigate } from "react-router-dom";
 import LayoutBlur from "../../components/layout/LayoutBlur/LayoutBlur";
 import JSConfetti from "js-confetti";
-import { ErrorMessage } from '@hookform/error-message';
+import { ErrorMessage } from "@hookform/error-message";
 import Arrow from "../../icons/Arrow";
 import ArrowLeft from "../../icons/ArrowLeft";
 import Check from "../../icons/Check";
+import ScrollReveal from "scrollreveal";
+import { slideUp } from "../../components/animations/Animations";
+import "./createmeal.css";
 
 const CreateMeal = () => {
   const token = Cookies.get("token");
@@ -35,8 +38,8 @@ const CreateMeal = () => {
   const [count, setCount] = useState(1);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [mealId, setMealId] = useState(0);
-  const [ formData, setFormData ] = useState();
-  const [ formErrors, setFormErrors ] = useState();
+  const [formData, setFormData] = useState();
+  const [formErrors, setFormErrors] = useState();
 
   document.documentElement.scrollTop = 0;
 
@@ -46,85 +49,80 @@ const CreateMeal = () => {
     formState: { errors },
   } = useForm();
 
-
-
   const navigate = useNavigate();
 
   const jsConfetti = new JSConfetti();
 
   const isDataValid = (data) => {
-    console.log('data isDataValid', data);
-    
-    return (  data.title.length >=3 &&
-              data.description.length >= 10 &&
-              data.categories &&
-              cityInfo &&
-              startDate
-            ) ? true : false
-  }
+    console.log("data isDataValid", data);
+
+    return data.title.length >= 3 &&
+      data.description.length >= 10 &&
+      data.categories &&
+      cityInfo &&
+      startDate
+      ? true
+      : false;
+  };
 
   const onSubmit = (data) => {
-    console.log('data onSubmit', data, cityInfo, startDate);
+    console.log("data onSubmit", data, cityInfo, startDate);
     setFormErrors({
       title: data.title.length < 3 && "Titre trop court.",
       description: data.description.length < 10 && "Description trop courte.",
-      categories : !data.categories && "Sélectionner 1 catégorie minimum.",
-      location : cityInfo === undefined && "L'adresse est requise.",
-      starting_date: startDate === undefined && "La date du repas est requise."
-    })
+      categories: !data.categories && "Sélectionner 1 catégorie minimum.",
+      location: cityInfo === undefined && "L'adresse est requise.",
+      starting_date: startDate === undefined && "La date du repas est requise.",
+    });
 
     setFormData(data);
-    if (isDataValid(data)){ 
+    if (isDataValid(data)) {
+      console.log("data", data);
+      const imagesUrl = new FormData();
+      for (let i = 0; i < data.image_urls.length; i++) {
+        imagesUrl.append("meal[images][]", data.image_urls[i]);
+      }
 
-              console.log("data", data)
-              const imagesUrl = new FormData();
-              for (let i = 0; i < data.image_urls.length; i++) {
-                imagesUrl.append("meal[images][]", data.image_urls[i]);
-              }
-
-              fetch(API + "meals", {
-                method: "POST",
-                headers: {
-                  "Content-type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                  meal: {
-                    title: data.title,
-                    description: data.description,
-                    price: data.price,
-                    location: {
-                      city: cityInfo.city,
-                      lat: cityInfo.lat,
-                      lon: cityInfo.lon,
-                      address: cityInfo.formatted,
-                    },
-                    guest_capacity: data.guest_capacity,
-                    starting_date: startDate,
-                    animals: data.animals,
-                    alcool: data.alcool,
-                    doggybag: data.doggybag,
-                    diet_type: data.dietType,
-                    allergens: data.allergens,
-                  },
-                }),
-              })
-                .then((response) => {
-                  return response.json();
-                })
-                .then((res) => {
-                  console.log(res);
-                  postCategoriesInfo(data.categories, res.id);
-                  data.image_urls.length !== 0 && postImages(res.id, imagesUrl);
-                  setMealId(res.id);
-                  jsConfetti.addConfetti();
-                  setShowConfirmation(true);
-                });}
-
-    else {
-      return (
-        <p>Données invalides.</p>
-      )
+      fetch(API + "meals", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          meal: {
+            title: data.title,
+            description: data.description,
+            price: data.price,
+            location: {
+              city: cityInfo.city,
+              lat: cityInfo.lat,
+              lon: cityInfo.lon,
+              address: cityInfo.formatted,
+            },
+            guest_capacity: data.guest_capacity,
+            starting_date: startDate,
+            animals: data.animals,
+            alcool: data.alcool,
+            doggybag: data.doggybag,
+            diet_type: data.dietType,
+            allergens: data.allergens,
+          },
+        }),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((res) => {
+          console.log(res);
+          postCategoriesInfo(data.categories, res.id);
+          data.image_urls.length !== 0 && postImages(res.id, imagesUrl);
+          setMealId(res.id);
+          jsConfetti.addConfetti();
+          setShowConfirmation(true);
+        });
+    } else {
+      return <p>Données invalides.</p>;
     }
   };
   const postCategoriesInfo = (categoriesArray, mealId) => {
@@ -178,7 +176,6 @@ const CreateMeal = () => {
     setCount(count - 1);
   };
   const gotoNextStep = (value) => {
-
     setNextStep(value);
     increment();
   };
@@ -186,6 +183,10 @@ const CreateMeal = () => {
     setNextStep(value);
     decrement();
   };
+
+  useEffect(() => {
+    ScrollReveal().reveal(".slide", slideUp);
+  }, []);
 
   return (
     <div className="flex">
@@ -211,18 +212,18 @@ const CreateMeal = () => {
           </div>
         </LayoutBlur>
       )}
-      <div className="w-2/6 h-screen bg-green flex justify-center items-center -z-10 top-0">
+      <div className="w-2/6 h-screen bg-green flex justify-center items-center -z-10 top-0 show-image">
         <img className="w-96" alt="createmeal" src={imgCreateMeal} />{" "}
       </div>
 
       <div className="p-32 pb-0 w-4/6">
         <HeroTitle>
-          <span className="text-black"> Étape 0{count}/04 </span>
+          <span className="text-black slide"> Étape 0{count}/04 </span>
         </HeroTitle>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-[600px] flex flex-col gap-3 mt-4 mb-6"
+          className="max-w-[600px] flex flex-col gap-3 mt-4 mb-6 slide"
         >
           {nextStep === "firstStep" && (
             <>
@@ -235,8 +236,7 @@ const CreateMeal = () => {
                   )}`}
                   placeholder="Quel est le titre de la recette ?"
                   type="text"
-                  {...register("title", {required: true})}
-                  
+                  {...register("title", { required: true })}
                 />
                 {errorMessage(errors.title)}
               </div>
@@ -280,16 +280,20 @@ const CreateMeal = () => {
                 </div>
               </div>
               <span onClick={() => gotoNextStep("secondStep", "title")}>
-                <Button showText={true} showIcon={true} icon={<Arrow/>}> Suivant </Button>
+                <Button showText={true} showIcon={true} icon={<Arrow />}>
+                  {" "}
+                  Suivant{" "}
+                </Button>
               </span>
-              
             </>
           )}
 
           {nextStep === "secondStep" && (
-            <>
+            <div
+              className={`${nextStep === "secondStep" && "slide-in-bottom"}`}
+            >
               <SectionTitle> Mais encore ... </SectionTitle>
-              <div className="flex gap-8 mt-8">
+              <div className="flex gap-8 mt-8 ">
                 <div className="flex flex-col  w-full">
                   <p> A quel prix ? (24€ max)</p>
                   <input
@@ -302,7 +306,6 @@ const CreateMeal = () => {
                     max={24}
                     onKeyDown={(e) => e.preventDefault()}
                     {...register("price", errorMessageValues.price)}
-                    
                   />
                   {errorMessage(errors.price)}
                 </div>
@@ -321,7 +324,6 @@ const CreateMeal = () => {
                       "guest_capacity",
                       errorMessageValues.guest_capacity
                     )}
-                    
                   />
                   {errorMessage(errors.guest_capacity)}
                 </div>
@@ -369,20 +371,30 @@ const CreateMeal = () => {
 
               <div className="flex mt-6 gap-4">
                 <span onClick={() => gotoPreviousStep("firstStep")}>
-                  <Button showText={true} showIconLeft={true} icon={<ArrowLeft/>}> Précedent </Button>
+                  <Button
+                    showText={true}
+                    showIconLeft={true}
+                    icon={<ArrowLeft />}
+                  >
+                    {" "}
+                    Précedent{" "}
+                  </Button>
                 </span>
                 <span onClick={() => gotoNextStep("thirdStep")}>
-                  <Button showText={true} showIcon={true} icon={<Arrow/>}> Suivant </Button>
+                  <Button showText={true} showIcon={true} icon={<Arrow />}>
+                    {" "}
+                    Suivant{" "}
+                  </Button>
                 </span>
               </div>
-            </>
+            </div>
           )}
 
           {nextStep === "thirdStep" && (
-            <>
+            <div className={`${nextStep === "thirdStep" && "slide-in-bottom"}`}>
               <SectionTitle> Des infos supplémentaires ? </SectionTitle>
-              <p className="mt-3"> Des spécificités ? </p>
-              <div className="flex gap-3">
+              <p className="mt-5"> Des spécificités ? </p>
+              <div className="flex gap-3 mt-2">
                 <div className="flex items-center gap-2">
                   <input
                     type="checkbox"
@@ -426,8 +438,8 @@ const CreateMeal = () => {
                   </label>
                 </div>
               </div>
-              <p className="mt-3"> Un régime alimentaire particulier ? </p>
-              <div className="flex gap-3">
+              <p className="mt-5"> Un régime alimentaire particulier ? </p>
+              <div className="flex gap-3 mt-2">
                 {dietType.map((dietT, index) => (
                   <div key={index} className="flex items-center gap-2">
                     <input
@@ -447,8 +459,8 @@ const CreateMeal = () => {
                   </div>
                 ))}
               </div>
-              <p className="mt-3"> Des allergies ? </p>
-              <div className="flex gap-3">
+              <p className="mt-5"> Des allergies ? </p>
+              <div className="flex gap-3 mt-2">
                 {allergens.map((allergen, index) => (
                   <div key={index} className="flex items-center gap-2">
                     <input
@@ -470,62 +482,77 @@ const CreateMeal = () => {
               </div>
               <div className="flex items-center gap-4 mt-8">
                 <span onClick={() => gotoPreviousStep("secondStep")}>
-                  <Button showText={true} showIconLeft={true} icon={<ArrowLeft/>}> Précedent </Button>
+                  <Button
+                    showText={true}
+                    showIconLeft={true}
+                    icon={<ArrowLeft />}
+                  >
+                    {" "}
+                    Précedent{" "}
+                  </Button>
                 </span>
                 <span onClick={() => gotoNextStep("fourthStep")}>
-                  <Button showText={true} showIcon={true} icon={<Arrow/>}> Suivant </Button>
+                  <Button showText={true} showIcon={true} icon={<Arrow />}>
+                    {" "}
+                    Suivant{" "}
+                  </Button>
                 </span>
               </div>
-            </>
+            </div>
           )}
 
           {nextStep === "fourthStep" && (
-            <>
+            <div
+              className={`${nextStep === "fourthStep" && "slide-in-bottom"}`}
+            >
               <SectionTitle> Ajouter des images </SectionTitle>
               <input
                 type="file"
+                className="mt-3 block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer file:hover:bg-green_light"
                 name="images"
                 id="images"
                 required
                 multiple={true}
                 {...register("image_urls")}
               />
-              
-              
-      
 
               <div className="flex items-center gap-4 mt-8">
                 <span onClick={() => gotoPreviousStep("thirdStep")}>
-                  <Button showText={true} showIconLeft={true} icon={<ArrowLeft/>}> Précedent </Button>
-              </span>
+                  <Button
+                    showText={true}
+                    showIconLeft={true}
+                    icon={<ArrowLeft />}
+                  >
+                    {" "}
+                    Précedent{" "}
+                  </Button>
+                </span>
 
-
-                
-              <button type="submit" className="my-2 flex justify-center">
-                <Button showText={true} showIcon={true} icon={<Check/>}>Créer un repas</Button>
-              </button>
-
-              
+                <button type="submit" className="my-2 flex justify-center">
+                  <Button showText={true} showIcon={true} icon={<Check />}>
+                    Créer un repas
+                  </Button>
+                </button>
               </div>
 
-              {
-                formData && (!isDataValid(formData) &&
-                  <div>
-                  <p className="text-sm text-black font-book-font">Veuillez vérifier les informations suivantes :</p>
-                    {
-                      Object.values(formErrors).map((error, index )=> {
-                        return(
-                          <p key={index} className="text-sm text-red font-book-font">{error}</p>
-                        )
-                      })
-                      
-                      
-                    }
-                  </div>
-                  )
-              }
-
-            </>
+              {formData && !isDataValid(formData) && (
+                <div>
+                  <p className="text-sm text-black font-book-font">
+                    Veuillez vérifier les informations suivantes :
+                  </p>
+                  {Object.values(formErrors).map((error, index) => {
+                    return (
+                      <p
+                        key={index}
+                        className="text-sm text-red font-book-font"
+                      >
+                        {error}
+                      </p>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           )}
         </form>
       </div>

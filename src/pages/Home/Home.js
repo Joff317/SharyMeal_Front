@@ -1,40 +1,56 @@
-import { useAtomValue } from "jotai";
-import React, { useState } from "react";
-import { loggedAtom } from "../../atoms/loggedAtom";
+import React, { useEffect, useRef } from "react";
 import "./Home.css";
-import Button from "../../components/actions/Button";
-import Arrow from "../../icons/Arrow";
 import HeroTitle from "../../components/titles/HeroTitle";
-import CategoryItem from "../../components/actions/CategoryItem";
-import Sushi from "../../icons/Sushi";
 import MealsIndex from "../../components/meals/MealsIndex";
 import image1 from "../../assets/images/imagehome1.jpeg";
 import image2 from "../../assets/images/imagehome2.jpeg";
 import image3 from "../../assets/images/imagehome3.jpeg";
 import InputGeoloc from "../../components/geolocation/InputGeoloc";
-
+import ScrollReveal from "scrollreveal";
+import {
+  AnimeJs,
+  slideUp,
+  slideUpContent,
+} from "../../components/animations/Animations";
+import "../../components/animations/transition.css";
 
 function Home(props) {
-  const loggedd = useAtomValue(loggedAtom);
+  const animation = useRef(null);
 
-  const [categoriesArray, setCategoriesArray] = useState([]);
+  useEffect(() => {
+    animation.current.innerHTML = animation.current.textContent.replace(
+      /\S/g,
+      "<span class='letter'>$&</span>"
+    );
+    AnimeJs();
+  }, [animation]);
 
-  // console.log(categoriesArray);
+  useEffect(() => {
+    ScrollReveal().reveal(".slide", slideUp);
+  }, []);
 
   return (
     <div className="home-container ">
       <div className="top-container relative">
         <div className="text-container pt-3">
-          <HeroTitle> Meet. Share. Eat. </HeroTitle>
-          <div className="under-title mt-3">
+          <HeroTitle>
+            {" "}
+            <span ref={animation} className="ml12">
+              Meet. Share. Eat.
+            </span>{" "}
+          </HeroTitle>
+
+          <div className="under-title mt-3 slide">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             semper nisl nec sociis.Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Praesent semper nisl
           </div>
-          <InputGeoloc />
+          <span className="slide">
+            <InputGeoloc />
+          </span>
         </div>
 
-        <div className="flex gap-4 w-full flex-wrap pt-24 justify-evenly absolute top-[320px]">
+        <div className="flex gap-4 w-full flex-wrap pt-24 -z-10 justify-evenly absolute slide  top-[320px]">
           <img
             src={image1}
             alt="first-img-home"
@@ -54,10 +70,9 @@ function Home(props) {
       </div>
 
       <div className="w-full h-5 mt-[250px]" id="titleScroll"></div>
-
-      <MealsIndex />
-   
-   
+      <span className="slide">
+        <MealsIndex />
+      </span>
     </div>
   );
 }

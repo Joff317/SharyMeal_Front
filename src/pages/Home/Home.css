@@ -12,6 +12,7 @@
     padding-top: 100px;
     background-color: var(--black);
     height: 600px;
+    z-index: 0;
 }
 
 .text-container{
@@ -102,3 +103,4 @@ footer{
     left: 0; */
     width: 100%;
 }
+

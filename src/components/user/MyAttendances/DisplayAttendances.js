@@ -31,11 +31,16 @@ function DisplayAttendances({ period, meals }) {
           ? meals
               .filter((meal) => new Date(meal.starting_date) < Date.now())
               .map((meal, index) => (
-                <MealCard key={index} mealData={meal} showAdditionalInfoReview />
+                <MealCard
+                  key={index}
+                  mealData={meal}
+                  showAdditionalInfoReview
+                  launchAnimation
+                />
               ))
           : meals
               .filter((meal) => new Date(meal.starting_date) >= Date.now())
-              .map((meal) => <MealCard mealData={meal} />)}
+              .map((meal) => <MealCard mealData={meal} launchAnimation />)}
       </div>
     </>
   );
