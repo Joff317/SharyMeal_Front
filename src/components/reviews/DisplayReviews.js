@@ -24,8 +24,8 @@ function DisplayReviews({ reviewStatus, reviews }) {
       )}
 
       {reviewStatus === "received"
-        ? reviews.received.map((review) => <Review review={review} showHost />)
-        : reviews.written.map((review) => <Review review={review} />)}
+        ? reviews.received.map((review, index) => <Review key={index} review={review} showHost />)
+        : reviews.written.map((review, index) => <Review key={index} review={review} />)}
     </div>
   );
 }

@@ -25,6 +25,7 @@ function MyHostedMeals({ userData, forceUpdate }) {
           {userData &&
             userData.hosted_meals.map((hosted_meal) => (
               <MealCard
+                key={hosted_meal.id}
                 mealData={hosted_meal}
                 showAdditionalInfo
                 forceUpdate={forceUpdate}
