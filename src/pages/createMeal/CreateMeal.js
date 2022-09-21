@@ -256,8 +256,8 @@ const CreateMeal = () => {
                 </p>
 
                 <div className="flex flex-wrap gap-3">
-                  {categories.map((category) => (
-                    <div className="flex items-center gap-2">
+                  {categories.map((category, index) => (
+                    <div key={index} className="flex items-center gap-2">
                       <input
                         type="checkbox"
                         id={category.id}
@@ -339,8 +339,9 @@ const CreateMeal = () => {
                   <div className="border border-slate-500 rounded-xl p-3 absolute top-20 z-10 bg-white">
                     {" "}
                     {autocomplete &&
-                      autocomplete.results.map((res) => (
+                      autocomplete.results.map((res, index) => (
                         <Autocompletion
+                          key={index}
                           res={res}
                           setCityInfo={setCityInfo}
                           setAutocompleteVisible={setAutocompleteVisible}
@@ -424,8 +425,8 @@ const CreateMeal = () => {
               </div>
               <p className="mt-3"> Un régime alimentaire particulier ? </p>
               <div className="flex gap-3">
-                {dietType.map((dietT) => (
-                  <div className="flex items-center gap-2">
+                {dietType.map((dietT, index) => (
+                  <div key={index} className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       id={dietT.label}
@@ -445,8 +446,8 @@ const CreateMeal = () => {
               </div>
               <p className="mt-3"> Des allergies ? </p>
               <div className="flex gap-3">
-                {allergens.map((allergen) => (
-                  <div className="flex items-center gap-2">
+                {allergens.map((allergen, index) => (
+                  <div key={index} className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       id={allergen.label}
@@ -508,9 +509,9 @@ const CreateMeal = () => {
                   <div>
                   <p className="text-sm text-black font-book-font">Veuillez vérifier les informations suivantes :</p>
                     {
-                      Object.values(formErrors).map(error => {
+                      Object.values(formErrors).map((error, index )=> {
                         return(
-                          <p className="text-sm text-red font-book-font">{error}</p>
+                          <p key={index} className="text-sm text-red font-book-font">{error}</p>
                         )
                       })
                       

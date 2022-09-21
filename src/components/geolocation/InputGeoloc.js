@@ -76,8 +76,9 @@ function InputGeoloc() {
           <div className="border border-slate-500 rounded-lg p-2 absolute top-16 left-16 z-10 bg-white">
             {" "}
             {autocomplete &&
-              autocomplete.results.map((res) => (
+              autocomplete.results.map((res, index) => (
                 <Autocompletion
+                  key={index}
                   res={res}
                   setCityInfo={setCityInfo}
                   setAutocompleteVisible={setAutocompleteVisible}

@@ -70,8 +70,8 @@ function MealIndex() {
     if (results.length > 0) {
       return !mapVisib ? (
         <div id="meals-index-container">
-          {results.map((meal) => (
-            <MealCard key={meal.id} mealData={meal} showAvatar={true} />
+          {results.map((meal, index) => (
+            <MealCard key={index} mealData={meal} showAvatar={true} />
           ))}
         </div>
       ) : (
