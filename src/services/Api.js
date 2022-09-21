@@ -55,6 +55,12 @@ export default class APIManager {
 
 	// Request that needs to be customized
 
+	static async updateMe(route, body){
+		const response = await API_REQUEST.put(route, body)
+
+		return response;
+	}
+
 	// We keep the classical fetch request for update meal images, as this request is not working yet.
 	// static async postImages (mealId, data) {
 	// 	console.log('data from AXIOS', data)

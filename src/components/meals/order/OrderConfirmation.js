@@ -9,12 +9,17 @@ import PaymentForm from "./PaymentForm";
 import { API } from "../../../utils/variables";
 import "./OrderElement.scss";
 import APIManager from "../../../services/Api";
+import env from "react-dotenv";
 
 const PUBLIC_KEY = process.env.REACT_APP_PUBLISHABLE_KEY;
+
+
 const stripeTestPromise = loadStripe(PUBLIC_KEY);
 
 function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
   const [clientSecret, setClientSecret] = useState("");
+  // console.log('env.REACT_APP_PUBLISHABLE_KEY', env.REACT_APP_PUBLISHABLE_KEY)
+  // console.log('env.REACT_APP_GEOAPIFY_KEY', env.REACT_APP_GEOAPIFY_KEY)
 
   useEffect(() => {
 

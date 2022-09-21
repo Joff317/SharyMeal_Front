@@ -42,7 +42,11 @@ function MealDetails() {
 
   const createAttendance = async () => {
 
-    await APIManager.createAttendance(mealId)
+    await APIManager.create("attendances", {
+      attendance: {
+        meal_id: mealId,
+      },
+    })
     .then(res => {
       console.log("res FROM createAttendance REQUEST => ", res)
       updateGuestRegisteredCount();
@@ -56,11 +60,11 @@ function MealDetails() {
     //     "Content-type": "application/json",
     //     Authorization: `Bearer ${token}`,
     //   },
-    //   body: JSON.stringify({
-    //     attendance: {
-    //       meal_id: mealId,
-    //     },
-    //   }),
+      // body: JSON.stringify({
+      //   attendance: {
+      //     meal_id: mealId,
+      //   },
+      // }),
     // })
     //   .then((response) => {
     //     return response.json();
@@ -75,23 +79,33 @@ function MealDetails() {
   };
 
   const updateGuestRegisteredCount = () => {
-    fetch(API + `meals/${mealId}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
+
+    APIManager.edit(`meals/${mealId}`, {
+      meal: {
+        guest_registered: meal.guest_registered + bookingQuantity,
       },
-      body: JSON.stringify({
-        meal: {
-          guest_registered: meal.guest_registered + bookingQuantity,
-        },
-      }),
-    })
-      .then((response) => {
-        console.log(response);
-        return response.json();
-      })
-      .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
+    } )
+    .then(res => console.log("res FROM updateGuestRegisteredCount => ", res))
+    .catch(error => console.log('error FROM updateGuestRegisteredCount => ', error.message))
+
+
+    // fetch(API + `meals/${mealId}`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   body: JSON.stringify({
+    //     meal: {
+    //       guest_registered: meal.guest_registered + bookingQuantity,
+    //     },
+    //   }),
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //     return response.json();
+    //   })
+    //   .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
   };
 
   useEffect(() => {
@@ -114,7 +128,7 @@ function MealDetails() {
   const closeModal = () => {
     createAttendance();
     // setOrderConfirmationAtom(false);
-    return (window.location.href = CURRENT_URL + `meals/${mealId}`);
+    // return (window.location.href = CURRENT_URL + `meals/${mealId}`);
     // console.log('window.history', window.history);
     // return window.history.go(-1);
   };

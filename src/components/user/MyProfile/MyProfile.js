@@ -16,6 +16,8 @@ import { useAtom, useSetAtom } from "jotai";
 import { currentuserAtom } from "../../../atoms/loggedAtom";
 import AvatarForm from "../AvatarForm";
 import DisplayReviews from "../../reviews/DisplayReviews";
+import APIManager from "../../../services/Api";
+import env from 'react-dotenv';
 
 function MyProfile({ currentUser, setCurrentUser, userData }) {
   const token = Cookies.get("token");
@@ -33,84 +35,151 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
     formState: { errors },
   } = useForm();
 
-  const OnSubmit = (data) => {
+  const OnSubmit = async (data) => {
     const dataAvatar = new FormData();
     dataAvatar.append("user[avatar]", data.avatar_url[0]);
 
-    fetch(API + "update_me", {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
+    await APIManager.updateMe("update_me", {
+      user: {
+        name: data.name,
+        age: data.age,
+        email: data.email,
+        gender: data.gender,
+        description: data.description,
+        city: cityInfo ? cityInfo.city : "",
       },
-      body: JSON.stringify({
-        user: {
-          name: data.name,
-          age: data.age,
-          email: data.email,
-          gender: data.gender,
-          description: data.description,
-          city: cityInfo ? cityInfo.city : "",
-        },
-      }),
     })
-      .then((response) => {
-        if (response.status === 200) {
-          setEditConfirmVisib(true);
-          setTimeout(() => {
-            setEditConfirmVisib(false);
-          }, 2000);
-          setCurrentUser(data);
-        } else {
-          setEditErrorVisib(true);
-          setTimeout(() => {
-            setEditErrorVisib(false);
-          }, 2000);
-        }
-        return response.json();
-      })
-      .then((fetchData) => {
-        setCurrentUserAtom({
-          ...currentUserAtom,
-          city: fetchData.city,
-          name: fetchData.name,
-          age: fetchData.age,
-          email: fetchData.email,
-          gender: fetchData.gender,
-          description: fetchData.description,
-        });
-        data.avatar_url.length !== 0 && postAvatar(dataAvatar);
-      })
-      .catch((error) => console.log(error.message));
+    .then(res => {
+      console.log('res FROM UPDATE_ME REQUEST => ', res);
+      console.log('res.status', res.status);
+
+      if (res.status === 200) {
+        setEditConfirmVisib(true);
+        setTimeout(() => {
+          setEditConfirmVisib(false);
+        }, 2000);
+        setCurrentUser(data);
+      } else {
+        setEditErrorVisib(true);
+        setTimeout(() => {
+          setEditErrorVisib(false);
+        }, 2000);
+      }
+
+      setCurrentUserAtom({
+        ...currentUserAtom,
+        city: res.data.city ? res.data.city : currentUser.city,
+        name: res.data.name,
+        age: res.data.age,
+        email: res.data.email,
+        gender: res.data.gender,
+        description: res.data.description,
+      });
+      data.avatar_url.length !== 0 && postAvatar(dataAvatar);
+
+    })
+    .catch(error => console.error('error FROM UPDATE_ME REQUEST => ', error.message))
+
+
+// OLD request : will be removed
+    // fetch(API + "update_me", {
+    //   method: "PUT",
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     user: {
+    //       name: data.name,
+    //       age: data.age,
+    //       email: data.email,
+    //       gender: data.gender,
+    //       description: data.description,
+    //       city: cityInfo ? cityInfo.city : "",
+    //     },
+    //   }),
+    // })
+    //   .then((response) => {
+    //     if (response.status === 200) {
+    //       setEditConfirmVisib(true);
+    //       setTimeout(() => {
+    //         setEditConfirmVisib(false);
+    //       }, 2000);
+    //       setCurrentUser(data);
+    //     } else {
+    //       setEditErrorVisib(true);
+    //       setTimeout(() => {
+    //         setEditErrorVisib(false);
+    //       }, 2000);
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((fetchData) => {
+    //     setCurrentUserAtom({
+    //       ...currentUserAtom,
+    //       city: fetchData.city,
+    //       name: fetchData.name,
+    //       age: fetchData.age,
+    //       email: fetchData.email,
+    //       gender: fetchData.gender,
+    //       description: fetchData.description,
+    //     });
+    //     data.avatar_url.length !== 0 && postAvatar(dataAvatar);
+    //   })
+    //   .catch((error) => console.log(error.message));
   };
 
-  function postAvatar(dataAvatar) {
-    const requestOptions = {
-      method: "PUT",
-      headers: { Authorization: `Bearer ${token}` },
-      body: dataAvatar,
-    };
-    fetch(API + "update_me", requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        setCurrentUserAtom({
-          ...currentUserAtom,
-          avatar_url: res.avatar_url,
-        });
+  async function postAvatar(dataAvatar) {
+
+    await APIManager.edit("update_me", dataAvatar)
+    .then(res => {
+      console.log('res FROM postAvatar REQUEST ', res);
+      setCurrentUserAtom({
+        ...currentUserAtom,
+        avatar_url: res.avatar_url,
       });
+    })
+    .catch(error => console.error('error FROM postAvatar REQUEST => ', error.message))
+
+
+// OLD request : will bre rmeoved.
+    // const requestOptions = {
+    //   method: "PUT",
+    //   headers: { Authorization: `Bearer ${token}` },
+    //   body: dataAvatar,
+    // };
+    // fetch(API + "update_me", requestOptions)
+    //   .then((response) => response.json())
+    //   .then((res) => {
+    //     setCurrentUserAtom({
+    //       ...currentUserAtom,
+    //       avatar_url: res.avatar_url,
+    //     });
+    //   });
   }
 
-  function getData(e) {
+  async function getLocationData(e) {
     if (e.target.value.length > 4) {
-      fetch(
-        `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&type=city&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setAutocompleteVisible(true);
-          setAutocomplete(data);
-        })
-        .catch((err) => console.error(err));
+
+      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`)
+      .then(res => {
+        console.log('res FROM getLocationData REQUEST => ', res);
+        setAutocompleteVisible(true);
+        setAutocomplete(res);
+        
+      })
+      .catch(error => console.error('error FROM getLocationData => ', error.message))
+
+  // OLD request : will be removed
+      // fetch(
+      //   `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&type=city&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
+      // )
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     setAutocompleteVisible(true);
+      //     setAutocomplete(data);
+      //   })
+      //   .catch((err) => console.error(err));
     } else {
       setAutocompleteVisible(false);
     }
@@ -197,7 +266,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
                   )}`}
                   type="text"
                   id="inputCityUser"
-                  onChange={getData}
+                  onChange={getLocationData}
                   name="cityInput"
                   placeholder="Où cuisines-tu ?"
                   defaultValue={currentUser.city && `${currentUser.city}`}
