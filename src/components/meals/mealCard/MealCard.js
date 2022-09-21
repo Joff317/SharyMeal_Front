@@ -21,7 +21,7 @@ function MealCard({
   mealData,
   showAvatar,
   showAdditionalInfo,
-
+  showAdditionalInfoReview,
   launchAnimation,
   forceUpdate,
 }) {
