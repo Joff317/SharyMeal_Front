@@ -38,13 +38,12 @@ function MealIndex() {
   };
 
   useEffect(() => {
-    const result = APIManager.get("meals")
     
-      .then(res => {
+    APIManager.get("meals")
+    .then(res => {
         console.log('res FROM GET REQUEST => ', res)
-        setMealsIndex(res);
-      })
-      .catch(error => console.log('error from GET REQUEST =>', error.message));
+        setMealsIndex(res);})
+    .catch(error => console.log('error from GET REQUEST =>', error.message));
       
 // OLD fetch request : will be removed from code.
     // fetch(API + "meals")
@@ -104,7 +103,7 @@ function MealIndex() {
       <SectionTitle textCenter={true}>
         {" "}
         Discover food experiences around{" "}
-        <span className="bg-green"> {inputData ? inputData.city : "you"} </span>
+        <span className="bg-green"> {inputData.city !== "" ? inputData.city : "you"} </span>
       </SectionTitle>
       <div className={`flex gap-10 my-10 border-b border-grey-border pb-3`}>
         {categories.map((category, index) => (

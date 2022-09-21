@@ -58,7 +58,7 @@ const CreateMeal = () => {
   const jsConfetti = new JSConfetti();
 
   const isDataValid = (data) => {
-    // console.log('data isDataValid', data);
+    console.log('data isDataValid', data);
     
     return (  data.title.length >=3 &&
               data.description.length >= 10 &&
@@ -70,6 +70,7 @@ const CreateMeal = () => {
 
   const onSubmit = async (data) => {
     console.log('data onSubmit', data, cityInfo, startDate);
+
     setFormErrors({
       title: data.title.length < 3 && "Titre trop court.",
       description: data.description.length < 10 && "Description trop courte.",
@@ -87,25 +88,28 @@ const CreateMeal = () => {
         imagesUrl.append("meal[images][]", data.image_urls[i]);
       }
 
-      await APIManager.create("meals", {
-        title: data.title,
-        description: data.description,
-        price: data.price,
-        location: {
-          city: cityInfo ? cityInfo.city : data.location.city,
-          lat: cityInfo ? cityInfo.lat : data.location.lat,
-          lon: cityInfo ? cityInfo.lon : data.location.lon,
-          address: cityInfo
-            ? cityInfo.formatted
-            : data.location.address,
-        },
-        guest_capacity: data.guest_capacity,
-        starting_date: startDate,
-        animals: data.animals,
-        alcool: data.alcool,
-        doggybag: data.doggybag,
-        diet_type: data.dietType,
-        allergens: data.allergens,
+      await APIManager.create("meals",
+        {
+         meal:  {
+              title: data.title,
+              description: data.description,
+              price: data.price,
+              location: {
+                city: cityInfo ? cityInfo.city : data.location.city,
+                lat: cityInfo ? cityInfo.lat : data.location.lat,
+                lon: cityInfo ? cityInfo.lon : data.location.lon,
+                address: cityInfo
+                  ? cityInfo.formatted
+                  : data.location.address,
+              },
+              guest_capacity: data.guest_capacity,
+              starting_date: startDate,
+              animals: data.animals,
+              alcool: data.alcool,
+              doggybag: data.doggybag,
+              diet_type: data.dietType,
+              allergens: data.allergens,
+            }
       })
       .then(res => {
         console.log('res FROM CREATE MEAL REQUEST => ', res)
@@ -387,6 +391,11 @@ const CreateMeal = () => {
                   <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
+                    dateFormat="d MMMM yyyy"
+                    locale="fr"
+                    minDate={new Date()}
+                    placeholderText=" Cliquez pour choisir la date "
+                    // withPortal
                   />{" "}
                 </span>
               </div>

@@ -76,7 +76,12 @@ function InputGeoloc() {
     }
   };
 
-
+  const getTodayAtMidnight = () => {
+    const todayAtMidnight = new Date();
+    todayAtMidnight.setHours(0,0,0)
+    // console.log('today', today)
+    return todayAtMidnight;
+  }
 
   return (
     <div className="rounded-full bg-white w-fit py-2 pl-6 pr-2 relative">
@@ -117,6 +122,7 @@ function InputGeoloc() {
               onChange={(date) => setStartDate(date)}
               dateFormat="d MMMM yyyy"
               locale="fr"
+              minDate={getTodayAtMidnight()}
             />{" "}
           </span>
         </div>

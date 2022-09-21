@@ -348,6 +348,7 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
               onChange={(date) => setStartDate(date)}
               dateFormat="d MMMM yyyy"
               locale="fr"
+              minDate={new Date()}
             />{" "}
           </span>
         </div>
