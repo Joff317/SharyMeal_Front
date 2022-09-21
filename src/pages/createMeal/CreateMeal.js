@@ -483,6 +483,7 @@ const CreateMeal = () => {
                 type="file"
                 name="images"
                 id="images"
+                required
                 multiple={true}
                 {...register("image_urls")}
               />
