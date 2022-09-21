@@ -127,14 +127,37 @@ const CreateMeal = () => {
   };
 
   const postCategoriesInfo = async (categoriesArray, mealId) => {
+    
     await categoriesArray.map((category) => {
 
-       APIManager.postCategoriesInfo(mealId, category)
+       APIManager.create("join_categories", {
+        join_category_meal: {
+          meal_id: mealId,
+          category_id: parseInt(category),
+        },
+      })
         .then(res => console.log('res FROM postCategoriesInfo REQUEST => ', res))
         .catch(error => console.error('error from postCategoriesInfo REQUEST => ', error))
 
-    });
+//OLD request : will be removed
+        // fetch(API + "join_categories", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-type": "application/json",
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        //   body: JSON.stringify({
+        //     join_category_meal: {
+        //       meal_id: mealId,
+        //       category_id: parseInt(category),
+        //     }
+        //   })
+        // })  
+    })
   };
+
+
+ 
 
   const postImages = async (mealId, data) => {
     console.log('data from postImages', data)
@@ -143,7 +166,7 @@ const CreateMeal = () => {
     // .then(res => console.log('res FROM postImages REQUEST => ', res))
     // .catch(error => console.log('error FROM postImages REQUEST => ', error.message))
 
-// The following request is not using axios like others requests (because not working). 
+// The following request is not using axios like others requests (because of content-type probably). 
     const requestOptions = {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` },
@@ -336,7 +359,7 @@ const CreateMeal = () => {
                   onChange={getLocationData}
                   type="text"
                   id="inputAddress"
-                  autocomplete="off"
+                  autoComplete="off"
                   // {...register("location", errorMessageValues.location)}
                 />
                 {autocompleteVisible && (
