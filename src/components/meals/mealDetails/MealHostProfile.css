@@ -1,0 +1,92 @@
+.meals-detail-host {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.meals-detail-host .host-title {
+  color: white;
+  font-family: var(--bookmania-bold-font);
+}
+.meals-detail-host .detail-host-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 60px;
+  margin: 20px 30px;
+}
+@media (max-width: 1000px) {
+  .meals-detail-host .detail-host-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+.meals-detail-host .left-detail-host-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+.meals-detail-host .left-detail-host-container .avatar {
+  border-radius: 100%;
+  width: 135px;
+  height: 135px;
+}
+.meals-detail-host .left-detail-host-container .avatar img {
+  object-fit: cover;
+  border-radius: 100%;
+  width: 135px;
+  height: 135px;
+}
+.meals-detail-host .left-detail-host-container .right-detail-of-left-detail-host-container .host-title {
+  font-family: var(--bold-font) !important;
+  font-style: normal !important;
+  font-size: 35px !important;
+}
+.meals-detail-host .left-detail-host-container .right-detail-of-left-detail-host-container p {
+  color: white;
+  font-family: var(--medium-font);
+  font-size: 17px;
+  font-style: normal;
+}
+.meals-detail-host .vertical-border {
+  padding-right: 20px;
+  margin-top: 20px;
+  border-right: 1px solid;
+  color: var(--grey);
+  height: 200px;
+}
+@media (max-width: 1000px) {
+  .meals-detail-host .vertical-border {
+    display: none;
+  }
+}
+.meals-detail-host .right-detail-host-container {
+  max-width: 700px;
+}
+.meals-detail-host .right-detail-host-container .top-container-about {
+  color: white;
+  padding: 20px;
+}
+.meals-detail-host .right-detail-host-container .top-container-about .bio-container {
+  padding: 12px 0 0 0;
+  font-family: var(--light-font);
+}
+.meals-detail-host .right-detail-host-container .bottom-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 30px;
+  gap: 30px;
+}
+@media (max-width: 1150px) {
+  .meals-detail-host .right-detail-host-container .bottom-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+.meals-detail-host .right-detail-host-container .bottom-container .contact {
+  color: var(--pink);
+}
+
+/*# sourceMappingURL=MealHostProfile.css.map */

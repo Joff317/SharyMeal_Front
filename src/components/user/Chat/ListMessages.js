@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { list } from "postcss";
+import ScrollReveal from "scrollreveal";
+import { slideUpFast } from "../../animations/Animations";
 
 function ListMessages({ listMessages, setCurrentChatterId, currentChatterId }) {
+  useEffect(() => {
+    ScrollReveal().reveal(".slide", slideUpFast);
+  }, []);
   // console.log(listMessages);
+
   return (
     <div className="relative ">
       {listMessages &&
