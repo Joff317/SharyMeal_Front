@@ -4,7 +4,7 @@ import DetailMessage from "./Chat/DetailMessage";
 import SubsectionTitle from "../titles/SubsectionTitle";
 
 function MyMessages({ userData }) {
-  const [currentChatterId, setCurrentChatterId] = useState(userData[0].id);
+  const [currentChatterId, setCurrentChatterId] = useState(userData[0] && userData[0].id);
 
   return (
     <>
