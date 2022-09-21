@@ -37,14 +37,14 @@ const MealDetailsInformations = ({ meal }) => {
           <Peanuts />
           <div>
             {meal.allergens &&
-              meal.allergens.map((allergen) => <p>{allergen}</p>)}
+              meal.allergens.map((allergen, index) => <p key={index}>{allergen}</p>)}
           </div>
         </li>
 
         <li className="icon">
           <Meal />
           <div>
-            {meal.diet_type && meal.diet_type.map((diet) => <p>{diet}</p>)}
+            {meal.diet_type && meal.diet_type.map((diet, index) => <p key={index}>{diet}</p>)}
           </div>
         </li>
       </ul>
