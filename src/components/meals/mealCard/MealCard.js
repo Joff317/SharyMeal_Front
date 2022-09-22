@@ -65,6 +65,9 @@ function MealCard({
     launchAnimation && ScrollReveal().reveal(".slide", slideUpFast);
   }, [launchAnimation]);
 
+  console.log(new Date(Date.now()));
+  console.log(new Date(mealData.starting_date));
+
   return (
     <div
       key={mealData.id}
@@ -76,8 +79,16 @@ function MealCard({
         <>
           <div className="absolute top-2 -left-2 flex flex-col gap-2 z-0">
             <div
-              onClick={() => setShowEdit(true)}
-              className="w-[38px] h-[38px] rounded-full bg-[#5376F1] flex justify-center items-center cursor-pointer"
+              onClick={() =>
+                setShowEdit(
+                  new Date(mealData.starting_date) > new Date(Date.now())
+                )
+              }
+              className={`w - [38px] h-[38px] rounded-full  ${
+                new Date(mealData.starting_date) < new Date(Date.now())
+                  ? "bg-grey cursor-not-allowed"
+                  : "bg-[#5376F1] cursor-pointer"
+              } flex justify-center items-center `}
             >
               <Edit />
             </div>
