@@ -27,7 +27,7 @@ const MealDetailsInformations = ({ meal }) => {
 
         <li className="icon">
           <UserBlack />
-           Places libres : {meal.guest_registered && meal.guest_registered} / {meal.guest_capacity && meal.guest_capacity} 
+           Réservations : {meal.guest_registered && meal.guest_registered} / {meal.guest_capacity && meal.guest_capacity} 
         </li>
 
         <li className="icon">
