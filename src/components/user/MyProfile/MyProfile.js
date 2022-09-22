@@ -19,6 +19,7 @@ import { slideUpFast } from "../../animations/Animations";
 import APIManager from "../../../services/Api";
 import env from "react-dotenv";
 import { API } from "../../../utils/variables";
+import avatarDefault from "../../../assets/images/avatardefault.png";
 
 function MyProfile({ currentUser, setCurrentUser, userData }) {
   const token = Cookies.get("token");
@@ -318,7 +319,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
               <img
                 alt="useravatar"
                 className="w-16 h-16 border border-black rounded-full"
-                src={currentUser.avatar_url}
+                src={currentUser.avatar_url ? currentUser.avatar_url : avatarDefault}
               />
 
               <label className="block">
