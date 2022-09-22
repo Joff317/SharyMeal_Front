@@ -38,18 +38,18 @@ function User() {
       //     console.error("error FROM GET ME REQUEST => ", error)
       //   );
 
-    // OLD request : will be removed.
-    fetch(API + "me", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => {
-        console.log("response DE User.js", response);
-        return response.json();
+      // OLD request : will be removed.
+      fetch(API + "me", {
+        headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => {
-        console.log("data DE User.js ", res);
-        setData(res);
-      });
+        .then((response) => {
+          console.log("response DE User.js", response);
+          return response.json();
+        })
+        .then((res) => {
+          console.log("data DE User.js ", res);
+          setData(res);
+        });
   }, [setData, reducerValue]);
 
   const displayProfile = () => {
@@ -246,7 +246,9 @@ function User() {
             />
           )}
           {messagesVisib && <MyMessages userData={data.list_chatters} />}
-          {attendancesVisib && <MyAttendances userData={data} />}
+          {attendancesVisib && (
+            <MyAttendances userData={data} forceUpdate={forceUpdate} />
+          )}
           {hostedMealsVisib && (
             <MyHostedMeals userData={data} forceUpdate={forceUpdate} />
           )}

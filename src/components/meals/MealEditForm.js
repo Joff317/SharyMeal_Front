@@ -262,7 +262,7 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
 
           <div className="flex flex-wrap gap-3">
             {categories.map((category, index) => (
-              <div key={index} className="flex items-center gap-2">
+              <div key={index} className='flex items-center gap-2 '>
                 <input
                   defaultChecked={getCategoryChecked(category.id)}
                   type="checkbox"
@@ -282,12 +282,6 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
               </div>
             ))}
           </div>
-          {formData && !isDataValid(formData) && (
-            <p className="text-sm text-red font-book-font">
-              {" "}
-              {formErrors.categories}{" "}
-            </p>
-          )}
         </div>
         <div className="flex gap-8 mt-8">
           <div className="flex flex-col  w-full">
@@ -300,7 +294,7 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
               placeholder="Ex : 12€"
               type="number"
               max={24}
-              min={0}
+              min={1}
               onKeyDown={(e) => e.preventDefault()}
               {...register("price", errorMessageValues.price)}
             />
@@ -369,6 +363,7 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
               dateFormat="d MMMM yyyy"
               locale="fr"
               minDate={new Date()}
+              required
             />{" "}
           </span>
         </div>
@@ -482,6 +477,12 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
         <button type="submit" className="mt-8 flex justify-center">
           <Button showText> Modifier mon repas </Button>
         </button>
+        {formData && !isDataValid(formData) && (
+            <p className="error text-sm text-red font-book-font">
+              {" "}
+              {formErrors.categories}{" "}
+            </p>
+          )}
       </form>
     </>
   );

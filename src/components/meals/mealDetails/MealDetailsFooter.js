@@ -29,7 +29,7 @@ const MealDetailsFooter = ({ meal, setBookingQuantity, bookingQuantity, forceUpd
 
   return (
     <div className="meal-details-footer-top">
-      <div className="left-footer">
+      <div className="left-footer items-center">
         <p className="meal-title">{meal.title},</p>
         <p className="host-name"> by {meal.host.name}</p>
       </div>

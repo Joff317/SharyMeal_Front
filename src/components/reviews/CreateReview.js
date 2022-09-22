@@ -42,23 +42,28 @@ function CreateReview({ setShowReview, mealData }) {
 
   return (
     <div>
+      <SectionTitle> Laisser un avis </SectionTitle>
       <form
-        className="max-h-[500px] pb-14 mt-3 overflow-scroll"
+        className="max-h-[500px] pb-14 mt-3 overflow-scroll "
         onSubmit={handleSubmit(submitData)}
       >
         <div className="flex flex-col mt-8">
           <label htmlFor="">Laissez un commentaire</label>
           <input
             type="text"
+            className="border border-grey-border mt-1 h-10 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md "
             name="content"
+            placeholder="Votre commentaire"
             {...register("content", errorMessageValues.content)}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col mt-6">
           <label htmlFor="">Mettez une note</label>
           <input
             type="number"
+            className="border border-grey-border mt-1 h-10 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md "
             min={1}
+            placeholder="Votre note"
             max={5}
             name="rating"
             {...register("rating", errorMessageValues.rating)}
@@ -72,10 +77,7 @@ function CreateReview({ setShowReview, mealData }) {
           <Button showIcon={true} icon={<Close />}></Button>
         </span>
 
-        <button
-          type="submit"
-          className="my-2 flex justify-start fixed bottom-4 left-[40%]"
-        >
+        <button type="submit" className="my-2 mt-6 flex justify-start fixed ">
           <Button showText> Laisser un avis </Button>
         </button>
       </form>

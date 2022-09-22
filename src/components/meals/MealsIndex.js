@@ -38,14 +38,13 @@ function MealIndex() {
   };
 
   useEffect(() => {
-    
     // APIManager.get("meals")
     // .then(res => {
     //     // console.log('res FROM GET REQUEST => ', res)
     //     setMealsIndex(res);})
     // .catch(error => console.log('error from GET REQUEST =>', error.message));
-      
-// OLD fetch request : will be removed from code.
+
+    // OLD fetch request : will be removed from code.
     fetch(API + "meals")
       .then((res) => res.json())
       .then((data) => {
@@ -58,6 +57,7 @@ function MealIndex() {
 
   const filteringRender = (data) => {
     const results = data
+
       .filter((meal) =>
         categoriesArray.length >= 1
           ? meal.categories.some((cat) => categoriesArray.includes(cat.label))
@@ -79,9 +79,11 @@ function MealIndex() {
     if (results.length > 0) {
       return !mapVisib ? (
         <div id="meals-index-container">
-          {results.map((meal, index) => (
-            <MealCard key={index} mealData={meal} showAvatar={true} />
-          ))}
+          {results
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+            .map((meal, index) => (
+              <MealCard key={index} mealData={meal} showAvatar={true} />
+            ))}
         </div>
       ) : (
         <Map mapCenter={inputData} meals={results} />
@@ -101,7 +103,10 @@ function MealIndex() {
       <SectionTitle textCenter={true}>
         {" "}
         Discover food experiences around{" "}
-        <span className="bg-green"> {inputData.city !== "" ? inputData.city : "you"} </span>
+        <span className="bg-green">
+          {" "}
+          {inputData.city !== "" ? inputData.city : "you"}{" "}
+        </span>
       </SectionTitle>
       <div
         className={`category-slider flex gap-10 my-10 border-b border-grey-border pb-3`}

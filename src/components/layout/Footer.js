@@ -13,7 +13,7 @@ import {
 
 function Footer() {
   return (
-    <footer className=" left-0 bottom-0 w-full">
+    <footer className=" left-0 bottom[-1000000000px] w-full">
       <EmailShareButton
         subject="You gonna like it !"
         body="https://shary-meal-front.vercel.app/ is awesome !"

@@ -19,6 +19,7 @@ import { slideUpFast } from "../../animations/Animations";
 import APIManager from "../../../services/Api";
 import env from "react-dotenv";
 import { API } from "../../../utils/variables";
+import avatarDefault from "../../../assets/images/avatardefault.png";
 
 function MyProfile({ currentUser, setCurrentUser, userData }) {
   const token = Cookies.get("token");
@@ -307,19 +308,16 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
                 defaultValue={
                   currentUser.description && `${currentUser.description}`
                 }
-                className={`border border-grey-border h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
-                  errors.description
-                )}`}
-                {...register("description", errorMessageValues.description)}
+                className={`border border-grey-border h-14 pl-3 placeholder:font-light-font rounded-md`}
+                {...register("description")}
               />
-              {errorMessage(errors.description)}
             </div>
 
             <div className="flex gap-8 items-center ">
               <img
                 alt="useravatar"
                 className="w-16 h-16 border border-black rounded-full"
-                src={currentUser.avatar_url}
+                src={currentUser.avatar_url ? currentUser.avatar_url : avatarDefault}
               />
 
               <label className="block">
@@ -334,21 +332,21 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
               </label>
             </div>
 
-            <button type="submit" className="my-2 flex justify-center ">
+            <button type="submit" className="my-2 flex justify-center relative">
+              {editConfirmVisib && (
+                <p className="bg-success text-white w-full text-center absolute top-14 p-1">
+                  Profil correctement mis à jour.
+                </p>
+              )}
+
+              {editErrorVisib && (
+                <p className="bg-red text-white text-center w-full absolute top-14 p-1">
+                  Une erreur est survenue.
+                </p>
+              )}
+
               <Button showText={true}>Sauvegarder les modifications</Button>
             </button>
-
-            {editConfirmVisib && (
-              <p className="bg-success text-white text-center p-1 rounded">
-                Profil correctement mis à jour.
-              </p>
-            )}
-
-            {editErrorVisib && (
-              <p className="bg-red text-white text-center p-1 rounded">
-                Une erreur est survenue.
-              </p>
-            )}
           </form>
         </div>
         <br />

@@ -124,28 +124,26 @@ const CreateMeal = () => {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-      body: JSON.stringify({
-        meal: {
-          title: data.title,
-          description: data.description,
-          price: data.price,
-          location: {
-            city: cityInfo ? cityInfo.city : data.location.city,
-            lat: cityInfo ? cityInfo.lat : data.location.lat,
-            lon: cityInfo ? cityInfo.lon : data.location.lon,
-            address: cityInfo
-              ? cityInfo.formatted
-              : data.location.address,
+        body: JSON.stringify({
+          meal: {
+            title: data.title,
+            description: data.description,
+            price: data.price,
+            location: {
+              city: cityInfo ? cityInfo.city : data.location.city,
+              lat: cityInfo ? cityInfo.lat : data.location.lat,
+              lon: cityInfo ? cityInfo.lon : data.location.lon,
+              address: cityInfo ? cityInfo.formatted : data.location.address,
+            },
+            guest_capacity: data.guest_capacity,
+            starting_date: startDate,
+            animals: data.animals,
+            alcool: data.alcool,
+            doggybag: data.doggybag,
+            diet_type: data.dietType,
+            allergens: data.allergens,
           },
-          guest_capacity: data.guest_capacity,
-          starting_date: startDate,
-          animals: data.animals,
-          alcool: data.alcool,
-          doggybag: data.doggybag,
-          diet_type: data.dietType,
-          allergens: data.allergens,
-        },
-      }),
+        }),
       })
         .then((res) => {
           console.log("res FROM CREATE MEAL REQUEST => ", res);
@@ -162,7 +160,6 @@ const CreateMeal = () => {
         .catch((error) =>
           console.error("error FROM CREATE MEAL REQUEST =>", error.message)
         );
-        
     } else {
       return <p> Données invalides.</p>;
     }
@@ -194,9 +191,9 @@ const CreateMeal = () => {
           join_category_meal: {
             meal_id: mealId,
             category_id: parseInt(category),
-          }
-        })
-      })
+          },
+        }),
+      });
     });
   };
 
@@ -237,14 +234,15 @@ const CreateMeal = () => {
       )
         .then((response) => {
           console.log("res FROM getCityData REQUEST => ", response);
-          return response.json()
+          return response.json();
         })
         .then((data) => {
           setAutocompleteVisible(true);
           setAutocomplete(data);
         })
-        .catch((error) => console.error("error FROM getCityData REQUEST => ", error.message));
-
+        .catch((error) =>
+          console.error("error FROM getCityData REQUEST => ", error.message)
+        );
     } else {
       setAutocompleteVisible(false);
     }
@@ -385,6 +383,7 @@ const CreateMeal = () => {
                       errors.price
                     )}`}
                     placeholder="Ex : 12€"
+                    defaultValue="5"
                     type="number"
                     min={0}
                     max={24}
@@ -401,6 +400,7 @@ const CreateMeal = () => {
                     )}`}
                     placeholder="Ex : 4 invités"
                     type="number"
+                    defaultValue="4"
                     min={1}
                     max={11}
                     onKeyDown={(e) => e.preventDefault()}
@@ -442,10 +442,10 @@ const CreateMeal = () => {
                 )}
                 {errorMessage(errors.location)}
               </div>
-              <div className="flex items-center gap-2 my-5">
+              <div className="flex flex-col gap-2 my-5">
                 <label className="text-md min-w-[80px]"> A quelle date ?</label>
 
-                <span className="text-sm font-light-font">
+                <span className="text-sm h-12  font-light-font border border-grey-border py-2 px-4">
                   {" "}
                   <DatePicker
                     selected={startDate}
@@ -453,7 +453,7 @@ const CreateMeal = () => {
                     dateFormat="d MMMM yyyy"
                     locale="fr"
                     minDate={new Date()}
-                    placeholderText=" Cliquez pour choisir la date "
+                    placeholderText="Choisir la date "
                     // withPortal
                   />{" "}
                 </span>
