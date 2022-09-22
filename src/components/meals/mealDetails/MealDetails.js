@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { API } from "../../../utils/variables";
 import { useNavigate, useParams } from "react-router-dom";
 import "./MealDetails.scss";
@@ -22,6 +22,7 @@ import Cookies from "js-cookie";
 import { CURRENT_URL } from "../../../utils/variables";
 import APIManager from "../../../services/Api";
 import DisplayReviews from "../../reviews/DisplayReviews";
+import { bookingQtyAtom } from "../../../atoms/bookingQtyAtom";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
@@ -36,12 +37,26 @@ function MealDetails() {
   const orderConfirmationAtom = useAtomValue(OrderConfirmationAtom);
   const setOrderConfirmationAtom = useSetAtom(OrderConfirmationAtom);
   const token = Cookies.get("token");
+  const atomBookingQty = useAtomValue(bookingQtyAtom)
+  // const setAtomBookingQty = useSetAtom(bookingQtyAtom);
 
-  // console.log('CURRENT_URL', CURRENT_URL);
-  // console.log("MEALID", mealId);
-  // console.log(hostReviews);
+  useEffect(() => {
 
-  const createAttendance = async () => {
+    fetch(API + `meals/${mealId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMeal(data.meal);
+        setHostedMeals(data.hosted_meals);
+        setHostavatar(data.host_avatar);
+        setHostReviews(data.host_reviews);
+        document.documentElement.scrollTop = 0;
+      });
+  }, []);
+
+  const createAttendance = async (atomBookingQty) => {
+
+    console.log('atomBookingQty FROM createAttendance [MealDetails]', atomBookingQty)
+
     // await APIManager.create("attendances", {
     //   attendance: {
     //     meal_id: mealId,
@@ -56,6 +71,7 @@ function MealDetails() {
     //   );
 
     // OLD request : will be removed.
+
     fetch(API + "attendances", {
       method: "POST",
       headers: {
@@ -78,6 +94,8 @@ function MealDetails() {
       .catch((error) => console.error(error));
   };
 
+  console.log('atomBookingQty', atomBookingQty);
+
   const updateGuestRegisteredCount = () => {
     // APIManager.edit(`meals/${mealId}`, {
     //   meal: {
@@ -90,7 +108,7 @@ function MealDetails() {
     //   .catch((error) =>
     //     console.log("error FROM updateGuestRegisteredCount => ", error.message)
     //   );
-
+    
     fetch(API + `meals/${mealId}`, {
       method: "PUT",
       headers: {
@@ -98,8 +116,8 @@ function MealDetails() {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        meal: {
-          guest_registered: meal.guest_registered + bookingQuantity,
+        meal: {          
+          guest_registered: meal.guest_registered + atomBookingQty,
         },
       }),
     })
@@ -110,25 +128,13 @@ function MealDetails() {
       .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
   };
 
-  useEffect(() => {
-    fetch(API + `meals/${mealId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setMeal(data.meal);
-        setHostedMeals(data.hosted_meals);
-        setHostavatar(data.host_avatar);
-        setHostReviews(data.host_reviews);
-        document.documentElement.scrollTop = 0;
-      });
-  }, []);
-
   if (window.location.href !== CURRENT_URL + `meals/${mealId}`) {
     setOrderConfirmationAtom(true);
     jsConfetti.addConfetti();
   }
 
   const closeModal = () => {
-    createAttendance();
+    createAttendance(atomBookingQty);
     // setOrderConfirmationAtom(false);
     return (window.location.href = CURRENT_URL + `meals/${mealId}`);
     // console.log('window.history', window.history);
@@ -136,7 +142,8 @@ function MealDetails() {
   };
 
   const redirectToPath = (path) => {
-    createAttendance();
+    console.log('atomBookingQty FROM redirectToPath [MealDetails]', atomBookingQty)
+    createAttendance(atomBookingQty);
     setOrderConfirmationAtom(false);
     return navigate(path);
   };
@@ -146,6 +153,7 @@ function MealDetails() {
       {meal ? (
         <div className="meal-detail-container">
           <div className="top-detail-container">
+          
             <MealDetailsImages meal={meal} />
 
             <div className="meal-detail-right-container">
@@ -219,6 +227,7 @@ function MealDetails() {
               meal={meal}
               setBookingQuantity={setBookingQuantity}
               bookingQuantity={bookingQuantity}
+              
             />
           )}
         </div>

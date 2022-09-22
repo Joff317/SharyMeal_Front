@@ -9,6 +9,8 @@ import Meal from "../../../icons/Meal";
 import DoggyBag from "../../../icons/DoggyBag";
 
 const MealDetailsInformations = ({ meal }) => {
+
+  console.log('meal', meal);
   return (
     <div className="meal-detail-right-bottom-container">
       <SubsectionTitle>Informations</SubsectionTitle>
@@ -25,7 +27,7 @@ const MealDetailsInformations = ({ meal }) => {
 
         <li className="icon">
           <UserBlack />
-          {meal.guest_capacity && meal.guest_capacity} places
+           Places libres : {meal.guest_registered && meal.guest_registered} / {meal.guest_capacity && meal.guest_capacity} 
         </li>
 
         <li className="icon">
