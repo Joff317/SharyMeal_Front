@@ -9,19 +9,29 @@ import MealCard from "../meals/mealCard/MealCard";
 import SectionTitle from "../titles/SectionTitle";
 import "./UserDetails.scss";
 
-const UserDetails = ({userData}) => {
-  console.log(userData);
+const UserDetails = () => {
   const [user, setUser] = useState();
   const userId = useParams().userId;
 
   useEffect(() => {
-    fetch(API + `user_detail/${userId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setUser(data);
-        console.log(data);
-      });
-  }, []);
+    APIManager.get(`user_detail/${userId}`)
+      .then((res) => {
+        setUser(res);
+        console.log("res FROM GET DETAILS USER REQUEST => ", res);
+      })
+      .catch((error) => 
+        console.error("error FROM GET DETAILS USER REQUEST => ", error)
+      );
+  }, [setUser])
+
+  // useEffect(() => {
+  //   fetch(API + `user_detail/${userId}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setUser(data);
+  //       console.log(data);
+  //     });
+  // }, []);
 
   return (
     <>
@@ -31,7 +41,7 @@ const UserDetails = ({userData}) => {
             <span className="pro">Host</span>
             <img
               className="round"
-              src="https://randomuser.me/api/portraits/women/79.jpg"
+              src={user.avatar_url}
               alt="user"
             />
 
@@ -40,14 +50,6 @@ const UserDetails = ({userData}) => {
               <span className="user-city">Ville: {user.city}</span>
             </div>
             <p>{user.description}</p>
-            <div className="buttons">
-              <button>
-                <Button showText={true}>Message</Button>
-              </button>
-              <button>
-                <Button showText={true}>Voir les repas</Button>
-              </button>
-            </div>
             <div className="skills">
               <h6>Info</h6>
               <ul>
@@ -66,7 +68,6 @@ const UserDetails = ({userData}) => {
                     key={hosted_meal.id}
                     mealData={hosted_meal}
                     launchAnimation
-               
                   />
                 ))}
             </div>
