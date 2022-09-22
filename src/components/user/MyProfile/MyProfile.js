@@ -200,14 +200,14 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
       <div className="perso-infos-container">
         <SubsectionTitle>
           {" "}
-          <span className="slide"> Mes informations persos </span>{" "}
+          <span className=""> Mes informations persos </span>{" "}
         </SubsectionTitle>
         <div className="perso-infos-details">
           <form
             className={` w-full flex flex-col gap-10 mt-8`}
             onSubmit={handleSubmit(OnSubmit)}
           >
-            <div className="flex justify-between w-full gap-14 slide">
+            <div className="flex justify-between w-full gap-14 ">
               <div className="flex flex-col w-full">
                 <p className="mb-2"> Nom </p>
                 <input
@@ -251,7 +251,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
                 {errorMessage(errors.gender)}
               </div>
             </div>
-            <div className="flex justify-between w-full gap-14 slide">
+            <div className="flex justify-between w-full gap-14 ">
               <div className="flex flex-col w-full">
                 <p className="mb-2"> Email </p>
                 <input
@@ -266,7 +266,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
                 {errorMessage(errors.email)}
               </div>
 
-              <div className="flex flex-col relative w-full">
+              <div className="flex flex-col w-full">
                 <p className="mb-2"> Ville </p>
                 <input
                   className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
@@ -298,7 +298,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
               </div>
             </div>
 
-            <div className="flex flex-col slide">
+            <div className="flex flex-col ">
               <p className="mb-2"> Ma bio </p>
               <textarea
                 placeholder="Que doit-on savoir de toi ?"
@@ -313,7 +313,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
               {errorMessage(errors.description)}
             </div>
 
-            <div className="flex gap-8 items-center slide">
+            <div className="flex gap-8 items-center ">
               <img
                 alt="useravatar"
                 className="w-16 h-16 border border-black rounded-full"
@@ -332,7 +332,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
               </label>
             </div>
 
-            <button type="submit" className="my-2 flex justify-center slide">
+            <button type="submit" className="my-2 flex justify-center ">
               <Button showText={true}>Sauvegarder les modifications</Button>
             </button>
 
@@ -354,10 +354,10 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
         <br />
         <SubsectionTitle>
           {" "}
-          <span className="slide"> Mes reviews </span>{" "}
+          <span className=""> Mes reviews </span>{" "}
         </SubsectionTitle>
 
-        <div className="tabs-container flex gap-4 border-b border-b-grey-border my-4 w-fit slide font-light-font h-[29px]">
+        <div className="tabs-container flex gap-4 border-b border-b-grey-border my-4 w-fit  font-light-font h-[29px]">
           <button
             className={
               reviewStatus === "written"

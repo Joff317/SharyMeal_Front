@@ -16,6 +16,11 @@
   flex-direction: row;
   gap: 5px;
 }
+@media screen and (max-width: 1200px) {
+  .meal-details-footer-top .left-footer {
+    display: none;
+  }
+}
 .meal-details-footer-top .left-footer .meal-title {
   font-family: var(--bookmania-black-font);
   font-style: normal;

@@ -42,30 +42,31 @@ function MealDetails() {
   // console.log(hostReviews);
 
   const createAttendance = async () => {
-
     await APIManager.create("attendances", {
       attendance: {
         meal_id: mealId,
       },
     })
-    .then(res => {
-      console.log("res FROM createAttendance REQUEST => ", res)
-      updateGuestRegisteredCount();
-    })
-    .catch(error => console.error("error FROM createAttendance REQUEST => ", error.message))
+      .then((res) => {
+        console.log("res FROM createAttendance REQUEST => ", res);
+        updateGuestRegisteredCount();
+      })
+      .catch((error) =>
+        console.error("error FROM createAttendance REQUEST => ", error.message)
+      );
 
-// OLD request : will be removed.
+    // OLD request : will be removed.
     // fetch(API + "attendances", {
     //   method: "POST",
     //   headers: {
     //     "Content-type": "application/json",
     //     Authorization: `Bearer ${token}`,
     //   },
-      // body: JSON.stringify({
-      //   attendance: {
-      //     meal_id: mealId,
-      //   },
-      // }),
+    // body: JSON.stringify({
+    //   attendance: {
+    //     meal_id: mealId,
+    //   },
+    // }),
     // })
     //   .then((response) => {
     //     return response.json();
@@ -75,19 +76,20 @@ function MealDetails() {
     //     updateGuestRegisteredCount();
     //   })
     //   .catch((error) => console.error(error));
-
   };
 
   const updateGuestRegisteredCount = () => {
-
     APIManager.edit(`meals/${mealId}`, {
       meal: {
         guest_registered: meal.guest_registered + bookingQuantity,
       },
-    } )
-    .then(res => console.log("res FROM updateGuestRegisteredCount => ", res))
-    .catch(error => console.log('error FROM updateGuestRegisteredCount => ', error.message))
-
+    })
+      .then((res) =>
+        console.log("res FROM updateGuestRegisteredCount => ", res)
+      )
+      .catch((error) =>
+        console.log("error FROM updateGuestRegisteredCount => ", error.message)
+      );
 
     // fetch(API + `meals/${mealId}`, {
     //   method: "PUT",
@@ -106,7 +108,6 @@ function MealDetails() {
     //     return response.json();
     //   })
     //   .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
-
   };
 
   useEffect(() => {
@@ -196,17 +197,17 @@ function MealDetails() {
           </div>
 
           {hostReviews.length !== 0 && (
-            <div className="pt-8 px-10 my-0 mx-auto max-w-[1500px]">
+            <div className="pt-8 px-10 my-0 mx-auto max-w-[1500px] ">
               <SectionTitle> Reviews </SectionTitle>
               <br />
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between reviews">
                 <DisplayReviews
                   reviewStatus={"received"}
                   reviews={hostReviews}
                 />
                 <img
                   alt="review"
-                  className="w-[40%]"
+                  className="w-[40%] image-review"
                   src="https://www.netreviews.com/wp-content/uploads/2021/04/VIsuel-Avis-clients.jpg"
                 />
               </div>
