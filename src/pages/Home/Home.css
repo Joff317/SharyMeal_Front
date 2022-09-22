@@ -29,6 +29,21 @@
   }
 }
 
+.rounded {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.pointed {
+  width: 7px;
+  height: 7px;
+  background-color: white;
+  border-radius: 50%;
+  margin-bottom: 20rem;
+}
+
 .under-title {
   width: 717px;
   height: 84px;
@@ -40,6 +55,10 @@
     margin: 0 30px 40px 30px;
     width: 100%;
   }
+}
+
+.image-cursor {
+  cursor: url(cursor.png) 12 12, auto;
 }
 
 .image-container {

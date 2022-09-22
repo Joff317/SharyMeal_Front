@@ -9,6 +9,7 @@ import InputGeoloc from "../../components/geolocation/InputGeoloc";
 import ScrollReveal from "scrollreveal";
 import { AnimeJs, slideUp } from "../../components/animations/Animations";
 import "../../components/animations/transition.css";
+import { Link } from "react-router-dom";
 
 function Home(props) {
   const animation = useRef(null);
@@ -47,21 +48,27 @@ function Home(props) {
         </div>
 
         <div className="images-home flex gap-4 w-full flex-wrap pt-24 -z-10 justify-evenly absolute slide  top-[320px]">
-          <img
-            src={image1}
-            alt="first-img-home"
-            className="max-w-[300px] max-h-[350px] object-cover -rotate-12"
-          />
-          <img
-            src={image2}
-            alt="second-img-home"
-            className="max-w-[350px] min-w-[320px] max-h-[350px] object-cover"
-          />
-          <img
-            src={image3}
-            alt="third-img-home"
-            className="max-w-[300px] min-w-[300px] max-h-[350px] object-cover rotate-6"
-          />
+          <Link to="/about">
+            <img
+              src={image1}
+              alt="first-img-home"
+              className="max-w-[300px] max-h-[350px] min-h-[350px] object-cover -rotate-12 image-cursor"
+            />
+          </Link>
+          <Link to="/about">
+            <img
+              src={image2}
+              alt="second-img-home"
+              className="max-w-[350px] min-w-[320px] max-h-[350px] object-cover image-cursor"
+            />
+          </Link>
+          <Link to="/about">
+            <img
+              src={image3}
+              alt="third-img-home"
+              className="max-w-[300px] min-w-[300px] max-h-[350px] object-cover rotate-6 image-cursor"
+            />
+          </Link>
         </div>
       </div>
 

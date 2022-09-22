@@ -11,7 +11,7 @@ import {
 import Autocompletion from "../../components/geolocation/Autocompletion";
 import Button from "../../components/actions/Button";
 import DatePicker from "react-datepicker";
-import { addDays } from 'date-fns';
+import { addDays } from "date-fns";
 import { categories } from "../../data/Category";
 import HeroTitle from "../../components/titles/HeroTitle";
 import SectionTitle from "../../components/titles/SectionTitle";
@@ -300,7 +300,7 @@ const CreateMeal = () => {
         <img className="w-96" alt="createmeal" src={imgCreateMeal} />{" "}
       </div>
 
-      <div className="p-32 pb-0 w-4/6">
+      <div className="form-wrapper p-32 pb-0 w-4/6">
         <HeroTitle>
           <span className="text-black slide"> Étape 0{count}/04 </span>
         </HeroTitle>

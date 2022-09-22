@@ -20,6 +20,8 @@
 @media screen and (max-width: 1200px) {
   .meal-detail-right-container {
     margin-top: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
   }
 }
 

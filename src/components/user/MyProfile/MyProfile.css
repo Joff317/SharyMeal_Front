@@ -1,0 +1,12 @@
+.perso-infos-details {
+  max-width: 800px;
+}
+
+@media screen and (max-width: 900px) {
+  .info-first {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+
+/*# sourceMappingURL=MyProfile.css.map */

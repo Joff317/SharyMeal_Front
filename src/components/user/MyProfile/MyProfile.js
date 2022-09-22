@@ -208,7 +208,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
             className={` w-full flex flex-col gap-10 mt-8`}
             onSubmit={handleSubmit(OnSubmit)}
           >
-            <div className="flex justify-between w-full gap-14 ">
+            <div className="flex justify-between w-full gap-14 info-first">
               <div className="flex flex-col w-full">
                 <p className="mb-2"> Nom </p>
                 <input

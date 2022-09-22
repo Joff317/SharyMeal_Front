@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { useAtom, useAtomValue } from "jotai";
 import { currentuserAtom } from "../../../atoms/loggedAtom";
 import PostChat from "./Postchat";
+import "../my-message.scss";
 
 function DetailMessage({ currentChatterId }) {
   const token = Cookies.get("token");
@@ -43,7 +44,7 @@ function DetailMessage({ currentChatterId }) {
   }, "10");
 
   return (
-    <div className="w-full border-l border-grey-border h-screen px-20 min-h-[500px] ">
+    <div className="detail-message-container w-full border-l border-grey-border h-screen px-20 min-h-[500px] ">
       <div
         id="chatWrapper"
         className="w-full flex flex-col gap-2 max-h-[400px] min-h-[400px] overflow-y-scroll"

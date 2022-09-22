@@ -13,6 +13,9 @@
     display: none;
   }
 }
+.navigation .popup-burger {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+}
 @media screen and (min-width: 965px) {
   .navigation .popup-burger {
     display: none;

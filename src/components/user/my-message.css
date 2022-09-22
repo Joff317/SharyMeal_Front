@@ -1,0 +1,26 @@
+@media screen and (max-width: 1000px) {
+  .message-container {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .detail-message {
+    width: 100%;
+    padding: 0;
+    min-height: 0;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .detail-message-container {
+    padding: 0;
+    margin-top: 30px;
+    border: none;
+    min-height: 0;
+    height: auto;
+  }
+}
+
+/*# sourceMappingURL=my-message.css.map */
