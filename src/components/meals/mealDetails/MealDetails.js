@@ -23,6 +23,7 @@ import { CURRENT_URL } from "../../../utils/variables";
 import APIManager from "../../../services/Api";
 import DisplayReviews from "../../reviews/DisplayReviews";
 import { bookingQtyAtom } from "../../../atoms/bookingQtyAtom";
+import Guest from "./Guest";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
@@ -204,6 +205,7 @@ function MealDetails() {
             />
           </div>
 
+
           {hostReviews.length !== 0 && (
             <div className="pt-8 px-10 my-0 mx-auto max-w-[1500px] ">
               <SectionTitle> Reviews </SectionTitle>
@@ -222,14 +224,16 @@ function MealDetails() {
             </div>
           )}
 
-          {currentUserAtom.id !== meal.host.id && (
+          {currentUserAtom.id !== meal.host.id ? (
             <MealDetailsFooter
               meal={meal}
               setBookingQuantity={setBookingQuantity}
               bookingQuantity={bookingQuantity}
               
             />
-          )}
+          ) : (<Guest guestMeal={meal}/>)
+           
+          }
         </div>
       ) : (
         <>
