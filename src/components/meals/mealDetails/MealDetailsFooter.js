@@ -7,22 +7,24 @@ import Book from "../../../icons/Book";
 import { bookingQtyAtom } from '../../../atoms/bookingQtyAtom';
 import { useSetAtom } from 'jotai';
 import { useAtomValue } from "jotai";
+import FullBooking from "../../../icons/FullBooking";
+// import { *asL } from 'leaflet';
 
 
 const MealDetailsFooter = ({ meal, setBookingQuantity, bookingQuantity, forceUpdate }) => {
   const [showOrderPopup, setShowOrderPopup] = useState(false);
   const setAtomBooking = useSetAtom(bookingQtyAtom);
-  const atomBooking = useAtomValue(bookingQtyAtom);
+  // const atomBooking = useAtomValue(bookingQtyAtom);
 
   const incrementCounter = () => {
-    // setBookingQuantity(bookingQuantity + 1);
-    setAtomBooking(atomBooking + 1)
+    setBookingQuantity(bookingQuantity + 1);
+    setAtomBooking(bookingQuantity + 1)
     // forceUpdate();
   };
 
   let decrementCounter = () => {
-    // setBookingQuantity(bookingQuantity - 1);
-    setAtomBooking(atomBooking - 1)
+    setBookingQuantity(bookingQuantity - 1);
+    setAtomBooking(bookingQuantity - 1)
     // forceUpdate();
 
   };
@@ -35,9 +37,24 @@ const MealDetailsFooter = ({ meal, setBookingQuantity, bookingQuantity, forceUpd
       </div>
 
       <div className="right-footer">
+
+      {
+        meal.guest_capacity === meal.guest_registered ?
+        <div className="flex mx-5">
+          <div className="mx-2">
+          <p className="">COMPLET</p>
+          </div>
+          
+          <div>
+          <FullBooking/>
+          </div>
+        </div>
+  
+        :
+        <>
         <p className="fork">Couvert : </p>
         <div className="button-wrapper">
-          {atomBooking > 1 ? (
+          {bookingQuantity > 1 ? (
             <span
               className="minus flex justify-center items-center bg-black w-6 h-6 rounded-full text-white"
               onClick={decrementCounter}
@@ -51,10 +68,10 @@ const MealDetailsFooter = ({ meal, setBookingQuantity, bookingQuantity, forceUpd
           )}
 
           <div className="num flex items-center justify-center">
-            {atomBooking}
+            {bookingQuantity}
           </div>
 
-          {atomBooking !== meal.guest_capacity - meal.guest_registered ? (
+          {bookingQuantity !== meal.guest_capacity - meal.guest_registered ? (
             <span
               className="plus flex justify-center items-center bg-black w-6 h-6 rounded-full text-white"
               onClick={incrementCounter}
@@ -75,13 +92,18 @@ const MealDetailsFooter = ({ meal, setBookingQuantity, bookingQuantity, forceUpd
         {showOrderPopup && (
           <LayoutBlur>
             <OrderConfirmation
-              guestRegistered={atomBooking}
+              guestRegistered={bookingQuantity}
               meal={meal}
               showOrderPopup={showOrderPopup}
               setShowOrderPopup={setShowOrderPopup}
             />
           </LayoutBlur>
         )}
+        </>
+      }
+
+
+        
       </div>
     </div>
   );

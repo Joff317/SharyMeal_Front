@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MealCard from "../../meals/mealCard/MealCard";
 import CreateReview from "../../reviews/CreateReview";
 import SectionTitle from "../../titles/SectionTitle";
 
 function DisplayAttendances({ period, meals, forceUpdate }) {
   // console.log("MEAL ATTENDANCE", meals);
+  const [ today, setToday ] = useState();
+  const [ yesterday, setYesterday ] = useState()
+
+  useEffect(() => {
+    const today = new Date();
+    const yesterday = new Date(today)
+    yesterday.setDate(today.getDate() - 1)
+
+    setToday(today.setHours(0,0,0));
+    setYesterday(yesterday.setHours(0,0,0));
+
+  }, [])
 
   return (
     <>
@@ -27,22 +39,27 @@ function DisplayAttendances({ period, meals, forceUpdate }) {
         </p>
       )}
       <div className="flex flex-wrap mt-4">
+      {/* {today && today.toString()} */}
+      
         {period === "past"
           ? meals
-              .filter((meal) => new Date(meal.starting_date) < Date.now())
-              .map((meal, index) => (
+              .filter((meal) => new Date(meal.starting_date) <= today)
+              .map((meal, index) => (<>
+                
                 <MealCard
                   key={index}
                   mealData={meal}
                   showAdditionalInfoReview
                   forceUpdate={forceUpdate}
                 />
+                </>
               ))
           : meals
-              .filter((meal) => new Date(meal.starting_date) >= Date.now())
-              .map((meal, index) => (
+              .filter((meal) => new Date(meal.starting_date) > today)
+              .map((meal, index) => (<>
+                {/* {yesterday && yesterday.toString()} / {new Date(meal.starting_date).toString()} */}
                 <MealCard mealData={meal} key={index} launchAnimation />
-              ))}
+                </>))}
       </div>
     </>
   );
