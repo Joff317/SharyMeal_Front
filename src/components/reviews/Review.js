@@ -8,6 +8,7 @@ import {
   Stars4,
   Stars5,
 } from "../../icons/Stars";
+import "./review.scss";
 
 function Review({ review, showHost }) {
   // console.log("one review", review);
@@ -43,7 +44,7 @@ function Review({ review, showHost }) {
   }
 
   return (
-    <div className=" py-4 max-w-[800px] min-w-[700px] border-b border-b-grey-border">
+    <div className=" py-4 max-w-[800px] min-w-[700px] border-b border-b-grey-border review-component">
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           {!review.author_avatar ? (

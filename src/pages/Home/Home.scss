@@ -1,0 +1,131 @@
+.title{
+    font-family: var(--bookmania-bold-font);
+    font-size: 75px;
+}
+
+.title1{
+    font-family: var(--bold-font);
+    font-size: 55px;
+}
+
+.top-container{
+    padding-top: 100px;
+    background-color: var(--black);
+    height: 600px;
+    z-index: 0;
+
+
+}
+
+.text-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font: var(--bookmania-bold-font);
+
+    @media screen and (max-width: 1000px) {
+        margin-top: 30px;
+    }
+}
+
+.under-title{
+    width: 717px;
+    height: 84px;
+    color: var(--white);
+    text-align: center;
+
+    @media screen and (max-width: 1000px) {
+        margin: 0 30px 40px 30px;
+        width: 100%;
+    }
+}
+
+.image-container{
+    display: flex;
+    gap: 25px;
+    flex-direction: row;
+    position: absolute;
+    width: 75vw;
+    height: 380px;
+    left: 300px;
+    top: 300px;
+}
+
+.image_1{
+    box-sizing: border-box;
+
+position: absolute;
+width: 264.37px;
+height: 315.86px;
+left: 0px;
+top: 67.74px;
+
+/* Pink */
+
+border: 1px solid #F4C0DB;
+border-radius: 5px;
+transform: rotate(-8.65deg);
+object-fit: cover;
+}
+
+.image_2{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 315.15px;
+    height: 338.21px;
+    left: 370.64px;
+    top: 21px;
+    
+    /* Pink */
+    
+    border: 1px solid #F4C0DB;
+    border-radius: 5px;
+    transform: rotate(2.48deg);
+    object-fit: cover;
+}
+
+.image_3{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 302.72px;
+    height: 357.54px;
+    left: 786.1px;
+    top: 0px;
+    
+    /* Pink */
+    
+    border: 1px solid #F4C0DB;
+    border-radius: 5px;
+    transform: rotate(3.06deg);
+}
+
+footer{
+    background-color: var(--black);
+    height: 200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    /* position: fixed;
+    bottom: 0;
+    left: 0; */
+    width: 100%;
+}
+
+.images-home{
+
+    @media screen and (max-width: 1000px){
+    display: none;
+}
+}
+
+#titleScroll {
+    @media screen and (max-width: 1000px) {
+        margin-top: 0;
+    }
+}
+

@@ -16,6 +16,10 @@
       flex-direction: row;
       gap: 5px;
 
+      @media screen and (max-width: 1200px){
+         display: none;
+      }
+
       .meal-title{
          font-family: var(--bookmania-black-font);
          font-style: normal;

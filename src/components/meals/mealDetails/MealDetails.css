@@ -1,14 +1,26 @@
 .top-detail-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 80px;
+  margin-bottom: 80px;
+}
+@media screen and (max-width: 1200px) {
+  .top-detail-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 }
 
 .meal-detail-right-container {
-  margin-top: 110px;
-  max-width: 496px;
+  margin-top: 130px;
   max-height: 75vh;
+}
+@media screen and (max-width: 1200px) {
+  .meal-detail-right-container {
+    margin-top: 30px;
+  }
 }
 
 .meal-detail-right-top-container {
@@ -19,6 +31,18 @@
 
 .meal-detail-container {
   min-height: 800px;
+}
+
+@media screen and (max-width: 1200px) {
+  .reviews {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .reviews .image-review {
+    width: 50%;
+  }
 }
 
 /*# sourceMappingURL=MealDetails.css.map */
