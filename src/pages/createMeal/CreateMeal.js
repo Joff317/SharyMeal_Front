@@ -11,6 +11,7 @@ import {
 import Autocompletion from "../../components/geolocation/Autocompletion";
 import Button from "../../components/actions/Button";
 import DatePicker from "react-datepicker";
+import { addDays } from 'date-fns';
 import { categories } from "../../data/Category";
 import HeroTitle from "../../components/titles/HeroTitle";
 import SectionTitle from "../../components/titles/SectionTitle";
@@ -66,6 +67,7 @@ const CreateMeal = () => {
 
   const onSubmit = async (data) => {
     console.log("data onSubmit", data, cityInfo, startDate);
+
     setFormErrors({
       title: data.title.length < 3 && "Titre trop court.",
       description: data.description.length < 10 && "Description trop courte.",
@@ -82,24 +84,28 @@ const CreateMeal = () => {
         imagesUrl.append("meal[images][]", data.image_urls[i]);
       }
 
-      await APIManager.create("meals", {
-        title: data.title,
-        description: data.description,
-        price: data.price,
-        location: {
-          city: cityInfo ? cityInfo.city : data.location.city,
-          lat: cityInfo ? cityInfo.lat : data.location.lat,
-          lon: cityInfo ? cityInfo.lon : data.location.lon,
-          address: cityInfo ? cityInfo.formatted : data.location.address,
-        },
-        guest_capacity: data.guest_capacity,
-        starting_date: startDate,
-        animals: data.animals,
-        alcool: data.alcool,
-        doggybag: data.doggybag,
-        diet_type: data.dietType,
-        allergens: data.allergens,
-      })
+      await APIManager.create("meals",
+          {
+              title: data.title,
+              description: data.description,
+              price: data.price,
+              location: {
+                city: cityInfo ? cityInfo.city : data.location.city,
+                lat: cityInfo ? cityInfo.lat : data.location.lat,
+                lon: cityInfo ? cityInfo.lon : data.location.lon,
+                address: cityInfo
+                  ? cityInfo.formatted
+                  : data.location.address,
+              },
+              guest_capacity: data.guest_capacity,
+              starting_date: startDate,
+              animals: data.animals,
+              alcool: data.alcool,
+              doggybag: data.doggybag,
+              diet_type: data.dietType,
+              allergens: data.allergens,
+            }
+      )
         .then((res) => {
           console.log("res FROM CREATE MEAL REQUEST => ", res);
           postCategoriesInfo(data.categories, res.id);
@@ -384,8 +390,14 @@ const CreateMeal = () => {
                   <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
+                    dateFormat="d MMMM yyyy"
+                    locale="fr"
+                    minDate={new Date()}
+                    placeholderText=" Cliquez pour choisir la date "
+                    // withPortal
                   />{" "}
                 </span>
+                {startDate && startDate.toString()}
               </div>
 
               <div className="flex mt-6 gap-4">

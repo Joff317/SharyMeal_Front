@@ -10,7 +10,7 @@ function MealAvatar({ host }) {
 
     APIManager.get(`/user_detail/${host.id}`)
     .then(res => {
-      console.log('res FROM MealAvatar GET REQUEST => ', res);
+      // console.log('res FROM MealAvatar GET REQUEST => ', res);
       setHostDetails(res);
     })
     .catch(error => console.log('error FROM MealAvatar GET REQUEST => ', error.message));
