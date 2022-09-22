@@ -6,7 +6,7 @@ import "./my-message.scss";
 
 function MyMessages({ userData }) {
   const [currentChatterId, setCurrentChatterId] = useState(
-    userData[0] && userData[0].id
+    userData && userData[userData.length - 1].id
   );
 
   useEffect(() => {

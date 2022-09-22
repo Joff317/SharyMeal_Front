@@ -54,24 +54,24 @@ function DetailMessage({ currentChatterId }) {
             <div key={index} className="flex flex-col justify-end">
               {message.sender_id === currentUser.id ? (
                 <>
-                  <p className="text-black p-3 bg-green_light  text-sm self-end rounded-lg w-max max-w-sm">
+                  <p className="text-black py-2 px-4 bg-green_light font-book-font  text-md self-end rounded-full w-max max-w-sm">
                     {" "}
                     {message.content}
                   </p>
 
-                  <p className="self-end mt-[-2px] mb-2 text-xs text-black font-light-font text-grey">
+                  <p className="self-end mt-[3px] mb-2 text-xs text-black font-light-font text-grey">
                     {" "}
                     {dataParsed(message.created_at)}{" "}
                   </p>
                 </>
               ) : (
                 <>
-                  <p className="text-black p-3 bg-grey-border text-sm  w-fit rounded-lg max-w-sm">
+                  <p className="text-black py-2 px-4 bg-grey-border text-md font-book-font  w-fit rounded-full max-w-sm">
                     {" "}
                     {message.content}
                   </p>
 
-                  <p className="mt-[-2px] mb-2 text-xs font-light-font text-grey">
+                  <p className="mt-[3px] mb-2 text-xs font-light-font text-grey">
                     {" "}
                     {dataParsed(message.created_at)}{" "}
                   </p>
