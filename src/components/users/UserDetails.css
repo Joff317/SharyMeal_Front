@@ -7,8 +7,16 @@
   padding-bottom: 100px;
   gap: 75px;
 }
-.user-container img {
-  margin: auto;
+.user-container .avatar {
+  display: flex;
+  border-radius: 100%;
+  justify-content: center;
+}
+.user-container .avatar img {
+  object-fit: cover;
+  border-radius: 100%;
+  width: 135px;
+  height: 135px;
 }
 .user-container .user-name {
   text-align: center;
