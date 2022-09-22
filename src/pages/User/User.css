@@ -1,0 +1,43 @@
+.top-container {
+  padding-top: 100px;
+  padding-bottom: 20px;
+  background-color: var(--black);
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font: var(--bookmania-bold-font);
+}
+
+.user-main-container {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  max-width: 1400px;
+  min-height: 500px;
+}
+
+.user-features-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+  width: 15%;
+  margin: 30px 30px 30px 50px;
+  padding: 20px 0 0 0;
+  border-right: 1px solid var(--grey-border);
+  position: sticky;
+  z-index: 1;
+  align-self: flex-start;
+  top: 170px;
+}
+
+.user-feature-container {
+  width: 80%;
+  padding-top: 20px;
+  margin: 20px 0px 20px 10px;
+}
+
+/*# sourceMappingURL=User.css.map */

@@ -27,9 +27,10 @@
     gap: 29px;
     width: 15%;
     margin: 30px 30px 30px 50px;
-    padding: 20px 0px 0px 0px;
+    padding: 20px 0 0 0;
     border-right: 1px solid var(--grey-border);
     position: sticky;
+    z-index: 1;
     align-self: flex-start;
     top: 170px;
 }

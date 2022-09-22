@@ -54,16 +54,14 @@ function MealIndex() {
     //   });
 
     setInputData({ ...inputData, date: "" });
-
-
   }, []);
 
   const filteringRender = (data) => {
     const results = data
       .filter((meal) =>
-       ( categoriesArray.length >= 1
+        categoriesArray.length >= 1
           ? meal.categories.some((cat) => categoriesArray.includes(cat.label))
-          : mealsIndex )
+          : mealsIndex
       )
       .filter((meal) =>
         inputData && inputData.city !== ""
@@ -105,9 +103,11 @@ function MealIndex() {
         Discover food experiences around{" "}
         <span className="bg-green"> {inputData.city !== "" ? inputData.city : "you"} </span>
       </SectionTitle>
-      <div className={`flex gap-10 my-10 border-b border-grey-border pb-3`}>
+      <div
+        className={`category-slider flex gap-10 my-10 border-b border-grey-border pb-3`}
+      >
         {categories.map((category, index) => (
-          <CategoryItem 
+          <CategoryItem
             key={index}
             setCategoriesArray={setCategoriesArray}
             categoriesArray={categoriesArray}
@@ -117,7 +117,7 @@ function MealIndex() {
         ))}
       </div>
 
-      <div className="relative w-full flex justify-around items-center mb-5">
+      <div className="items-filter relative w-full flex justify-around items-center mb-5">
         <div className="relative">
           <FilterButton
             setVisibleFilter={setVisibleFilter}

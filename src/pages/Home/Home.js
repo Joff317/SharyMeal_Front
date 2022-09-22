@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import "./Home.css";
+import "./Home.scss";
 import HeroTitle from "../../components/titles/HeroTitle";
 import MealsIndex from "../../components/meals/MealsIndex";
 import image1 from "../../assets/images/imagehome1.jpeg";
@@ -46,7 +46,7 @@ function Home(props) {
           </span>
         </div>
 
-        <div className="flex gap-4 w-full flex-wrap pt-24 -z-10 justify-evenly absolute slide  top-[320px]">
+        <div className="images-home flex gap-4 w-full flex-wrap pt-24 -z-10 justify-evenly absolute slide  top-[320px]">
           <img
             src={image1}
             alt="first-img-home"

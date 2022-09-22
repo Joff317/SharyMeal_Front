@@ -1,14 +1,24 @@
 .top-detail-container{
    display: flex;
-   align-items: center;
+   align-items: flex-start;
    justify-content: center;
    gap: 80px;
    margin-bottom: 80px;
+
+   @media screen and (max-width: 1200px){
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+}
 }
 
 .meal-detail-right-container{
    margin-top: 130px;
    max-height: 75vh;
+
+   @media screen and (max-width: 1200px){
+      margin-top: 30px;
+   }
 }
 
 .meal-detail-right-top-container{
@@ -19,6 +29,21 @@
 
 .meal-detail-container{
    min-height: 800px;
+}
+
+.reviews{
+   @media screen and (max-width: 1200px){
+      display: flex;
+      flex-direction: column;
+
+   }
+
+   .image-review{
+      @media screen and (max-width: 1200px){
+         width: 50%;
+
+      }
+   }
 }
 
 
