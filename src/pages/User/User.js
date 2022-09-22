@@ -168,6 +168,75 @@ function User() {
           </NavLink>
         </div>
 
+        <div className="user-features-navigation-screen">
+          <div>
+            <input
+              type="radio"
+              name="choice"
+              id="radio1-screen"
+              value="radio1-screen"
+              defaultChecked
+              ref={radioButton}
+              className={`hidden peer`}
+            />
+            <label
+              htmlFor="radio1-screen"
+              onClick={() => displayProfile()}
+              className="text-grey font-medium-font text-md peer-checked:text-black cursor-pointer"
+            >
+              Profil
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="choice"
+              id="radio2-screen"
+              value="radio2-screen"
+              className="hidden peer"
+            />
+            <label
+              htmlFor="radio2-screen"
+              onClick={() => displayMessages()}
+              className="text-grey font-medium-font text-md peer-checked:text-black cursor-pointer"
+            >
+              Messages
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="choice"
+              id="radio3-screen"
+              value="radio3-screen"
+              className={`hidden peer`}
+            />
+            <label
+              htmlFor="radio3-screen"
+              onClick={() => displayAttendances()}
+              className="text-grey font-medium-font text-md peer-checked:text-black cursor-pointer"
+            >
+              Réservations
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="choice"
+              id="radio4-screen"
+              value="radio4-screen"
+              className={`hidden peer`}
+            />
+            <label
+              htmlFor="radio4-screen"
+              onClick={() => displayHostedMeals()}
+              className="text-grey text-md font-medium-font peer-checked:text-black cursor-pointer"
+            >
+              Repas organisés
+            </label>
+          </div>
+        </div>
+
         <div className="user-feature-container ">
           {profileVisib && data && (
             <MyProfile

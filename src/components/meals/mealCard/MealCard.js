@@ -73,7 +73,7 @@ function MealCard({
     >
       {showAdditionalInfo && (
         <>
-          <div className="absolute top-2 -left-2 flex flex-col gap-2 z-10">
+          <div className="absolute top-2 -left-2 flex flex-col gap-2 z-0">
             <div
               onClick={() => setShowEdit(true)}
               className="w-[38px] h-[38px] rounded-full bg-[#5376F1] flex justify-center items-center cursor-pointer"

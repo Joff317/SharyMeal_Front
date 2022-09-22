@@ -63,7 +63,11 @@ function Navigation() {
           : "text-black bg-white_opacity backdrop-blur-sm"
       } `}
     >
-      <NavLink className="text-xl " to="/">
+      <NavLink
+        className="text-xl"
+        onClick={() => setPopupBurgerVisible(false)}
+        to="/"
+      >
         <span className="text-green font-bold-font">Shary</span>Meal
       </NavLink>
 
