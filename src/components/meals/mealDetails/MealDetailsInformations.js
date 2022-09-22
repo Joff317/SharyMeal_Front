@@ -15,43 +15,56 @@ const MealDetailsInformations = ({ meal }) => {
     <div className="meal-detail-right-bottom-container">
       <SubsectionTitle>Informations</SubsectionTitle>
       <ul>
-        <li className="icon">
+        <li className="icon items-center">
           <Shrimp />
           {meal.animals ? "Animaux acceptés" : "Animaux non-acceptés"}
         </li>
 
-        <li className="icon">
+        <li className="icon items-center">
           <Wine />
           {meal.alcool ? "Alcool autorisé" : "Alcool non-autorisé"}
         </li>
 
-        <li className="icon">
+        <li className="icon items-center">
           <UserBlack />
-           Réservations : {meal.guest_registered && meal.guest_registered} / {meal.guest_capacity && meal.guest_capacity} 
+          <span className={ meal.guest_capacity === meal.guest_registered && "font-bold bg-green p-1 rounded-md"}>
+            Réservations : {meal.guest_registered ? meal.guest_registered : "0"} / {meal.guest_capacity && meal.guest_capacity}
+          </span>
         </li>
 
-        <li className="icon">
+        <li className="icon items-center">
           <DoggyBag />
           {meal.doggybag ? "Doggybag autorisé" : "Doggybag non-autorisé"}
         </li>
 
-        <li className="allergen icon">
-          <Peanuts />
-          <div>
-            {meal.allergens &&
-              meal.allergens.map((allergen, index) => (
-                <p key={index}>{allergen}</p>
-              ))}
-          </div>
-        </li>
-
-        <li className="icon">
-          <Meal />
-          <div>
-            {meal.diet_type &&
-              meal.diet_type.map((diet, index) => <p key={index}>{diet}</p>)}
-          </div>
-        </li>
+        {
+            meal.allergens.length === 0 ? <></> :
+              <>
+              <li className="allergen icon">
+                <Peanuts />
+                <div>
+                {meal.allergens &&
+                  meal.allergens.map((allergen, index) => (
+                    <p key={index}>{allergen}</p>
+                  ))}
+                </div>
+              </li>
+              </>
+        }
+      
+        {
+          meal.diet_type.length === 0 ? <></> :
+            <>
+            <li className="icon items-center">
+              <Meal />
+              <div>
+              {meal.diet_type &&
+                meal.diet_type.map((diet, index) => <p key={index}>{diet}</p>)}
+              </div>
+            </li>
+            </>
+        }
+          
       </ul>
     </div>
   );
