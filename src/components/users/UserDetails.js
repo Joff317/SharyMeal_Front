@@ -7,6 +7,7 @@ import { API } from "../../utils/variables";
 import Button from "../actions/Button";
 import MealCard from "../meals/mealCard/MealCard";
 import SectionTitle from "../titles/SectionTitle";
+import avatarDefault from "../../assets/images/avatardefault.png";
 import "./UserDetails.scss";
 
 const UserDetails = () => {
@@ -40,7 +41,13 @@ const UserDetails = () => {
          <span className="title-container"> <SectionTitle>Bienvenue sur le profil de {user.name}</SectionTitle> </span>
           <div className="card-container">
             <span className="pro">Host</span>
-            <img className="round" src={user.avatar_url} alt="user" />
+            <div className="avatar">
+              {user.avatar_url ? (
+                <img alt="avatar" src={user.avatar_url} />
+              ) : (
+                <img alt="avatar" src={avatarDefault} />
+              )}
+            </div>
 
             <div className="avatar-bottom">
               <span className="user-name">Prénom: {user.name}</span>
