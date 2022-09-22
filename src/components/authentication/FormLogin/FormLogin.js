@@ -16,6 +16,7 @@ function FormLogin({
   setRegisterPopup,
   setSwitchPopup,
   switchPopup,
+  setPopupBurgerVisible,
 }) {
   const {
     register,
@@ -37,12 +38,14 @@ function FormLogin({
       setLoginResult,
       current_user_value
     );
+    setPopupBurgerVisible(false);
   };
 
   function resetPopup() {
     setRegisterPopup(false);
     setLoginPopup(false);
     setSwitchPopup(false);
+    setPopupBurgerVisible(false);
   }
 
   return (
@@ -85,7 +88,9 @@ function FormLogin({
           Mot de passe oublié ?{" "}
         </Link>
         <button type="submit" className="my-2 flex justify-center">
-          <Button showText={true} showIcon={true} icon={<Arrow/>}>Se connecter</Button>
+          <Button showText={true} showIcon={true} icon={<Arrow />}>
+            Se connecter
+          </Button>
         </button>
         {!loginResult && (
           <p className="bg-red text-white text-center rounded p-2">
