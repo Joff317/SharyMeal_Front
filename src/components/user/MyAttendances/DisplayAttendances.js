@@ -3,7 +3,7 @@ import MealCard from "../../meals/mealCard/MealCard";
 import CreateReview from "../../reviews/CreateReview";
 import SectionTitle from "../../titles/SectionTitle";
 
-function DisplayAttendances({ period, meals }) {
+function DisplayAttendances({ period, meals, forceUpdate }) {
   // console.log("MEAL ATTENDANCE", meals);
 
   return (
@@ -35,7 +35,7 @@ function DisplayAttendances({ period, meals }) {
                   key={index}
                   mealData={meal}
                   showAdditionalInfoReview
-                  launchAnimation
+                  forceUpdate={forceUpdate}
                 />
               ))
           : meals

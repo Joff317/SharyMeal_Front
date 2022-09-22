@@ -5,10 +5,6 @@ import { slideUpFast } from "../../animations/Animations";
 import DefaultAvatar from "../../../assets/images/avatardefault.png";
 
 function ListMessages({ listMessages, setCurrentChatterId, currentChatterId }) {
-  /*  useEffect(() => {
-    ScrollReveal().reveal(".slide", slideUpFast);
-  }, []);*/
-
   return (
     <div className="relative ">
       {listMessages &&
