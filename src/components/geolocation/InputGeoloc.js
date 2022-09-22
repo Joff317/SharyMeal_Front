@@ -20,7 +20,7 @@ function InputGeoloc() {
   const [cityInfo, setCityInfo] = useState();
   const setInputData = useSetAtom(inputDataAtom);
   const inputDataValue = useAtomValue(inputDataAtom);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date().setHours(0,0,0));
 
   registerLocale("fr", fr);
 
@@ -54,7 +54,7 @@ function InputGeoloc() {
 
       await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`)
       .then(res => {
-        console.log('res FROM getCityData REQUEST => ', res);
+        // console.log('res FROM getCityData REQUEST => ', res);
         setAutocompleteVisible(true);
         setAutocomplete(res);
       })
@@ -76,7 +76,12 @@ function InputGeoloc() {
     }
   };
 
-
+  const getTodayAtMidnight = (date) => {
+    console.log('date', date)
+    date.setHours(0,0,0)
+    console.log('date', date)
+    setStartDate(date)
+  }
 
   return (
     <div className="rounded-full z-50 bg-white w-fit py-2 pl-6 pr-2 relative">
@@ -113,11 +118,14 @@ function InputGeoloc() {
           <span className="text-sm font-light-font">
             {" "}
             <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              selected={startDate && startDate}
+              onChange={(date) => getTodayAtMidnight(date)}
               dateFormat="d MMMM yyyy"
               locale="fr"
+              minDate={new Date()}
+              
             />{" "}
+            {/* {startDate && startDate.toString()} */}
           </span>
         </div>
 

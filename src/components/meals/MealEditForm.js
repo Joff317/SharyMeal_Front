@@ -7,6 +7,7 @@ import {
 import { categories } from "../../data/Category";
 import Autocompletion from "../geolocation/Autocompletion";
 import DatePicker, { registerLocale } from "react-datepicker";
+import {addDays} from 'date-fns'
 import "react-datepicker/dist/react-datepicker.css";
 import fr from "date-fns/locale/fr";
 import { dietType } from "../../data/DietType";
@@ -357,6 +358,7 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
               onChange={(date) => setStartDate(date)}
               dateFormat="d MMMM yyyy"
               locale="fr"
+              minDate={new Date()}
             />{" "}
           </span>
         </div>
