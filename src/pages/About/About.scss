@@ -181,79 +181,88 @@
 //RESPONSIVE
 
 @media screen and (max-width: 1500px) {
-  .top-container {
-    display: flex;
-    flex-direction: row;
+  .about-container{
 
-    .top-container-right {
-      .image-3 {
-        left: 850px;
-        top: 140px;
-      }
-
-      .image-1 {
-        left: 1000px;
-        top: 240px;
+    .top-container {
+      display: flex;
+      flex-direction: row;
+      
+      .top-container-right {
+        .image-3 {
+          left: 850px;
+          top: 140px;
+        }
+        
+        .image-1 {
+          left: 1000px;
+          top: 240px;
+        }
       }
     }
-  }
-
-  .middle-left-container {
-    left: 50px !important;
+    
+    .middle-left-container {
+      left: 50px !important;
+    }
   }
 }
 
 @media screen and (max-width: 1280px) {
-  .top-container {
-    display: flex;
-    flex-direction: row;
+  .about-container{
 
-    h1 {
-      font-size: 30px;
-    }
-
-    .top-container-right {
-      .image-3 {
-        left: 650px;
-        top: 140px;
+    .top-container {
+      display: flex;
+      flex-direction: row;
+      
+      h1 {
+        font-size: 30px;
       }
-
-      .image-1 {
-        top: 220px;
-        left: 800px;
+      
+      .top-container-right {
+        .image-3 {
+          left: 650px;
+          top: 140px;
+        }
+        
+        .image-1 {
+          top: 220px;
+          left: 800px;
+        }
       }
     }
   }
 }
 
 @media screen and (max-width: 1080px) {
-  .top-container {
-    align-items: center !important;
+  .about-container{
 
-    .top-container-left {
-      h1 {
-        font-size: 35px;
+    .top-container {
+      align-items: center !important;
+      
+      .top-container-left {
+        h1 {
+          font-size: 35px;
+        }
+      }
+      .top-container-right {
+        .image-3 {
+          left: 500px;
+          width: 150px;
+          height: 300px;
+          top: 160px;
+        }
+        .image-1 {
+          width: 150px;
+          height: 300px;
+          left: 690px;
+          top: 160px;
+          transform: none;
+        }
       }
     }
-    .top-container-right {
-      .image-3 {
-        left: 500px;
-        width: 150px;
-        height: 300px;
-        top: 160px;
-      }
-      .image-1 {
-        width: 150px;
-        height: 300px;
-        left: 690px;
-        top: 160px;
-        transform: none;
-      }
+    
+    .middle-left-container {
+      top: 70px !important;
     }
-  }
-
-  .middle-left-container {
-    top: 70px !important;
   }
 }
 
