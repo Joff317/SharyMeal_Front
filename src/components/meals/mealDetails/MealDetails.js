@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { API } from "../../../utils/variables";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./MealDetails.scss";
 import MealDetailsImages from "./MealDetailsImages";
 import MealDetailsTitle from "./MealDetailsTitle";
@@ -24,12 +24,15 @@ import APIManager from "../../../services/Api";
 import DisplayReviews from "../../reviews/DisplayReviews";
 import { bookingQtyAtom } from "../../../atoms/bookingQtyAtom";
 import Guest from "./Guest";
+import DefaultAvatar from "../../../assets/images/avatardefault.png";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
   const [hostedMeals, setHostedMeals] = useState();
   const [hostAvatar, setHostavatar] = useState();
   const [hostReviews, setHostReviews] = useState();
+  const [guestsAvatar, setGuestsAvatar] = useState();
+  const [showDetailGuest, setShowDetailGuest] = useState();
   const [bookingQuantity, setBookingQuantity] = useState(1);
   const currentUserAtom = useAtomValue(currentuserAtom);
   const mealId = useParams().mealId;
@@ -38,25 +41,30 @@ function MealDetails() {
   const orderConfirmationAtom = useAtomValue(OrderConfirmationAtom);
   const setOrderConfirmationAtom = useSetAtom(OrderConfirmationAtom);
   const token = Cookies.get("token");
-  const atomBookingQty = useAtomValue(bookingQtyAtom)
+  const atomBookingQty = useAtomValue(bookingQtyAtom);
   // const setAtomBookingQty = useSetAtom(bookingQtyAtom);
 
   useEffect(() => {
-
     fetch(API + `meals/${mealId}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setMeal(data.meal);
         setHostedMeals(data.hosted_meals);
+        setGuestsAvatar(data.guests_avatar);
         setHostavatar(data.host_avatar);
         setHostReviews(data.host_reviews);
         document.documentElement.scrollTop = 0;
       });
   }, []);
 
-  const createAttendance = async (atomBookingQty) => {
+  console.log("GUEST", guestsAvatar);
 
-    console.log('atomBookingQty FROM createAttendance [MealDetails]', atomBookingQty)
+  const createAttendance = async (atomBookingQty) => {
+    console.log(
+      "atomBookingQty FROM createAttendance [MealDetails]",
+      atomBookingQty
+    );
 
     // await APIManager.create("attendances", {
     //   attendance: {
@@ -79,23 +87,20 @@ function MealDetails() {
         "Content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-    body: JSON.stringify({
-      attendance: {
-        meal_id: mealId,
-      },
-    }),
+      body: JSON.stringify({
+        attendance: {
+          meal_id: mealId,
+        },
+      }),
     })
       .then((response) => {
         return response.json();
       })
       .then((response) => {
-        console.log("CREATE ATTENDANCE", response);
         updateGuestRegisteredCount();
       })
       .catch((error) => console.error(error));
   };
-
-  console.log('atomBookingQty', atomBookingQty);
 
   const updateGuestRegisteredCount = () => {
     // APIManager.edit(`meals/${mealId}`, {
@@ -109,7 +114,7 @@ function MealDetails() {
     //   .catch((error) =>
     //     console.log("error FROM updateGuestRegisteredCount => ", error.message)
     //   );
-    
+
     fetch(API + `meals/${mealId}`, {
       method: "PUT",
       headers: {
@@ -117,13 +122,12 @@ function MealDetails() {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        meal: {          
+        meal: {
           guest_registered: meal.guest_registered + atomBookingQty,
         },
       }),
     })
       .then((response) => {
-        console.log(response);
         return response.json();
       })
       .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
@@ -143,7 +147,6 @@ function MealDetails() {
   };
 
   const redirectToPath = (path) => {
-    console.log('atomBookingQty FROM redirectToPath [MealDetails]', atomBookingQty)
     createAttendance(atomBookingQty);
     setOrderConfirmationAtom(false);
     return navigate(path);
@@ -154,12 +157,52 @@ function MealDetails() {
       {meal ? (
         <div className="meal-detail-container">
           <div className="top-detail-container">
-          
             <MealDetailsImages meal={meal} />
 
             <div className="meal-detail-right-container">
               <div className="meal-detail-right-top-container">
                 <MealDetailsTitle meal={meal} />
+                <div className="flex items-center gap-2">
+                  <div
+                    onMouseEnter={() => setShowDetailGuest(true)}
+                    onMouseLeave={() => setShowDetailGuest(false)}
+                    className="flex relative"
+                  >
+                    {guestsAvatar &&
+                      guestsAvatar.map((guestAvatar) => (
+                        <>
+                          <img
+                            className="w-8 h-8 border-grey ml-[-9px] rounded full cursor-pointer"
+                            src={
+                              guestAvatar.avatar_url
+                                ? guestAvatar.avatar_url
+                                : DefaultAvatar
+                            }
+                            alt="avatar"
+                          />
+                        </>
+                      ))}
+
+                    {showDetailGuest && (
+                      <div className="flex flex-col px-4 py-2 gap-2 bg-black absolute top-7 rounded-sm">
+                        {guestsAvatar.map((guestAvatar) => (
+                          <Link
+                            to={`/users/${guestAvatar.id}`}
+                            className="text-white text-sm font-book-font hover:bg-grey pl-2 rounded-sm"
+                          >
+                            {guestAvatar.name
+                              ? guestAvatar.name
+                              : guestAvatar.email}{" "}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <p className="text-sm">
+                    {" "}
+                    Déjà {guestsAvatar.length} participants !{" "}
+                  </p>
+                </div>
                 <MealDetailsHost meal={meal} />
               </div>
 
@@ -205,7 +248,6 @@ function MealDetails() {
             />
           </div>
 
-
           {hostReviews.length !== 0 && (
             <div className="pt-8 px-10 my-0 mx-auto max-w-[1500px] ">
               <SectionTitle> Reviews </SectionTitle>
@@ -224,16 +266,13 @@ function MealDetails() {
             </div>
           )}
 
-          {currentUserAtom.id !== meal.host.id ? (
+          {currentUserAtom.id !== meal.host.id && (
             <MealDetailsFooter
               meal={meal}
               setBookingQuantity={setBookingQuantity}
               bookingQuantity={bookingQuantity}
-              
             />
-          ) : (<Guest guestMeal={meal}/>)
-           
-          }
+          )}
         </div>
       ) : (
         <>
