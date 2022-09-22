@@ -22,7 +22,7 @@ function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
   // console.log('env.REACT_APP_GEOAPIFY_KEY', env.REACT_APP_GEOAPIFY_KEY)
 
   useEffect(() => {
-
+    
     // APIManager.create("charges", {
     //   amount: parseInt(`${meal.price * guestRegistered}00`),
     //   currency: "eur",

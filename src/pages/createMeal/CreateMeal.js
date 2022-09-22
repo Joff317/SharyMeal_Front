@@ -219,7 +219,7 @@ const CreateMeal = () => {
   };
 
   const getLocationData = async (e) => {
-    if (e.target.value.length > 4) {
+    if (e.target.value.length >= 3) {
       // await APIManager.getLocationData(
       //   `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`
       // )
