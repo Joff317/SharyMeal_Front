@@ -40,7 +40,7 @@ const MealDetailsInformations = ({ meal }) => {
         {
             meal.allergens.length === 0 ? <></> :
               <>
-              <li className="allergen icon">
+              <li className="allergen icon items-top">
                 <Peanuts />
                 <div>
                 {meal.allergens &&
@@ -55,7 +55,7 @@ const MealDetailsInformations = ({ meal }) => {
         {
           meal.diet_type.length === 0 ? <></> :
             <>
-            <li className="icon items-center">
+            <li className="icon items-top">
               <Meal />
               <div>
               {meal.diet_type &&
