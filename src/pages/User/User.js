@@ -29,27 +29,27 @@ function User() {
 
   useEffect(() => {
     loggedd &&
-      APIManager.get("me")
-        .then((res) => {
-          setData(res);
-          console.log("res FROM GET ME REQUEST => ", res);
-        })
-        .catch((error) =>
-          console.error("error FROM GET ME REQUEST => ", error)
-        );
+      // APIManager.get("me")
+      //   .then((res) => {
+      //     setData(res);
+      //     console.log("res FROM GET ME REQUEST => ", res);
+      //   })
+      //   .catch((error) =>
+      //     console.error("error FROM GET ME REQUEST => ", error)
+      //   );
 
     // OLD request : will be removed.
-    // fetch(API + "me", {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // })
-    //   .then((response) => {
-    //     console.log("response DE User.js", response);
-    //     return response.json();
-    //   })
-    //   .then((res) => {
-    //     console.log("data DE User.js ", res);
-    //     setData(res);
-    //   });
+    fetch(API + "me", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => {
+        console.log("response DE User.js", response);
+        return response.json();
+      })
+      .then((res) => {
+        console.log("data DE User.js ", res);
+        setData(res);
+      });
   }, [setData, reducerValue]);
 
   const displayProfile = () => {

@@ -23,33 +23,26 @@ function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
 
   useEffect(() => {
 
-    APIManager.create("charges", {
-      amount: parseInt(`${meal.price * guestRegistered}00`),
-      currency: "eur",
-    })
-    .then(res => {
-      console.log('res FROM orderConfirmation REQUEST => ', res);
-      setClientSecret(res.clientSecret);
-    })
-    .catch(error => console.error('error FROM orderConfirmation REQUEST => ', error.message));
-
-    // APIManager.orderConfirmation(meal,guestRegistered)
+    // APIManager.create("charges", {
+    //   amount: parseInt(`${meal.price * guestRegistered}00`),
+    //   currency: "eur",
+    // })
     // .then(res => {
     //   console.log('res FROM orderConfirmation REQUEST => ', res);
     //   setClientSecret(res.clientSecret);
     // })
     // .catch(error => console.error('error FROM orderConfirmation REQUEST => ', error.message));
 
-    // fetch(API + "charges", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     amount: parseInt(`${meal.price * guestRegistered}00`),
-    //     currency: "eur",
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => setClientSecret(data.clientSecret));
+    fetch(API + "charges", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: parseInt(`${meal.price * guestRegistered}00`),
+        currency: "eur",
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
 
 
   }, []);

@@ -70,7 +70,7 @@ const CreateMeal = () => {
 
     setFormErrors({
       title: data.title.length < 3 && "Titre trop court.",
-      description: data.description.length < 10 && "Description trop courte.",
+      description: data.description.length < 5 && "Description trop courte.",
       categories: !data.categories && "Sélectionner 1 catégorie minimum.",
       location: cityInfo === undefined && "L'adresse est requise.",
       starting_date: startDate === undefined && "La date du repas est requise.",
@@ -84,35 +84,85 @@ const CreateMeal = () => {
         imagesUrl.append("meal[images][]", data.image_urls[i]);
       }
 
-      await APIManager.create("meals", {
-        title: data.title,
-        description: data.description,
-        price: data.price,
-        location: {
-          city: cityInfo ? cityInfo.city : data.location.city,
-          lat: cityInfo ? cityInfo.lat : data.location.lat,
-          lon: cityInfo ? cityInfo.lon : data.location.lon,
-          address: cityInfo ? cityInfo.formatted : data.location.address,
+      // await APIManager.create("meals",
+      //     {
+      //         title: data.title,
+      //         description: data.description,
+      //         price: data.price,
+      //         location: {
+      //           city: cityInfo ? cityInfo.city : data.location.city,
+      //           lat: cityInfo ? cityInfo.lat : data.location.lat,
+      //           lon: cityInfo ? cityInfo.lon : data.location.lon,
+      //           address: cityInfo
+      //             ? cityInfo.formatted
+      //             : data.location.address,
+      //         },
+      //         guest_capacity: data.guest_capacity,
+      //         starting_date: startDate,
+      //         animals: data.animals,
+      //         alcool: data.alcool,
+      //         doggybag: data.doggybag,
+      //         diet_type: data.dietType,
+      //         allergens: data.allergens,
+      //       }
+      // )
+      //   .then((res) => {
+      //     console.log("res FROM CREATE MEAL REQUEST => ", res);
+      //     postCategoriesInfo(data.categories, res.id);
+      //     data.image_urls.length !== 0 && postImages(res.id, imagesUrl);
+      //     setMealId(res.id);
+      //     jsConfetti.addConfetti();
+      //     setShowConfirmation(true);
+      //   })
+      //   .catch((error) =>
+      //     console.error("error FROM CREATE MEAL REQUEST =>", error.message)
+      //   );
+
+      fetch(API + "meals", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        guest_capacity: data.guest_capacity,
-        starting_date: startDate,
-        animals: data.animals,
-        alcool: data.alcool,
-        doggybag: data.doggybag,
-        diet_type: data.dietType,
-        allergens: data.allergens,
+      body: JSON.stringify({
+        meal: {
+          title: data.title,
+          description: data.description,
+          price: data.price,
+          location: {
+            city: cityInfo ? cityInfo.city : data.location.city,
+            lat: cityInfo ? cityInfo.lat : data.location.lat,
+            lon: cityInfo ? cityInfo.lon : data.location.lon,
+            address: cityInfo
+              ? cityInfo.formatted
+              : data.location.address,
+          },
+          guest_capacity: data.guest_capacity,
+          starting_date: startDate,
+          animals: data.animals,
+          alcool: data.alcool,
+          doggybag: data.doggybag,
+          diet_type: data.dietType,
+          allergens: data.allergens,
+        },
+      }),
       })
         .then((res) => {
           console.log("res FROM CREATE MEAL REQUEST => ", res);
-          postCategoriesInfo(data.categories, res.id);
-          data.image_urls.length !== 0 && postImages(res.id, imagesUrl);
-          setMealId(res.id);
+          return res.json();
+        })
+        .then((datas) => {
+          console.log("datas FROM CREATE MEAL REQUEST => ", datas);
+          postCategoriesInfo(data.categories, datas.id);
+          data.image_urls.length !== 0 && postImages(datas.id, imagesUrl);
+          setMealId(datas.id);
           jsConfetti.addConfetti();
           setShowConfirmation(true);
         })
         .catch((error) =>
           console.error("error FROM CREATE MEAL REQUEST =>", error.message)
         );
+        
     } else {
       return <p> Données invalides.</p>;
     }
@@ -120,33 +170,33 @@ const CreateMeal = () => {
 
   const postCategoriesInfo = async (categoriesArray, mealId) => {
     await categoriesArray.map((category) => {
-      APIManager.create("join_categories", {
-        join_category_meal: {
-          meal_id: mealId,
-          category_id: parseInt(category),
-        },
-      })
-        .then((res) =>
-          console.log("res FROM postCategoriesInfo REQUEST => ", res)
-        )
-        .catch((error) =>
-          console.error("error from postCategoriesInfo REQUEST => ", error)
-        );
+      // APIManager.create("join_categories", {
+      //   join_category_meal: {
+      //     meal_id: mealId,
+      //     category_id: parseInt(category),
+      //   },
+      // })
+      //   .then((res) =>
+      //     console.log("res FROM postCategoriesInfo REQUEST => ", res)
+      //   )
+      //   .catch((error) =>
+      //     console.error("error from postCategoriesInfo REQUEST => ", error)
+      //   );
 
       //OLD request : will be removed
-      // fetch(API + "join_categories", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-type": "application/json",
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      //   body: JSON.stringify({
-      //     join_category_meal: {
-      //       meal_id: mealId,
-      //       category_id: parseInt(category),
-      //     }
-      //   })
-      // })
+      fetch(API + "join_categories", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          join_category_meal: {
+            meal_id: mealId,
+            category_id: parseInt(category),
+          }
+        })
+      })
     });
   };
 
@@ -170,17 +220,31 @@ const CreateMeal = () => {
 
   const getLocationData = async (e) => {
     if (e.target.value.length > 4) {
-      await APIManager.getLocationData(
+      // await APIManager.getLocationData(
+      //   `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`
+      // )
+      //   .then((res) => {
+      //     console.log("res FROM getCityData REQUEST => ", res);
+      //     setAutocompleteVisible(true);
+      //     setAutocomplete(res);
+      //   })
+      //   .catch((error) =>
+      //     console.error("error FROM getCityData REQUEST => ", error.message)
+      //   );
+
+      fetch(
         `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`
       )
-        .then((res) => {
-          console.log("res FROM getCityData REQUEST => ", res);
-          setAutocompleteVisible(true);
-          setAutocomplete(res);
+        .then((response) => {
+          console.log("res FROM getCityData REQUEST => ", response);
+          return response.json()
         })
-        .catch((error) =>
-          console.error("error FROM getCityData REQUEST => ", error.message)
-        );
+        .then((data) => {
+          setAutocompleteVisible(true);
+          setAutocomplete(data);
+        })
+        .catch((error) => console.error("error FROM getCityData REQUEST => ", error.message));
+
     } else {
       setAutocompleteVisible(false);
     }

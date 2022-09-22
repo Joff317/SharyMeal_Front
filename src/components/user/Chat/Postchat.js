@@ -23,43 +23,43 @@ const PostChat = ({ forceUpdate, recipient_id }) => {
 
   const onSubmit = async (data) => {
 
-    await APIManager.create("messages", {
-      message: {
-        sender_id: currentUser.id,
-        recipient_id,
-        content: data.content,
-      },
-    })
-    .then(res => {
-      console.log('res FROM PostChat REQUEST => ', res)
-      forceUpdate();
-      emptyInput();
-    })
-    .catch(error => console.error('error FROM FROM PostChat REQUEST => ', error.message))
+    // await APIManager.create("messages", {
+    //   message: {
+    //     sender_id: currentUser.id,
+    //     recipient_id,
+    //     content: data.content,
+    //   },
+    // })
+    // .then(res => {
+    //   console.log('res FROM PostChat REQUEST => ', res)
+    //   forceUpdate();
+    //   emptyInput();
+    // })
+    // .catch(error => console.error('error FROM FROM PostChat REQUEST => ', error.message))
 
 // OLD request : will be removed.
-    // fetch(API + "messages", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    //   body: JSON.stringify({
-    //     message: {
-    //       sender_id: currentUser.id,
-    //       recipient_id,
-    //       content: data.content,
-    //     },
-    //   }),
-    // })
-    //   .then((response) => {
-    //     forceUpdate();
+    fetch(API + "messages", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        message: {
+          sender_id: currentUser.id,
+          recipient_id,
+          content: data.content,
+        },
+      }),
+    })
+      .then((response) => {
+        forceUpdate();
 
-    //     return response.json();
-    //   })
-    //   .then((res) => {
-    //     emptyInput();
-    //   });
+        return response.json();
+      })
+      .then((res) => {
+        emptyInput();
+      });
   };
 
   const emptyInput = () => {
