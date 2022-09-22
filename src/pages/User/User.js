@@ -172,7 +172,7 @@ function User() {
           <div>
             <input
               type="radio"
-              name="choice"
+              name="choice1"
               id="radio1-screen"
               value="radio1-screen"
               defaultChecked
@@ -190,7 +190,7 @@ function User() {
           <div>
             <input
               type="radio"
-              name="choice"
+              name="choice1"
               id="radio2-screen"
               value="radio2-screen"
               className="hidden peer"
@@ -206,7 +206,7 @@ function User() {
           <div>
             <input
               type="radio"
-              name="choice"
+              name="choice1"
               id="radio3-screen"
               value="radio3-screen"
               className={`hidden peer`}
@@ -222,7 +222,7 @@ function User() {
           <div>
             <input
               type="radio"
-              name="choice"
+              name="choice1"
               id="radio4-screen"
               value="radio4-screen"
               className={`hidden peer`}
