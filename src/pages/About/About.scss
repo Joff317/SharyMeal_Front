@@ -25,49 +25,45 @@
       
       .image-3{
          box-sizing: border-box;
-
-position: absolute;
-width: 264.37px;
-height: 315.86px;
-left: 1000px;
-top: 140px;
-
-/* Pink */
-
-border: 1px solid #F4C0DB;
-border-radius: 5px;
-object-fit: cover;
+         position: absolute;
+         width: 264.37px;
+         height: 315.86px;
+         left: 1000px;
+         top: 140px;
+         border: 1px solid #F4C0DB;
+         border-radius: 5px;
+         object-fit: cover;
       }
 
       .image-1{
          box-sizing: border-box;
-
-position: absolute;
-width: 264.37px;
-height: 315.86px;
-top: 270.74px;
-left: 1200px;
-transform: rotate(-4.56deg);
-
-/* Pink */
-
-border: 1px solid #F4C0DB;
-border-radius: 5px;
-object-fit: cover;
+         position: absolute;
+         width: 264.37px;
+         height: 315.86px;
+         top: 270.74px;
+         left: 1200px;
+         transform: rotate(-4.56deg);
+         border: 1px solid #F4C0DB;
+         border-radius: 5px;
+         object-fit: cover;
       }
    }
 
    .middle-container{
-      position: relative;
-      width: 100%;
+      width: 100vw;
       display: flex;
       flex-direction: column;
       margin-top: 30px;
-      height: 820px;
 
       .middle-title{
          display: flex;
          justify-content: center;
+         align-items: center;
+      }
+
+      .middle-middle{
+         display: flex;
+         flex-direction: row;
       }
 
       .middle-left-container{
@@ -166,12 +162,9 @@ object-fit: cover;
       }
 
       .middle-container-right{
-         position: absolute;
          display: flex;
          flex-direction: column;
-         text-align:justify ;
-         right: 100px;
-         top: 180px;
+         margin-right: 20px;
          width: 50vw;
          gap: 20px;
          font-family: var(--medium-font);
@@ -183,12 +176,171 @@ object-fit: cover;
       }
 
       .bottom-button{
-         position: absolute;
          display: flex;
          justify-content: center;
          left: 800px;
-         bottom: 100px;
       }
       
    }
+}
+
+//RESPONSIVE
+
+@media screen and (max-width: 1500px) {
+   .top-container{
+      display: flex;
+      flex-direction: row;
+
+      .top-container-right{
+
+         .image-3{
+            left: 850px;
+            top: 140px;
+
+         }
+
+         .image-1{
+            left: 1000px;
+            top: 240px;
+
+         }
+      }
+   }
+
+   .middle-container{
+
+      span{
+         left: 560px !important;
+         bottom: 20px !important;
+      }
+
+   }
+
+}
+
+@media screen and (max-width: 1280px) {
+   .top-container{
+      display: flex;
+      flex-direction: row;
+
+      h1{
+         font-size: 30px;
+      }
+
+      .top-container-right{
+
+         .image-3{
+            left: 650px;
+            top: 140px;
+
+         }
+
+         .image-1{
+            top: 220px;
+            left: 800px;
+
+         }
+      }
+   }
+
+   .middle-container{
+      position: relative;
+
+      .middle-container-right{
+         position: absolute;
+         margin-bottom: 20px;
+         .text-1{
+            width: 500px;
+            margin-left: 30px;
+         }
+         
+      }
+
+      span{
+         left: 520px !important;
+         bottom: 20px !important;
+      }
+
+   }
+}
+
+@media screen and (max-width: 1100px) {
+   .top-container{
+      align-items: center !important;
+
+      .top-container-left{
+         h1{
+            font-size: 35px;
+         }
+      }
+      .top-container-right{
+
+         .image-3{
+            left: 560px;
+            width: 200px;
+            height: 300px;
+            top: 160px;
+
+         }
+         .image-1{
+            width: 200px;
+            height: 300px;
+            left: 780px;
+            top: 160px;
+            transform: none;
+
+         }
+   }
+}
+
+.middle-container{
+   display: flex !important;
+   flex-direction: column !important;
+
+   .middle-left-container{
+      width: 50vw !important;
+      top: 40px;
+   }
+
+   .text-1{
+      margin-left: 90px !important;
+   }
+}
+}
+
+@media screen and (max-width: 1025px) {
+   .top-container{
+      display: flex;
+      flex-direction: column !important;
+      height: 1000px;
+
+      .top-container-right{
+
+         .image-3{
+            left: 320px;
+            width: 150px;
+            height: 300px;
+            top: 500px;
+
+         }
+         .image-1{
+            left: 500px;
+            width: 150px;
+            height: 300px;
+            top: 500px;
+            transform: none;
+
+         }
+   }
+   }
+
+   .middle-container{
+      
+      display: flex !important;
+      flex-direction: column !important;
+      .middle-left-container{
+         right: 2500px;
+      }
+   }
+
 }

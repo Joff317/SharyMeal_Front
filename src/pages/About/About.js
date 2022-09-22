@@ -25,10 +25,6 @@ function About() {
             Consequatur corporis rerum aut porro, exercitationem accusamus
             magnam perferendis at, adipisci debitis quasi reprehenderit. Rerum
             et officia commodi, eveniet nesciunt totam exercitationem.
-            Provident, natus ea. Optio vero quas provident mollitia est alias
-            minus qui amet dolore? Aliquid odio suscipit enim iste, labore
-            corrupti consequuntur cupiditate aspernatur aliquam eius expedita
-            modi, repellat ipsam.
           </p>
           <button onClick={() => navigate("/create-meal")}>
             <Button showText={true} showIcon={true} icon={<Arrow />}>
@@ -48,126 +44,127 @@ function About() {
         <span className="middle-title">
           <SectionTitle>Comment ça fonctionne ?</SectionTitle>
         </span>
-        <div className="middle-left-container">
-          <div className="first-double-circle">
-            <div className="circle-1">
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
+        <div className="middle-middle">
+          <div className="middle-left-container">
+            <div className="first-double-circle">
+              <div className="circle-1">
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+              </div>
+              <div className="circle-2">
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+              </div>
             </div>
-            <div className="circle-2">
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
+            <div className="double-circle">
+              <div className="circle-3">
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+              </div>
+              <div className="circle-4">
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+                <span className="circle"></span>
+              </div>
             </div>
+            <div className="square"></div>
+            <img src={aboutImage} alt="about-us" className="about-image" />
           </div>
-          <div className="double-circle">
-            <div className="circle-3">
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
+          <div className="middle-container-right">
+            <div className="text-1">
+              <SubsectionTitle>Créer votre annonce</SubsectionTitle>
+              <p className="text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
+                repudiandae animi asperiores magni. Animi, perferendis ipsa vel
+                reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
+                labore quae, asperiores alias dicta id! Soluta aliquid quas
+                quaerat voluptates modi quod, aspernatur deserunt, expedita
+                eaque nesciunt sit exercitationem ut assumenda excepturi
+                explicabo nam ab cupiditate rem nihil in doloribus nostrum.
+                Corporis voluptatum harum quibusdam?
+              </p>
             </div>
-            <div className="circle-4">
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
-              <span className="circle"></span>
+            <div className="text-1">
+              <SubsectionTitle>
+                Gérer les demande de participations{" "}
+              </SubsectionTitle>
+              <p className="text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
+                repudiandae animi asperiores magni. Animi, perferendis ipsa vel
+                reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
+                labore quae, asperiores alias dicta id! Soluta aliquid quas
+                quaerat voluptates modi quod, aspernatur deserunt, expedita
+                eaque nesciunt sit exercitationem ut assumenda excepturi
+                explicabo nam ab cupiditate rem nihil in doloribus nostrum.
+                Corporis voluptatum harum quibusdam?
+              </p>
             </div>
+            <div className="text-1">
+              <SubsectionTitle>Mangez et profitez !</SubsectionTitle>
+              <p className="text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
+                repudiandae animi asperiores magni. Animi, perferendis ipsa vel
+                reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
+                labore quae, asperiores alias dicta id! Soluta aliquid quas
+                quaerat voluptates modi quod, aspernatur deserunt, expedita
+                eaque nesciunt sit exercitationem ut assumenda excepturi
+                explicabo nam ab cupiditate rem nihil in doloribus nostrum.
+                Corporis voluptatum harum quibusdam?
+              </p>
+            </div>
+            <span
+              className="bottom-button"
+              onClick={() => navigate("/create-meal")}
+            >
+              <Button showText={true} showIcon={true} icon={<Arrow />}>
+                Lancez-vous !
+              </Button>
+            </span>
           </div>
-          <div className="square"></div>
-          <img src={aboutImage} alt="about-us" className="about-image" />
         </div>
-        <div className="middle-container-right">
-          <div className="text-1">
-            <SubsectionTitle>Créer votre annonce</SubsectionTitle>
-            <p className="text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-              repudiandae animi asperiores magni. Animi, perferendis ipsa vel
-              reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
-              labore quae, asperiores alias dicta id! Soluta aliquid quas
-              quaerat voluptates modi quod, aspernatur deserunt, expedita eaque
-              nesciunt sit exercitationem ut assumenda excepturi explicabo nam
-              ab cupiditate rem nihil in doloribus nostrum. Corporis voluptatum
-              harum quibusdam?
-            </p>
-          </div>
-          <div className="text-2">
-            <SubsectionTitle>
-              Gérer les demande de participations{" "}
-            </SubsectionTitle>
-            <p className="text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-              repudiandae animi asperiores magni. Animi, perferendis ipsa vel
-              reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
-              labore quae, asperiores alias dicta id! Soluta aliquid quas
-              quaerat voluptates modi quod, aspernatur deserunt, expedita eaque
-              nesciunt sit exercitationem ut assumenda excepturi explicabo nam
-              ab cupiditate rem nihil in doloribus nostrum. Corporis voluptatum
-              harum quibusdam?
-            </p>
-          </div>
-          <div className="text-3">
-            <SubsectionTitle>Mangez et profitez !</SubsectionTitle>
-            <p className="text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-              repudiandae animi asperiores magni. Animi, perferendis ipsa vel
-              reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
-              labore quae, asperiores alias dicta id! Soluta aliquid quas
-              quaerat voluptates modi quod, aspernatur deserunt, expedita eaque
-              nesciunt sit exercitationem ut assumenda excepturi explicabo nam
-              ab cupiditate rem nihil in doloribus nostrum. Corporis voluptatum
-              harum quibusdam?
-            </p>
-          </div>
-        </div>
-
-        <span
-          className="bottom-button"
-          onClick={() => navigate("/create-meal")}
-        >
-          <Button showText={true} showIcon={true} icon={<Arrow />}>
-            Lancez-vous !
-          </Button>
-        </span>
       </div>
     </div>
   );
