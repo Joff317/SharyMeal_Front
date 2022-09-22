@@ -7,6 +7,7 @@ import {
 import { categories } from "../../data/Category";
 import Autocompletion from "../geolocation/Autocompletion";
 import DatePicker, { registerLocale } from "react-datepicker";
+import {addDays} from 'date-fns'
 import "react-datepicker/dist/react-datepicker.css";
 import fr from "date-fns/locale/fr";
 import { dietType } from "../../data/DietType";

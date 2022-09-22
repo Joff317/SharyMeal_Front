@@ -41,7 +41,7 @@ function MealIndex() {
     
     APIManager.get("meals")
     .then(res => {
-        console.log('res FROM GET REQUEST => ', res)
+        // console.log('res FROM GET REQUEST => ', res)
         setMealsIndex(res);})
     .catch(error => console.log('error from GET REQUEST =>', error.message));
       

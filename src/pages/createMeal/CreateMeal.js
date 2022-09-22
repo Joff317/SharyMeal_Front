@@ -11,6 +11,7 @@ import {
 import Autocompletion from "../../components/geolocation/Autocompletion";
 import Button from "../../components/actions/Button";
 import DatePicker from "react-datepicker";
+import { addDays } from 'date-fns';
 import { categories } from "../../data/Category";
 import HeroTitle from "../../components/titles/HeroTitle";
 import SectionTitle from "../../components/titles/SectionTitle";
@@ -66,6 +67,7 @@ const CreateMeal = () => {
 
   const onSubmit = async (data) => {
     console.log("data onSubmit", data, cityInfo, startDate);
+
     setFormErrors({
       title: data.title.length < 3 && "Titre trop court.",
       description: data.description.length < 10 && "Description trop courte.",
@@ -83,8 +85,7 @@ const CreateMeal = () => {
       }
 
       await APIManager.create("meals",
-        {
-         meal:  {
+          {
               title: data.title,
               description: data.description,
               price: data.price,
@@ -104,7 +105,7 @@ const CreateMeal = () => {
               diet_type: data.dietType,
               allergens: data.allergens,
             }
-      })
+      )
         .then((res) => {
           console.log("res FROM CREATE MEAL REQUEST => ", res);
           postCategoriesInfo(data.categories, res.id);
@@ -396,6 +397,7 @@ const CreateMeal = () => {
                     // withPortal
                   />{" "}
                 </span>
+                {startDate && startDate.toString()}
               </div>
 
               <div className="flex mt-6 gap-4">
