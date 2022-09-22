@@ -39,19 +39,19 @@ function MealIndex() {
 
   useEffect(() => {
     
-    APIManager.get("meals")
-    .then(res => {
-        // console.log('res FROM GET REQUEST => ', res)
-        setMealsIndex(res);})
-    .catch(error => console.log('error from GET REQUEST =>', error.message));
+    // APIManager.get("meals")
+    // .then(res => {
+    //     // console.log('res FROM GET REQUEST => ', res)
+    //     setMealsIndex(res);})
+    // .catch(error => console.log('error from GET REQUEST =>', error.message));
       
 // OLD fetch request : will be removed from code.
-    // fetch(API + "meals")
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log("MEALINDEX", data);
-    //     setMealsIndex(data);
-    //   });
+    fetch(API + "meals")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("MEALINDEX", data);
+        setMealsIndex(data);
+      });
 
     setInputData({ ...inputData, date: "" });
   }, []);
