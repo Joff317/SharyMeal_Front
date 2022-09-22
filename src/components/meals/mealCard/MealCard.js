@@ -17,6 +17,9 @@ import ScrollReveal from "scrollreveal";
 import { slideUpFast } from "../../animations/Animations";
 import APIManager from "../../../services/Api";
 import { API } from "../../../utils/variables";
+import Guest from "../mealDetails/Guest";
+import DefaultAvatar from "../../../assets/images/avatardefault.png";
+import SendMessage from "../mealDetails/SendMessage";
 
 function MealCard({
   mealData,
@@ -29,6 +32,17 @@ function MealCard({
   const token = Cookies.get("token");
   const [showEdit, setShowEdit] = useState();
   const [showReview, setShowReview] = useState();
+  const [guestsAvatarUrl, setGuestsAvatarUrl] = useState();
+  const [showDetailGuest, setShowDetailGuest] = useState();
+  const [getGuestId, setGetGuestId] = useState();
+  const [showMessage, setShowMessage] = useState(false);
+
+  console.log(mealData);
+
+  function setShowMessageFunc(id) {
+    setGetGuestId(id);
+    setShowMessage(true);
+  }
 
   const deleteMeal = () => {
     // APIManager.delete(`meals/${mealData.id}`)
@@ -49,6 +63,16 @@ function MealCard({
     });
   };
 
+  useEffect(() => {
+    showAdditionalInfo &&
+      fetch(`${API}/guests_avatar/${mealData.id}`)
+        .then((res) => res.json())
+        .then((response) => {
+          setGuestsAvatarUrl(response);
+          console.log(response);
+        });
+  }, []);
+
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
@@ -64,9 +88,6 @@ function MealCard({
   useEffect(() => {
     launchAnimation && ScrollReveal().reveal(".slide", slideUpFast);
   }, [launchAnimation]);
-
-  console.log(new Date(Date.now()));
-  console.log(new Date(mealData.starting_date));
 
   return (
     <div
@@ -136,6 +157,68 @@ function MealCard({
             </LayoutBlur>
           )}{" "}
         </>
+      )}
+      <div
+        onMouseEnter={() => setShowDetailGuest(true)}
+        onMouseLeave={() => setShowDetailGuest(false)}
+        className="flex relative"
+      >
+        {showAdditionalInfo &&
+          guestsAvatarUrl &&
+          guestsAvatarUrl.guests_avatar.map((guestAvatar) => (
+            <>
+              <img
+                className="w-7 h-7 border-grey ml-[-9px] rounded full cursor-pointer"
+                src={
+                  guestAvatar.avatar_url
+                    ? guestAvatar.avatar_url
+                    : DefaultAvatar
+                }
+                alt="avatar"
+              />
+            </>
+          ))}
+        {showDetailGuest && (
+          <div className="flex flex-col px-6 py-3 gap-2 bg-white absolute drop-shadow-lg min-w-[200px] top-7 rounded-sm">
+            {guestsAvatarUrl.guests_avatar.map((guestAvatar) => (
+              <div className="border-b border-b-grey-border mb-2">
+                <div className="flex items-center gap-1">
+                  <img
+                    className="w-7 h-7 border-grey ml-[-9px] rounded full cursor-pointer"
+                    src={
+                      guestAvatar.avatar_url
+                        ? guestAvatar.avatar_url
+                        : DefaultAvatar
+                    }
+                    alt="avatar"
+                  />
+
+                  <Link to={`/users/${guestAvatar.id}`}>
+                    <p className="text-lg font-bold-font mt-1">
+                      {" "}
+                      {guestAvatar.name
+                        ? guestAvatar.name
+                        : guestAvatar.email}{" "}
+                    </p>
+                  </Link>
+                </div>
+                <p
+                  onClick={() => setShowMessageFunc(guestAvatar)}
+                  className="text-sm my-2 mb-3 font-light-font bg-pink rounded-full py-1 px-2 w-fit cursor-pointer"
+                >
+                  {" "}
+                  Envoyer un message{" "}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {showMessage && (
+        <LayoutBlur>
+          <SendMessage setShowMessage={setShowMessage} host={getGuestId} />
+        </LayoutBlur>
       )}
       <p className="text-white">{mealData.location.city}</p>
       <div className="layer-blur"> </div>
