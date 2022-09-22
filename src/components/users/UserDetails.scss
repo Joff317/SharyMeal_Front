@@ -96,3 +96,17 @@ button.primary.ghost {
 	display: flex;
 	flex-direction: column;
 }
+
+//RESPONSIVE
+
+@media screen and (max-width: 1290px) {
+	.user-container{
+		display: flex;
+		flex-direction: column;
+
+		.title-container{
+			display: flex;
+			justify-content: center;
+		}
+	}
+}

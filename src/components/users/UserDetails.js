@@ -19,10 +19,10 @@ const UserDetails = () => {
         setUser(res);
         console.log("res FROM GET DETAILS USER REQUEST => ", res);
       })
-      .catch((error) => 
+      .catch((error) =>
         console.error("error FROM GET DETAILS USER REQUEST => ", error)
       );
-  }, [setUser])
+  }, [setUser]);
 
   // useEffect(() => {
   //   fetch(API + `user_detail/${userId}`)
@@ -39,11 +39,7 @@ const UserDetails = () => {
         <div className="user-container">
           <div className="card-container">
             <span className="pro">Host</span>
-            <img
-              className="round"
-              src={user.avatar_url}
-              alt="user"
-            />
+            <img className="round" src={user.avatar_url} alt="user" />
 
             <div className="avatar-bottom">
               <span className="user-name">Prénom: {user.name}</span>
@@ -60,7 +56,10 @@ const UserDetails = () => {
             </div>
           </div>
           <div className="hosted-meals-container">
-            <SectionTitle>Les repas organisés de {user.name}</SectionTitle>
+            <span className="title-container">
+              <SectionTitle>Les repas organisés de {user.name}</SectionTitle>
+            </span>
+
             <div className="flex flex-wrap mt-4">
               {user &&
                 user.hosted_meals.map((hosted_meal) => (
