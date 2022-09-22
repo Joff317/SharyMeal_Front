@@ -37,6 +37,7 @@ const UserDetails = () => {
     <>
       {user && (
         <div className="user-container">
+         <span className="title-container"> <SectionTitle>Bienvenue sur le profil de {user.name}</SectionTitle> </span>
           <div className="card-container">
             <span className="pro">Host</span>
             <img className="round" src={user.avatar_url} alt="user" />
@@ -60,7 +61,7 @@ const UserDetails = () => {
               <SectionTitle>Les repas organisés de {user.name}</SectionTitle>
             </span>
 
-            <div className="flex flex-wrap mt-4">
+            <div className="hosted-container flex flex-wrap mt-4">
               {user &&
                 user.hosted_meals.map((hosted_meal) => (
                   <MealCard

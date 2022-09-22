@@ -1,6 +1,6 @@
 .user-container{
    display: flex;
-	flex-direction: row;
+	flex-direction: column;
    justify-content: center;
    align-items: center;
    padding-top: 100px;
@@ -15,6 +15,11 @@
       text-align: center;
       font-size: 20px;
    }
+
+	.title-container{
+		display: flex;
+		justify-content: center;
+	}
 }
 
 .avatar-bottom{
@@ -99,6 +104,31 @@ button.primary.ghost {
 
 //RESPONSIVE
 
+@media screen and (max-width: 1700px){
+	
+}
+
+@media screen and (max-width: 1500px) {
+	.user-container{
+		display: flex;
+		flex-direction: column;
+		padding-top: 200px;
+
+		.title-container{
+			display: flex;
+			justify-content: center;
+		}
+
+		.hosted-container{
+			display: grid; 
+			grid-template-columns: repeat(4, 1fr); 
+			grid-template-rows: repeat(4, 1fr); 
+			height: 700px;
+				
+		}
+	}
+}
+
 @media screen and (max-width: 1290px) {
 	.user-container{
 		display: flex;
@@ -108,5 +138,39 @@ button.primary.ghost {
 			display: flex;
 			justify-content: center;
 		}
+
+		.hosted-container{
+			display: grid; 
+			grid-template-columns: repeat(3, 1fr); 
+			grid-template-rows: repeat(3, 1fr); 
+				
+		}
 	}
+}
+
+@media screen and (max-width: 790px) {
+	.user-container{
+		display: flex;
+		flex-direction: column;
+
+		.title-container{
+			display: flex;
+			justify-content: center;
+		}
+	.hosted-container{
+		display: grid;
+		grid-template-columns: repeat(2, 1fr); 
+		grid-template-rows: repeat(2, 1fr); 
+	}
+}
+}
+
+@media screen and (max-width: 530px){
+
+
+		.title-container{
+			h1{
+				font-size: 30px ;
+			}
+		}
 }
