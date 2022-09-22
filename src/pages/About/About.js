@@ -46,7 +46,6 @@ function About() {
         </span>
         <div className="middle-middle">
           <div className="middle-left-container">
-            <div className="first-double-circle">
               <div className="circle-1">
                 <span className="circle"></span>
                 <span className="circle"></span>
@@ -74,8 +73,6 @@ function About() {
                 <span className="circle"></span>
                 <span className="circle"></span>
               </div>
-            </div>
-            <div className="double-circle">
               <div className="circle-3">
                 <span className="circle"></span>
                 <span className="circle"></span>
@@ -109,22 +106,15 @@ function About() {
                 <span className="circle"></span>
                 <span className="circle"></span>
               </div>
-            </div>
-            <div className="square"></div>
+            <span className="square"></span>
             <img src={aboutImage} alt="about-us" className="about-image" />
           </div>
           <div className="middle-container-right">
             <div className="text-1">
               <SubsectionTitle>Créer votre annonce</SubsectionTitle>
               <p className="text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-                repudiandae animi asperiores magni. Animi, perferendis ipsa vel
-                reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
-                labore quae, asperiores alias dicta id! Soluta aliquid quas
-                quaerat voluptates modi quod, aspernatur deserunt, expedita
-                eaque nesciunt sit exercitationem ut assumenda excepturi
-                explicabo nam ab cupiditate rem nihil in doloribus nostrum.
-                Corporis voluptatum harum quibusdam?
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis facere ipsam laboriosam. Velit quo cum dolorum dicta enim eum tempore, et blanditiis odio, esse harum tempora suscipit, beatae sit nostrum.
+               Ab odit officiis voluptatum commodi voluptatibus. Laborum repudiandae, aliquam aut odio quisquam rerum reprehenderit blanditiis recusandae. Praesentium minima, iusto tempore temporibus soluta autem animi voluptatem voluptates voluptatum optio quaerat in.
               </p>
             </div>
             <div className="text-1">

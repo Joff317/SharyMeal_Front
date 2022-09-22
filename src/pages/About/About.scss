@@ -50,15 +50,15 @@
    }
 
    .middle-container{
-      width: 100vw;
       display: flex;
       flex-direction: column;
-      margin-top: 30px;
+      margin-top: 20px;
+      margin-bottom: 20px;
 
       .middle-title{
          display: flex;
          justify-content: center;
-         align-items: center;
+         margin-bottom: 20px;
       }
 
       .middle-middle{
@@ -68,15 +68,11 @@
 
       .middle-left-container{
          position: relative;
-         align-items: center;
-         left: 70px;
+         display: flex;
          width: 50vw;
+         left: 250px;
+         top: -100px;
 
-         .first-circle{
-            display: flex;
-            flex-direction: column;
-         }
-         
          .circle-1 {
             position: absolute;
             display: flex;
@@ -164,11 +160,15 @@
       .middle-container-right{
          display: flex;
          flex-direction: column;
-         margin-right: 20px;
-         width: 50vw;
-         gap: 20px;
+         text-align:justify;
+         align-items: flex-start;
+         width: 55vw;
+         gap: 15px;
          font-family: var(--medium-font);
 
+         .text-1{
+            width: 45vw;
+         }
          .text{
             font-family: var(--medium-font) !important;
             font-size: 15px;
@@ -207,140 +207,147 @@
       }
    }
 
-   .middle-container{
 
-      span{
-         left: 560px !important;
-         bottom: 20px !important;
-      }
-
-   }
-
-}
-
-@media screen and (max-width: 1280px) {
-   .top-container{
-      display: flex;
-      flex-direction: row;
-
-      h1{
-         font-size: 30px;
-      }
-
-      .top-container-right{
-
-         .image-3{
-            left: 650px;
-            top: 140px;
-
-         }
-
-         .image-1{
-            top: 220px;
-            left: 800px;
-
-         }
-      }
-   }
-
-   .middle-container{
-      position: relative;
-
-      .middle-container-right{
-         position: absolute;
-         margin-bottom: 20px;
-         .text-1{
-            width: 500px;
-            margin-left: 30px;
-         }
-         
-      }
-
-      span{
-         left: 520px !important;
-         bottom: 20px !important;
-      }
-
-   }
-}
-
-@media screen and (max-width: 1100px) {
-   .top-container{
-      align-items: center !important;
-
-      .top-container-left{
-         h1{
-            font-size: 35px;
-         }
-      }
-      .top-container-right{
-
-         .image-3{
-            left: 560px;
-            width: 200px;
-            height: 300px;
-            top: 160px;
-
-         }
-         .image-1{
-            width: 200px;
-            height: 300px;
-            left: 780px;
-            top: 160px;
-            transform: none;
-
-         }
-   }
-}
-
-.middle-container{
-   display: flex !important;
-   flex-direction: column !important;
-
-   .middle-left-container{
-      width: 50vw !important;
-      top: 40px;
-   }
-
-   .text-1{
-      margin-left: 90px !important;
-   }
-}
-}
-
-@media screen and (max-width: 1025px) {
-   .top-container{
-      display: flex;
-      flex-direction: column !important;
-      height: 1000px;
-
-      .top-container-right{
-
-         .image-3{
-            left: 320px;
-            width: 150px;
-            height: 300px;
-            top: 500px;
-
-         }
-         .image-1{
-            left: 500px;
-            width: 150px;
-            height: 300px;
-            top: 500px;
-            transform: none;
-
-         }
-   }
-   }
-
-   .middle-container{
-      
-      display: flex !important;
-      flex-direction: column !important;
       .middle-left-container{
-         right: 2500px;
+         left: 50px !important;
       }
-   }
-
 }
+
+// @media screen and (max-width: 1280px) {
+//    .top-container{
+//       display: flex;
+//       flex-direction: row;
+
+//       h1{
+//          font-size: 30px;
+//       }
+
+//       .top-container-right{
+
+//          .image-3{
+//             left: 650px;
+//             top: 140px;
+
+//          }
+
+//          .image-1{
+//             top: 220px;
+//             left: 800px;
+
+//          }
+//       }
+//    }
+
+//    .middle-container{
+//       position: relative;
+
+//       .middle-container-right{
+//          position: absolute;
+//          margin-bottom: 20px;
+//          .text-1{
+//             width: 500px;
+//             margin-left: 30px;
+//          }
+         
+//       }
+
+//       span{
+//          left: 520px !important;
+//          bottom: 20px !important;
+//       }
+
+//    }
+// }
+
+// @media screen and (max-width: 1100px) {
+//    .top-container{
+//       align-items: center !important;
+
+//       .top-container-left{
+//          h1{
+//             font-size: 35px;
+//          }
+//       }
+//       .top-container-right{
+
+//          .image-3{
+//             left: 560px;
+//             width: 200px;
+//             height: 300px;
+//             top: 160px;
+
+//          }
+//          .image-1{
+//             width: 200px;
+//             height: 300px;
+//             left: 780px;
+//             top: 160px;
+//             transform: none;
+
+//          }
+//    }
+// }
+
+// .middle-container{
+//    display: flex !important;
+//    flex-direction: column !important;
+
+//    .middle-left-container{
+//       width: 50vw !important;
+//       top: 40px;
+//    }
+
+//    .text-1{
+//       margin-left: 90px !important;
+//    }
+// }
+// }
+
+// @media screen and (max-width: 1025px) {
+//    .top-container{
+//       display: flex;
+//       flex-direction: column !important;
+//       height: 1000px;
+
+//       .top-container-right{
+
+//          .image-3{
+//             left: 320px;
+//             width: 150px;
+//             height: 300px;
+//             top: 500px;
+
+//          }
+//          .image-1{
+//             left: 500px;
+//             width: 150px;
+//             height: 300px;
+//             top: 500px;
+//             transform: none;
+
+//          }
+//    }
+//    }
+
+//    .middle-container{
+//       display: flex !important;
+//       flex-direction: column !important;
+
+//       .middle-left-container{
+//          top: 700px;
+//          align-items: center;
+//       }
+
+//       .middle-container-right{
+//          align-items: center;
+         
+        
+//          .text{
+//             font-size: 15px !important;
+//             width: 500px;
+//             align-items: center;
+//          }
+//       }
+//    }
+
+// }
