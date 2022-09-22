@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListMessages from "./Chat/ListMessages";
 import DetailMessage from "./Chat/DetailMessage";
 import SubsectionTitle from "../titles/SubsectionTitle";
+import "./my-message.scss";
 
 function MyMessages({ userData }) {
-  const [currentChatterId, setCurrentChatterId] = useState(userData[0] && userData[0].id);
+  const [currentChatterId, setCurrentChatterId] = useState(
+    userData[0] && userData[0].id
+  );
+
+  useEffect(() => {
+    document.documentElement.scrollTop = 0;
+  }, [document]);
+
   return (
     <>
       <SubsectionTitle> Vos messages </SubsectionTitle>
@@ -16,13 +24,13 @@ function MyMessages({ userData }) {
           un repas. Une conversation avec l'hôte se créera.
         </p>
       ) : (
-        <div className="flex w-full mt-6">
+        <div className="flex w-full -z-50 mt-6 message-container">
           <ListMessages
             listMessages={userData}
             setCurrentChatterId={setCurrentChatterId}
             currentChatterId={currentChatterId}
           />
-          <div className="min-h-[500px] w-4/6 pl-12">
+          <div className="min-h-[500px] w-4/6 pl-12 detail-message">
             {currentChatterId && (
               <DetailMessage currentChatterId={currentChatterId} />
             )}

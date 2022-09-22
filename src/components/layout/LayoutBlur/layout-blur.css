@@ -10,8 +10,21 @@
     opacity:0.5;
 }
 
+#beforeEl{
+    z-index: 9999999999;
+}
+
 .open-popup{
     animation: open-popup ease 0.3s;
+
+
+}
+
+@media screen and (max-width: 900px){
+
+.open-popup{
+    padding: 15px 5px
+}
 }
 
 @keyframes open-popup {
