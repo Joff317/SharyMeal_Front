@@ -397,7 +397,7 @@ const CreateMeal = () => {
                     // withPortal
                   />{" "}
                 </span>
-                {startDate && startDate.toString()}
+                {/* {startDate && startDate.toString()} */}
               </div>
 
               <div className="flex mt-6 gap-4">
