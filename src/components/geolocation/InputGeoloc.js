@@ -52,24 +52,24 @@ function InputGeoloc() {
   const getLocationData = async (e) => {
     if (e.target.value.length > 4) {
 
-      await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`)
-      .then(res => {
-        // console.log('res FROM getCityData REQUEST => ', res);
-        setAutocompleteVisible(true);
-        setAutocomplete(res);
-      })
-      .catch(error => console.error('error FROM getCityData REQUEST => ', error.message))
+      // await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`)
+      // .then(res => {
+      //   // console.log('res FROM getCityData REQUEST => ', res);
+      //   setAutocompleteVisible(true);
+      //   setAutocomplete(res);
+      // })
+      // .catch(error => console.error('error FROM getCityData REQUEST => ', error.message))
 
 // OLD request : will be removed.
-      // fetch(
-      //   `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&type=city&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
-      // )
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     setAutocompleteVisible(true);
-      //     setAutocomplete(data);
-      //   })
-      //   .catch((err) => console.error(err));
+      fetch(
+        `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setAutocompleteVisible(true);
+          setAutocomplete(data);
+        })
+        .catch((err) => console.error(err));
 
     } else {
       setAutocompleteVisible(false);

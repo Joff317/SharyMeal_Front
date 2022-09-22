@@ -16,6 +16,7 @@ import CreateReview from "../../reviews/CreateReview";
 import ScrollReveal from "scrollreveal";
 import { slideUpFast } from "../../animations/Animations";
 import APIManager from "../../../services/Api";
+import { API } from '../../../utils/variables';
 
 function MealCard({
   mealData,
@@ -30,22 +31,22 @@ function MealCard({
   const [showReview, setShowReview] = useState();
 
   const deleteMeal = () => {
-    APIManager.delete(`meals/${mealData.id}`)
-      .then((res) => {
-        console.log("res FROM DELETE MEAL REQUEST => ", res);
-        forceUpdate();
-      })
-      .catch((error) =>
-        console.error("error from DELETE MEAL REQUEST => ", error.message)
-      );
+    // APIManager.delete(`meals/${mealData.id}`)
+    //   .then((res) => {
+    //     console.log("res FROM DELETE MEAL REQUEST => ", res);
+    //     forceUpdate();
+    //   })
+    //   .catch((error) =>
+    //     console.error("error from DELETE MEAL REQUEST => ", error.message)
+    //   );
 
     //OLD request : will be removed from code.
-    // fetch(`${API}/meals/${mealData.id}`, {
-    //   method: "DELETE",
-    //   headers: { Authorization: `Bearer ${token}` },
-    // }).then((response) => {
-    //   forceUpdate();
-    // });
+    fetch(`${API}/meals/${mealData.id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((response) => {
+      forceUpdate();
+    });
   };
 
   const openInNewTab = (url) => {

@@ -33,8 +33,8 @@ export const errorMessageValues = {
   title: {
     required: "Le titre est requis",
     maxLength: {
-      value: 20,
-      message: "Le titre doit faire maximum 20 caractères",
+      value: 50,
+      message: "Le titre doit faire maximum 50 caractères",
     },
     minLength: {
       value: 3,
@@ -56,8 +56,8 @@ export const errorMessageValues = {
   content: {
     required: "Le content est requis",
     maxLength: {
-      value: 20,
-      message: "Le content doit faire maximum 20 caractères",
+      value: 50,
+      message: "Le content doit faire maximum 50 caractères",
     },
     minLength: {
       value: 3,

@@ -42,72 +42,72 @@ function MealDetails() {
   // console.log(hostReviews);
 
   const createAttendance = async () => {
-    await APIManager.create("attendances", {
-      attendance: {
-        meal_id: mealId,
-      },
-    })
-      .then((res) => {
-        console.log("res FROM createAttendance REQUEST => ", res);
-        updateGuestRegisteredCount();
-      })
-      .catch((error) =>
-        console.error("error FROM createAttendance REQUEST => ", error.message)
-      );
-
-    // OLD request : will be removed.
-    // fetch(API + "attendances", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // body: JSON.stringify({
+    // await APIManager.create("attendances", {
     //   attendance: {
     //     meal_id: mealId,
     //   },
-    // }),
     // })
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((response) => {
-    //     console.log("CREATE ATTENDANCE", response);
+    //   .then((res) => {
+    //     console.log("res FROM createAttendance REQUEST => ", res);
     //     updateGuestRegisteredCount();
     //   })
-    //   .catch((error) => console.error(error));
+    //   .catch((error) =>
+    //     console.error("error FROM createAttendance REQUEST => ", error.message)
+    //   );
+
+    // OLD request : will be removed.
+    fetch(API + "attendances", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    body: JSON.stringify({
+      attendance: {
+        meal_id: mealId,
+      },
+    }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        console.log("CREATE ATTENDANCE", response);
+        updateGuestRegisteredCount();
+      })
+      .catch((error) => console.error(error));
   };
 
   const updateGuestRegisteredCount = () => {
-    APIManager.edit(`meals/${mealId}`, {
-      meal: {
-        guest_registered: meal.guest_registered + bookingQuantity,
-      },
-    })
-      .then((res) =>
-        console.log("res FROM updateGuestRegisteredCount => ", res)
-      )
-      .catch((error) =>
-        console.log("error FROM updateGuestRegisteredCount => ", error.message)
-      );
-
-    // fetch(API + `meals/${mealId}`, {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //     Authorization: `Bearer ${token}`,
+    // APIManager.edit(`meals/${mealId}`, {
+    //   meal: {
+    //     guest_registered: meal.guest_registered + bookingQuantity,
     //   },
-    //   body: JSON.stringify({
-    //     meal: {
-    //       guest_registered: meal.guest_registered + bookingQuantity,
-    //     },
-    //   }),
     // })
-    //   .then((response) => {
-    //     console.log(response);
-    //     return response.json();
-    //   })
-    //   .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
+    //   .then((res) =>
+    //     console.log("res FROM updateGuestRegisteredCount => ", res)
+    //   )
+    //   .catch((error) =>
+    //     console.log("error FROM updateGuestRegisteredCount => ", error.message)
+    //   );
+
+    fetch(API + `meals/${mealId}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        meal: {
+          guest_registered: meal.guest_registered + bookingQuantity,
+        },
+      }),
+    })
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((response) => console.log("UPDATE MEAL GUESTRESGISTRED", response));
   };
 
   useEffect(() => {
