@@ -1,0 +1,52 @@
+@media screen and (max-width: 965px) {
+  .navigation {
+    padding: 30px 40px 30px 30px;
+  }
+}
+@media screen and (max-width: 965px) {
+  .navigation .navigation-center {
+    display: none;
+  }
+}
+@media screen and (max-width: 965px) {
+  .navigation .navigation-right {
+    display: none;
+  }
+}
+@media screen and (min-width: 965px) {
+  .navigation .popup-burger {
+    display: none;
+  }
+}
+.navigation .burger-menu {
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  display: none;
+}
+@media screen and (max-width: 965px) {
+  .navigation .burger-menu {
+    display: flex;
+  }
+}
+.navigation .burger-menu .tick {
+  width: 23px;
+  height: 3px;
+  margin-top: 4px;
+  border-radius: 5px;
+}
+@media screen and (max-width: 965px) {
+  .navigation .burger-menu .tick {
+    display: block;
+  }
+}
+
+.set-white {
+  background-color: white !important;
+}
+
+.set-black {
+  background-color: black !important;
+}
+
+/*# sourceMappingURL=navigation.css.map */

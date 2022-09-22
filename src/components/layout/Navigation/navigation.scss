@@ -1,0 +1,62 @@
+.navigation{
+
+  @media screen and (max-width: 965px){
+    padding: 30px 40px 30px 30px;
+  }
+
+  .navigation-center{
+
+    @media screen and (max-width: 965px){
+      display: none;
+    }
+  }
+
+  .navigation-right{
+    @media screen and (max-width: 965px){
+    display: none;
+    }
+  }
+
+  .popup-burger{
+    @media screen and (min-width: 965px){
+      display: none;
+    }
+  }
+
+
+
+  .burger-menu{
+
+    flex-direction: column;
+    justify-content: space-between;
+    cursor:pointer;
+    display: none;
+
+    @media screen and (max-width: 965px){
+      display: flex;
+    }
+
+
+
+    .tick{
+      width: 23px;
+      height: 3px;
+      margin-top: 4px;
+      border-radius: 5px;
+
+      @media screen and (max-width: 965px){
+        display: block;
+      }
+
+
+    }
+  }
+}
+
+.set-white{
+  background-color: white !important;
+}
+
+.set-black{
+  background-color: black !important;
+}
