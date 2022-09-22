@@ -6,11 +6,10 @@ import { currentuserAtom } from "../../../atoms/loggedAtom";
 import PostChat from "./Postchat";
 import "../my-message.scss";
 
-function DetailMessage({ currentChatterId }) {
+function DetailMessage({ currentChatterId, forceUpdate, reducerValue }) {
   const token = Cookies.get("token");
   const [currentConversation, setCurrentConversation] = useState();
   const currentUser = useAtomValue(currentuserAtom);
-  const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
     currentChatterId &&
@@ -23,7 +22,6 @@ function DetailMessage({ currentChatterId }) {
           return response.json();
         })
         .then((response) => {
-          // console.log(response);
           setCurrentConversation(response);
         });
   }, [currentChatterId, reducerValue]);
