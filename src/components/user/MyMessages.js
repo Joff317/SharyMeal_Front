@@ -7,9 +7,7 @@ import { API } from "../../utils/variables";
 import Cookies from "js-cookie";
 
 function MyMessages({ userData }) {
-  const [currentChatterId, setCurrentChatterId] = useState(
-    userData && userData[userData.length - 4].id
-  );
+  const [currentChatterId, setCurrentChatterId] = useState();
   const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
   const token = Cookies.get("token");
   const [lastMessages, setLastMessages] = useState([]);
@@ -49,7 +47,7 @@ function MyMessages({ userData }) {
         <div className="flex w-full -z-50 mt-6 message-container">
           {lastMessages && (
             <ListMessages
-              listMessages={lastMessages}
+              listMessages={lastMessages && lastMessages}
               setCurrentChatterId={setCurrentChatterId}
               currentChatterId={currentChatterId}
             />

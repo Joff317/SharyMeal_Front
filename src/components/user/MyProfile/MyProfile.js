@@ -306,12 +306,9 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
                 defaultValue={
                   currentUser.description && `${currentUser.description}`
                 }
-                className={`border border-grey-border h-14 pl-3 placeholder:font-light-font rounded-md  ${errorInput(
-                  errors.description
-                )}`}
-                {...register("description", errorMessageValues.description)}
+                className={`border border-grey-border h-14 pl-3 placeholder:font-light-font rounded-md`}
+                {...register("description")}
               />
-              {errorMessage(errors.description)}
             </div>
 
             <div className="flex gap-8 items-center ">
@@ -333,21 +330,21 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
               </label>
             </div>
 
-            <button type="submit" className="my-2 flex justify-center ">
+            <button type="submit" className="my-2 flex justify-center relative">
+              {editConfirmVisib && (
+                <p className="bg-success text-white w-full text-center absolute top-14 p-1">
+                  Profil correctement mis à jour.
+                </p>
+              )}
+
+              {editErrorVisib && (
+                <p className="bg-red text-white text-center w-full absolute top-14 p-1">
+                  Une erreur est survenue.
+                </p>
+              )}
+
               <Button showText={true}>Sauvegarder les modifications</Button>
             </button>
-
-            {editConfirmVisib && (
-              <p className="bg-success text-white text-center p-1 rounded">
-                Profil correctement mis à jour.
-              </p>
-            )}
-
-            {editErrorVisib && (
-              <p className="bg-red text-white text-center p-1 rounded">
-                Une erreur est survenue.
-              </p>
-            )}
           </form>
         </div>
         <br />

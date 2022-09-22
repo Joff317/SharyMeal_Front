@@ -3,12 +3,10 @@ import DisplayAttendances from "./DisplayAttendances";
 import SectionTitle from "../../titles/SectionTitle";
 import SubsectionTitle from "../../titles/SubsectionTitle";
 
-function MyAttendances({ userData }) {
+function MyAttendances({ userData, forceUpdate }) {
   const [period, setPeriod] = useState("future");
 
-
   // console.log(userData.guested_meals);
-
 
   return (
     <>
@@ -39,7 +37,11 @@ function MyAttendances({ userData }) {
         </button>
       </div>
 
-      <DisplayAttendances period={period} meals={userData.guested_meals} />
+      <DisplayAttendances
+        period={period}
+        meals={userData.guested_meals}
+        forceUpdate={forceUpdate}
+      />
     </>
   );
 }
