@@ -246,7 +246,9 @@ function User() {
             />
           )}
           {messagesVisib && <MyMessages userData={data.list_chatters} />}
-          {attendancesVisib && <MyAttendances userData={data} />}
+          {attendancesVisib && (
+            <MyAttendances userData={data} forceUpdate={forceUpdate} />
+          )}
           {hostedMealsVisib && (
             <MyHostedMeals userData={data} forceUpdate={forceUpdate} />
           )}

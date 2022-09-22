@@ -16,7 +16,7 @@ import CreateReview from "../../reviews/CreateReview";
 import ScrollReveal from "scrollreveal";
 import { slideUpFast } from "../../animations/Animations";
 import APIManager from "../../../services/Api";
-import { API } from '../../../utils/variables';
+import { API } from "../../../utils/variables";
 
 function MealCard({
   mealData,
