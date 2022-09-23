@@ -191,10 +191,17 @@ function MealDetails() {
                       />
                     )}
                   </div>
-                  <p className="text-sm">
-                    {" "}
-                    Déjà {guestsAvatar.length} participants !{" "}
-                  </p>
+
+                  {guestsAvatar.length > 0 ? (
+                    <p className="text-sm">
+                      {" "}
+                      {guestsAvatar.length === 1
+                        ? "Déjà 1 participant !"
+                        : `Déjà ${guestsAvatar.length} participants !`}
+                    </p>
+                  ) : (
+                    <p> Pas encore de participants </p>
+                  )}
                 </div>
                 <MealDetailsHost meal={meal} />
               </div>
