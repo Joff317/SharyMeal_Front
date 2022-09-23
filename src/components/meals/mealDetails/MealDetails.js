@@ -34,7 +34,7 @@ function MealDetails() {
   const [guestsAvatar, setGuestsAvatar] = useState();
   const [showDetailGuest, setShowDetailGuest] = useState();
   const [bookingQuantity, setBookingQuantity] = useState(1);
-  const currentUserAtom = useAtomValue(currentuserAtom);
+  const currentUser = useAtomValue(currentuserAtom);
   const mealId = useParams().mealId;
   const navigate = useNavigate();
   const jsConfetti = new JSConfetti();
@@ -42,9 +42,9 @@ function MealDetails() {
   const setOrderConfirmationAtom = useSetAtom(OrderConfirmationAtom);
   const token = Cookies.get("token");
   const atomBookingQty = useAtomValue(bookingQtyAtom);
-  // const setAtomBookingQty = useSetAtom(bookingQtyAtom);
-
+  
   useEffect(() => {
+    
     fetch(API + `meals/${mealId}`)
       .then((res) => res.json())
       .then((data) => {
@@ -61,10 +61,12 @@ function MealDetails() {
   console.log("GUEST", guestsAvatar);
 
   const createAttendance = async (atomBookingQty) => {
-    console.log(
-      "atomBookingQty FROM createAttendance [MealDetails]",
-      atomBookingQty
-    );
+    console.log('currentUser', currentUser);
+
+    // console.log(
+    //   "atomBookingQty FROM createAttendance [MealDetails]",
+    //   atomBookingQty
+    // );
 
     // await APIManager.create("attendances", {
     //   attendance: {
@@ -90,6 +92,7 @@ function MealDetails() {
       body: JSON.stringify({
         attendance: {
           meal_id: mealId,
+          requester: currentUser
         },
       }),
     })
@@ -266,7 +269,7 @@ function MealDetails() {
             </div>
           )}
 
-          {currentUserAtom.id !== meal.host.id && (
+          {currentUser.id !== meal.host.id && (
             <MealDetailsFooter
               meal={meal}
               setBookingQuantity={setBookingQuantity}
