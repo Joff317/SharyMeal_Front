@@ -151,8 +151,8 @@ function MealDetails() {
                     <p className="text-sm">
                       {" "}
                       {guestsAvatar.length === 1
-                        ? "Déjà 1 participant !"
-                        : `Déjà ${guestsAvatar.length} participants et ${meal.guest_registered} réservations !`}
+                        ? "Déjà 1 participant !"            
+                        : `Déjà ${guestsAvatar.length} personnes ont réservé, plus que ${meal.guest_capacity - meal.guest_registered} places !`}
                     </p>
                   ) : (
                     <p> Pas encore de participants </p>
