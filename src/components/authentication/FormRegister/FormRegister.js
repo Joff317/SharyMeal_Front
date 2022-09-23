@@ -69,7 +69,7 @@ function FormRegister({
         </div>
         <div className="flex flex-col">
           <p> Mot de passe </p>
-          <p className="mb-2 text-xs font-light-font">(8 caractère dont une lettre, un chiffre et un caractère spécial )</p>
+          <p className="mb-2 text-xs font-light-font">(8 caractères dont 1 lettre, 1 chiffre et 1 caractère spécial )</p>
           <input
             className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md ${errorInput(
               errors.password
