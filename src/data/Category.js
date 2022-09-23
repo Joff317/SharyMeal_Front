@@ -17,7 +17,7 @@ export const categories = [
   },
   {
     id: 2,
-    label: "Seafood",
+    label: "SeaFood",
     icon: <Shrimp />,
   },
   {
