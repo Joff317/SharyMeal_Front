@@ -127,7 +127,7 @@ function MealDetails() {
                     className="flex relative"
                   >
                     {guestsAvatar &&
-                      guestsAvatar.map((guestAvatar) => (
+                      guestsAvatar.map((guestAvatar, index) => (
                         <>
                           <img
                             className="w-8 h-8 border-grey ml-[-9px] rounded full cursor-pointer"
@@ -207,7 +207,7 @@ function MealDetails() {
 
           {hostReviews.length !== 0 && (
             <div className="pt-8 px-10 my-0 mx-auto max-w-[1500px] ">
-              <SectionTitle> Reviews </SectionTitle>
+              <SectionTitle> Avis </SectionTitle>
               <br />
               <div className="flex items-start justify-between reviews">
                 <DisplayReviews

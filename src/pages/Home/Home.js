@@ -56,9 +56,7 @@ function Home(props) {
           </HeroTitle>
 
           <div className="under-title mt-3 slide">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            semper nisl nec sociis.Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Praesent semper nisl
+          Pour tous les amoureux de la cuisine ! Trouvez, créez et partagez des repas avec les habitants de votre ville.
           </div>
           <span className="slide">
             <InputGeoloc saveSearchData={saveSearchData} />

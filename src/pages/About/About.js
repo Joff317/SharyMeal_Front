@@ -21,10 +21,9 @@ function About() {
         <div className="top-container-left">
           <HeroTitle>Pourquoi devenir hôte ?</HeroTitle>
           <p className="text-white">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            Consequatur corporis rerum aut porro, exercitationem accusamus
-            magnam perferendis at, adipisci debitis quasi reprehenderit. Rerum
-            et officia commodi, eveniet nesciunt totam exercitationem.
+          Vous avez toujours rêvé de préparer de délicieux repas à la
+                maison et de partager cette expérience ? Alors, inscrivez-vous
+                et créez votre premier repas !
           </p>
           <button onClick={() => navigate("/create-meal")}>
             <Button showText={true} showIcon={true} icon={<Arrow />}>
@@ -46,66 +45,66 @@ function About() {
         </span>
         <div className="middle-middle">
           <div className="middle-left-container">
-              <div className="circle-1">
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-              </div>
-              <div className="circle-2">
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-              </div>
-              <div className="circle-3">
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-              </div>
-              <div className="circle-4">
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-                <span className="circle"></span>
-              </div>
+            <div className="circle-1">
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+            </div>
+            <div className="circle-2">
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+            </div>
+            <div className="circle-3">
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+            </div>
+            <div className="circle-4">
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+              <span className="circle"></span>
+            </div>
             <span className="square"></span>
             <img src={aboutImage} alt="about-us" className="about-image" />
           </div>
@@ -113,36 +112,21 @@ function About() {
             <div className="text-1">
               <SubsectionTitle>Créer votre annonce</SubsectionTitle>
               <p className="text">
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis facere ipsam laboriosam. Velit quo cum dolorum dicta enim eum tempore, et blanditiis odio, esse harum tempora suscipit, beatae sit nostrum.
-               Ab odit officiis voluptatum commodi voluptatibus. Laborum repudiandae, aliquam aut odio quisquam rerum reprehenderit blanditiis recusandae. Praesentium minima, iusto tempore temporibus soluta autem animi voluptatem voluptates voluptatum optio quaerat in.
+              Créer votre événement gastronomique n'a jamais été aussi facile. Proposez un repas, publiez une annonce et recevez des réservations.
               </p>
             </div>
             <div className="text-1">
               <SubsectionTitle>
-                Gérer les demande de participations{" "}
+                Gérer vos événement depuis votre profil{" "}
               </SubsectionTitle>
               <p className="text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-                repudiandae animi asperiores magni. Animi, perferendis ipsa vel
-                reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
-                labore quae, asperiores alias dicta id! Soluta aliquid quas
-                quaerat voluptates modi quod, aspernatur deserunt, expedita
-                eaque nesciunt sit exercitationem ut assumenda excepturi
-                explicabo nam ab cupiditate rem nihil in doloribus nostrum.
-                Corporis voluptatum harum quibusdam?
+              Gérez vos événements à partir de votre profil.  Vous pouvez voir et modifier les détails comme la date, le lieux etc. Indiquez à vos convives s'il s'agit d'un repas pour omnivore, végétarien etc. 
               </p>
             </div>
             <div className="text-1">
               <SubsectionTitle>Mangez et profitez !</SubsectionTitle>
               <p className="text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-                repudiandae animi asperiores magni. Animi, perferendis ipsa vel
-                reprehenderit ullam voluptatibus harum. Ratione iste quibusdam
-                labore quae, asperiores alias dicta id! Soluta aliquid quas
-                quaerat voluptates modi quod, aspernatur deserunt, expedita
-                eaque nesciunt sit exercitationem ut assumenda excepturi
-                explicabo nam ab cupiditate rem nihil in doloribus nostrum.
-                Corporis voluptatum harum quibusdam?
+              Laissez des commentaires en ligne à la fin de chaque repas pour dire ce que vous avez pensé de votre soirée. Évaluez votre hôte en lui donnant une note !
               </p>
             </div>
             <span
