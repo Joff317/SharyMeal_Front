@@ -15,11 +15,10 @@ import { Link } from "react-router-dom";
 import CreateReview from "../../reviews/CreateReview";
 import ScrollReveal from "scrollreveal";
 import { slideUpFast } from "../../animations/Animations";
-import APIManager from "../../../services/Api";
 import { API } from "../../../utils/variables";
-import Guest from "../mealDetails/Guest";
 import DefaultAvatar from "../../../assets/images/avatardefault.png";
 import SendMessage from "../mealDetails/SendMessage";
+import AvatarPopup from "../../users/AvatarPopup";
 
 function MealCard({
   mealData,
@@ -33,28 +32,11 @@ function MealCard({
   const [showEdit, setShowEdit] = useState();
   const [showReview, setShowReview] = useState();
   const [guestsAvatarUrl, setGuestsAvatarUrl] = useState();
-  const [showDetailGuest, setShowDetailGuest] = useState();
+  const [showDetailGuest, setShowDetailGuest] = useState(false);
   const [getGuestId, setGetGuestId] = useState();
   const [showMessage, setShowMessage] = useState(false);
 
-  console.log(mealData);
-
-  function setShowMessageFunc(id) {
-    setGetGuestId(id);
-    setShowMessage(true);
-  }
-
   const deleteMeal = () => {
-    // APIManager.delete(`meals/${mealData.id}`)
-    //   .then((res) => {
-    //     console.log("res FROM DELETE MEAL REQUEST => ", res);
-    //     forceUpdate();
-    //   })
-    //   .catch((error) =>
-    //     console.error("error from DELETE MEAL REQUEST => ", error.message)
-    //   );
-
-    //OLD request : will be removed from code.
     fetch(`${API}/meals/${mealData.id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
@@ -92,7 +74,7 @@ function MealCard({
   return (
     <div
       key={mealData.id}
-      className={`mealcard-container flex flex-col opacity-100 justify-end  gap-1 ${
+      className={`mealcard-container flex flex-col opacity-100 justify-end   ${
         launchAnimation && !showAdditionalInfo && "slide"
       } `}
     >
@@ -161,7 +143,7 @@ function MealCard({
       <div
         onMouseEnter={() => setShowDetailGuest(true)}
         onMouseLeave={() => setShowDetailGuest(false)}
-        className="flex relative"
+        className="flex relative ml-2"
       >
         {showAdditionalInfo &&
           guestsAvatarUrl &&
@@ -178,40 +160,14 @@ function MealCard({
               />
             </>
           ))}
-        {showDetailGuest && (
-          <div className="flex flex-col px-6 py-3 gap-2 bg-white absolute drop-shadow-lg min-w-[200px] top-7 rounded-sm">
-            {guestsAvatarUrl.guests_avatar.map((guestAvatar) => (
-              <div className="border-b border-b-grey-border mb-2">
-                <div className="flex items-center gap-1">
-                  <img
-                    className="w-7 h-7 border-grey ml-[-9px] rounded full cursor-pointer"
-                    src={
-                      guestAvatar.avatar_url
-                        ? guestAvatar.avatar_url
-                        : DefaultAvatar
-                    }
-                    alt="avatar"
-                  />
 
-                  <Link to={`/users/${guestAvatar.id}`}>
-                    <p className="text-lg font-bold-font mt-1">
-                      {" "}
-                      {guestAvatar.name
-                        ? guestAvatar.name
-                        : guestAvatar.email}{" "}
-                    </p>
-                  </Link>
-                </div>
-                <p
-                  onClick={() => setShowMessageFunc(guestAvatar)}
-                  className="text-sm my-2 mb-3 font-light-font bg-pink rounded-full py-1 px-2 w-fit cursor-pointer"
-                >
-                  {" "}
-                  Envoyer un message{" "}
-                </p>
-              </div>
-            ))}
-          </div>
+        {showDetailGuest && (
+          <AvatarPopup
+            guestData={guestsAvatarUrl.guests_avatar}
+            setGetGuestId={setGetGuestId}
+            setShowMessage={setShowMessage}
+            hideMessageBtn={false}
+          />
         )}
       </div>
 

@@ -167,7 +167,7 @@ function Navigation() {
       </div>
 
       {popupBurgerVisible && (
-        <div className="open-popup popup-burger bg-white text-black flex flex-col rounded-lg p-5 gap-3 items-center absolute top-16 right-6 z-50">
+        <div className="open-popup popup-burger bg-white text-black flex flex-col rounded-lg p-5 gap-3 items-center absolute top-16 right-6 ">
           <div className="navigation-center-burger text-black flex flex-col ">
             <NavLink
               className="text-center hover:bg-green_light py-3 rounded-sm"

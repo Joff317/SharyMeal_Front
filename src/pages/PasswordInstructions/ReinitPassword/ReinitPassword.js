@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Button from "../../../components/actions/Button";
 import {
   errorMessageValues,
   errorInput,
   errorMessage,
 } from "../../../components/authentication/errors";
+import Check from "../../../icons/Check";
 import { API } from "../../../utils/variables";
+import './ReinitPassword.scss'
 
-function ReinitPassword(props) {
+function ReinitPassword() {
   const token = useParams().tokenId;
   // console.log(token, typeof token);
   const navigate = useNavigate();
@@ -21,7 +24,7 @@ function ReinitPassword(props) {
   } = useForm();
 
   const OnSubmit = (data) => {
-    fetch(API + "users/password", {
+    fetch(API + `users/password`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -40,15 +43,15 @@ function ReinitPassword(props) {
         // console.log(data);
         setShow(true);
         setTimeout(() => {
-          navigate("/login");
+          navigate("/");
         }, "2000");
       })
       .catch((error) => console.log(error.message));
   };
 
   return (
-    <>
-      <div>ReinitPassword</div>
+    <div className="password-container">
+      <div>Change your password</div>
       <form
         className={`max-w-[400px] flex flex-col gap-3 mt-2`}
         onSubmit={handleSubmit(OnSubmit)}
@@ -77,11 +80,11 @@ function ReinitPassword(props) {
         </div>
 
         <button
-          className="py-2 px-4 rounded text-white bg-slate-800"
           type="submit"
         >
-          {" "}
-          Submit{" "}
+         <Button showText={true} showIcon={true} icon={<Check/>}>
+              submit
+         </Button>
         </button>
       </form>
       {show && (
@@ -90,7 +93,7 @@ function ReinitPassword(props) {
           Mot de passe modifié avec succès !{" "}
         </h1>
       )}
-    </>
+    </div>
   );
 }
 

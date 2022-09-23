@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 function MyHostedMeals({ userData, forceUpdate }) {
   const navigate = useNavigate();
 
-  console.log(userData);
   return (
     <>
       <SubsectionTitle> Les repas que vous avez organisés </SubsectionTitle>

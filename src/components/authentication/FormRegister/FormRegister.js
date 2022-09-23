@@ -84,14 +84,11 @@ function FormRegister({
             condition d'utilisation
           </a>
           <div className="check-conditions">
-            <p className="mb-2">
+            <p className="items-center">
               {" "}
-              J'ai lu et j'accepte les conditions d'utilisation{" "}
+              J'ai lu et j'accepte les conditions d'utilisation et l'utilisation des cookies{" "}
             </p>
             <input
-              className={`border border-grey-border  pl-3 placeholder:font-light-font placeholder:text-sm rounded-md ${errorInput(
-                errors.password
-              )}`}
               type="checkbox"
               required
             />
