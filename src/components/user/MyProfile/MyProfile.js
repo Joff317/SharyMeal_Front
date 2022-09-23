@@ -289,7 +289,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
         <br />
         <SubsectionTitle>
           {" "}
-          <span className=""> Mes reviews </span>{" "}
+          <span className=""> Mes Avis </span>{" "}
         </SubsectionTitle>
 
         <div className="tabs-container flex gap-4 border-b border-b-grey-border my-4 w-fit  font-light-font h-[29px]">
@@ -302,7 +302,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
             onClick={() => setReviewStatus("written")}
           >
             {" "}
-            Reviews recues
+            Avis reçus
           </button>
 
           <button
@@ -314,7 +314,7 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
             onClick={() => setReviewStatus("received")}
           >
             {" "}
-            Reviews écrites
+            Avis écrits
           </button>
         </div>
 

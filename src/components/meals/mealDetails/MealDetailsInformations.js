@@ -27,7 +27,7 @@ const MealDetailsInformations = ({ meal }) => {
 
         <li className="icon items-center">
           <UserBlack />
-          <span className={ meal.guest_capacity === meal.guest_registered && "font-bold bg-green p-1 rounded-md"}>
+          <span className={ meal.guest_capacity === meal.guest_registered ? "font-bold bg-green p-1 rounded-md" : undefined}>
             Réservations : {meal.guest_registered ? meal.guest_registered : "0"} / {meal.guest_capacity && meal.guest_capacity}
           </span>
         </li>

@@ -15,9 +15,9 @@ function AvatarPopup({
   }
 
   return (
-    <div className="flex flex-col  bg-white absolute z-50 drop-shadow-lg min-w-[330px] top-8 rounded-xl">
-      {guestData.map((guestAvatar) => (
-        <div className=" flex items-center justify-between py-3 px-6  hover:bg-green_light">
+    <div className="flex flex-col  bg-white absolute z-50 drop-shadow-lg min-w-[330px] top-7 rounded-xl">
+      {guestData.map((guestAvatar, index) => (
+        <div key={index} className=" flex items-center justify-between py-3 px-6  hover:bg-green_light">
           <div className="flex items-center gap-2">
             <img
               className="w-10 h-10 border-grey ml-[-9px] rounded-full cursor-pointer"
