@@ -14,8 +14,7 @@ import Loader from "../Loader";
 import Lottie from "react-lottie";
 import * as noResult from "../../lotties/noresult.json";
 import Map from "../map/Map";
-import ToggleMap from "../map/ToggleMap";
-import APIManager from "../../services/Api";
+import Toggle from "../map/Toggle";
 
 function MealIndex() {
   const [mealsIndex, setMealsIndex] = useState(null);
@@ -25,7 +24,6 @@ function MealIndex() {
   const [price, setPrice] = useState([0, 30]);
   const [places, setPlaces] = useState(0);
   const [visibleFilter, setVisibleFilter] = useState(false);
-  const [mealsIndexFiltered, setMealsIndexFiltered] = useState([]);
   const [mapVisib, setMapVisib] = useState(false);
 
   const defaultOptions = {
@@ -38,17 +36,9 @@ function MealIndex() {
   };
 
   useEffect(() => {
-    // APIManager.get("meals")
-    // .then(res => {
-    //     // console.log('res FROM GET REQUEST => ', res)
-    //     setMealsIndex(res);})
-    // .catch(error => console.log('error from GET REQUEST =>', error.message));
-
-    // OLD fetch request : will be removed from code.
     fetch(API + "meals")
       .then((res) => res.json())
       .then((data) => {
-        console.log("MEALINDEX", data);
         setMealsIndex(data);
       });
 
@@ -142,7 +132,12 @@ function MealIndex() {
             )}
           </div>
         </div>
-        <ToggleMap setMapVisib={setMapVisib} mapVisib={mapVisib} />
+        <div className="flex  ">
+          <Toggle setBoolean={setMapVisib} boolean={mapVisib} name="map" />
+          <span className="ml-3 text-sm font-medium text-grey dark:text-grey">
+            Map view
+          </span>
+        </div>
       </div>
 
       {mealsIndex ? (

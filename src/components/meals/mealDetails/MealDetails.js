@@ -1,6 +1,6 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { API } from "../../../utils/variables";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./MealDetails.scss";
 import MealDetailsImages from "./MealDetailsImages";
 import MealDetailsTitle from "./MealDetailsTitle";
@@ -20,10 +20,8 @@ import SectionTitle from "../../titles/SectionTitle";
 import JSConfetti from "js-confetti";
 import Cookies from "js-cookie";
 import { CURRENT_URL } from "../../../utils/variables";
-import APIManager from "../../../services/Api";
 import DisplayReviews from "../../reviews/DisplayReviews";
 import { bookingQtyAtom } from "../../../atoms/bookingQtyAtom";
-import Guest from "./Guest";
 import DefaultAvatar from "../../../assets/images/avatardefault.png";
 import AvatarPopup from "../../users/AvatarPopup";
 
@@ -43,13 +41,11 @@ function MealDetails() {
   const setOrderConfirmationAtom = useSetAtom(OrderConfirmationAtom);
   const token = Cookies.get("token");
   const atomBookingQty = useAtomValue(bookingQtyAtom);
-  // const setAtomBookingQty = useSetAtom(bookingQtyAtom);
 
   useEffect(() => {
     fetch(API + `meals/${mealId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setMeal(data.meal);
         setHostedMeals(data.hosted_meals);
         setGuestsAvatar(data.guests_avatar);
@@ -59,29 +55,7 @@ function MealDetails() {
       });
   }, []);
 
-  console.log("GUEST", guestsAvatar);
-
-  const createAttendance = async (atomBookingQty) => {
-    console.log(
-      "atomBookingQty FROM createAttendance [MealDetails]",
-      atomBookingQty
-    );
-
-    // await APIManager.create("attendances", {
-    //   attendance: {
-    //     meal_id: mealId,
-    //   },
-    // })
-    //   .then((res) => {
-    //     console.log("res FROM createAttendance REQUEST => ", res);
-    //     updateGuestRegisteredCount();
-    //   })
-    //   .catch((error) =>
-    //     console.error("error FROM createAttendance REQUEST => ", error.message)
-    //   );
-
-    // OLD request : will be removed.
-
+  const createAttendance = async () => {
     fetch(API + "attendances", {
       method: "POST",
       headers: {
@@ -104,18 +78,6 @@ function MealDetails() {
   };
 
   const updateGuestRegisteredCount = () => {
-    // APIManager.edit(`meals/${mealId}`, {
-    //   meal: {
-    //     guest_registered: meal.guest_registered + bookingQuantity,
-    //   },
-    // })
-    //   .then((res) =>
-    //     console.log("res FROM updateGuestRegisteredCount => ", res)
-    //   )
-    //   .catch((error) =>
-    //     console.log("error FROM updateGuestRegisteredCount => ", error.message)
-    //   );
-
     fetch(API + `meals/${mealId}`, {
       method: "PUT",
       headers: {
@@ -138,14 +100,6 @@ function MealDetails() {
     setOrderConfirmationAtom(true);
     jsConfetti.addConfetti();
   }
-
-  const closeModal = () => {
-    createAttendance(atomBookingQty);
-    // setOrderConfirmationAtom(false);
-    return (window.location.href = CURRENT_URL + `meals/${mealId}`);
-    // console.log('window.history', window.history);
-    // return window.history.go(-1);
-  };
 
   const redirectToPath = (path) => {
     createAttendance(atomBookingQty);
@@ -226,7 +180,7 @@ function MealDetails() {
                     </p>
                     <span
                       className="absolute top-5 right-5"
-                      onClick={closeModal}
+                      onClick={() => redirectToPath(`/meals/${mealId}`)}
                     >
                       <Button showIcon={true} icon={<Close />}></Button>
                     </span>
