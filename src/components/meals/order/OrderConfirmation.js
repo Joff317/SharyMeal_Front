@@ -51,7 +51,8 @@ function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
     })
       .then((res) => {
         console.log('res FROM CHARGES REQUEST => ', res)
-        if (res.url === API + "users/sign_in") {
+        // if (res.url === API + "users/sign_in") {
+        if (res.status === 500) {
           setSignIn(true);
           setTimeout( () => 
             setSignIn(false)
