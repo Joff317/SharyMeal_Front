@@ -25,6 +25,7 @@ import DisplayReviews from "../../reviews/DisplayReviews";
 import { bookingQtyAtom } from "../../../atoms/bookingQtyAtom";
 import Guest from "./Guest";
 import DefaultAvatar from "../../../assets/images/avatardefault.png";
+import AvatarPopup from "../../users/AvatarPopup";
 
 function MealDetails() {
   const [meal, setMeal] = useState();
@@ -184,18 +185,10 @@ function MealDetails() {
                       ))}
 
                     {showDetailGuest && (
-                      <div className="flex flex-col px-4 py-2 gap-2 bg-black absolute top-7 rounded-sm">
-                        {guestsAvatar.map((guestAvatar) => (
-                          <Link
-                            to={`/users/${guestAvatar.id}`}
-                            className="text-white text-sm font-book-font hover:bg-grey pl-2 rounded-sm"
-                          >
-                            {guestAvatar.name
-                              ? guestAvatar.name
-                              : guestAvatar.email}{" "}
-                          </Link>
-                        ))}
-                      </div>
+                      <AvatarPopup
+                        guestData={guestsAvatar}
+                        hideMessageBtn={true}
+                      />
                     )}
                   </div>
                   <p className="text-sm">
