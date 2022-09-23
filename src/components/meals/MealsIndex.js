@@ -92,7 +92,7 @@ function MealIndex() {
       <span id="titleScroll" className=""></span>
       <SectionTitle textCenter={true}>
         {" "}
-        Découvrez de nouvelle expériences culinaires autour de{" "}
+        Découvrez de nouvelles expériences culinaires autour de{" "}
         <span className="bg-green">
           {" "}
           {inputData.city !== "" ? inputData.city : "chez vous"}{" "}
