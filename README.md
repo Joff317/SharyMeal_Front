@@ -29,7 +29,6 @@ FREIXANET Joffrey | BEAUMONT Foucauld | ARMAGNAC Julien
 
 ### Packages npm used for frontend :
 
-"@emailjs/browser": "^3.7.0",
 - "animejs": "^3.2.1",
 - "jotai": "^1.7.8",
 - "js-confetti": "^0.10.2",
