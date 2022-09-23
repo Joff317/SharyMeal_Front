@@ -29,6 +29,8 @@ import Arrow from "../../icons/Arrow";
 import ArrowLeft from "../../icons/ArrowLeft";
 import Check from "../../icons/Check";
 import env from "react-dotenv";
+import { useAtomValue } from 'jotai';
+import { currentuserAtom } from "../../atoms/loggedAtom";
 
 const CreateMeal = () => {
   const token = Cookies.get("token");
@@ -42,6 +44,8 @@ const CreateMeal = () => {
   const [mealId, setMealId] = useState(0);
   const [formData, setFormData] = useState();
   const [formErrors, setFormErrors] = useState();
+  const currentUser = useAtomValue(currentuserAtom)
+  const [ isOwner , setIsOwner ] = useState(true)
 
   document.documentElement.scrollTop = 0;
 
@@ -142,7 +146,9 @@ const CreateMeal = () => {
             doggybag: data.doggybag,
             diet_type: data.dietType,
             allergens: data.allergens,
+            requester: currentUser,
           },
+          
         }),
       })
         .then((res) => {
@@ -151,12 +157,20 @@ const CreateMeal = () => {
         })
         .then((datas) => {
           console.log("datas FROM CREATE MEAL REQUEST => ", datas);
-          postCategoriesInfo(data.categories, datas.id);
-          data.image_urls.length !== 0 && postImages(datas.id, imagesUrl);
-          setMealId(datas.id);
-          jsConfetti.addConfetti();
-          setShowConfirmation(true);
-        })
+          if (!datas.account_owner) {
+            setIsOwner(false)
+            setTimeout( () => {
+              setIsOwner(true)
+            }, 5000)
+          }
+          else {
+            postCategoriesInfo(data.categories, datas.meal.id);
+            data.image_urls.length !== 0 && postImages(datas.meal.id, imagesUrl);
+            setMealId(datas.meal.id);
+            jsConfetti.addConfetti();
+            setShowConfirmation(true);
+          }
+         })
         .catch((error) =>
           console.error("error FROM CREATE MEAL REQUEST =>", error.message)
         );
@@ -188,9 +202,10 @@ const CreateMeal = () => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          join_category_meal: {
+            join_category_meal: {
             meal_id: mealId,
             category_id: parseInt(category),
+            requester: currentUser
           },
         }),
       });
@@ -620,6 +635,9 @@ const CreateMeal = () => {
                 </span>
 
                 <button type="submit" className="my-2 flex justify-center">
+                {
+                  !isOwner && <p>Opération interdite</p> 
+                }
                   <Button showText={true} showIcon={true} icon={<Check />}>
                     Créer un repas
                   </Button>
