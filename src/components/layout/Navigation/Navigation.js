@@ -72,8 +72,24 @@ function Navigation() {
       </NavLink>
 
       <div className="navigation-center flex gap-12">
+
         <NavLink to="/about">À propos</NavLink>
         <NavLink to="/create-meal">&#10024; Proposer un repas &#10024;</NavLink>
+
+
+        {!loggedd ? (
+          <p
+            className="cursor-pointer text-sm "
+            onClick={() => setLoginPopup(true)}
+          >
+            &#10024; Proposer un repas &#10024;
+          </p>
+        ) : (
+          <NavLink to="/create-meal">
+            &#10024; Proposer un repas &#10024;
+          </NavLink>
+        )}
+
       </div>
 
       <div className="navigation-right flex justify-end gap-8 items-center">
@@ -176,13 +192,19 @@ function Navigation() {
             >
               About us
             </NavLink>
-            <NavLink
-              className="hover:bg-green_light py-3 rounded-sm"
-              onClick={() => setPopupBurgerVisible(false)}
-              to="/create-meal"
-            >
-              &#10024; Proposer un repas &#10024;
-            </NavLink>
+
+            {!loggedd ? (
+              <p
+                className="cursor-pointer text-sm "
+                onClick={() => setLoginPopup(true)}
+              >
+                &#10024; Proposer un repas &#10024;
+              </p>
+            ) : (
+              <NavLink to="/create-meal">
+                &#10024; Proposer un repas &#10024;
+              </NavLink>
+            )}
           </div>
           <div className="navigation-right-burger  flex flex-col border-t border-grey-border pt-1 gap-2 w-full">
             {!loggedd ? (
