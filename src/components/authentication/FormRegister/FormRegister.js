@@ -68,7 +68,8 @@ function FormRegister({
           {errorMessage(errors.email)}
         </div>
         <div className="flex flex-col">
-          <p className="mb-2"> Password </p>
+          <p> Mot de passe </p>
+          <p className="mb-2 text-xs font-light-font">(8 caractère dont une lettre, un chiffre et un caractère spécial )</p>
           <input
             className={`border border-grey-border  h-14 pl-3 placeholder:font-light-font placeholder:text-sm rounded-md ${errorInput(
               errors.password
@@ -86,12 +87,10 @@ function FormRegister({
           <div className="check-conditions">
             <p className="items-center">
               {" "}
-              J'ai lu et j'accepte les conditions d'utilisation et l'utilisation des cookies{" "}
+              J'ai lu et j'accepte les conditions d'utilisation et l'utilisation
+              des cookies{" "}
             </p>
-            <input
-              type="checkbox"
-              required
-            />
+            <input type="checkbox" required />
           </div>
         </div>
         <button type="submit" className="my-2 flex justify-center">
@@ -101,7 +100,7 @@ function FormRegister({
         </button>
 
         {!registerResult && (
-          <p className="bg-red text-white text-center rounded p-2">
+          <p className="bg-red text-white text-center p-2">
             Erreur. Vous avez peut-être déjà un compte chez nous ?
           </p>
         )}
