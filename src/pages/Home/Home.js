@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Home.scss";
 import HeroTitle from "../../components/titles/HeroTitle";
 import MealsIndex from "../../components/meals/MealsIndex";
@@ -10,9 +10,16 @@ import ScrollReveal from "scrollreveal";
 import { AnimeJs, slideUp } from "../../components/animations/Animations";
 import "../../components/animations/transition.css";
 import { Link } from "react-router-dom";
+import Toggle from "../../components/map/Toggle";
+import { useAtomValue, useSetAtom } from "jotai";
+import { CheckedAtom } from "../../atoms/Checked";
+import { inputDataAtom } from "../../atoms/inputData";
 
 function Home(props) {
   const animation = useRef(null);
+  const [saveSearchData, setSaveSearchData] = useState(false);
+  const checkedAtomValue = useAtomValue(CheckedAtom);
+  const setInputDataAtom = useSetAtom(inputDataAtom);
 
   useEffect(() => {
     animation.current.innerHTML = animation.current.textContent.replace(
@@ -24,6 +31,17 @@ function Home(props) {
 
   useEffect(() => {
     ScrollReveal().reveal(".slide", slideUp);
+  }, []);
+
+  useEffect(() => {
+    if (!checkedAtomValue) {
+      setInputDataAtom({
+        city: "",
+        lat: "",
+        lon: "",
+        date: "",
+      });
+    }
   }, []);
 
   return (
@@ -43,7 +61,19 @@ function Home(props) {
             adipiscing elit. Praesent semper nisl
           </div>
           <span className="slide">
-            <InputGeoloc />
+            <InputGeoloc saveSearchData={saveSearchData} />
+            <div className="flex  gap-2 mt-3 ml-4">
+              {" "}
+              <Toggle
+                setBoolean={setSaveSearchData}
+                boolean={saveSearchData}
+                name="save"
+              />
+              <p className="text-white font-light-font text-sm mt-1">
+                {" "}
+                Memoriser votre ville ?
+              </p>{" "}
+            </div>
           </span>
         </div>
 

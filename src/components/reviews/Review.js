@@ -11,8 +11,6 @@ import {
 import "./review.scss";
 
 function Review({ review, showHost }) {
-  // console.log("one review", review);
-
   function dataParsed(date) {
     return new Date(date).toLocaleDateString("fr-FR", {
       month: "short",
