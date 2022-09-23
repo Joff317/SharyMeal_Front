@@ -21,9 +21,9 @@ function About() {
         <div className="top-container-left">
           <HeroTitle>Pourquoi devenir hôte ?</HeroTitle>
           <p className="text-white">
-          Vous avez toujours rêvé de préparer de délicieux repas à la
-                maison et de partager cette expérience ? Alors, inscrivez-vous
-                et créez votre premier repas !
+            Vous avez toujours rêvé de préparer de délicieux repas à la maison
+            et de partager cette expérience ? Alors, inscrivez-vous et créez
+            votre premier repas !
           </p>
           <button onClick={() => navigate("/create-meal")}>
             <Button showText={true} showIcon={true} icon={<Arrow />}>
@@ -112,7 +112,9 @@ function About() {
             <div className="text-1">
               <SubsectionTitle>Créer votre annonce</SubsectionTitle>
               <p className="text">
-              Créer votre événement gastronomique n'a jamais été aussi facile. Proposez un repas, publiez une annonce et recevez des réservations.
+                Créer votre événement gastronomique n'a jamais été aussi facile.
+                Proposez un repas, publiez une annonce et recevez des
+                réservations.
               </p>
             </div>
             <div className="text-1">
@@ -120,13 +122,18 @@ function About() {
                 Gérer vos événement depuis votre profil{" "}
               </SubsectionTitle>
               <p className="text">
-              Gérez vos événements à partir de votre profil.  Vous pouvez voir et modifier les détails comme la date, le lieux etc. Indiquez à vos convives s'il s'agit d'un repas pour omnivore, végétarien etc. 
+                Gérez vos événements à partir de votre profil. Vous pouvez voir
+                et modifier les détails comme la date, le lieux etc. Indiquez à
+                vos convives s'il s'agit d'un repas pour omnivore, végétarien
+                etc.
               </p>
             </div>
             <div className="text-1">
               <SubsectionTitle>Mangez et profitez !</SubsectionTitle>
               <p className="text">
-              Laissez des commentaires en ligne à la fin de chaque repas pour dire ce que vous avez pensé de votre soirée. Évaluez votre hôte en lui donnant une note !
+                Laissez des commentaires en ligne à la fin de chaque repas pour
+                dire ce que vous avez pensé de votre soirée. Évaluez votre hôte
+                en lui donnant une note !
               </p>
             </div>
             <span

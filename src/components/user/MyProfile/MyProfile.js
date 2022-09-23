@@ -212,7 +212,6 @@ function MyProfile({ currentUser, setCurrentUser, userData }) {
                   placeholder="Où cuisines-tu ?"
                   defaultValue={currentUser.city && `${currentUser.city}`}
                   autoComplete="off"
-                  // {...register("city", errorMessageValues.city)}
                   onInput={() => handleVisibilities()}
                 />
                 {autocompleteVisible && (

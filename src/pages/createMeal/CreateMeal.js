@@ -29,7 +29,7 @@ import Arrow from "../../icons/Arrow";
 import ArrowLeft from "../../icons/ArrowLeft";
 import Check from "../../icons/Check";
 import env from "react-dotenv";
-import { useAtomValue } from 'jotai';
+import { useAtomValue } from "jotai";
 import { currentuserAtom } from "../../atoms/loggedAtom";
 
 const CreateMeal = () => {
@@ -44,8 +44,8 @@ const CreateMeal = () => {
   const [mealId, setMealId] = useState(0);
   const [formData, setFormData] = useState();
   const [formErrors, setFormErrors] = useState();
-  const currentUser = useAtomValue(currentuserAtom)
-  const [ isOwner , setIsOwner ] = useState(true)
+  const currentUser = useAtomValue(currentuserAtom);
+  const [isOwner, setIsOwner] = useState(true);
 
   document.documentElement.scrollTop = 0;
 
@@ -70,8 +70,6 @@ const CreateMeal = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log("data onSubmit", data, cityInfo, startDate);
-
     setFormErrors({
       title: data.title.length < 3 && "Titre trop court.",
       description: data.description.length < 5 && "Description trop courte.",
@@ -87,40 +85,6 @@ const CreateMeal = () => {
       for (let i = 0; i < data.image_urls.length; i++) {
         imagesUrl.append("meal[images][]", data.image_urls[i]);
       }
-
-      // await APIManager.create("meals",
-      //     {
-      //         title: data.title,
-      //         description: data.description,
-      //         price: data.price,
-      //         location: {
-      //           city: cityInfo ? cityInfo.city : data.location.city,
-      //           lat: cityInfo ? cityInfo.lat : data.location.lat,
-      //           lon: cityInfo ? cityInfo.lon : data.location.lon,
-      //           address: cityInfo
-      //             ? cityInfo.formatted
-      //             : data.location.address,
-      //         },
-      //         guest_capacity: data.guest_capacity,
-      //         starting_date: startDate,
-      //         animals: data.animals,
-      //         alcool: data.alcool,
-      //         doggybag: data.doggybag,
-      //         diet_type: data.dietType,
-      //         allergens: data.allergens,
-      //       }
-      // )
-      //   .then((res) => {
-      //     console.log("res FROM CREATE MEAL REQUEST => ", res);
-      //     postCategoriesInfo(data.categories, res.id);
-      //     data.image_urls.length !== 0 && postImages(res.id, imagesUrl);
-      //     setMealId(res.id);
-      //     jsConfetti.addConfetti();
-      //     setShowConfirmation(true);
-      //   })
-      //   .catch((error) =>
-      //     console.error("error FROM CREATE MEAL REQUEST =>", error.message)
-      //   );
 
       fetch(API + "meals", {
         method: "POST",
@@ -148,29 +112,26 @@ const CreateMeal = () => {
             allergens: data.allergens,
             requester: currentUser,
           },
-          
         }),
       })
         .then((res) => {
-          console.log("res FROM CREATE MEAL REQUEST => ", res);
           return res.json();
         })
         .then((datas) => {
-          console.log("datas FROM CREATE MEAL REQUEST => ", datas);
           if (!datas.account_owner) {
-            setIsOwner(false)
-            setTimeout( () => {
-              setIsOwner(true)
-            }, 5000)
-          }
-          else {
+            setIsOwner(false);
+            setTimeout(() => {
+              setIsOwner(true);
+            }, 5000);
+          } else {
             postCategoriesInfo(data.categories, datas.meal.id);
-            data.image_urls.length !== 0 && postImages(datas.meal.id, imagesUrl);
+            data.image_urls.length !== 0 &&
+              postImages(datas.meal.id, imagesUrl);
             setMealId(datas.meal.id);
             jsConfetti.addConfetti();
             setShowConfirmation(true);
           }
-         })
+        })
         .catch((error) =>
           console.error("error FROM CREATE MEAL REQUEST =>", error.message)
         );
@@ -181,20 +142,6 @@ const CreateMeal = () => {
 
   const postCategoriesInfo = async (categoriesArray, mealId) => {
     await categoriesArray.map((category) => {
-      // APIManager.create("join_categories", {
-      //   join_category_meal: {
-      //     meal_id: mealId,
-      //     category_id: parseInt(category),
-      //   },
-      // })
-      //   .then((res) =>
-      //     console.log("res FROM postCategoriesInfo REQUEST => ", res)
-      //   )
-      //   .catch((error) =>
-      //     console.error("error from postCategoriesInfo REQUEST => ", error)
-      //   );
-
-      //OLD request : will be removed
       fetch(API + "join_categories", {
         method: "POST",
         headers: {
@@ -202,10 +149,10 @@ const CreateMeal = () => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-            join_category_meal: {
+          join_category_meal: {
             meal_id: mealId,
             category_id: parseInt(category),
-            requester: currentUser
+            requester: currentUser,
           },
         }),
       });
@@ -215,11 +162,6 @@ const CreateMeal = () => {
   const postImages = async (mealId, data) => {
     console.log("data from postImages", data);
 
-    // APIManager.postImages(mealId, data)
-    // .then(res => console.log('res FROM postImages REQUEST => ', res))
-    // .catch(error => console.log('error FROM postImages REQUEST => ', error.message))
-
-    // The following request is not using axios like others requests (because of content-type probably).
     const requestOptions = {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` },
@@ -232,23 +174,10 @@ const CreateMeal = () => {
 
   const getLocationData = async (e) => {
     if (e.target.value.length >= 3) {
-      // await APIManager.getLocationData(
-      //   `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`
-      // )
-      //   .then((res) => {
-      //     console.log("res FROM getCityData REQUEST => ", res);
-      //     setAutocompleteVisible(true);
-      //     setAutocomplete(res);
-      //   })
-      //   .catch((error) =>
-      //     console.error("error FROM getCityData REQUEST => ", error.message)
-      //   );
-
       fetch(
         `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
       )
         .then((response) => {
-          console.log("res FROM getCityData REQUEST => ", response);
           return response.json();
         })
         .then((data) => {
@@ -438,7 +367,6 @@ const CreateMeal = () => {
                   type="text"
                   id="inputAddress"
                   autoComplete="off"
-                  // {...register("location", errorMessageValues.location)}
                 />
                 {autocompleteVisible && (
                   <div className="border border-slate-500 rounded-xl p-3 absolute top-20 z-10 bg-white">
@@ -472,7 +400,6 @@ const CreateMeal = () => {
                     // withPortal
                   />{" "}
                 </span>
-                {/* {startDate && startDate.toString()} */}
               </div>
 
               <div className="flex mt-6 gap-4">
@@ -635,9 +562,7 @@ const CreateMeal = () => {
                 </span>
 
                 <button type="submit" className="my-2 flex justify-center">
-                {
-                  !isOwner && <p>Opération interdite</p> 
-                }
+                  {!isOwner && <p>Opération interdite</p>}
                   <Button showText={true} showIcon={true} icon={<Check />}>
                     Créer un repas
                   </Button>

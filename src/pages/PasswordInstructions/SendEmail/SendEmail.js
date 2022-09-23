@@ -21,12 +21,10 @@ function SendEmail() {
       body: JSON.stringify({ user: { email: e.target.email.value } }),
     })
       .then((response) => {
-        // console.log(response);
         return response.json();
       })
       .then((res) => {
         setShow(true);
-        // console.log(res);
       })
       .catch((error) => setError(true));
   };

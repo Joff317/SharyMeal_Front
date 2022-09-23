@@ -54,7 +54,6 @@ function DisplayAttendances({ period, meals, forceUpdate }) {
               .filter((meal) => new Date(meal.starting_date) > today)
               .map((meal, index) => (
                 <>
-                  {/* {yesterday && yesterday.toString()} / {new Date(meal.starting_date).toString()} */}
                   <MealCard mealData={meal} key={index} launchAnimation />
                 </>
               ))}

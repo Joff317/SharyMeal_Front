@@ -41,10 +41,8 @@ function MealDetails() {
   const setOrderConfirmationAtom = useSetAtom(OrderConfirmationAtom);
   const token = Cookies.get("token");
   const atomBookingQty = useAtomValue(bookingQtyAtom);
-  
 
   useEffect(() => {
-    
     fetch(API + `meals/${mealId}`)
       .then((res) => res.json())
       .then((data) => {
@@ -67,7 +65,7 @@ function MealDetails() {
       body: JSON.stringify({
         attendance: {
           meal_id: mealId,
-          requester: currentUser
+          requester: currentUser,
         },
       }),
     })

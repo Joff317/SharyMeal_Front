@@ -4,8 +4,6 @@ import Button from "../../actions/Button";
 import SectionTitle from "../../titles/SectionTitle";
 
 const Guest = ({ guestMeal }) => {
-  console.log(guestMeal);
-
   return (
     <div className="flex flex-col items-start mx-32 justify-between gap-4">
       <SectionTitle>Participants </SectionTitle>

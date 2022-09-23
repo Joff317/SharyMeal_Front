@@ -18,17 +18,6 @@ export const errorMessageValues = {
       message: "Le pseudo doit faire minimum 3 caractères",
     },
   },
-  // email: {
-  // 	required: "Votre identifiant est incorrect",
-  // 	maxLength: {
-  // 		value: 40,
-  // 		message: "Le pseudo doit faire maximum 20 caractères",
-  // 	},
-  // 	minLength: {
-  // 		value: 3,
-  // 		message: "Le pseudo doit faire minimum 3 caractères",
-  // 	},
-  // },
 
   title: {
     required: "Le titre est requis",
@@ -96,11 +85,4 @@ export const errorMessageValues = {
       message: "Vous devez avoir 16 ans.",
     },
   },
-
-  // price:{
-  //   minLength: {
-  //     value: 1,
-  //     message: "Le prix est requis (inscrire '0' si gratuit)."
-  //   },
-  // }
 };

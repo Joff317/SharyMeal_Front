@@ -7,19 +7,9 @@ function MealAvatar({ host }) {
   const [hostDetails, setHostDetails] = useState(null);
 
   useEffect(() => {
-
-    // APIManager.get(`/user_detail/${host.id}`)
-    // .then(res => {
-    //   // console.log('res FROM MealAvatar GET REQUEST => ', res);
-    //   setHostDetails(res);
-    // })
-    // .catch(error => console.log('error FROM MealAvatar GET REQUEST => ', error.message));
-
-  // OLD request : will be removed
     fetch(API + `/user_detail/${host.id}`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log("data MealAvatar => ", data);
         setHostDetails(data);
       });
   }, []);

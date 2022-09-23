@@ -51,7 +51,6 @@ function MealCard({
         .then((res) => res.json())
         .then((response) => {
           setGuestsAvatarUrl(response);
-          console.log(response);
         });
   }, []);
 

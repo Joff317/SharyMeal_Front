@@ -7,7 +7,7 @@ import {
 import { categories } from "../../data/Category";
 import Autocompletion from "../geolocation/Autocompletion";
 import DatePicker, { registerLocale } from "react-datepicker";
-import {addDays} from 'date-fns'
+import { addDays } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import fr from "date-fns/locale/fr";
 import { dietType } from "../../data/DietType";
@@ -63,65 +63,34 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
       starting_date: startDate === undefined && "La date du repas est requise.",
     });
     if (isDataValid(data)) {
-      // APIManager.edit(`meals/${mealData.id}`, {
-      //   meal: {
-      //     title: data.title,
-      //     description: data.description,
-      //     price: data.price,
-      //     location: {
-      //       city: cityInfo ? cityInfo.city : mealData.location.city,
-      //       lat: cityInfo ? cityInfo.lat : mealData.location.lat,
-      //       lon: cityInfo ? cityInfo.lon : mealData.location.lon,
-      //       address: cityInfo ? cityInfo.formatted : mealData.location.address,
-      //     },
-      //     guest_capacity: data.guest_capacity,
-      //     starting_date: startDate,
-      //     animals: data.animals,
-      //     alcool: data.alcool,
-      //     doggybag: data.doggybag,
-      //     diet_type: data.dietType,
-      //     allergens: data.allergens,
-      //   },
-      // })
-      //   .then((res) => {
-      //     console.log("res FROM EDIT MEAL REQUEST => ", res);
-      //     deleteCategoryInfo(joinCategoryArray, data.categories, res.id);
-      //     setShowEdit(false);
-      //     forceUpdate();
-      //   })
-      //   .catch((error) =>
-      //     console.error("error FROM EDIT MEAL REQUEST =>", error.message)
-      //   );
-
-      // OLD request : will be removed from code.
       fetch(API + `meals/${mealData.id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-      body: JSON.stringify({
-        meal: {
-          title: data.title,
-          description: data.description,
-          price: data.price,
-          location: {
-            city: cityInfo ? cityInfo.city : mealData.location.city,
-            lat: cityInfo ? cityInfo.lat : mealData.location.lat,
-            lon: cityInfo ? cityInfo.lon : mealData.location.lon,
-            address: cityInfo
-              ? cityInfo.formatted
-              : mealData.location.address,
+        body: JSON.stringify({
+          meal: {
+            title: data.title,
+            description: data.description,
+            price: data.price,
+            location: {
+              city: cityInfo ? cityInfo.city : mealData.location.city,
+              lat: cityInfo ? cityInfo.lat : mealData.location.lat,
+              lon: cityInfo ? cityInfo.lon : mealData.location.lon,
+              address: cityInfo
+                ? cityInfo.formatted
+                : mealData.location.address,
+            },
+            guest_capacity: data.guest_capacity,
+            starting_date: startDate,
+            animals: data.animals,
+            alcool: data.alcool,
+            doggybag: data.doggybag,
+            diet_type: data.dietType,
+            allergens: data.allergens,
           },
-          guest_capacity: data.guest_capacity,
-          starting_date: startDate,
-          animals: data.animals,
-          alcool: data.alcool,
-          doggybag: data.doggybag,
-          diet_type: data.dietType,
-          allergens: data.allergens,
-        },
-      }),
+        }),
       })
         .then((response) => {
           return response.json();
@@ -137,18 +106,6 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
 
   const deleteCategoryInfo = async (arrayToDelete, dataCategory, mealId) => {
     await arrayToDelete.map((categoryId) => {
-      // APIManager.delete(`join_categories/${categoryId}`)
-      //   .then((res) =>
-      //     console.log("res FROM deleteCategoryInfo REQUEST => ", res)
-      //   )
-      //   .catch((error) =>
-      //     console.error(
-      //       "error FROM deleteCategoryInfo REQUEST => ",
-      //       error.message
-      //     )
-      //   );
-
-      // OLD Request : will be removed
       fetch(API + `join_categories/${categoryId}`, {
         method: "DELETE",
       });
@@ -159,50 +116,24 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
 
   const postCategoriesInfo = async (categoriesArray, mealId) => {
     await categoriesArray.map((category) => {
-      // APIManager.create("join_categories", {
-      //   join_category_meal: {
-      //     meal_id: mealId,
-      //     category_id: parseInt(category),
-      //   },
-      // })
-      //   .then((res) =>
-      //     console.log("res FROM postCategoriesInfo REQUEST => ", res)
-      //   )
-      //   .catch((error) =>
-      //     console.error("error from postCategoriesInfo REQUEST => ", error)
-      //   );
-
-      // OLD resquest : will be removed
       fetch(API + "join_categories", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-      body: JSON.stringify({
-        join_category_meal: {
-          meal_id: mealId,
-          category_id: parseInt(category),
-        },
-      }),
+        body: JSON.stringify({
+          join_category_meal: {
+            meal_id: mealId,
+            category_id: parseInt(category),
+          },
+        }),
       });
     });
   };
 
   const getLocationData = async (e) => {
     if (e.target.value.length >= 3) {
-      // await APIManager.getLocationData(
-      //   `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`
-      // )
-      //   .then((res) => {
-      //     console.log("res FROM getCityData REQUEST => ", res);
-      //     setAutocompleteVisible(true);
-      //     setAutocomplete(res);
-      //   })
-      //   .catch((error) =>
-      //     console.error("error FROM getCityData REQUEST => ", error.message)
-      //   );
-
       fetch(
         `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
       )
@@ -262,7 +193,7 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
 
           <div className="flex flex-wrap gap-3">
             {categories.map((category, index) => (
-              <div key={index} className='flex items-center gap-2 '>
+              <div key={index} className="flex items-center gap-2 ">
                 <input
                   defaultChecked={getCategoryChecked(category.id)}
                   type="checkbox"
@@ -330,7 +261,6 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
             type="text"
             id="inputAddress"
             autocomplete="off"
-            // {...register("location", errorMessageValues.location)}
           />
           {autocompleteVisible && (
             <div className="border border-slate-500 rounded-xl p-3 absolute top-20 z-10 bg-white">
@@ -478,11 +408,11 @@ function MealEditForm({ mealData, setShowEdit, forceUpdate }) {
           <Button showText> Modifier mon repas </Button>
         </button>
         {formData && !isDataValid(formData) && (
-            <p className="error text-sm text-red font-book-font">
-              {" "}
-              {formErrors.categories}{" "}
-            </p>
-          )}
+          <p className="error text-sm text-red font-book-font">
+            {" "}
+            {formErrors.categories}{" "}
+          </p>
+        )}
       </form>
     </>
   );
