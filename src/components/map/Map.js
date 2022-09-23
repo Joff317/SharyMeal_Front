@@ -3,7 +3,6 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import * as L from "leaflet";
 import "./Map.css";
 import marker from "../../assets/images/marker.png";
-// import RecenterAutomatically from "./RecenterAutomatically";
 import { API } from "../../utils/variables";
 import SubsectionTitle from "../titles/SubsectionTitle";
 import MealPrice from "../meals/mealCard/MealPrice";

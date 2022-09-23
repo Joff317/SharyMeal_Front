@@ -49,7 +49,6 @@ function Navigation() {
         return response.json();
       })
       .then((res) => {
-        //console.log(res);
       });
 
     navigate("/");

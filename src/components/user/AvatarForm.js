@@ -19,8 +19,6 @@ function AvatarForm(props) {
       body: data,
     };
     fetch(API + "update_me", requestOptions)
-      .then((response) => response.json())
-      .then((res) => console.log(res));
   };
 
   return (

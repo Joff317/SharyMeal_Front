@@ -25,15 +25,6 @@ const UserDetails = () => {
       );
   }, [setUser]);
 
-  // useEffect(() => {
-  //   fetch(API + `user_detail/${userId}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setUser(data);
-  //       console.log(data);
-  //     });
-  // }, []);
-
   return (
     <>
       {user && (

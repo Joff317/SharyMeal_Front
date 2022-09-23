@@ -9,7 +9,7 @@ import {
 } from "../../../components/authentication/errors";
 import Check from "../../../icons/Check";
 import { API } from "../../../utils/variables";
-import './ReinitPassword.scss'
+import "./ReinitPassword.scss";
 
 function ReinitPassword() {
   const token = useParams().tokenId;
@@ -40,7 +40,6 @@ function ReinitPassword() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         setShow(true);
         setTimeout(() => {
           navigate("/");
@@ -79,12 +78,10 @@ function ReinitPassword() {
           {errorMessage(errors.password)}
         </div>
 
-        <button
-          type="submit"
-        >
-         <Button showText={true} showIcon={true} icon={<Check/>}>
-              submit
-         </Button>
+        <button type="submit">
+          <Button showText={true} showIcon={true} icon={<Check />}>
+            submit
+          </Button>
         </button>
       </form>
       {show && (

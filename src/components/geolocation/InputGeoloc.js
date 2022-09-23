@@ -46,15 +46,6 @@ function InputGeoloc({ saveSearchData }) {
 
   const getLocationData = async (e) => {
     if (e.target.value.length >= 3) {
-      // await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`)
-      // .then(res => {
-      //   // console.log('res FROM getCityData REQUEST => ', res);
-      //   setAutocompleteVisible(true);
-      //   setAutocomplete(res);
-      // })
-      // .catch(error => console.error('error FROM getCityData REQUEST => ', error.message))
-
-      // OLD request : will be removed.
       fetch(
         `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
       )
@@ -117,7 +108,6 @@ function InputGeoloc({ saveSearchData }) {
               locale="fr"
               minDate={new Date()}
             />{" "}
-            {/* {startDate && startDate.toString()} */}
           </span>
         </div>
 

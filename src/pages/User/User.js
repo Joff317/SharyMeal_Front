@@ -32,11 +32,9 @@ function User() {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => {
-          console.log("response DE User.js", response);
           return response.json();
         })
         .then((res) => {
-          console.log("data DE User.js ", res);
           setData(res);
         });
   }, [setData, reducerValue]);
@@ -46,7 +44,6 @@ function User() {
     setAttendancesVisib(false);
     setHostedMealsVisib(false);
     setProfileVisib(true);
-    console.log("USE REF", radioButton);
   };
 
   const displayMessages = () => {

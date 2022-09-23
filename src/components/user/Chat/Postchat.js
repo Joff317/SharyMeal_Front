@@ -22,22 +22,6 @@ const PostChat = ({ forceUpdate, recipient_id }) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-
-    // await APIManager.create("messages", {
-    //   message: {
-    //     sender_id: currentUser.id,
-    //     recipient_id,
-    //     content: data.content,
-    //   },
-    // })
-    // .then(res => {
-    //   console.log('res FROM PostChat REQUEST => ', res)
-    //   forceUpdate();
-    //   emptyInput();
-    // })
-    // .catch(error => console.error('error FROM FROM PostChat REQUEST => ', error.message))
-
-// OLD request : will be removed.
     fetch(API + "messages", {
       method: "POST",
       headers: {

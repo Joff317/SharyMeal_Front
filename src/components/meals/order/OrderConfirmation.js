@@ -8,41 +8,28 @@ import { loadStripe } from "@stripe/stripe-js";
 import PaymentForm from "./PaymentForm";
 import { API } from "../../../utils/variables";
 import "./OrderElement.scss";
-import APIManager from "../../../services/Api";
-import env from "react-dotenv";
 import Cookies from "js-cookie";
-import { useAtomValue } from 'jotai';
-import {currentuserAtom} from '../../../atoms/loggedAtom'
+import { useAtomValue } from "jotai";
+import { currentuserAtom } from "../../../atoms/loggedAtom";
 
 const PUBLIC_KEY = process.env.REACT_APP_PUBLISHABLE_KEY;
-
 
 const stripeTestPromise = loadStripe(PUBLIC_KEY);
 
 function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
   const [clientSecret, setClientSecret] = useState("");
-  const token = Cookies.get('token');
-  const [ signIn, setSignIn ] = useState(false)
-  const [ wrongUser, setWrongUser ] = useState(false)
-  const currentUser = useAtomValue(currentuserAtom)
-  // console.log('env.REACT_APP_PUBLISHABLE_KEY', env.REACT_APP_PUBLISHABLE_KEY)
-  // console.log('env.REACT_APP_GEOAPIFY_KEY', env.REACT_APP_GEOAPIFY_KEY)
+  const token = Cookies.get("token");
+  const [signIn, setSignIn] = useState(false);
+  const [wrongUser, setWrongUser] = useState(false);
+  const currentUser = useAtomValue(currentuserAtom);
 
   useEffect(() => {
-    
-    // APIManager.create("charges", {
-    //   amount: parseInt(`${meal.price * guestRegistered}00`),
-    //   currency: "eur",
-    // })
-    // .then(res => {
-    //   console.log('res FROM orderConfirmation REQUEST => ', res);
-    //   setClientSecret(res.clientSecret);
-    // })
-    // .catch(error => console.error('error FROM orderConfirmation REQUEST => ', error.message));
-
     fetch(API + "charges", {
       method: "POST",
-      headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${token}` },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         amount: parseInt(`${meal.price * guestRegistered}00`),
         currency: "eur",
@@ -50,29 +37,20 @@ function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
       }),
     })
       .then((res) => {
-        console.log('res FROM CHARGES REQUEST => ', res)
-        // if (res.url === API + "users/sign_in") {
         if (res.status === 500) {
           setSignIn(true);
-          setTimeout( () => 
-            setSignIn(false)
-          , 5000)
+          setTimeout(() => setSignIn(false), 5000);
         }
-        return res.json()
+        return res.json();
       })
       .then((data) => {
-        console.log('data FROM CHARGES REQUEST => ', data)
         if (data.account_owner === false) {
-          setWrongUser(true)
-          setTimeout( () => 
-            setWrongUser(false)
-          , 5000)
+          setWrongUser(true);
+          setTimeout(() => setWrongUser(false), 5000);
         }
-        setClientSecret(data.clientSecret)
+        setClientSecret(data.clientSecret);
       })
-      .catch(error => console.error('error FROM CHARGES REQUEST => ', error))
-
-
+      .catch((error) => console.error("error FROM CHARGES REQUEST => ", error));
   }, []);
 
   function dataParsed(date) {
@@ -97,7 +75,6 @@ function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
       borderRadius: "4px",
       fontSizeSm: "0.2rem",
       fontLineHeight: "10px",
-      // See all possible variables below
     },
 
     rules: {
@@ -115,23 +92,20 @@ function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
     appearance,
   };
 
-
   return (
     <div className="z-50">
       <SectionTitle> Confirmation de commande </SectionTitle>
       <br />
-      {
-        signIn && <p
-                    className="bg-red text-white rounded-md text-center">
-                    Connectez-vous pour procéder au règlement
-                  </p>
-      }
-      {
-        wrongUser && <p
-                    className="bg-red text-white rounded-md text-center">
-                    Vous n'êtes pas le propriétaire de compte. Opération interdite.
-                  </p>
-      }
+      {signIn && (
+        <p className="bg-red text-white rounded-md text-center">
+          Connectez-vous pour procéder au règlement
+        </p>
+      )}
+      {wrongUser && (
+        <p className="bg-red text-white rounded-md text-center">
+          Vous n'êtes pas le propriétaire de compte. Opération interdite.
+        </p>
+      )}
       <SubsectionTitle> Récapitulatif du repas </SubsectionTitle>
 
       <ul className="flex flex-col gap-1 mt-4 ml-5">
@@ -157,7 +131,6 @@ function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
 
       {clientSecret && (
         <Elements options={options} stripe={stripeTestPromise}>
-          
           <PaymentForm setShowOrderPopup={setShowOrderPopup} mealId={meal.id} />
         </Elements>
       )}

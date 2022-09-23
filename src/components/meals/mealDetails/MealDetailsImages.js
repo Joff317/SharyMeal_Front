@@ -1,8 +1,4 @@
 import React from "react";
-import MealDetailsImage1 from "../../../assets/images/mealDetailsImage/MealDetailsImage1.jpeg";
-import MealDetailsImage2 from "../../../assets/images/mealDetailsImage/MealDetailsImage2.jpeg";
-import MealDetailsImage3 from "../../../assets/images/mealDetailsImage/MealDetailsImage3.jpeg";
-import MealDetailsImage4 from "../../../assets/images/mealDetailsImage/MealDetailsImage4.jpeg";
 import MealDetailsImage5 from "../../../assets/images/mealDetailsImage/MealDetailsImage5.jpeg";
 import MealDetailsImage6 from "../../../assets/images/mealDetailsImage/MealDetailsImage6.jpeg";
 import "./MealDetailsImages.scss";
