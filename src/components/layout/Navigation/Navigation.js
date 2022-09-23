@@ -72,7 +72,10 @@ function Navigation() {
       </NavLink>
 
       <div className="navigation-center flex gap-12">
-        <NavLink to="/about">About us</NavLink>
+
+        <NavLink to="/about">À propos</NavLink>
+        <NavLink to="/create-meal">&#10024; Proposer un repas &#10024;</NavLink>
+
 
         {!loggedd ? (
           <p
@@ -86,6 +89,7 @@ function Navigation() {
             &#10024; Proposer un repas &#10024;
           </NavLink>
         )}
+
       </div>
 
       <div className="navigation-right flex justify-end gap-8 items-center">
