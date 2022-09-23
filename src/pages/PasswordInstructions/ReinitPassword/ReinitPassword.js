@@ -7,6 +7,7 @@ import {
   errorMessage,
 } from "../../../components/authentication/errors";
 import { API } from "../../../utils/variables";
+import './ReinitPassword.scss'
 
 function ReinitPassword(props) {
   const token = useParams().tokenId;
@@ -47,8 +48,8 @@ function ReinitPassword(props) {
   };
 
   return (
-    <>
-      <div>ReinitPassword</div>
+    <div className="password-container">
+      <div>Change your password</div>
       <form
         className={`max-w-[400px] flex flex-col gap-3 mt-2`}
         onSubmit={handleSubmit(OnSubmit)}
@@ -90,7 +91,7 @@ function ReinitPassword(props) {
           Mot de passe modifié avec succès !{" "}
         </h1>
       )}
-    </>
+    </div>
   );
 }
 
