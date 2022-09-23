@@ -56,7 +56,7 @@ function InputGeoloc({ saveSearchData }) {
 
       // OLD request : will be removed.
       fetch(
-        `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`
+        `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
       )
         .then((response) => response.json())
         .then((data) => {
