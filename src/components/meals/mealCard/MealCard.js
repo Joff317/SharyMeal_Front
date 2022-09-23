@@ -140,35 +140,37 @@ function MealCard({
           )}{" "}
         </>
       )}
-      <div
-        onMouseEnter={() => setShowDetailGuest(true)}
-        onMouseLeave={() => setShowDetailGuest(false)}
-        className="flex relative ml-2"
-      >
-        {showAdditionalInfo &&
-          guestsAvatarUrl &&
-          guestsAvatarUrl.guests_avatar.map((guestAvatar) => (
-            <>
-              <img
-                className="w-7 h-7 border-grey ml-[-9px] rounded full cursor-pointer"
-                src={
-                  guestAvatar.avatar_url
-                    ? guestAvatar.avatar_url
-                    : DefaultAvatar
-                }
-                alt="avatar"
-              />
-            </>
-          ))}
+      <div className="absolute min-w-[35px] top-14 right-2">
+        <div
+          onMouseEnter={() => setShowDetailGuest(true)}
+          onMouseLeave={() => setShowDetailGuest(false)}
+          className="flex flex-col relative"
+        >
+          {showAdditionalInfo &&
+            guestsAvatarUrl &&
+            guestsAvatarUrl.guests_avatar.map((guestAvatar) => (
+              <>
+                <img
+                  className="w-7 h-7 border-grey mt-[-9px] rounded full cursor-pointer"
+                  src={
+                    guestAvatar.avatar_url
+                      ? guestAvatar.avatar_url
+                      : DefaultAvatar
+                  }
+                  alt="avatar"
+                />
+              </>
+            ))}
 
-        {showDetailGuest && (
-          <AvatarPopup
-            guestData={guestsAvatarUrl.guests_avatar}
-            setGetGuestId={setGetGuestId}
-            setShowMessage={setShowMessage}
-            hideMessageBtn={false}
-          />
-        )}
+          {showDetailGuest && (
+            <AvatarPopup
+              guestData={guestsAvatarUrl.guests_avatar}
+              setGetGuestId={setGetGuestId}
+              setShowMessage={setShowMessage}
+              hideMessageBtn={false}
+            />
+          )}
+        </div>
       </div>
 
       {showMessage && (
