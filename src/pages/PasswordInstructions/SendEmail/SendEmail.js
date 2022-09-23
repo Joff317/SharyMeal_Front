@@ -22,7 +22,6 @@ function SendEmail() {
     })
       .then((response) => {
         // console.log(response);
-        throw "erreur";
         return response.json();
       })
       .then((res) => {
