@@ -75,18 +75,19 @@ export const errorMessageValues = {
 
   password: {
     required: "Le mot de passe est requis",
+    pattern: {
+      value: /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]/,
+      message:
+        "Le mot de passe doit contenir au moins une lettre, un nombre et un caractère spécial",
+    },
     maxLength: {
       value: 20,
       message: "Le mot de passe doit faire maximum 20 caractères",
     },
     minLength: {
-      value: 6,
-      message: "Le mot de passe doit faire minimum 6 caractères",
+      value: 8,
+      message: "Le mot de passe doit faire minimum 8 caractères",
     },
-    // pattern: {
-    // 	value: /^([A-Z][a-z]+)+$/,
-    // 	message: "Le mot de passe doit contenir au moins 1 majuscule",
-    // },
   },
 
   age: {

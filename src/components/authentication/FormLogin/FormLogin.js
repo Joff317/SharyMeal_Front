@@ -93,7 +93,7 @@ function FormLogin({
           </Button>
         </button>
         {!loginResult && (
-          <p className="bg-red text-white text-center rounded p-2">
+          <p className="bg-red text-white text-center p-2">
             Erreur d'identifiant ou de mot de passe
           </p>
         )}
