@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import DisplayAttendances from "./DisplayAttendances";
-import SectionTitle from "../../titles/SectionTitle";
 import SubsectionTitle from "../../titles/SubsectionTitle";
 
 function MyAttendances({ userData, forceUpdate }) {
   const [period, setPeriod] = useState("future");
-
-  // console.log(userData.guested_meals);
 
   return (
     <>

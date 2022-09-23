@@ -15,12 +15,9 @@ import { Link } from "react-router-dom";
 import CreateReview from "../../reviews/CreateReview";
 import ScrollReveal from "scrollreveal";
 import { slideUpFast } from "../../animations/Animations";
-import APIManager from "../../../services/Api";
 import { API } from "../../../utils/variables";
-import Guest from "../mealDetails/Guest";
 import DefaultAvatar from "../../../assets/images/avatardefault.png";
 import SendMessage from "../mealDetails/SendMessage";
-import Chat from "../../../icons/Chat";
 import AvatarPopup from "../../users/AvatarPopup";
 
 function MealCard({
@@ -39,24 +36,7 @@ function MealCard({
   const [getGuestId, setGetGuestId] = useState();
   const [showMessage, setShowMessage] = useState(false);
 
-  console.log(mealData);
-
-  function setShowMessageFunc(id) {
-    setGetGuestId(id);
-    setShowMessage(true);
-  }
-
   const deleteMeal = () => {
-    // APIManager.delete(`meals/${mealData.id}`)
-    //   .then((res) => {
-    //     console.log("res FROM DELETE MEAL REQUEST => ", res);
-    //     forceUpdate();
-    //   })
-    //   .catch((error) =>
-    //     console.error("error from DELETE MEAL REQUEST => ", error.message)
-    //   );
-
-    //OLD request : will be removed from code.
     fetch(`${API}/meals/${mealData.id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },

@@ -7,20 +7,15 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import fr from "date-fns/locale/fr";
 import Search from "../../icons/Search";
-import APIManager from "../../services/Api";
 import env from "react-dotenv";
 
-
-
-
-
-function InputGeoloc() {
+function InputGeoloc({ saveSearchData }) {
   const [autocompleteVisible, setAutocompleteVisible] = useState(false);
   const [autocomplete, setAutocomplete] = useState(false);
   const [cityInfo, setCityInfo] = useState();
   const setInputData = useSetAtom(inputDataAtom);
   const inputDataValue = useAtomValue(inputDataAtom);
-  const [startDate, setStartDate] = useState(new Date().setHours(0,0,0));
+  const [startDate, setStartDate] = useState(new Date().setHours(0, 0, 0));
 
   registerLocale("fr", fr);
 
@@ -51,7 +46,6 @@ function InputGeoloc() {
 
   const getLocationData = async (e) => {
     if (e.target.value.length >= 3) {
-
       // await APIManager.getLocationData(`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`)
       // .then(res => {
       //   // console.log('res FROM getCityData REQUEST => ', res);
@@ -60,7 +54,7 @@ function InputGeoloc() {
       // })
       // .catch(error => console.error('error FROM getCityData REQUEST => ', error.message))
 
-// OLD request : will be removed.
+      // OLD request : will be removed.
       fetch(
         `https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=${env.REACT_APP_GEOAPIFY_KEY}`
       )
@@ -70,18 +64,17 @@ function InputGeoloc() {
           setAutocomplete(data);
         })
         .catch((err) => console.error(err));
-
     } else {
       setAutocompleteVisible(false);
     }
   };
 
   const getTodayAtMidnight = (date) => {
-    console.log('date', date)
-    date.setHours(0,0,0)
-    console.log('date', date)
-    setStartDate(date)
-  }
+    console.log("date", date);
+    date.setHours(0, 0, 0);
+    console.log("date", date);
+    setStartDate(date);
+  };
 
   return (
     <div className="rounded-full z-50 bg-white w-fit py-2 pl-6 pr-2 relative">
@@ -123,7 +116,6 @@ function InputGeoloc() {
               dateFormat="d MMMM yyyy"
               locale="fr"
               minDate={new Date()}
-              
             />{" "}
             {/* {startDate && startDate.toString()} */}
           </span>

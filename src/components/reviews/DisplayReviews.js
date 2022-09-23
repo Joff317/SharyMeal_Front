@@ -2,7 +2,6 @@ import React from "react";
 import Review from "./Review";
 
 function DisplayReviews({ reviewStatus, reviews }) {
-  // console.log(reviews);
   return (
     <div className="mb-8">
       {reviewStatus === "received" && reviews.received.length === 0 && (
