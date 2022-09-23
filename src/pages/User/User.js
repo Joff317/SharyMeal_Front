@@ -77,8 +77,8 @@ function User() {
           <SectionTitle>
             {" "}
             {currentUser.name
-              ? `Welcome back, ${currentUser.name}`
-              : "Welcome back"}
+              ? `Heureux de vous revoir, ${currentUser.name}`
+              : "Heureux de vous revoir"}
           </SectionTitle>
         </div>
       </div>
