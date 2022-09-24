@@ -562,12 +562,15 @@ const CreateMeal = () => {
                 </span>
 
                 <button type="submit" className="my-2 flex justify-center">
-                  {!isOwner && <p>Opération interdite</p>}
+                  
                   <Button showText={true} showIcon={true} icon={<Check />}>
                     Créer un repas
                   </Button>
+                  
                 </button>
               </div>
+
+              {!isOwner && <div><p>Vous devez être inscrit pour aller plus loin.</p></div>}
 
               {formData && !isDataValid(formData) && (
                 <div>
