@@ -115,12 +115,10 @@ const CreateMeal = () => {
         }),
       })
         .then((res) => {
-          
           return res.json();
         })
         .then((datas) => {
-          
-          if (!datas) {
+          if (!datas.account_owner) {
             setIsOwner(false);
             setTimeout(() => {
               setIsOwner(true);
@@ -128,7 +126,7 @@ const CreateMeal = () => {
           } else {
             postCategoriesInfo(data.categories, datas.meal.id);
             data.image_urls.length !== 0 &&
-            postImages(datas.meal.id, imagesUrl);
+              postImages(datas.meal.id, imagesUrl);
             setMealId(datas.meal.id);
             jsConfetti.addConfetti();
             setShowConfirmation(true);
@@ -572,7 +570,7 @@ const CreateMeal = () => {
                 </button>
               </div>
 
-              {!isOwner && <div><p>Vous devez être inscrit pour aller plus loin.</p></div>}
+              {!isOwner && <div><br/><p>Vous devez être connecté pour aller plus loin.</p></div>}
 
               {formData && !isDataValid(formData) && (
                 <div>

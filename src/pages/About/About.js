@@ -25,7 +25,7 @@ function About() {
             et de partager cette expérience ? Alors, inscrivez-vous et créez
             votre premier repas !
           </p>
-          <button onClick={() => navigate("/create-meal")}>
+          <button onClick={() => navigate("/register")}>
             <Button showText={true} showIcon={true} icon={<Arrow />}>
               Commencer
             </Button>
