@@ -127,6 +127,11 @@ function OrderConfirmation({ setShowOrderPopup, meal, guestRegistered }) {
         <li className="list-disc font-light-font">
           {meal.price}€ par unité - total : {meal.price * guestRegistered}€
         </li>
+        <li className="list-disc font-light-font">
+          Carte bancaire de test :<br/>
+          n° : 4242 4242 4242 4242 4242<br/>
+          date : 12/23, cvc: 123
+        </li>
       </ul>
 
       {clientSecret && (
