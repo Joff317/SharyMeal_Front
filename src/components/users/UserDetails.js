@@ -48,7 +48,7 @@ const UserDetails = () => {
             <div className="skills">
               <h6>Info</h6>
               <ul>
-                <li>Genre : {user.gender}</li>
+                <li>Genre : {user.gender ? user.gender : "non spécifié"}</li>
                 <li>Email : {user.email}</li>
                 <li>{user.hosted_meals.length} repas organisés</li>
               </ul>
