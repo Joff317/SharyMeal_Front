@@ -115,12 +115,12 @@ const CreateMeal = () => {
         }),
       })
         .then((res) => {
-          console.log('res', res)
+          
           return res.json();
         })
         .then((datas) => {
-          console.log('datas', datas)
-          if (datas.status === 500) {
+          
+          if (!datas) {
             setIsOwner(false);
             setTimeout(() => {
               setIsOwner(true);
