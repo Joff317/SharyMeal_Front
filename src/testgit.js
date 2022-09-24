@@ -1,7 +1,7 @@
 import React from "react";
 
 function testgit(props) {
-	return <div>Salut</div>;
+	return <div>salut</div>;
 }
 
 export default testgit;
